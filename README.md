@@ -7,3 +7,5 @@ This is a landing page for my various public GitHub.io pages.  My actual homepag
 * [CIS680 - Cloud Applications Development](https://gvsu-cloudapplicationsdevelopment.github.io/CloudAppsDev/)
 
 * [CIS367 - Computer Graphics](https://efredericks.github.io/CIS367-ComputerGraphics)
+
+* [P5.JS Projects](https://efredericks.github.io/P5-Projects)
