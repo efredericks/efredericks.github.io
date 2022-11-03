@@ -62,10 +62,10 @@
 <loc>http://localhost:4000/cookies</loc>
 </url>
 <url>
-<loc>http://localhost:4000/privacy-policy</loc>
+<loc>http://localhost:4000/publications.html</loc>
 </url>
 <url>
-<loc>http://localhost:4000/publications.html</loc>
+<loc>http://localhost:4000/teaching.html</loc>
 </url>
 <url>
 <loc>http://localhost:4000/collaborations/</loc>
