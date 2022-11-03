@@ -1,2 +1,3 @@
-# efredericks.github.io
-homepage
+# erik fredericks
+
+homepage to replace an aging wordpress installation
