@@ -3,7 +3,7 @@ logo: assets/img/Fredericks-Small.jpg
 clickToEnlargeImages: True
 lang: en
 cookies:
-  enabled: True
+  enabled: False
   message: This site might be using cookies! Customize your message or disable cookies in metaData.yml!
   agreeButtonText: Yes, I agree
   disagreeButtonText: No, take me to settings
