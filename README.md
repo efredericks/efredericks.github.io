@@ -4,6 +4,7 @@ Template based on [minimal-music-project](https://github.com/ItsPatrq/minimal-mu
 
 * Checkout `gh-pages` branch
 * Build bundle as usual
+* Copy `_site/*` to temp folder
 * Checkout `main` branch
-* Move `_site/*` to root of repo
+* Copy contents of temp to root of repo
 * Checkin and push

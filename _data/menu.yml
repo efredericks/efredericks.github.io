@@ -4,22 +4,22 @@ menu_pages:
   category: home
 
 - title: students 
-  url: /students/
+  url: /students.html
   category: students
   tooltip: students tooltip
 
 - title: teaching
-  url: /teaching/
+  url: /teaching.html
   category: teaching
   tooltip: teaching tooltip
 
 - title: publications
-  url: /publications/
+  url: /publications.html
   category: publications
   tooltip: publications tooltip
 
 - title: activities
-  url: /activities/
+  url: /activities.html
   category: activities 
   tooltip: activities tooltip
 
