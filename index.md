@@ -13,7 +13,7 @@ category: home
 #image: assets/img/band_logo.png
 ---
 <div class="content-container home">
-  <h1>about</h1>
+  <h1>about me</h1>
   <p>I am an Assistant Professor of Computer Science at <a href="https://www.gvsu.edu/" target="_blank" rel="noopener noreferrer">Grand Valley State University</a>, formerly at <a href="http://www.oakland.edu" target="_blank" rel="noopener noreferrer">Oakland University</a>. I received my PhD from <a href="http://www.msu.edu" target="_blank" rel="noopener noreferrer">Michigan State University</a> in 2015, exploring how uncertainty can impact self-adaptive systems at different levels of abstraction and how it can be mitigated by using search-based software engineering techniques.</p>
   <p>Previously, I worked for <a href="http://www.conti-online.com" target="_blank" rel="noopener noreferrer">Continental Automotive Systems</a> as a software engineer / software project manager, focusing on developing safety systems that help to reduce the amount of traffic accidents.</p>
   <br />
