@@ -340,6 +340,10 @@ footer {
       width: 100%;
       height: calc(100% - 50px); } }
 
+pre {
+  background: #ddd;
+  padding: 0.8em; }
+
 .post-feed {
   display: flex;
   flex-direction: column;
