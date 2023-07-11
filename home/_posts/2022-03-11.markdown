@@ -1,8 +1,8 @@
 ---
 layout: post
-title: welcome
-category: home
-description: homepage
+title: 2023 roguelikedev does the tutorial kickoff
+category: dev
+description: intro page
 ---
 
-this is my homepage.  and this is a post that needs to be moved because the homepage will be static but other work beckons.
+description about my dev-along

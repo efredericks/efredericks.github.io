@@ -1,60 +1,229 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-05-21T22:28:12-06:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Z is for Zero</title><link href="https://efredericks.github.io/z-is-for-zero.html" rel="alternate" type="text/html" title="Z is for Zero" /><published>2021-01-26T00:00:00-07:00</published><updated>2021-01-26T00:00:00-07:00</updated><id>https://efredericks.github.io/z-is-for-zero</id><content type="html" xml:base="https://efredericks.github.io/z-is-for-zero.html"><![CDATA[<p>Here you can write more about a certain release, e.g. history of the album, <a href="https://soundcloud.com/celldweller/sets/my-disintegration-remix-1">winning remixes</a> or some other stuff</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/z-is-for-zero.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/z-is-for-zero.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Experimental Glitches</title><link href="https://efredericks.github.io/experimental-glitches.html" rel="alternate" type="text/html" title="Experimental Glitches" /><published>2021-01-25T00:00:00-07:00</published><updated>2021-01-25T00:00:00-07:00</updated><id>https://efredericks.github.io/experimental-glitches</id><content type="html" xml:base="https://efredericks.github.io/experimental-glitches.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
-<ol>
-  <li>Intro</li>
-  <li>Super track nr. 1</li>
-  <li>Super track nr. 2</li>
-  <li>This was a single once upon a time</li>
-  <li>Outro</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/Experimental-Glitches-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/Experimental-Glitches-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">YyY maybe so</title><link href="https://efredericks.github.io/yyy-maybe-so.html" rel="alternate" type="text/html" title="YyY maybe so" /><published>2020-10-25T00:00:00-06:00</published><updated>2020-10-25T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-maybe-so</id><content type="html" xml:base="https://efredericks.github.io/yyy-maybe-so.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-07-11T14:10:18-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="https://efredericks.github.io/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-2</id><content type="html" xml:base="https://efredericks.github.io/rldev-2.html"><![CDATA[<hr size="1" />
+
+<p><a href="" target="_blank">Week 2 post</a></p>
+<hr size="1" />
+
+<p>This week I wanted to start by turning my “simple” entities into proper objects.  Previously anything that moved was simply a row/column position dictionary.  Nice for prototyping, bad for anything else.</p>
+
+<p>Somewhat following a mishmash of multiple tutorials I created a base <code class="language-plaintext highlighter-rouge">Entity</code> class and a child <code class="language-plaintext highlighter-rouge">MoveableEntity</code> class, where <code class="language-plaintext highlighter-rouge">Entity</code> is intended to not move (e.g., items).  Every object also now gets a unique identifier so that I can track them, care of the <a href="https://docs.python.org/3/library/uuid.html" target="_blank"><code class="language-plaintext highlighter-rouge">uuid</code> Python class</a>.</p>
+
+<p>I may end up needing to refactor as I’m not truly following the tutorial and just using it as an excuse to work on yet another roguelike, however here is where we’re at:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Base entity class
+class Entity:
+    def __init__(self, _type, pos, entity_id=None, count=None):
+        assert _type in ENTITY_NAMES, "Error: ${0} not found in lookup table.".format(_type)
+
+        self.entity_id = entity_id
+        self._type = _type
+        self.pos = pos
+        self.count = count
+
+    def getTransmissable(self):
+        return {
+            'type': self._type,
+            'pos': self.pos,
+            'count': self.count,
+        }
+
+# Entity that can move around the screen
+class MoveableEntity(Entity):
+    def __init__(self, _type, pos, entity_id=None):
+        super().__init__(_type, pos, entity_id)
+
+        # particulars
+        self._type = _type
+        self.pos = pos
+        self.entity_id = entity_id # only used for logged in players
+
+        # stats
+        self.hp = LOOKUP_STATS['maxHP'][_type]
+        self.maxHP = LOOKUP_STATS['maxHP'][_type]
+        self.active = True
+        self.inventory = {}
+
+    def getTransmissable(self):
+        return {
+            'type': self._type,
+            'pos': self.pos,
+            'hp': self.hp,
+            'maxHP': self.maxHP,
+            'active': self.active,
+            'inventory': self.inventory,
+        }
+
+</code></pre></div></div>
+
+<p>Couple of points here that were important to me.  I have a <code class="language-plaintext highlighter-rouge">LOOKUP_STATS</code> dictionary in global space that serves as my overall balancing table for entity stats - who has what HP, etc.  I also have an <code class="language-plaintext highlighter-rouge">ENTITY_NAMES</code> list that is the global array of the names for all things that can be in the game (mainly as a check to make sure I didn’t typo anywhere when instantiating entities).  Most likely I’ll move those to a dictionary that serves as a name/description table, but that’s for future me (insert technical debt here).</p>
+
+<p>The other bit is the <code class="language-plaintext highlighter-rouge">getTransmissable</code> function.  This serves to break the object down into what gets sent along the socket so that we’re not packaging up the <strong>entire</strong> thing - only what matters to the frontend.  There are probably better ways of doing this, but I’m trying to keep it as light as possible.</p>
+
+<p>So now, I can instantiate everything as an <code class="language-plaintext highlighter-rouge">Entity</code> or <code class="language-plaintext highlighter-rouge">MoveableEntity</code>, neat.</p>
+
+<hr />
+
+<p>Next up is to add in items to be scattered around for the player to pick up.  Here I used my new objects and created a new list focused around items - in this case apples.  Right now they serve no purpose other than to be picked up and added to the player’s inventory, however it works quite nicely.</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/YXJFeSn.gif" alt="picking up apples" title="picking up apples" />
+</div>
+
+<p>With some additional socket work (i.e., also sending the items array as well as the player inventories) this behavior also works nicely with multiple players.  Not too hard as the logic is pretty much the same as enemy updates and was mostly copy and paste.</p>
+
+<hr />
+
+<p>This leads me to one future point that I should address.  Right now all of my <em>things</em> in the game are separate in that I have a dictionary of players (keyed on the session ID provided by Flask), a list of enemies, and a list of items.  It <em>works</em>, however it really isn’t to my liking for efficiency.  At some point in the near future I’ll merge this into a single Entities object (or perhaps delineate Entities and MoveableEntities) and try to capture the logic into a bastardized Entity-Component pattern.</p>
+
+<hr />
+
+<p>Last update for the week - laying the groundwork for multiple levels/floors/instances/etc.  A new attribute was added to the position of all <code class="language-plaintext highlighter-rouge">Entity</code> objects: <code class="language-plaintext highlighter-rouge">level</code>.</p>
+
+<p>I have a helper function that places the <code class="language-plaintext highlighter-rouge">Entity</code> on a clear spot within the map (no walls, etc.):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    def getRandomPos(self, level=1):
+        r = random.randint(0,self.NUM_ROWS-1)
+        c = random.randint(0,self.NUM_COLS-1)
+        while not self.isWalkable(c, r):
+            r = random.randint(0,self.NUM_ROWS-1)
+            c = random.randint(0,self.NUM_COLS-1)
+        return {'r': r, 'c': c, 'level': level}
+</code></pre></div></div>
+
+<p>Now, it takes in the desired <code class="language-plaintext highlighter-rouge">level</code> of the object and includes it as something <em>very</em> easy to lookup.  The change cascades all over the current code, however any time there is a lookup for row/column, now the level is checked as well.  For instance, enemies only follow players on their level, socket data only sends current floor information relevant to the player, etc.</p>
+
+<p>You may have noticed there aren’t any enemies in the last gif - that’s because I spawned them all on level 2 to check that my inventory/pickup system was working without needing to despawn them all:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def addEnemy(self):
+    return MoveableEntity("snek", self.getRandomPos(level=2), str(uuid.uuid4()))
+</code></pre></div></div>
+
+<hr />
+
+<p>That’s it for now - next week I’m hoping to add a camera system and/or a proper procedural content generation algorithm for the dungeon.  Or focus on a user interface so I don’t need to keep calling <code class="language-plaintext highlighter-rouge">console.log</code> any time I want to see data 🙄.</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="https://efredericks.github.io/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-1</id><content type="html" xml:base="https://efredericks.github.io/rldev-1.html"><![CDATA[<hr size="1" />
+
+<p><a href="https://www.reddit.com/r/roguelikedev/comments/14q58js/roguelikedev_does_the_complete_roguelike_tutorial/jqr89ss/" target="_blank">Week 1 post</a></p>
+<hr size="1" />
+
+<p>I’ve silently participated in the Reddit (RIP) does the <a href="http://rogueliketutorials.com/tutorials/tcod/v2/" target="_blank">roguelikedev tutorial</a> over the past few years (and have never extended it beyond the basic tutorial - school-related things always seem to come up).  This year I wanted to try something different and we’ll see how it goes.  No guarantees I’ll finish this or that even I’ll make something releasable, but I wanted to have some fun and see where I can get.</p>
+
+<p>I’ve always had a soft spot for grindy MMOs (for example, Ragnarok Online, FlyFF) and fell hard for <a href="https://www.realmofthemadgod.com/" target="_blank">Realm of the Mad God</a> (RotMG) several years ago.  Oddly enough, one of the early contributors who did the maps for RotMG - <a href="https://www.redblobgames.com/" target="_blank">Red Blob Games</a> - also <a href="https://www.redblobgames.com/x/2025-roguelike-dev/" target="_blank">participates in this challenge</a>!</p>
+
+<div align="center">
+  <img src="https://media.tenor.com/3QvpUGVoyuIAAAAd/rotmg-realm-of-the-mad-god.gif" alt="RotMG" title="RotMG" />
+</div>
+
+<p>Anyway, that’s where my mind wandered this year.  This proof of concept will probably fall outside of the typical <a href="https://roguebasin.com/index.php?title=Berlin_Interpretation" target="_blank">Berlin interpretation</a> of a roguelike, and dare I say, may even become a rogue<em>lite</em>.</p>
+
+<p>Here is the core concept:</p>
+
+<h3 id="roguelike-mechanics-bump-to-attack-tile-based-movement-permadeath-etc-in-a-multiplayer-instanced-environment">Roguelike mechanics (bump to attack, tile-based movement, permadeath, etc.) in a multiplayer, instanced environment</h3>
+
+<p>The fact that multiple players will be participating is not new, however is a tricky thing to address for the typical roguelike given that time moves only when players move.  My design decision here is that time will forever be moving forward (meaning that the game state will update periodically), however players can “remove” themselves from the flow of time if they need to stop and think (or take a break).</p>
+
+<p><em>Or, worst case they can bail on the instance as in RotMG if things don’t work out</em>.</p>
+
+<p>This will be the <strong>meditate</strong> mechanic - players will enter a meditative state where they still exist but are on another plane of existence.  A mechanic which is ripe for abuse and therefore probably will receive a cooldown timer of sorts.</p>
+
+<p>One of my caveats is that, while I will do my best, this will not be a “secure” environment in which I can guarantee that players can’t abuse the client/server mechanic.  If you’re familiar with RotMG (or any multiplayer game really) there was a serious issue with item duplication that went on for some time.  I’m going to handwave that bit and assume I’ll hire a security expert at some point that can fix things.</p>
+
+<p>Anyway, here are my overall goals for the follow-along tutorial series:</p>
+
+<ul>
+  <li>
+    <p>Client/server architecture where all logic occurs server-side</p>
+  </li>
+  <li>
+    <p>“Standard” tutorial concepts implemented (e.g., multiple dungeon levels, enemies, items, etc.)</p>
+  </li>
+  <li>
+    <p>Different procedural content generation (PCG) methods for the map (BSP, cellular automata, etc.)</p>
+  </li>
+  <li>
+    <p>Camera system to allow large-scale maps to let the PCG shine</p>
+  </li>
+  <li>
+    <p>Ability for players to interact with each other (i.e., via a text chat)</p>
+  </li>
+</ul>
+
+<p>And some initial architectural/design decisions in no particular order:</p>
+
+<ul>
+  <li>
+    <p>Server will be in Python to enable me to use <code class="language-plaintext highlighter-rouge">tcod</code> if necessary</p>
+  </li>
+  <li>
+    <p>Client will be in JavaScript/HTML5 and be responsible for rendering/handling player input</p>
+  </li>
+  <li>
+    <p>All code will be open source to enable others to spin up their own instances</p>
+  </li>
+</ul>
+
+<p>And lastly some stretch goals:</p>
+
+<ul>
+  <li>
+    <p>Player can select tiles or ASCII</p>
+  </li>
+  <li>
+    <p>Players can trade with each other</p>
+  </li>
+  <li>
+    <p>Fog of war for individual players</p>
+  </li>
+  <li>
+    <p>Database implementation will allow persistence (<code class="language-plaintext highlighter-rouge">redis</code> or <code class="language-plaintext highlighter-rouge">SQLite</code>)</p>
+  </li>
+</ul>
+
+<p>I don’t plan to checkpoint this at all as I go so the eventual repository will be one single <code class="language-plaintext highlighter-rouge">main</code> tree, but I’ll try to highlight things that are “interesting” for others in these posts.</p>
+
+<p>Prior to the Week 1 drop I wanted to get a prototype up and running just to see if I could get Flask to play nicely with web sockets and a JavaScript frontend.  Here is a sample - hot pink is you, green are other players, E are enemies that will either randomly move or follow the closest player. When a player goes dark they are meditating and still exist but aren’t a part of the game until they resume motion.</p>
+
+<p><img src="https://i.imgur.com/YfOeEQv.gif" alt="Sample interactions" /></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-07:00</published><updated>2019-11-25T00:00:00-07:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example</id><content type="html" xml:base="https://efredericks.github.io/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-06:00</published><updated>2019-10-25T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-example</id><content type="html" xml:base="https://efredericks.github.io/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-04:00</published><updated>2019-10-24T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%202</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-06:00</published><updated>2019-10-24T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-example%20copy%202</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-04:00</published><updated>2019-10-20T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%203</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-06:00</published><updated>2019-10-20T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-example%20copy%203</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-5.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-09-25T00:00:00-04:00</published><updated>2019-09-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%205</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-5.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-5.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-09-25T00:00:00-06:00</published><updated>2019-09-25T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-example%20copy%205</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-5.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-4.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-06-25T00:00:00-04:00</published><updated>2019-06-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%204</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-4.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-4.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-06-25T00:00:00-06:00</published><updated>2019-06-25T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-example%20copy%204</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-4.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
-<ol>
-  <li>Y</li>
-  <li>Yy</li>
-  <li>YyY</li>
-  <li>YyYy</li>
-  <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Collaboration entry example</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Collaboration entry example" /><published>2018-10-25T00:00:00-06:00</published><updated>2018-10-25T00:00:00-06:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>This is first paragraph of a post. It will appear in the page of it’s category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking “Read More”</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Collaboration entry example</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Collaboration entry example" /><published>2018-10-25T00:00:00-04:00</published><updated>2018-10-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>This is first paragraph of a post. It will appear in the page of it’s category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking “Read More”</p>
 
 <p>Here you can write more about a certain release, e.g. tracklist:</p>
 

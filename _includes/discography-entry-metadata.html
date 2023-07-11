@@ -1,10 +1,10 @@
 <p class="discography-album_release-date">
-    release date: {{ include.currPost.date | date_to_long_string }}
+    date: {{ include.currPost.date | date_to_long_string }}
 </p>
 
 {% if include.currPost.type %}
 <p class="discography-album_type">
-    release type: {{ include.currPost.type }}
+    post type: {{ include.currPost.type }}
 </p>
 {% endif %}
 

@@ -23,6 +23,9 @@ menu_pages:
   category: activities 
   tooltip: activities tooltip
 
+- title: posts
+  url: /posts/
+
 menu_contacts:
 - faicon: fa fa-github
   url: https://github.com/efredericks
