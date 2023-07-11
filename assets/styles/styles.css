@@ -442,7 +442,9 @@ pre {
     margin-inline-end: 0px;
     padding-inline-start: 40px; }
   .post li {
-    display: list-item; }
+    display: list-item;
+    font-size: 0.9em;
+    color: #000000; }
   .post .post-content, .post .post-metadata {
     background: #FFF;
     padding: 0 2rem 1rem 2rem;
