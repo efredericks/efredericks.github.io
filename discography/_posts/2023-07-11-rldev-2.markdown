@@ -24,7 +24,10 @@ type: blog
 #   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
 ---
 <hr size="1" />
-[Week 2 post](){:target="_blank"}
+* [Week 2 post](https://www.reddit.com/r/roguelikedev/comments/14wuzqa/roguelikedev_does_the_complete_roguelike_tutorial/jrkdlgr/){:target="_blank"}
+
+* [Project repo](https://github.com/efredericks/RL-MMO){:target="_blank"}
+
 <hr size="1" />
 
 This week I wanted to start by turning my "simple" entities into proper objects.  Previously anything that moved was simply a row/column position dictionary.  Nice for prototyping, bad for anything else.
