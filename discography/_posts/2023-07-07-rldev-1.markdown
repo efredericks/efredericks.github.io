@@ -85,5 +85,8 @@ Prior to the Week 1 drop I wanted to get a prototype up and running just to see 
 
 ![Sample interactions](https://i.imgur.com/YfOeEQv.gif)
 
+---
+
+[Next post](/rldev-2.html)
 
 
