@@ -1,7 +1,7 @@
 ---
 layout: post
 title: fredericks does the roguelikedev tutorial - 3
-description: Z-levels, UI refinement, camera?
+description: Z-levels, UI refinement, camera, sounds, drops
 # image: assets/img/z-is-for-zero.png
 # responsiveImage:
 #   - src: assets/img/300.png
