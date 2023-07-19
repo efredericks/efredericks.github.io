@@ -48,7 +48,9 @@ scholar:
 
   source: ./assets
   bibliography: pubs.bib
-  bibliography_template: ""
+  bibliography_template: "bibtemplate"
+
+  repository: /publications
 
   replace_strings: true
   join_strings:    true

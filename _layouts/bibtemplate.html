@@ -1,0 +1,9 @@
+    {% if link %}
+    <a href="{{link}}"><button class="btn btnId btnPub--download" style="outline:none; position:relative;white-space: normal;">PDF</button></a>
+    {% endif %}
+
+{{reference}}
+    
+    {% if links['sup.pdf'] %}
+    <a href="{{links['sup.pdf']}}"><button class="btn btnId btnPub--supplement" style="outline:none; position:relative;white-space: normal;">Supplement</button></a>
+    {% endif %}
