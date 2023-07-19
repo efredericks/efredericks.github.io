@@ -159,6 +159,15 @@ audio {
       -webkit-text-decoration-color: #000000;
       -moz-text-decoration-color: #000000; }
 
+/*
+.btn {
+    background: url(/assets/paper_icon_pdf.png) no-repeat;
+    cursor: pointer;
+    border: none;
+    height: 48px;
+    width: 48px;
+}
+*/
 .menu {
   background-color: #FFF;
   position: fixed;
