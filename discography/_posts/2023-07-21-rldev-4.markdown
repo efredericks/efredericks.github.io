@@ -1,7 +1,7 @@
 ---
 layout: post
 title: fredericks does the roguelikedev tutorial - 4
-description: chat, procgen
+description: chat, procgen, cleanup
 # image: assets/img/z-is-for-zero.png
 # responsiveImage:
 #   - src: assets/img/300.png
@@ -30,176 +30,145 @@ type: blog
 
 <hr size="1" />
 
-* chat (blegh - forgot that `_player` != `player` - everybody was chatting for a while)
-* procgen
-* HP
+This week I spent some time getting a limited chat up and running, along with basic procgen for the map and some extra hooks for HP.  All the screenshots will have the new procgen in there, but I'm going to talk about chat first.
 
-This week I spent some time getting a limited chat up and running, along with basic procgen for the map and some extra hooks for HP.
+Before starting though, I am pleased to report that this does work in a public environment.  I put the repo on a Google Cloud virtual machine (microinstance) and played it with a friend for a bit.  No lag from either end at this point, though 2 people isn't really a stress test.  It was more of a "does it actually work outside of my own machine" type of test.
 
+And that, at least, passed just fine.
 
----
-
-First of all we have a bit of a user interface refinement.  First we have some relevant stats being reported in the game window sidebar (`console.log` was getting annoying), some animated CSS background trickery to spice things up, and a new font, [Chivo Mono, c/o Google](https://fonts.google.com/specimen/Chivo+Mono){:target="_blank"}.
-
-For the animated background I just gave my main window a pair of drop shadows and animated their blurriness and placement.  Nothing too crazy, but hits that vaporwave aesthetic that is oh so pleasing.
-
-![Screenshot](https://i.imgur.com/W2Cz22N.png)
-
-Here is the relevant code if you're interested (we'll talk about that little checkbox in a bit):
-
-```
-#game-canvas {
-    background: #222;
-    margin: 0 auto;
-    display: block;
-    width: 900px;
-    /* 640 + 260 */
-    height: 480px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    margin-top: -240px;
-    margin-left: -455px;
-    /* 900/2 + 10/2 */
-
-    border: 5px solid #eee;
-    border-radius: 20px;
-    padding: 10px;
-
-    animation: moveShadow ease-in-out 15s infinite;
-}
-
-@keyframes moveShadow {
-    0% {
-        box-shadow: -15px -15px 45px 0 rgba(220, 0, 220, 0.25), 15px 15px 45px 0 rgba(0, 229, 255, 0.25);
-    }
-
-    50% {
-        box-shadow: 15px -15px 145px 0 rgba(220, 0, 220, 0.25), -15px 15px 145px 0 rgba(0, 229, 255, 0.25);
-    }
-
-    100% {
-        box-shadow: -15px -15px 45px 0 rgba(220, 0, 220, 0.25), 15px 15px 45px 0 rgba(0, 229, 255, 0.25);
-    }
-}
-
-```
-
-This is also a good reminder (to myself) that I need to download the font locally, as I was doing some testing in a place without WiFi and defaulting to `monospace` wasn't nearly as nice to look at (for me).
-
-We also have a series of dots in the background that are fudged via some `linear-gradient` calls and are the result of me googling "animated CSS background."  The only thing I changed here is the background color and the original was here: [https://codepen.io/edmundojr/pen/xOYJGw](https://codepen.io/edmundojr/pen/xOYJGw){:target="_blank"}.  
+<div align="center">
+  <img src="https://i.imgur.com/LF2TnIl.png" title="yay" alt="yay" />
+</div>
 
 ---
 
-Next up we have ... Z-levels! I mean dungeon depth.  Everything so far has been mainly proof of concept, adding the ability for the dungeon to have floors starts to make it a bit more real.
+## Chat
 
-If you've never done this before, it is pretty straightforward. The game map gets a new dimension, that's about it.  This also means that all references to the map now need to check that dimension as well. 
+I wanted players to have a limited chat so that they can talk to each other.  Otherwise we lose a bit of the MMO-ness.  In taking a page from RotMG, I thought little speech bubbles would be a good idea. 
 
-Instead of  `gameMap[r][c]` we have `gameMap[z][r][c]`.
+<div align="center">
+  <img src="https://i.imgur.com/dVeW4gc.png" alt="rotmg chat" title="rotmg chat" />
+</div>
 
-And the `pos` attribute for all `Entity` objects get a new `level` attribute so we know on which floor they live.
+We'll get there eventually, but each person only says one thing at a time - there is no buffer.  What I did was to give each `MoveableEntity` a chat object - currently a list but that may get pared down a single object.  The list is forced into a mutable tuple - element 0 is the chat message and element 1 is the timer.
 
-Upon adding this I spent some time quashing bugs, notably one where you could kill enemies on other floors because I forgot to update my attack mechanism (so, if you were on floor 1 and the enemy was on floor 3, as long as you were checking the row/column you could still hit them...).
+The timer will decrement for each game tick that a chat message exists on an entity, allowing me to map opacity to time remaining.  In its current state things decrement quickly, but are visible and *functional* at least.
 
-Another thing I added was stairs, though right now the player's placement is a bit random upon entering and leaving them - work for future me.
+The nice bit here is that all `MoveableEntity` objects get a chat, so enemies can now talk to you as well!  This will eventually extend to NPCs once they get added.
 
----
+The screenshot is a bit hard to see below, but the enemies will randomly select a bit of angry flavor text when they're following you.  The rat is saying '!!' at the moment.
 
-After this I wanted to add a bit more non-tutorial bits to it, so we have some sounds!  I took a note out of the [Broughlike tutorial](https://nluqo.github.io/broughlike-tutorial/stage7.html){:target="_blank"} for managing them and found a nice [royalty free sound pack by the group that did Charlie the Unicorn](https://filmcow.itch.io/filmcow-sfx){:target="_blank"}.
+<div align="center">
+  <img src="https://i.imgur.com/6hwUJQn.png" alt="rat chat" title="rat chat" />
+</div>
 
-Now we have ambient sounds, sound effects upon all sorts of things, and whatnot.  Right now they're mainly placeholders and absolutely zero sound normalization has been done, but I like it!
+Colors and interface are by no means final and currently quite difficult to read, but I figured prettifying it would take a back seat to actual implementation.  Plus then I'd need to add things like text wrapping and all those fun calculations and my eyes glazed over a bit.
 
-The fun bit here is that the pack has a large number of "similar" sounds, so I included them all and provided a bit of randomness for when an event pops.  For instance, there is a group of `bat hit 1` through `bat hit 15` sounds that are played if the player hits a monster.
-
-For this I added a new global lookup table for each of my sound events with the event name and how many sounds are available.
-
-```
-// pick a random index for each sound on [1,len]
-let soundMaps = {
-    monHit: 2,
-    playerHit: 15,
-    pickup: 4,
-    stairs: 7,
-    spawn: 1,
-};
-```
-
-So if a player hits a monster, I just grab a random number on [1,14] and tack that onto my sound player (`snd` is the event name and `sounds` hold the loaded audio files and are keyed on the name of the event):
-
-```
-playSound('playerHit');
-
-// abstracted a bit
-playSound = (snd) => {
-    let idx = getRandomInt(1, soundMaps[snd] + 1);
-    let key = `${snd}${idx}`;
-    sounds[key].currentTime = 0;
-    sounds[key].play();
-}
-```
-
-I also bulk-converted all the `wav` files to `ogg` in the thought that it would be better for file size.  I did 0 checks to make sure this was the case.
+Work for future me.
 
 ---
 
-Two more things, camera and drops!  First lets talk drops.  I updated my `Entity` system a bit to include the type(s) of items that can be dropped as well as how many. Right now all we have are apples so that's all that can be dropped.  However this is setup in a nice little global loot table that I can balance later.
+## Procgen
 
+Ok, now for procedural generation.
 
-This table lists out all the relevant information for each *thing* in the game.  A better way would be to sub-class out every single entity (as the Broughlike/TCOD tutorials do), but I wanted everything in one concise place.
+*Deep breath*
 
-Note: this is **terrible** for human error - everything is keyed on something typed out multiple times.  Just keep piling on the technical debt to get to that minimum viable product.
+I didn't use `tcod`.  I apologize to all.  I just ... didn't feel like rewriting all of my code to handle the `numpy` arrays.  In the future that would be a better idea for performance, however for now we'll just stick with a 2D list.
+
+Otherwise, this proof of concept will never be done.
+
+Anywho, I used the `opensimplex` noise library ([PyPi reference](https://pypi.org/project/opensimplex/){:target="_blank"}) and simply mapped ranges to tile values.  As you can see below the level is fairly water-heavy.  I'll be tweaking this significantly as I go, but I honestly like how it looks at the moment.  
+
+Pretty simple mapping that is fun to play with for a 'standard' Simplex noise look:
 
 ```
-LOOKUP_STATS = {
-    'maxHP': {
-        'player': 10,
-        'gobbo': 2,
-        'snek': 2,
-        'rat': 1,
-    },
-    'sprite': {
-        # moveables
-        'player': '@',
-        'gobbo': 'g',
-        'snek': 's',
-        'rat': 'r',
+n = opensimplex.noise2(c*zoom, r*zoom)
+newtile = "empty"
+if n < -0.8 or n > 0.8:     # water2 is not walkable
+    newtile = "water2"
+elif n < -0.6 or n > 0.6:
+    newtile = "water1"
+elif n < -0.4 or n > 0.4:
+    newtile = "floor2"
+elif n < -0.2 or n > 0.2:
+    newtile = "floor1"
+_map[z][r].append(newtile)
+```
 
-        # static
-        'apple': 'a',
-    },
-    # name: list[(tuple(type, max, chance))] - random() > chance
-    'drops': {
-        'rat': [('apple', 1, 0.25)],
-        'gobbo': [('apple', 3, 0.35)],
-        'snek': [('apple', 5, 0.5)],
-    }
+<div align="center">
+  <b>Floor 1</b><br />
+  <img src="https://i.imgur.com/AQV8rp1.png" alt="procgen 1" title="procgen 1" />
+</div>
+
+Plus, as you descend in Z-levels the zoom changes as well.  This comes care of a handy utility function I always transpose from p5js:
+
+```
+# map function similar to p5.js
+def p5map(n, start1, stop1, start2, stop2): 
+    return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2
+```
+
+--
+
+```
+# map generation loop
+for z in range(self.NUM_LEVELS):
+    zoom = p5map(z, 0, self.NUM_LEVELS, 0.1, 0.001)
+    ...
+```
+
+<div align="center">
+  <b>Floor 3</b><br />
+  <img src="https://i.imgur.com/QTz0oiZ.png" alt="procgen 2" title="procgen 2" />
+</div>
+
+Gives a nice feeling of depth and the environments varying.  
+
+---
+
+## Other
+
+I also updated the drops/items a bit so that players could eat apples, rather than just collect them.  To make this happen, a new 'use' key got added (right now that only eats apples) and heals the player (and plays the associated pickup sound since I didn't feel like sound hunting at the moment).  To heal the player a new `updateHP` function got added to `MoveableEntity` that will be the basis of HP management and death.  If `HP` < 0, then the function will return `false`, otherwise it will cap at the entity's `maxHP` attribute.  No HP overloading planned as of this point.
+
+However, testing this functionality was not really possible as nobody can hurt you.  So, all players got started with 2 HP for a bit just to make sure that all the socket communication was happy.
+
+Test test test!
+
+...then test again.
+
+--
+
+One other bit I added was some sprite management.  Each tile now has a named key, an associated glyph, and a color value (including alpha).  This is all done in hex code on the client-side (I'm making the assumption all game logic happens server-side and all drawing/rendering/UI/sounds happens client-side):
+
+```
+// spritesheet
+let SPRITESHEET = {
+    // env
+    wall1: { sprite: '#', color: '#ccc' },
+    wall2: { sprite: '#', color: '#999' },
+    floor1: { sprite: '.', color: '#333' },
+    floor2: { sprite: '.', color: '#666' },
+    water1: { sprite: '~', color: '#008080' },
+    water2: { sprite: '~', color: '#0011ee' },
+    empty: { sprite: ' ', color: '#000' },
+    stairsDown: { sprite: '>', color: '#00ffff' },
+    stairsUp: { sprite: '<', color: '#00ffff' },
+    ...
 }
 ```
 
-> I probably should also create better enemies at some point because writing these out reminds me that I have the sense of humor of a toddler.
-
-That's not terribly exciting though and is really just object/state management.  What is fun is scrolling cameras!
-
-![Scrolling camera](https://i.imgur.com/TrwjCX1.gif)
-
-This is always the bane of my existence because I always do this kind of thing by hand (note: Unity/Godot make this ridiculously easy).  However, I've done it enough times now that I can cheat by looking at old code and just transplant it.
-
-The basis is here: [https://www.roguebasin.com/index.php/Scrolling_map](https://www.roguebasin.com/index.php/Scrolling_map){:target="_blank"}
-
-Essentially, we create a viewport around the player and only draw things within that viewport.  Note - this is lovely for performance optimization as you only need to manage visuals for things in view.  You do still need to update AI and whatnot for things off screen, but at least we don't have to draw it all.
-
-The scrolling camera and larger map are what will be the requirement for my procedural generation as I like large worlds, however keeping it constrained for this use case will be a fun challenge.
+To me, going this route is nicely extensible as I can also tack on sprite images as well if I'd like, or offsets into a spritesheet.  Previously it was all `if` checks in code for the exact sprite, so not very programmer-friendly.
 
 ---
 
-Last but not least, I started working on the README file so that I could remember how to do things in the future when I invariably run out of time.  The semester start is a month away and that means that it is nigh time for class prep to begin.  How to add enemies and items, etc.
+Next week I plan to work on enemy AI a bit, since right now everything either wanders or follows you.  Also, I'd like to start dipping into accessibility a bit to ensure that the game itself is playable for all.  I don't have a whole lot of experience in managing that with a canvas, so some additional research is going to be needed.
 
----
+Here's a GIF of current playing through a few levels and testing out chatting.  Even though I didn't need any, I just couldn't stop myself from picking up some apples.
 
-Next week I'm planning on adding proper procedural generation, so hoping to either make use of the `tcod` library for that or `opensimplex`.  Perhaps some drunken walking for caves, we shall see.
-
-Also a slew of bugs/issues to fix, including player placement from stairs.
+<div align="center">
+  <img src="https://i.imgur.com/ZHLAHK8.gif" alt="playthrough" title="playthrough" />
+</div>
 
 ---
 

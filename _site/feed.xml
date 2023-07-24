@@ -1,4 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-07-19T14:50:14-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="https://efredericks.github.io/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-3</id><content type="html" xml:base="https://efredericks.github.io/rldev-3.html"><![CDATA[<hr size="1" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-07-24T15:19:05-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="http://localhost:4000/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>http://localhost:4000/rldev-4</id><content type="html" xml:base="http://localhost:4000/rldev-4.html"><![CDATA[<hr size="1" />
+
+<ul>
+  <li>
+    <p><a href="" target="_blank">Week 4 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank">Project repo</a></p>
+  </li>
+</ul>
+
+<hr size="1" />
+
+<p>This week I spent some time getting a limited chat up and running, along with basic procgen for the map and some extra hooks for HP.  All the screenshots will have the new procgen in there, but I’m going to talk about chat first.</p>
+
+<p>Before starting though, I am pleased to report that this does work in a public environment.  I put the repo on a Google Cloud virtual machine (microinstance) and played it with a friend for a bit.  No lag from either end at this point, though 2 people isn’t really a stress test.  It was more of a “does it actually work outside of my own machine” type of test.</p>
+
+<p>And that, at least, passed just fine.</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/LF2TnIl.png" title="yay" alt="yay" />
+</div>
+
+<hr />
+
+<h2 id="chat">Chat</h2>
+
+<p>I wanted players to have a limited chat so that they can talk to each other.  Otherwise we lose a bit of the MMO-ness.  In taking a page from RotMG, I thought little speech bubbles would be a good idea.</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/dVeW4gc.png" alt="rotmg chat" title="rotmg chat" />
+</div>
+
+<p>We’ll get there eventually, but each person only says one thing at a time - there is no buffer.  What I did was to give each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> a chat object - currently a list but that may get pared down a single object.  The list is forced into a mutable tuple - element 0 is the chat message and element 1 is the timer.</p>
+
+<p>The timer will decrement for each game tick that a chat message exists on an entity, allowing me to map opacity to time remaining.  In its current state things decrement quickly, but are visible and <em>functional</em> at least.</p>
+
+<p>The nice bit here is that all <code class="language-plaintext highlighter-rouge">MoveableEntity</code> objects get a chat, so enemies can now talk to you as well!  This will eventually extend to NPCs once they get added.</p>
+
+<p>The screenshot is a bit hard to see below, but the enemies will randomly select a bit of angry flavor text when they’re following you.  The rat is saying ‘!!’ at the moment.</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/6hwUJQn.png" alt="rat chat" title="rat chat" />
+</div>
+
+<p>Colors and interface are by no means final and currently quite difficult to read, but I figured prettifying it would take a back seat to actual implementation.  Plus then I’d need to add things like text wrapping and all those fun calculations and my eyes glazed over a bit.</p>
+
+<p>Work for future me.</p>
+
+<hr />
+
+<h2 id="procgen">Procgen</h2>
+
+<p>Ok, now for procedural generation.</p>
+
+<p><em>Deep breath</em></p>
+
+<p>I didn’t use <code class="language-plaintext highlighter-rouge">tcod</code>.  I apologize to all.  I just … didn’t feel like rewriting all of my code to handle the <code class="language-plaintext highlighter-rouge">numpy</code> arrays.  In the future that would be a better idea for performance, however for now we’ll just stick with a 2D list.</p>
+
+<p>Otherwise, this proof of concept will never be done.</p>
+
+<p>Anywho, I used the <code class="language-plaintext highlighter-rouge">opensimplex</code> noise library (<a href="https://pypi.org/project/opensimplex/" target="_blank">PyPi reference</a>) and simply mapped ranges to tile values.  As you can see below the level is fairly water-heavy.  I’ll be tweaking this significantly as I go, but I honestly like how it looks at the moment.</p>
+
+<p>Pretty simple mapping that is fun to play with for a ‘standard’ Simplex noise look:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = opensimplex.noise2(c*zoom, r*zoom)
+newtile = "empty"
+if n &lt; -0.8 or n &gt; 0.8:     # water2 is not walkable
+    newtile = "water2"
+elif n &lt; -0.6 or n &gt; 0.6:
+    newtile = "water1"
+elif n &lt; -0.4 or n &gt; 0.4:
+    newtile = "floor2"
+elif n &lt; -0.2 or n &gt; 0.2:
+    newtile = "floor1"
+_map[z][r].append(newtile)
+</code></pre></div></div>
+
+<div align="center">
+  <b>Floor 1</b><br />
+  <img src="https://i.imgur.com/AQV8rp1.png" alt="procgen 1" title="procgen 1" />
+</div>
+
+<p>Plus, as you descend in Z-levels the zoom changes as well.  This comes care of a handy utility function I always transpose from p5js:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># map function similar to p5.js
+def p5map(n, start1, stop1, start2, stop2): 
+    return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2
+</code></pre></div></div>
+
+<p>–</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># map generation loop
+for z in range(self.NUM_LEVELS):
+    zoom = p5map(z, 0, self.NUM_LEVELS, 0.1, 0.001)
+    ...
+</code></pre></div></div>
+
+<div align="center">
+  <b>Floor 3</b><br />
+  <img src="https://i.imgur.com/QTz0oiZ.png" alt="procgen 2" title="procgen 2" />
+</div>
+
+<p>Gives a nice feeling of depth and the environments varying.</p>
+
+<hr />
+
+<h2 id="other">Other</h2>
+
+<p>I also updated the drops/items a bit so that players could eat apples, rather than just collect them.  To make this happen, a new ‘use’ key got added (right now that only eats apples) and heals the player (and plays the associated pickup sound since I didn’t feel like sound hunting at the moment).  To heal the player a new <code class="language-plaintext highlighter-rouge">updateHP</code> function got added to <code class="language-plaintext highlighter-rouge">MoveableEntity</code> that will be the basis of HP management and death.  If <code class="language-plaintext highlighter-rouge">HP</code> &lt; 0, then the function will return <code class="language-plaintext highlighter-rouge">false</code>, otherwise it will cap at the entity’s <code class="language-plaintext highlighter-rouge">maxHP</code> attribute.  No HP overloading planned as of this point.</p>
+
+<p>However, testing this functionality was not really possible as nobody can hurt you.  So, all players got started with 2 HP for a bit just to make sure that all the socket communication was happy.</p>
+
+<p>Test test test!</p>
+
+<p>…then test again.</p>
+
+<p>–</p>
+
+<p>One other bit I added was some sprite management.  Each tile now has a named key, an associated glyph, and a color value (including alpha).  This is all done in hex code on the client-side (I’m making the assumption all game logic happens server-side and all drawing/rendering/UI/sounds happens client-side):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// spritesheet
+let SPRITESHEET = {
+    // env
+    wall1: { sprite: '#', color: '#ccc' },
+    wall2: { sprite: '#', color: '#999' },
+    floor1: { sprite: '.', color: '#333' },
+    floor2: { sprite: '.', color: '#666' },
+    water1: { sprite: '~', color: '#008080' },
+    water2: { sprite: '~', color: '#0011ee' },
+    empty: { sprite: ' ', color: '#000' },
+    stairsDown: { sprite: '&gt;', color: '#00ffff' },
+    stairsUp: { sprite: '&lt;', color: '#00ffff' },
+    ...
+}
+</code></pre></div></div>
+
+<p>To me, going this route is nicely extensible as I can also tack on sprite images as well if I’d like, or offsets into a spritesheet.  Previously it was all <code class="language-plaintext highlighter-rouge">if</code> checks in code for the exact sprite, so not very programmer-friendly.</p>
+
+<hr />
+
+<p>Next week I plan to work on enemy AI a bit, since right now everything either wanders or follows you.  Also, I’d like to start dipping into accessibility a bit to ensure that the game itself is playable for all.  I don’t have a whole lot of experience in managing that with a canvas, so some additional research is going to be needed.</p>
+
+<p>Here’s a GIF of current playing through a few levels and testing out chatting.  Even though I didn’t need any, I just couldn’t stop myself from picking up some apples.</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/ZHLAHK8.gif" alt="playthrough" title="playthrough" />
+</div>
+
+<hr />
+
+<p><a href="/rldev-3.html">Last post</a></p>
+
+<p>Next post: TBD</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="http://localhost:4000/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>http://localhost:4000/rldev-3</id><content type="html" xml:base="http://localhost:4000/rldev-3.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -180,7 +333,7 @@ playSound = (snd) =&gt; {
 
 <p><a href="/rldev-2.html">Last post</a></p>
 
-<p>Next post: TBD</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="https://efredericks.github.io/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-2</id><content type="html" xml:base="https://efredericks.github.io/rldev-2.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="http://localhost:4000/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>http://localhost:4000/rldev-2</id><content type="html" xml:base="http://localhost:4000/rldev-2.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -295,7 +448,7 @@ class MoveableEntity(Entity):
 
 <p><a href="/rldev-1.html">Last post</a></p>
 
-<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="https://efredericks.github.io/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-1</id><content type="html" xml:base="https://efredericks.github.io/rldev-1.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="http://localhost:4000/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>http://localhost:4000/rldev-1</id><content type="html" xml:base="http://localhost:4000/rldev-1.html"><![CDATA[<hr size="1" />
 
 <p><a href="https://www.reddit.com/r/roguelikedev/comments/14q58js/roguelikedev_does_the_complete_roguelike_tutorial/jqr89ss/" target="_blank">Week 1 post</a></p>
 <hr size="1" />
@@ -381,56 +534,46 @@ class MoveableEntity(Entity):
 
 <hr />
 
-<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>http://localhost:4000/yyy-example%20copy</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example</id><content type="html" xml:base="https://efredericks.github.io/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example</id><content type="html" xml:base="http://localhost:4000/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-04:00</published><updated>2019-10-24T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%202</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-04:00</published><updated>2019-10-24T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example%20copy%202</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-04:00</published><updated>2019-10-20T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%203</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-04:00</published><updated>2019-10-20T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example%20copy%203</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-5.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-09-25T00:00:00-04:00</published><updated>2019-09-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%205</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-5.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy-5.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-09-25T00:00:00-04:00</published><updated>2019-09-25T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example%20copy%205</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy-5.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-4.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-06-25T00:00:00-04:00</published><updated>2019-06-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%204</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-4.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy-4.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-06-25T00:00:00-04:00</published><updated>2019-06-25T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example%20copy%204</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy-4.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Collaboration entry example</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Collaboration entry example" /><published>2018-10-25T00:00:00-04:00</published><updated>2018-10-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>This is first paragraph of a post. It will appear in the page of it’s category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking “Read More”</p>
-
-<p>Here you can write more about a certain release, e.g. tracklist:</p>
-
-<ol>
-  <li>Y</li>
-  <li>Yy</li>
-  <li>YyY</li>
-  <li>YyYy</li>
-  <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is first paragraph of a post. It will appear in the page of it’s category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking “Read More”]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
