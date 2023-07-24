@@ -1,7 +1,7 @@
 ---
 layout: post
-title: fredericks does the roguelikedev tutorial - 3
-description: Z-levels, UI refinement, camera, sounds, drops
+title: fredericks does the roguelikedev tutorial - 4
+description: chat, procgen
 # image: assets/img/z-is-for-zero.png
 # responsiveImage:
 #   - src: assets/img/300.png
@@ -24,15 +24,18 @@ type: blog
 #   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
 ---
 <hr size="1" />
-* [Week 3 post](https://www.reddit.com/r/roguelikedev/comments/152ns71/roguelikedev_does_the_complete_roguelike_tutorial/jsez1go/){:target="_blank"}
+* [Week 4 post](){:target="_blank"}
 
 * [Project repo](https://github.com/efredericks/RL-MMO){:target="_blank"}
 
 <hr size="1" />
 
-This week was all about refinement and starting to prep things for procedural generation.  Also, this post is probably going to be fairly terse as there were a lot of little updates and I have some other deadlines not related to this.
+* chat (blegh - forgot that `_player` != `player` - everybody was chatting for a while)
+* procgen
+* HP
 
-Here we go!
+This week I spent some time getting a limited chat up and running, along with basic procgen for the map and some extra hooks for HP.
+
 
 ---
 
@@ -200,6 +203,6 @@ Also a slew of bugs/issues to fix, including player placement from stairs.
 
 ---
 
-[Last post](/rldev-2.html)
+[Last post](/rldev-3.html)
 
-[Next post](/rldev-4.html)
+Next post: TBD
