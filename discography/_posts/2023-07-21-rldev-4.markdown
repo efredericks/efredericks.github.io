@@ -24,7 +24,7 @@ type: blog
 #   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
 ---
 <hr size="1" />
-* [Week 4 post](){:target="_blank"}
+* [Week 4 post](https://www.reddit.com/r/roguelikedev/comments/159b1yu/roguelikedev_does_the_complete_roguelike_tutorial/jteeuhl/){:target="_blank"}
 
 * [Project repo](https://github.com/efredericks/RL-MMO){:target="_blank"}
 
