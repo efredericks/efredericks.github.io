@@ -1,0 +1,149 @@
+---
+layout: post
+title: fredericks does the roguelikedev tutorial - 5
+description: aoe, procgen, chat
+# image: assets/img/z-is-for-zero.png
+# responsiveImage:
+#   - src: assets/img/300.png
+#     size: 300
+#   - src: assets/img/600.png
+#     size: 600
+#   - src: assets/img/z-is-for-zero.png
+#     size: 900
+type: blog
+# play:
+#     - name: YouTube
+#       url: https://www.youtube.com/
+#     - name: SoundCloud
+#       url: https://soundcloud.com/
+# buy:
+#   - url: https://backfromvoid.bandcamp.com/track/if-i-want-you-to
+#     name: BandCamp
+# embed_player:
+#   type: bandcamp
+#   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
+---
+<hr size="1" />
+* [Week 5 post](){:target="_blank"}
+
+* [Project repo](https://github.com/efredericks/RL-MMO){:target="_blank"}
+
+<hr size="1" />
+
+This week introduces player area of effect spells (singular currently), a Drunkard's Walk algorithm for map generation, and chat backgrounds for players (enemies lose theirs).  Mostly it was in touching up some things on the backend to better support the effects.
+
+Also, enemy pathfinding gets a touch of rework so that enemies "forget" about players.
+
+---
+
+## Chat Backgrounds
+
+I was really not up for doing the calculations necessary to draw a chat balloon in the canvas, so I turned to our old friend StackOverflow to see if there were pre-existing solutions to the problem.  Fortunately, chat bubbles are pretty common things to have, so there were numerous questions out there for how to draw them.
+
+I liked this one the most, though I removed the little directional bit (for now):  [https://stackoverflow.com/questions/21597644/speech-buble-html5-canvas-js](https://stackoverflow.com/questions/21597644/speech-buble-html5-canvas-js){:target="_blank"}
+
+<div align="center">
+  <img src="https://i.imgur.com/G55Vmv6.png" alt="player chat" title="player chat" />
+</div>
+
+Enemies also lose their bubbles because the screen got *really* messy with everybody chattering.  I still think I prefer this to a message log though - we'll see if "important" messages still get logged.  It makes sense for a traditional roguelike, though here I don't know that it does.
+
+---
+
+## Procgen - Drunkard's Walk
+
+First off, I tweaked the order of generation.  The overworld gets the Simplex noise forest and sub-levels are now created via a [drunkard's walk](https://en.wikipedia.org/wiki/Random_walk){:target="_blank"}.  The *tentative* plan is for sub-levels to have their own algorithms creating them (caves, dungeons, etc.).  I think if and when I get to an actual narrative those choices will become clearer.  
+
+However, this one is easy enough.  Fill a map with walls and then carve out walkable spaces based on the stumblings of a drunkard.  My implementation currently does not take connectivity into account, so there are chances that I'll have disconnected areas.
+
+Targets of optimization for a future flood fill check (when a cellular automata gets added).  Right now I give it enough iterations/time that it hasn't been an issue for the smaller map size.
+
+Here's the algorithm - again, fairly simple.  `ENEMY_DIRS` is a global list of possible directions that enemies can walk in (essentially the cardinal/ordinal directions) that I just reused here.
+
+```
+def drunkardsMap(self, z):
+    _map = [['wall2'] * self.NUM_COLS for _ in range(self.NUM_ROWS)]
+
+    center_c = self.NUM_COLS//2
+    center_r = self.NUM_ROWS//2
+
+    for _ in range(DRUNK_ITERATIONS):
+        curr_c = center_c
+        curr_r = center_r
+        DRUNK_LIFETIME = self.NUM_COLS * self.NUM_ROWS
+
+        for i in range(DRUNK_LIFETIME):
+            _map[curr_r][curr_c] = random.choice(['empty', 'empty', 'floor1', 'floor1', 'floor2'])
+
+            new_dir = random.choice(ENEMY_DIRS)
+            curr_r += new_dir['r']
+            curr_c += new_dir['c']
+
+            # out of bounds
+            if curr_c == 0 or curr_r == 1 or curr_c == self.NUM_COLS-1 or curr_r == self.NUM_ROWS-1:
+                break
+
+    return _map
+```
+
+Here we have the player going down to the first sub-level.  Looks like a fairly standard randomly-carved out space!
+
+<div align="center">
+  <img src="https://i.imgur.com/a2T233M.gif" alt="drunkard" title="drunkard" />
+</div>
+
+(Note to future self: fix the odd offset between ASCII and Unicode characters):
+
+<div align="center">
+  <img src="https://i.imgur.com/DjVFihK.png" alt="offset" title="offset" />
+</div>
+
+
+---
+
+## AoE - Fire 
+
+This took a little longer than I thought as I had figured I could re-use my `Item` entity setup for spawning fireballs surrounding the player.  It would have been more special handling than I wanted in that class, so `effects` are now their own thing.  
+
+What it boils down to is that I spawn a set of effect objects, give them a lifetime, define *what* they do, and then track them like all other entities.
+
+**Note: what should probably happen is that every entity gets their own `update` function and self-handles - I haven't gotten there yet with refactoring**.
+
+However, for now it just goes into the lookup table:
+
+```
+# key: {attr:impact, timeout: upper}
+'effects': {
+    'fire': {'hp': -3, 'timer': 10},
+    'heal': {'hp': 1, 'timer': 5},
+}
+```
+
+The `timer` field is the upper limit of how long it lasts.  Essentially a target for future randomization (perhaps the fire lasts for `random.randint(5, LOOKUP_STATS['effects']['fire']['timer'])`).
+
+Anyway, here's a shot of some rats and goblins getting toasted:
+
+<div align="center">
+  <img src="https://i.imgur.com/GtnnYcF.gif" alt="fire!" title="fire!" />
+</div>
+
+Right now it doesn't hurt the player to walk over their own flames, though I might change that up as it seems a bit overpowered to leave firebombs burning while the player escapes unharmed.
+
+I'd really like AoE effects to interact with the environment (fire burns grasses, trees, etc.), but we'll see how that pans out.  To do that I'd need a separate hook for the environment to respawn over time, then we're talking going down the path of simulating a world's ecological systems, and that might be a bit *too* much to bite off right now.
+
+Other spell targets are a group heal, electricity, etc.  
+
+---
+
+Last little bit - I started breaking up the files into specific uses - e.g., utility functions go in `utils.js`, etc.  I've been keeping everything in single files just to avoid navigating through 30 different files (something that is annoying during development to me personally - I know that long term it is a terrible idea and freely admit that).  However, for posterity things are getting broken apart and placed into their proper locations.  Not done yet, but the process has begun.
+
+---
+
+Next time I'd really like to get *some* sort of feedback from attacks, as the bump to attack feels very unsatisfying at the moment.  I've been playing with the sound off as well, so no additions there.
+
+Also, more procgen algorithms!  Eyeballing cellular automata and BSP generation.  
+
+---
+[Last post](/rldev-4.html)
+
+Next post: TBD

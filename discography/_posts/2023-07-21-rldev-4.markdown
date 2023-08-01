@@ -174,4 +174,4 @@ Here's a GIF of current playing through a few levels and testing out chatting.  
 
 [Last post](/rldev-3.html)
 
-Next post: TBD
+[Next post](/rldev-5.html)
