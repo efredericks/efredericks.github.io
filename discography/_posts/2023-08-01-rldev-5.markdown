@@ -135,6 +135,16 @@ Other spell targets are a group heal, electricity, etc.
 
 ---
 
+## Enemy Following
+
+Enemies now follow a particular player rather than simply wandering and locking on to whoever is closest.  Enemies will wander until a player is close enough (currently the camera range) and will then try to follow that person.  If the player goes out of range the enemy will forget about them and go back to wandering/scanning.
+
+Essentially, players can now escape the clutches of the hordes of the underdark.  No GIF here as it would be fairly boring, but enemies will basically stop following you if you just walk away from them.
+
+(This is somewhat extensible to different follow/forget types of enemies as well - larger/smaller radii, etc.)
+
+---
+
 Last little bit - I started breaking up the files into specific uses - e.g., utility functions go in `utils.js`, etc.  I've been keeping everything in single files just to avoid navigating through 30 different files (something that is annoying during development to me personally - I know that long term it is a terrible idea and freely admit that).  However, for posterity things are getting broken apart and placed into their proper locations.  Not done yet, but the process has begun.
 
 ---
