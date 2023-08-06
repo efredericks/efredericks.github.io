@@ -1,0 +1,121 @@
+---
+layout: post
+title: fredericks does the roguelikedev tutorial - 5
+description: bugfixes,
+# image: assets/img/z-is-for-zero.png
+# responsiveImage:
+#   - src: assets/img/300.png
+#     size: 300
+#   - src: assets/img/600.png
+#     size: 600
+#   - src: assets/img/z-is-for-zero.png
+#     size: 900
+type: blog
+# play:
+#     - name: YouTube
+#       url: https://www.youtube.com/
+#     - name: SoundCloud
+#       url: https://soundcloud.com/
+# buy:
+#   - url: https://backfromvoid.bandcamp.com/track/if-i-want-you-to
+#     name: BandCamp
+# embed_player:
+#   type: bandcamp
+#   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
+---
+
+- simple animation
+- bugfixes (following while inactive)
+- npcs?
+- loot?
+- inventory?
+- attrs?
+- larger maps?
+
+<hr size="1" />
+* [Week 6 post](){:target="_blank"}
+
+- [Project repo](https://github.com/efredericks/RL-MMO){:target="\_blank"}
+
+<hr size="1" />
+
+This week involved a bit of navel gazing - what do I want this game to eventually be? What is fun and what is not?
+
+Given that I started this as an homage to RotMG I wanted to start moving in that direction for the actual design and balance. The main concepts here will be large maps, loot, items that progressively get more and more useful based on enemy difficulty, etc.
+
+Also some bugfixing and basic animation. Lets start there, shall we?
+
+---
+
+## Animation
+
+The animation was actually a lot easier to implement than I had thought. I've done this in the past in terms of client-side-only JS games, however receiving positional information from the server was going to be tricky (I thought).
+
+It wasn't really.
+
+I always go back to the [Broughlike tutorial](https://nluqo.github.io/broughlike-tutorial/stage7.html){:target="\_blank"} for JS roguelikes:.
+
+It involves adding an `offset` attribute for the x/y coordinates and nicely degrading it as we animate in. I was able to do something similar.
+
+Each `MoveableEntity` gets an `offsetX`/`offsetY` attribute on instantiation.
+
+Drawing is as simple as tacking that onto my existing drawing function:
+
+```
+let _x = player.offsetX + (player.pos.c - startx) * tileSize;
+let _y = player.offsetY + (player.pos.r - starty) * tileSize + tileSize;
+
+player.offsetX -= Math.sign(player.offsetX) * (1/8);
+player.offsetY -= Math.sign(player.offsetY) * (1/8);
+```
+
+This gets applied to all `MoveableEntity` objects. The `Math.sign` helps to lerp things a bit so the animation is smoother.
+
+`offsetX` and `offsetY` get set whenever the player presses a movement key. The nice thing here is that if the movement is invalid (wall, enemy, deep water, etc.) then the player's position will revert back. The offset will give a mild stutter and look like the player is bumping into something.
+
+![player animation](https://i.imgur.com/ZtI90n8.gif)
+
+(Right now enemies don't make use of this field, but it is there for future updates).
+
+## Bugfixes
+
+One of the more egregious bugs I came across was that, in reworking enemy AI, I neglected to remove a targeted player if they become inactive.
+
+That was a simple fix - right now I remove a target from an enemy if the player leaves the level. The fix was to also check if they were active.
+
+```
+# update the enemies
+for e in self.enemies:
+    # (basic follower):
+    # 1 if no target, set target
+    # 2 if target, follow
+    # 3 if target out of range, forget
+
+    tgt = e.getTarget()
+    if tgt is not None and tgt in self.players: # we have a target
+        # same level test / meditating test
+        if self.players[tgt].pos['level'] != e.pos['level'] or not self.players[tgt].active:
+            e.removeTarget()
+        else:
+            # do the follow thing
+```
+
+Easy enough. Also highly abusable in a production environment, but we'll save that for when it is time to balance this monstrosity.
+
+---
+
+## Gameplay
+
+As a fun aside, I fully anticipate that a large number of performance bugs will be cropping up, now that I'm going "to scale," so to speak.
+
+Let's start with bumping the number of rows/columns to 2500 each. This image became necessary in the canvas as it takes longer to receive the whole map now:
+
+<div align="center">
+  <img src="https://i.imgur.com/HJqJ3ax.png" alt="loader" title="loader" />
+</div>
+
+---
+
+[Last post](/rldev-5.html)
+
+Next post: TBD

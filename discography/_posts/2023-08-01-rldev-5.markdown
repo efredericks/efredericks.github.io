@@ -156,4 +156,4 @@ Also, more procgen algorithms!  Eyeballing cellular automata and BSP generation.
 ---
 [Last post](/rldev-4.html)
 
-Next post: TBD
+[Next post](/rldev-6.html)

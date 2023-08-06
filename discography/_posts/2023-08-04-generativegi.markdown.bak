@@ -1,0 +1,57 @@
+---
+layout: post
+title: GenerativeGI - Project Writeup
+description: project overview and images
+# image: assets/img/z-is-for-zero.png
+# responsiveImage:
+#   - src: assets/img/300.png
+#     size: 300
+#   - src: assets/img/600.png
+#     size: 600
+#   - src: assets/img/z-is-for-zero.png
+#     size: 900
+type: blog
+# play:
+#     - name: YouTube
+#       url: https://www.youtube.com/
+#     - name: SoundCloud
+#       url: https://soundcloud.com/
+# buy:
+#   - url: https://backfromvoid.bandcamp.com/track/if-i-want-you-to
+#     name: BandCamp
+# embed_player:
+#   type: bandcamp
+#   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
+carousels:
+  - images: 
+    - image: /assets/img/GenerativeGI/img-46.png
+    - image: /assets/img/GenerativeGI/img-35.png
+    - image: /assets/img/GenerativeGI/img-36.png
+    - image: /assets/img/GenerativeGI/img-37.png
+    - image: /assets/img/GenerativeGI/img-39.png
+    - image: /assets/img/GenerativeGI/img-48.png
+  - images: 
+    - image: /assets/img/GenerativeGI/img-46.png
+    - image: /assets/img/GenerativeGI/img-35.png
+    - image: /assets/img/GenerativeGI/img-36.png
+    - image: /assets/img/GenerativeGI/img-37.png
+    - image: /assets/img/GenerativeGI/img-39.png
+    - image: /assets/img/GenerativeGI/img-48.png
+---
+
+<hr size="1" />
+- [Project repo](https://github.com/GI2023-GenerativeGI/GI2023/tree/ASE-GI-Extension){:target="\_blank"}
+
+<hr size="1" />
+
+---
+
+## Random
+
+## Single-Objective (Clear)
+
+  {% include carousel.html height="50" unit="%" duration="7" number="1" %}
+
+  {% include carousel.html height="50" unit="%" duration="7" number="2" %}
+
+## Single-Objective (No Clear)
