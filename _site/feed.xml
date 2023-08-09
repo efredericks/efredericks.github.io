@@ -1,926 +1,108 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-04T09:39:04-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">GenerativeGI - Project Writeup</title><link href="http://localhost:4000/generativegi.html" rel="alternate" type="text/html" title="GenerativeGI - Project Writeup" /><published>2023-08-04T00:00:00-04:00</published><updated>2023-08-04T00:00:00-04:00</updated><id>http://localhost:4000/generativegi</id><content type="html" xml:base="http://localhost:4000/generativegi.html"><![CDATA[<hr size="1" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-08-09T09:06:22-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 6</title><link href="https://efredericks.github.io/rldev-6.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 6" /><published>2023-08-09T00:00:00-04:00</published><updated>2023-08-09T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-6</id><content type="html" xml:base="https://efredericks.github.io/rldev-6.html"><![CDATA[<hr size="1" />
 
 <ul>
-  <li><a href="https://github.com/GI2023-GenerativeGI/GI2023/tree/ASE-GI-Extension" target="\_blank">Project repo</a></li>
+  <li>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15lnxy2/roguelikedev_does_the_complete_roguelike_tutorial/jvfnwkh/" target="_blank">Week 6 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="\_blank">Project repo</a></p>
+  </li>
 </ul>
 
 <hr size="1" />
 
+<p>This week involved a bit of navel gazing - what do I want this game to eventually be? What is fun and what is not?</p>
+
+<p>Given that I started this as an homage to RotMG I wanted to start moving in that direction for the actual design and balance. The main concepts will (eventually) be large maps, loot, items that progressively get more and more useful based on enemy difficulty, etc.  Spoiler warning - I didn’t get to the whole items bit, but it is good for future updates to consider.</p>
+
+<p>Also some bugfixing and basic animation. Lets start there, shall we?</p>
+
 <hr />
 
-<h2 id="random">Random</h2>
+<h2 id="animation">Animation</h2>
 
-<h2 id="single-objective-clear">Single-Objective (Clear)</h2>
+<p>The animation was actually a lot easier to implement than I had thought. I’ve done this in the past in terms of client-side-only JS games, however receiving positional information from the server was going to be tricky (I thought).</p>
 
-<div class="carousel__holder">
-    <div id="carousel0" class="carousel">
-        
-          <input class="carousel__activator" type="radio" name="carousel0" id="0a" checked="checked" />
-        
-          <input class="carousel__activator" type="radio" name="carousel0" id="0b" />
-        
-          <input class="carousel__activator" type="radio" name="carousel0" id="0c" />
-        
-          <input class="carousel__activator" type="radio" name="carousel0" id="0d" />
-        
-          <input class="carousel__activator" type="radio" name="carousel0" id="0e" />
-        
-          <input class="carousel__activator" type="radio" name="carousel0" id="0f" />
-        
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0f"></label>
-              <label class="carousel__control carousel__control--forward" for="0b"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0a"></label>
-              <label class="carousel__control carousel__control--forward" for="0c"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0b"></label>
-              <label class="carousel__control carousel__control--forward" for="0d"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0c"></label>
-              <label class="carousel__control carousel__control--forward" for="0e"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0d"></label>
-              <label class="carousel__control carousel__control--forward" for="0f"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0e"></label>
-              <label class="carousel__control carousel__control--forward" for="0a"></label>
-          </div>
-        
-        <div class="carousel__track">
-          <ul>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-46.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-35.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-36.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-37.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-39.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-48.png');"></li>
-            
-          </ul>
-        </div>
-        <div class="carousel__indicators">
-            
-              <label class="carousel__indicator" for="0a"></label>
-            
-              <label class="carousel__indicator" for="0b"></label>
-            
-              <label class="carousel__indicator" for="0c"></label>
-            
-              <label class="carousel__indicator" for="0d"></label>
-            
-              <label class="carousel__indicator" for="0e"></label>
-            
-              <label class="carousel__indicator" for="0f"></label>
-            
-        </div>
-    </div>
+<p>It wasn’t really.</p>
+
+<p>I always go back to the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="\_blank">Broughlike tutorial</a> for JS roguelikes.  It involves adding an <code class="language-plaintext highlighter-rouge">offset</code> attribute for the x/y coordinates and nicely degrading it as we animate in. I was able to do something similar.</p>
+
+<p>Each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> gets an <code class="language-plaintext highlighter-rouge">offsetX</code>/<code class="language-plaintext highlighter-rouge">offsetY</code> attribute on instantiation.</p>
+
+<p>Drawing is as simple as tacking that onto my existing drawing function:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let _x = player.offsetX + (player.pos.c - startx) * tileSize;
+let _y = player.offsetY + (player.pos.r - starty) * tileSize + tileSize;
+
+player.offsetX -= Math.sign(player.offsetX) * (1/8);
+player.offsetY -= Math.sign(player.offsetY) * (1/8);
+</code></pre></div></div>
+
+<p>This gets applied to all <code class="language-plaintext highlighter-rouge">MoveableEntity</code> objects. The <code class="language-plaintext highlighter-rouge">Math.sign</code> helps to lerp things a bit so the animation is smoother.</p>
+
+<p><code class="language-plaintext highlighter-rouge">offsetX</code> and <code class="language-plaintext highlighter-rouge">offsetY</code> get set whenever the player presses a movement key. The nice thing here is that if the movement is invalid (wall, enemy, deep water, etc.) then the player’s position will revert back. The offset will give a mild stutter and look like the player is bumping into something.</p>
+
+<p><img src="https://i.imgur.com/ZtI90n8.gif" alt="player animation" /></p>
+
+<p>(Right now enemies don’t make use of this field, but it is there for future updates).</p>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<p>One of the more egregious bugs I came across was that, in reworking enemy AI, I neglected to remove a targeted player if they become inactive.</p>
+
+<p>That was a simple fix - right now I remove a target from an enemy if the player leaves the level. The fix was to also check if they were active.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update the enemies
+for e in self.enemies:
+    # (basic follower):
+    # 1 if no target, set target
+    # 2 if target, follow
+    # 3 if target out of range, forget
+
+    tgt = e.getTarget()
+    if tgt is not None and tgt in self.players: # we have a target
+        # same level test / meditating test
+        if self.players[tgt].pos['level'] != e.pos['level'] or not self.players[tgt].active:
+            e.removeTarget()
+        else:
+            # do the follow thing
+</code></pre></div></div>
+
+<p>Easy enough. Also highly abusable in a production environment, but we’ll save that for when it is time to balance this monstrosity.</p>
+
+<hr />
+
+<h2 id="gameplay">Gameplay</h2>
+
+<p>As a fun aside, I fully anticipate that a large number of performance bugs will be cropping up, now that I’m going “to scale,” so to speak.</p>
+
+<p>Let’s start with bumping the number of rows/columns to 2500 each. This image became necessary in the canvas as it takes longer to receive the whole map now:</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/HJqJ3ax.png" alt="loader" title="loader" />
 </div>
 
-<style>
-.carousel__holder {width: 100%; position: relative; padding-bottom: 50%; margin: 1rem 0 1rem;}
-.carousel {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  text-align: center;
-  position: absolute;
-  padding: 0;
-}
-.carousel__controls,
-.carousel__activator {
-  display: none;
-}
+<p>I also started adding in a cellular automata for cave generation, but didn’t <em>quite</em> get it done in time for this post.  There are a significant amount of tweaks needed as well, but at least it is something!</p>
 
-.carousel__activator:nth-of-type(1):checked ~ .carousel__track {
-  -webkit-transform: translateX(-000%);
-          transform: translateX(-000%);
-}
-.carousel__activator:nth-of-type(1):checked ~ .carousel__slide:nth-of-type(1) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(1):checked ~ .carousel__controls:nth-of-type(1) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(1):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(1) {
-  opacity: 1;
-}
+<p>I based the implementation off of my favorite blog post for making CAs - they outline the algorithm quite nicely: <a href="https://abitawake.com/news/articles/procedural-generation-with-godot-creating-caves-with-cellular-automata" target="_blank">A Bit Awake - Cellular Automata</a>.</p>
 
-.carousel__activator:nth-of-type(2):checked ~ .carousel__track {
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
-}
-.carousel__activator:nth-of-type(2):checked ~ .carousel__slide:nth-of-type(2) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(2):checked ~ .carousel__controls:nth-of-type(2) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(2):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(2) {
-  opacity: 1;
-}
+<p>This was made while watching my kids playing outside so I gave 0 thought to tweaks and balance on all the parameters, but the skeleton is in place.</p>
 
-.carousel__activator:nth-of-type(3):checked ~ .carousel__track {
-  -webkit-transform: translateX(-200%);
-          transform: translateX(-200%);
-}
-.carousel__activator:nth-of-type(3):checked ~ .carousel__slide:nth-of-type(3) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(3):checked ~ .carousel__controls:nth-of-type(3) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(3):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(3) {
-  opacity: 1;
-}
-
-.carousel__activator:nth-of-type(4):checked ~ .carousel__track {
-  -webkit-transform: translateX(-300%);
-          transform: translateX(-300%);
-}
-.carousel__activator:nth-of-type(4):checked ~ .carousel__slide:nth-of-type(4) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(4):checked ~ .carousel__controls:nth-of-type(4) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(4):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(4) {
-  opacity: 1;
-}
-
-.carousel__activator:nth-of-type(5):checked ~ .carousel__track {
-  -webkit-transform: translateX(-400%);
-          transform: translateX(-400%);
-}
-.carousel__activator:nth-of-type(5):checked ~ .carousel__slide:nth-of-type(5) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(5):checked ~ .carousel__controls:nth-of-type(5) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(5):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(5) {
-  opacity: 1;
-}
-
-.carousel__activator:nth-of-type(6):checked ~ .carousel__track {
-  -webkit-transform: translateX(-500%);
-          transform: translateX(-500%);
-}
-.carousel__activator:nth-of-type(6):checked ~ .carousel__slide:nth-of-type(6) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(6):checked ~ .carousel__controls:nth-of-type(6) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(6):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(6) {
-  opacity: 1;
-}
-
-
-.carousel__control {
-  height: 30px;
-  width: 30px;
-  margin-top: -15px;
-  top: 50%;
-  position: absolute;
-  display: block;
-  cursor: pointer;
-  border-width: 5px 5px 0 0;
-  border-style: solid;
-  border-color: #fafafa;
-  opacity: 0.35;
-  opacity: 1;
-  outline: 0;
-  z-index: 3;
-}
-.carousel__control:hover {
-  opacity: 1;
-}
-.carousel__control--backward {
-  left: 20px;
-  -webkit-transform: rotate(-135deg);
-          transform: rotate(-135deg);
-}
-.carousel__control--forward {
-  right: 20px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-.carousel__indicators {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-}
-.carousel__indicator {
-  height: 15px;
-  width: 15px;
-  border-radius: 100%;
-  display: inline-block;
-  z-index: 2;
-  cursor: pointer;
-  opacity: 0.35;
-  margin: 0 2.5px 0 2.5px;
-}
-.carousel__indicator:hover {
-  opacity: 0.75;
-}
-.carousel__track {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0;
-  margin: 0;
-  transition: -webkit-transform 0.5s ease 0s;
-  transition: transform 0.5s ease 0s;
-  transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
-}
-.carousel__track .carousel__slide {
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-}
-
-.carousel__track .carousel__slide:nth-of-type(1) {
-  -webkit-transform: translateX(000%);
-          transform: translateX(000%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(2) {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(3) {
-  -webkit-transform: translateX(200%);
-          transform: translateX(200%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(4) {
-  -webkit-transform: translateX(300%);
-          transform: translateX(300%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(5) {
-  -webkit-transform: translateX(400%);
-          transform: translateX(400%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(6) {
-  -webkit-transform: translateX(500%);
-          transform: translateX(500%);
-}
-
-
-.carousel--scale .carousel__slide {
-  -webkit-transform: scale(0);
-          transform: scale(0);
-}
-.carousel__slide {
-  height: 100%;
-  position: absolute;
-  opacity: 0;
-  overflow: hidden;
-}
-.carousel__slide .overlay {height: 100%;}
-.carousel--thumb .carousel__indicator {
-  height: 30px;
-  width: 30px;
-}
-.carousel__indicator {
-  background-color: #fafafa;
-}
-
-.carousel__slide:nth-of-type(1),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(2),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(3),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(4),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(5),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(6),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(6) {
-  background-size: cover;
-  background-position: center;
-}
-
-</style>
-
-<script>
-  function isVisible(el) {
-        while (el) {
-            if (el === document) {
-                return true;
-            }
-
-            var $style = window.getComputedStyle(el, null);
-
-            if (!el) {
-                return false;
-            } else if (!$style) {
-                return false;
-            } else if ($style.display === 'none') {
-                return false;
-            } else if ($style.visibility === 'hidden') {
-                return false;
-            } else if (+$style.opacity === 0) {
-                return false;
-            } else if (($style.display === 'block' || $style.display === 'inline-block') &&
-                $style.height === '0px' && $style.overflow === 'hidden') {
-                return false;
-            } else {
-                return $style.position === 'fixed' || isVisible(el.parentNode);
-            }
-        }
-  }
-  
-  setInterval(function(){
-    var j=0;
-    var elements = document.querySelectorAll('#carousel0 .carousel__control--forward');
-    for(i=(elements.length - 1);i>-1;i--) {
-      if(isVisible(elements[i])) j=i;
-    }
-    elements[j].click();
-  },7000);
-  
-</script>
-
-<div class="carousel__holder">
-    <div id="carousel1" class="carousel">
-        
-          <input class="carousel__activator" type="radio" name="carousel1" id="1a" checked="checked" />
-        
-          <input class="carousel__activator" type="radio" name="carousel1" id="1b" />
-        
-          <input class="carousel__activator" type="radio" name="carousel1" id="1c" />
-        
-          <input class="carousel__activator" type="radio" name="carousel1" id="1d" />
-        
-          <input class="carousel__activator" type="radio" name="carousel1" id="1e" />
-        
-          <input class="carousel__activator" type="radio" name="carousel1" id="1f" />
-        
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="1f"></label>
-              <label class="carousel__control carousel__control--forward" for="1b"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="1a"></label>
-              <label class="carousel__control carousel__control--forward" for="1c"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="1b"></label>
-              <label class="carousel__control carousel__control--forward" for="1d"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="1c"></label>
-              <label class="carousel__control carousel__control--forward" for="1e"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="1d"></label>
-              <label class="carousel__control carousel__control--forward" for="1f"></label>
-          </div>
-        
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="1e"></label>
-              <label class="carousel__control carousel__control--forward" for="1a"></label>
-          </div>
-        
-        <div class="carousel__track">
-          <ul>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-46.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-35.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-36.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-37.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-39.png');"></li>
-            
-            <li class="carousel__slide" style="background-image: url('/assets/img/GenerativeGI/img-48.png');"></li>
-            
-          </ul>
-        </div>
-        <div class="carousel__indicators">
-            
-              <label class="carousel__indicator" for="1a"></label>
-            
-              <label class="carousel__indicator" for="1b"></label>
-            
-              <label class="carousel__indicator" for="1c"></label>
-            
-              <label class="carousel__indicator" for="1d"></label>
-            
-              <label class="carousel__indicator" for="1e"></label>
-            
-              <label class="carousel__indicator" for="1f"></label>
-            
-        </div>
-    </div>
+<div align="center">
+  <img src="https://imgur.com/iXYU6N6.png" alt="ca" title="ca" />
 </div>
 
-<style>
-.carousel__holder {width: 100%; position: relative; padding-bottom: 50%; margin: 1rem 0 1rem;}
-.carousel {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  text-align: center;
-  position: absolute;
-  padding: 0;
-}
-.carousel__controls,
-.carousel__activator {
-  display: none;
-}
+<p>As you can see here, the maps are very stringy.  I added a dev minimap to get a feel for what it looks like and clearly some optimizations need to be made.</p>
 
-.carousel__activator:nth-of-type(1):checked ~ .carousel__track {
-  -webkit-transform: translateX(-000%);
-          transform: translateX(-000%);
-}
-.carousel__activator:nth-of-type(1):checked ~ .carousel__slide:nth-of-type(1) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(1):checked ~ .carousel__controls:nth-of-type(1) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(1):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(1) {
-  opacity: 1;
-}
+<hr />
 
-.carousel__activator:nth-of-type(2):checked ~ .carousel__track {
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
-}
-.carousel__activator:nth-of-type(2):checked ~ .carousel__slide:nth-of-type(2) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(2):checked ~ .carousel__controls:nth-of-type(2) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(2):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(2) {
-  opacity: 1;
-}
+<p>That’s it for this week - next week I’m thinking game balancing, items, and bugfixes.</p>
 
-.carousel__activator:nth-of-type(3):checked ~ .carousel__track {
-  -webkit-transform: translateX(-200%);
-          transform: translateX(-200%);
-}
-.carousel__activator:nth-of-type(3):checked ~ .carousel__slide:nth-of-type(3) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(3):checked ~ .carousel__controls:nth-of-type(3) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(3):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(3) {
-  opacity: 1;
-}
+<hr />
 
-.carousel__activator:nth-of-type(4):checked ~ .carousel__track {
-  -webkit-transform: translateX(-300%);
-          transform: translateX(-300%);
-}
-.carousel__activator:nth-of-type(4):checked ~ .carousel__slide:nth-of-type(4) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(4):checked ~ .carousel__controls:nth-of-type(4) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(4):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(4) {
-  opacity: 1;
-}
+<p><a href="/rldev-5.html">Last post</a></p>
 
-.carousel__activator:nth-of-type(5):checked ~ .carousel__track {
-  -webkit-transform: translateX(-400%);
-          transform: translateX(-400%);
-}
-.carousel__activator:nth-of-type(5):checked ~ .carousel__slide:nth-of-type(5) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(5):checked ~ .carousel__controls:nth-of-type(5) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(5):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(5) {
-  opacity: 1;
-}
-
-.carousel__activator:nth-of-type(6):checked ~ .carousel__track {
-  -webkit-transform: translateX(-500%);
-          transform: translateX(-500%);
-}
-.carousel__activator:nth-of-type(6):checked ~ .carousel__slide:nth-of-type(6) {
-  transition: opacity 0.5s, -webkit-transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s;
-  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-.carousel__activator:nth-of-type(6):checked ~ .carousel__controls:nth-of-type(6) {
-  display: block;
-  opacity: 1;
-}
-.carousel__activator:nth-of-type(6):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(6) {
-  opacity: 1;
-}
-
-
-.carousel__control {
-  height: 30px;
-  width: 30px;
-  margin-top: -15px;
-  top: 50%;
-  position: absolute;
-  display: block;
-  cursor: pointer;
-  border-width: 5px 5px 0 0;
-  border-style: solid;
-  border-color: #fafafa;
-  opacity: 0.35;
-  opacity: 1;
-  outline: 0;
-  z-index: 3;
-}
-.carousel__control:hover {
-  opacity: 1;
-}
-.carousel__control--backward {
-  left: 20px;
-  -webkit-transform: rotate(-135deg);
-          transform: rotate(-135deg);
-}
-.carousel__control--forward {
-  right: 20px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-.carousel__indicators {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-}
-.carousel__indicator {
-  height: 15px;
-  width: 15px;
-  border-radius: 100%;
-  display: inline-block;
-  z-index: 2;
-  cursor: pointer;
-  opacity: 0.35;
-  margin: 0 2.5px 0 2.5px;
-}
-.carousel__indicator:hover {
-  opacity: 0.75;
-}
-.carousel__track {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0;
-  margin: 0;
-  transition: -webkit-transform 0.5s ease 0s;
-  transition: transform 0.5s ease 0s;
-  transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
-}
-.carousel__track .carousel__slide {
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 1;
-}
-
-.carousel__track .carousel__slide:nth-of-type(1) {
-  -webkit-transform: translateX(000%);
-          transform: translateX(000%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(2) {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(3) {
-  -webkit-transform: translateX(200%);
-          transform: translateX(200%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(4) {
-  -webkit-transform: translateX(300%);
-          transform: translateX(300%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(5) {
-  -webkit-transform: translateX(400%);
-          transform: translateX(400%);
-}
-
-.carousel__track .carousel__slide:nth-of-type(6) {
-  -webkit-transform: translateX(500%);
-          transform: translateX(500%);
-}
-
-
-.carousel--scale .carousel__slide {
-  -webkit-transform: scale(0);
-          transform: scale(0);
-}
-.carousel__slide {
-  height: 100%;
-  position: absolute;
-  opacity: 0;
-  overflow: hidden;
-}
-.carousel__slide .overlay {height: 100%;}
-.carousel--thumb .carousel__indicator {
-  height: 30px;
-  width: 30px;
-}
-.carousel__indicator {
-  background-color: #fafafa;
-}
-
-.carousel__slide:nth-of-type(1),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(2),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(3),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(4),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(5),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
-  background-size: cover;
-  background-position: center;
-}
-
-.carousel__slide:nth-of-type(6),
-.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(6) {
-  background-size: cover;
-  background-position: center;
-}
-
-</style>
-
-<script>
-  function isVisible(el) {
-        while (el) {
-            if (el === document) {
-                return true;
-            }
-
-            var $style = window.getComputedStyle(el, null);
-
-            if (!el) {
-                return false;
-            } else if (!$style) {
-                return false;
-            } else if ($style.display === 'none') {
-                return false;
-            } else if ($style.visibility === 'hidden') {
-                return false;
-            } else if (+$style.opacity === 0) {
-                return false;
-            } else if (($style.display === 'block' || $style.display === 'inline-block') &&
-                $style.height === '0px' && $style.overflow === 'hidden') {
-                return false;
-            } else {
-                return $style.position === 'fixed' || isVisible(el.parentNode);
-            }
-        }
-  }
-  
-  setInterval(function(){
-    var j=0;
-    var elements = document.querySelectorAll('#carousel1 .carousel__control--forward');
-    for(i=(elements.length - 1);i>-1;i--) {
-      if(isVisible(elements[i])) j=i;
-    }
-    elements[j].click();
-  },7000);
-  
-</script>
-
-<h2 id="single-objective-no-clear">Single-Objective (No Clear)</h2>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[project overview and images]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="http://localhost:4000/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>http://localhost:4000/rldev-5</id><content type="html" xml:base="http://localhost:4000/rldev-5.html"><![CDATA[<hr size="1" />
+<p>Next post: TBD</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[bugfixes, big maps, cellular automata]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="https://efredericks.github.io/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-5</id><content type="html" xml:base="https://efredericks.github.io/rldev-5.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -1056,7 +238,7 @@
 <hr />
 <p><a href="/rldev-4.html">Last post</a></p>
 
-<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="http://localhost:4000/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>http://localhost:4000/rldev-4</id><content type="html" xml:base="http://localhost:4000/rldev-4.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="https://efredericks.github.io/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-4</id><content type="html" xml:base="https://efredericks.github.io/rldev-4.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -1209,7 +391,7 @@ let SPRITESHEET = {
 
 <p><a href="/rldev-3.html">Last post</a></p>
 
-<p><a href="/rldev-5.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="http://localhost:4000/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>http://localhost:4000/rldev-3</id><content type="html" xml:base="http://localhost:4000/rldev-3.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-5.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="https://efredericks.github.io/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-3</id><content type="html" xml:base="https://efredericks.github.io/rldev-3.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -1391,7 +573,7 @@ playSound = (snd) =&gt; {
 
 <p><a href="/rldev-2.html">Last post</a></p>
 
-<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="http://localhost:4000/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>http://localhost:4000/rldev-2</id><content type="html" xml:base="http://localhost:4000/rldev-2.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="https://efredericks.github.io/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-2</id><content type="html" xml:base="https://efredericks.github.io/rldev-2.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -1506,7 +688,7 @@ class MoveableEntity(Entity):
 
 <p><a href="/rldev-1.html">Last post</a></p>
 
-<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="http://localhost:4000/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>http://localhost:4000/rldev-1</id><content type="html" xml:base="http://localhost:4000/rldev-1.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="https://efredericks.github.io/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-1</id><content type="html" xml:base="https://efredericks.github.io/rldev-1.html"><![CDATA[<hr size="1" />
 
 <p><a href="https://www.reddit.com/r/roguelikedev/comments/14q58js/roguelikedev_does_the_complete_roguelike_tutorial/jqr89ss/" target="_blank">Week 1 post</a></p>
 <hr size="1" />
@@ -1592,32 +774,32 @@ class MoveableEntity(Entity):
 
 <hr />
 
-<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>http://localhost:4000/yyy-example%20copy</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example</id><content type="html" xml:base="http://localhost:4000/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example</id><content type="html" xml:base="https://efredericks.github.io/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-04:00</published><updated>2019-10-24T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example%20copy%202</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-04:00</published><updated>2019-10-24T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%202</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-04:00</published><updated>2019-10-20T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example%20copy%203</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-04:00</published><updated>2019-10-20T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%203</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

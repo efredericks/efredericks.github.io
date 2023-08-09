@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#ffffff">
 
 <!-- feed -->
-<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="erik fredericks" />
+<link type="application/atom+xml" rel="alternate" href="https://efredericks.github.io/feed.xml" title="erik fredericks" />
 
 
 
@@ -33,17 +33,16 @@
 <meta name="description" content="project overview and images" />
 <meta property="og:description" content="project overview and images" />
 <meta property="twitter:description" content="project overview and images" />
-<link rel="canonical" href="http://localhost:4000/generativegi.html" />
-<meta property="og:url" content="http://localhost:4000/generativegi.html" />
+<link rel="canonical" href="https://efredericks.github.io/discography/2023-08-04-generativegi.markdown.bak" />
+<meta property="og:url" content="https://efredericks.github.io/discography/2023-08-04-generativegi.markdown.bak" />
 <meta property="og:site_name" content="erik fredericks" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-08-04T00:00:00-04:00" />
+<meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="GenerativeGI - Project Writeup" />
 <meta name="twitter:site" content="@efredericks" />
 <meta name="twitter:creator" content="@efredericks" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"efredericks"},"dateModified":"2023-08-04T00:00:00-04:00","datePublished":"2023-08-04T00:00:00-04:00","description":"project overview and images","headline":"GenerativeGI - Project Writeup","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/generativegi.html"},"url":"http://localhost:4000/generativegi.html"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"efredericks"},"description":"project overview and images","headline":"GenerativeGI - Project Writeup","url":"https://efredericks.github.io/discography/2023-08-04-generativegi.markdown.bak"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -160,33 +159,33 @@
         </header>
         <div class="post-content">
             <hr size="1" />
-
-<ul>
-  <li><a href="https://github.com/GI2023-GenerativeGI/GI2023/tree/ASE-GI-Extension" target="\_blank">Project repo</a></li>
-</ul>
+- [Project repo](https://github.com/GI2023-GenerativeGI/GI2023/tree/ASE-GI-Extension){:target="\_blank"}
 
 <hr size="1" />
 
-<hr />
+---
 
-<h2 id="random">Random</h2>
+## Random
 
-<h2 id="single-objective-clear">Single-Objective (Clear)</h2>
+## Single-Objective (Clear)
+
+  
+
 
 <div class="carousel__holder">
     <div id="carousel0" class="carousel">
         
           <input class="carousel__activator" type="radio" name="carousel0" id="0a" checked="checked" />
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0b" />
+          <input class="carousel__activator" type="radio" name="carousel0" id="0b"  />
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0c" />
+          <input class="carousel__activator" type="radio" name="carousel0" id="0c"  />
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0d" />
+          <input class="carousel__activator" type="radio" name="carousel0" id="0d"  />
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0e" />
+          <input class="carousel__activator" type="radio" name="carousel0" id="0e"  />
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0f" />
+          <input class="carousel__activator" type="radio" name="carousel0" id="0f"  />
         
         
           
@@ -627,20 +626,23 @@
   
 </script>
 
+  
+
+
 <div class="carousel__holder">
     <div id="carousel1" class="carousel">
         
           <input class="carousel__activator" type="radio" name="carousel1" id="1a" checked="checked" />
         
-          <input class="carousel__activator" type="radio" name="carousel1" id="1b" />
+          <input class="carousel__activator" type="radio" name="carousel1" id="1b"  />
         
-          <input class="carousel__activator" type="radio" name="carousel1" id="1c" />
+          <input class="carousel__activator" type="radio" name="carousel1" id="1c"  />
         
-          <input class="carousel__activator" type="radio" name="carousel1" id="1d" />
+          <input class="carousel__activator" type="radio" name="carousel1" id="1d"  />
         
-          <input class="carousel__activator" type="radio" name="carousel1" id="1e" />
+          <input class="carousel__activator" type="radio" name="carousel1" id="1e"  />
         
-          <input class="carousel__activator" type="radio" name="carousel1" id="1f" />
+          <input class="carousel__activator" type="radio" name="carousel1" id="1f"  />
         
         
           
@@ -1081,12 +1083,11 @@
   
 </script>
 
-<h2 id="single-objective-no-clear">Single-Objective (No Clear)</h2>
-
+## Single-Objective (No Clear)
         </div>
         <div class="post-metadata">
             <p class="discography-album_release-date">
-    date: 04 August 2023
+    date: 
 </p>
 
 
