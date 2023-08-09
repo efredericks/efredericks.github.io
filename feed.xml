@@ -1,4 +1,108 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-08-01T10:25:18-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="https://efredericks.github.io/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-5</id><content type="html" xml:base="https://efredericks.github.io/rldev-5.html"><![CDATA[<hr size="1" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-08-09T09:06:22-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 6</title><link href="https://efredericks.github.io/rldev-6.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 6" /><published>2023-08-09T00:00:00-04:00</published><updated>2023-08-09T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-6</id><content type="html" xml:base="https://efredericks.github.io/rldev-6.html"><![CDATA[<hr size="1" />
+
+<ul>
+  <li>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15lnxy2/roguelikedev_does_the_complete_roguelike_tutorial/jvfnwkh/" target="_blank">Week 6 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="\_blank">Project repo</a></p>
+  </li>
+</ul>
+
+<hr size="1" />
+
+<p>This week involved a bit of navel gazing - what do I want this game to eventually be? What is fun and what is not?</p>
+
+<p>Given that I started this as an homage to RotMG I wanted to start moving in that direction for the actual design and balance. The main concepts will (eventually) be large maps, loot, items that progressively get more and more useful based on enemy difficulty, etc.  Spoiler warning - I didn’t get to the whole items bit, but it is good for future updates to consider.</p>
+
+<p>Also some bugfixing and basic animation. Lets start there, shall we?</p>
+
+<hr />
+
+<h2 id="animation">Animation</h2>
+
+<p>The animation was actually a lot easier to implement than I had thought. I’ve done this in the past in terms of client-side-only JS games, however receiving positional information from the server was going to be tricky (I thought).</p>
+
+<p>It wasn’t really.</p>
+
+<p>I always go back to the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="\_blank">Broughlike tutorial</a> for JS roguelikes.  It involves adding an <code class="language-plaintext highlighter-rouge">offset</code> attribute for the x/y coordinates and nicely degrading it as we animate in. I was able to do something similar.</p>
+
+<p>Each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> gets an <code class="language-plaintext highlighter-rouge">offsetX</code>/<code class="language-plaintext highlighter-rouge">offsetY</code> attribute on instantiation.</p>
+
+<p>Drawing is as simple as tacking that onto my existing drawing function:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let _x = player.offsetX + (player.pos.c - startx) * tileSize;
+let _y = player.offsetY + (player.pos.r - starty) * tileSize + tileSize;
+
+player.offsetX -= Math.sign(player.offsetX) * (1/8);
+player.offsetY -= Math.sign(player.offsetY) * (1/8);
+</code></pre></div></div>
+
+<p>This gets applied to all <code class="language-plaintext highlighter-rouge">MoveableEntity</code> objects. The <code class="language-plaintext highlighter-rouge">Math.sign</code> helps to lerp things a bit so the animation is smoother.</p>
+
+<p><code class="language-plaintext highlighter-rouge">offsetX</code> and <code class="language-plaintext highlighter-rouge">offsetY</code> get set whenever the player presses a movement key. The nice thing here is that if the movement is invalid (wall, enemy, deep water, etc.) then the player’s position will revert back. The offset will give a mild stutter and look like the player is bumping into something.</p>
+
+<p><img src="https://i.imgur.com/ZtI90n8.gif" alt="player animation" /></p>
+
+<p>(Right now enemies don’t make use of this field, but it is there for future updates).</p>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<p>One of the more egregious bugs I came across was that, in reworking enemy AI, I neglected to remove a targeted player if they become inactive.</p>
+
+<p>That was a simple fix - right now I remove a target from an enemy if the player leaves the level. The fix was to also check if they were active.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update the enemies
+for e in self.enemies:
+    # (basic follower):
+    # 1 if no target, set target
+    # 2 if target, follow
+    # 3 if target out of range, forget
+
+    tgt = e.getTarget()
+    if tgt is not None and tgt in self.players: # we have a target
+        # same level test / meditating test
+        if self.players[tgt].pos['level'] != e.pos['level'] or not self.players[tgt].active:
+            e.removeTarget()
+        else:
+            # do the follow thing
+</code></pre></div></div>
+
+<p>Easy enough. Also highly abusable in a production environment, but we’ll save that for when it is time to balance this monstrosity.</p>
+
+<hr />
+
+<h2 id="gameplay">Gameplay</h2>
+
+<p>As a fun aside, I fully anticipate that a large number of performance bugs will be cropping up, now that I’m going “to scale,” so to speak.</p>
+
+<p>Let’s start with bumping the number of rows/columns to 2500 each. This image became necessary in the canvas as it takes longer to receive the whole map now:</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/HJqJ3ax.png" alt="loader" title="loader" />
+</div>
+
+<p>I also started adding in a cellular automata for cave generation, but didn’t <em>quite</em> get it done in time for this post.  There are a significant amount of tweaks needed as well, but at least it is something!</p>
+
+<p>I based the implementation off of my favorite blog post for making CAs - they outline the algorithm quite nicely: <a href="https://abitawake.com/news/articles/procedural-generation-with-godot-creating-caves-with-cellular-automata" target="_blank">A Bit Awake - Cellular Automata</a>.</p>
+
+<p>This was made while watching my kids playing outside so I gave 0 thought to tweaks and balance on all the parameters, but the skeleton is in place.</p>
+
+<div align="center">
+  <img src="https://imgur.com/iXYU6N6.png" alt="ca" title="ca" />
+</div>
+
+<p>As you can see here, the maps are very stringy.  I added a dev minimap to get a feel for what it looks like and clearly some optimizations need to be made.</p>
+
+<hr />
+
+<p>That’s it for this week - next week I’m thinking game balancing, items, and bugfixes.</p>
+
+<hr />
+
+<p><a href="/rldev-5.html">Last post</a></p>
+
+<p>Next post: TBD</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[bugfixes, big maps, cellular automata]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="https://efredericks.github.io/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-5</id><content type="html" xml:base="https://efredericks.github.io/rldev-5.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -134,7 +238,7 @@
 <hr />
 <p><a href="/rldev-4.html">Last post</a></p>
 
-<p>Next post: TBD</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="https://efredericks.github.io/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-4</id><content type="html" xml:base="https://efredericks.github.io/rldev-4.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="https://efredericks.github.io/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-4</id><content type="html" xml:base="https://efredericks.github.io/rldev-4.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -692,13 +796,6 @@ class MoveableEntity(Entity):
   <li>YyYy</li>
   <li>YyYyY</li>
 </ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-3.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-20T00:00:00-04:00</published><updated>2019-10-20T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%203</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-3.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
-<ol>
-  <li>Y</li>
-  <li>Yy</li>
-  <li>YyY</li>
-  <li>YyYy</li>
-  <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-5.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-09-25T00:00:00-04:00</published><updated>2019-09-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%205</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-5.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
