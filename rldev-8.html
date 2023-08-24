@@ -25,25 +25,25 @@
 
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>fredericks does the roguelikedev tutorial - 6 | erik fredericks</title>
+<title>fredericks does the roguelikedev tutorial - 7/8 | erik fredericks</title>
 <meta name="generator" content="Jekyll v3.9.2" />
-<meta property="og:title" content="fredericks does the roguelikedev tutorial - 6" />
+<meta property="og:title" content="fredericks does the roguelikedev tutorial - 7/8" />
 <meta name="author" content="efredericks" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="bugfixes, big maps, cellular automata" />
-<meta property="og:description" content="bugfixes, big maps, cellular automata" />
-<meta property="twitter:description" content="bugfixes, big maps, cellular automata" />
-<link rel="canonical" href="https://efredericks.github.io/rldev-6.html" />
-<meta property="og:url" content="https://efredericks.github.io/rldev-6.html" />
+<meta name="description" content="a*, slimes, more fixes, the end (for now)" />
+<meta property="og:description" content="a*, slimes, more fixes, the end (for now)" />
+<meta property="twitter:description" content="a*, slimes, more fixes, the end (for now)" />
+<link rel="canonical" href="https://efredericks.github.io/rldev-8.html" />
+<meta property="og:url" content="https://efredericks.github.io/rldev-8.html" />
 <meta property="og:site_name" content="erik fredericks" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-08-09T00:00:00-04:00" />
+<meta property="article:published_time" content="2023-08-20T00:00:00-04:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="fredericks does the roguelikedev tutorial - 6" />
+<meta property="twitter:title" content="fredericks does the roguelikedev tutorial - 7/8" />
 <meta name="twitter:site" content="@efredericks" />
 <meta name="twitter:creator" content="@efredericks" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"efredericks"},"dateModified":"2023-08-09T00:00:00-04:00","datePublished":"2023-08-09T00:00:00-04:00","description":"bugfixes, big maps, cellular automata","headline":"fredericks does the roguelikedev tutorial - 6","mainEntityOfPage":{"@type":"WebPage","@id":"https://efredericks.github.io/rldev-6.html"},"url":"https://efredericks.github.io/rldev-6.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"efredericks"},"dateModified":"2023-08-20T00:00:00-04:00","datePublished":"2023-08-20T00:00:00-04:00","description":"a*, slimes, more fixes, the end (for now)","headline":"fredericks does the roguelikedev tutorial - 7/8","mainEntityOfPage":{"@type":"WebPage","@id":"https://efredericks.github.io/rldev-8.html"},"url":"https://efredericks.github.io/rldev-8.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -155,7 +155,7 @@
     <div class="content-container ">
 
         <header>
-            <h1>fredericks does the roguelikedev tutorial - 6</h1>
+            <h1>fredericks does the roguelikedev tutorial - 7/8</h1>
             
         </header>
         <div class="post-content">
@@ -163,7 +163,10 @@
 
 <ul>
   <li>
-    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15lnxy2/roguelikedev_does_the_complete_roguelike_tutorial/jvfnwkh/" target="_blank">Week 6 post</a></p>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15rltmg/roguelikedev_does_the_complete_roguelike_tutorial/jwajwkt/" target="_blank">Week 7 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15xppyg/roguelikedev_does_the_complete_roguelike_tutorial/jx9yz3e/" target="_blank">Week 8 post</a></p>
   </li>
   <li>
     <p><a href="https://github.com/efredericks/RL-MMO" target="\_blank">Project repo</a></p>
@@ -172,103 +175,108 @@
 
 <hr size="1" />
 
-<p>This week involved a bit of navel gazing - what do I want this game to eventually be? What is fun and what is not?</p>
+<p>There really wasn’t much to report for week 7 outside of a couple of minor things so I didn’t write a separate post for it, so I’ll include it in this last post for the roguelikedev tutorial event.  Overall it was quite fun and nice to see the other projects going as well.</p>
 
-<p>Given that I started this as an homage to RotMG I wanted to start moving in that direction for the actual design and balance. The main concepts will (eventually) be large maps, loot, items that progressively get more and more useful based on enemy difficulty, etc.  Spoiler warning - I didn’t get to the whole items bit, but it is good for future updates to consider.</p>
+<p>tl;dr - definitely try out the tutorial if you have any interest in roguelikes, or game development in general.  Absolutely a great starting point into the area.</p>
 
-<p>Also some bugfixing and basic animation. Lets start there, shall we?</p>
+<p>Reiterating my two favorites that this proof of concept was based on:</p>
+
+<ul>
+  <li>
+    <p><a href="http://rogueliketutorials.com/tutorials/tcod/v2/" target="_blank">TCOD v2 (Python)</a></p>
+  </li>
+  <li>
+    <p><a href="https://nluqo.github.io/broughlike-tutorial/" target="_blank">Broughlike Tutorial (JavaScript)</a></p>
+  </li>
+</ul>
 
 <hr />
 
-<h2 id="animation">Animation</h2>
+<h2 id="visual-updates">Visual updates</h2>
 
-<p>The animation was actually a lot easier to implement than I had thought. I’ve done this in the past in terms of client-side-only JS games, however receiving positional information from the server was going to be tricky (I thought).</p>
+<p>First things first, a lot of the glyphs were being oddly aligned, and I realized that I wasn’t centering text when drawing to the canvas.  This has been corrected now and fixed with a simple call to update alignment prior to drawing the map (and setting it back to <code class="language-plaintext highlighter-rouge">left</code> when drawing the UI/chat messages):</p>
 
-<p>It wasn’t really.</p>
-
-<p>I always go back to the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="\_blank">Broughlike tutorial</a> for JS roguelikes.  It involves adding an <code class="language-plaintext highlighter-rouge">offset</code> attribute for the x/y coordinates and nicely degrading it as we animate in. I was able to do something similar.</p>
-
-<p>Each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> gets an <code class="language-plaintext highlighter-rouge">offsetX</code>/<code class="language-plaintext highlighter-rouge">offsetY</code> attribute on instantiation.</p>
-
-<p>Drawing is as simple as tacking that onto my existing drawing function:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let _x = player.offsetX + (player.pos.c - startx) * tileSize;
-let _y = player.offsetY + (player.pos.r - starty) * tileSize + tileSize;
-
-player.offsetX -= Math.sign(player.offsetX) * (1/8);
-player.offsetY -= Math.sign(player.offsetY) * (1/8);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctx.textAlign = "center";
 </code></pre></div></div>
 
-<p>This gets applied to all <code class="language-plaintext highlighter-rouge">MoveableEntity</code> objects. The <code class="language-plaintext highlighter-rouge">Math.sign</code> helps to lerp things a bit so the animation is smoother.</p>
+<p>Easy enough!  The next visual update is probably my favorite way to represent HP in games like this.  I calculate the percentage of the entity’s health based on their <code class="language-plaintext highlighter-rouge">HP</code> and <code class="language-plaintext highlighter-rouge">maxHP</code> and draw a pair of rectangles that represent this:</p>
 
-<p><code class="language-plaintext highlighter-rouge">offsetX</code> and <code class="language-plaintext highlighter-rouge">offsetY</code> get set whenever the player presses a movement key. The nice thing here is that if the movement is invalid (wall, enemy, deep water, etc.) then the player’s position will revert back. The offset will give a mild stutter and look like the player is bumping into something.</p>
+<p><img src="https://i.imgur.com/PGXHjc6.gif" alt="Centered animations and HP bars" /></p>
 
-<p><img src="https://i.imgur.com/ZtI90n8.gif" alt="player animation" /></p>
+<h2 id="dropsloot">Drops/Loot</h2>
 
-<p>(Right now enemies don’t make use of this field, but it is there for future updates).</p>
+<p>What is a game without loot?  Right now the only loot we have are apples, so that is the current thing to drop.  The intended extensions are scrolls, weapons, armor, etc., but that’s for future developments (i.e., when there would be a purpose to have them).</p>
 
-<h2 id="bugfixes">Bugfixes</h2>
+<p>The easiest way to do this seemed to be having a drops table to aggregate everything,  Since I already have other lookup tables, it made the most sense to simply add on a new key:</p>
 
-<p>One of the more egregious bugs I came across was that, in reworking enemy AI, I neglected to remove a targeted player if they become inactive.</p>
-
-<p>That was a simple fix - right now I remove a target from an enemy if the player leaves the level. The fix was to also check if they were active.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update the enemies
-for e in self.enemies:
-    # (basic follower):
-    # 1 if no target, set target
-    # 2 if target, follow
-    # 3 if target out of range, forget
-
-    tgt = e.getTarget()
-    if tgt is not None and tgt in self.players: # we have a target
-        # same level test / meditating test
-        if self.players[tgt].pos['level'] != e.pos['level'] or not self.players[tgt].active:
-            e.removeTarget()
-        else:
-            # do the follow thing
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drops': {
+    'rat': [('apple', 1, 0.25)],
+    'gobbo': [('apple', 3, 0.35)],
+    'snek': [('apple', 5, 0.5)],
+},
 </code></pre></div></div>
 
-<p>Easy enough. Also highly abusable in a production environment, but we’ll save that for when it is time to balance this monstrosity.</p>
+<p>This table basically takes the entity name and provides options for what they drop and what the odds of that are.  When that monster is killed a simple check against <code class="language-plaintext highlighter-rouge">random.random()</code>.</p>
+
+<h2 id="second-spell">Second spell</h2>
+
+<p>Setting yourself for future success is always a good thing.  One of the functions I added to the map/entity generation was a <code class="language-plaintext highlighter-rouge">getRandomPosition</code> call that would return an empty, valid cell on the current map level.  This is suggested in pretty much any tutorial as well.  No cooldown and highly-abusable, but I wanted to get it in there to make sure it worked.</p>
+
+<p><img src="https://i.imgur.com/BAJ5bIZ.gif" alt="Teleporting" /></p>
+
+<h2 id="pathfinding">Pathfinding</h2>
+
+<p>Now the big one - enemies now follow the player around blocking cells.  Thanks to the <a href="https://www.redblobgames.com/pathfinding/a-star/implementation.html" target="_blank">red blob games</a> post on getting me up and running with that.  (Note: the <code class="language-plaintext highlighter-rouge">tcod</code> library has this built in, I just haven’t really been using that library at all so I didn’t really feel like starting now).  I’ll leave the algorithm particularls to the prior link, but it is quite satisfying to see things working.</p>
+
+<p><img src="https://i.imgur.com/BI8rwJS.gif" alt="Pathfinding" /></p>
+
+<h2 id="new-enemy">New enemy</h2>
+
+<p>I started getting interested in the physarum simulation, particularly how to make one in GPU shaders (always a fun mental activity to move thinking to matrix math mode - <a href="https://observablehq.com/@johnowhitaker/dotswarm-exploring-slime-mould-inspired-shaders" target="_blank">live display</a>)., but thought it might be fun to replicate the Nethack-style slime mold that self-replicates randomly.  Right now it is just a random check to see if it replicates or not.</p>
+
+<p>But, the fun bit was that it abuses an existing function for get neighboring cells to pick a valid one, rather than introducing yet another search method for empty cells.  The nice bit was this caused me to slightly refactor my <code class="language-plaintext highlighter-rouge">Monster</code> class to better handle child classes.</p>
+
+<p><img src="https://i.imgur.com/ypEhIgB.gif" alt="Slime mold" /></p>
+
+<p>Last but not least, I gave the player a slight aura as one possible way to reflect what their current resists are (for instance, this one might be resistant against fire).  Not sure that I like this, but the other choice is figuring out doll parts for ASCII glpyhs…</p>
+
+<p><img src="https://i.imgur.com/J4VzQxJ.png" alt="Aura" /></p>
 
 <hr />
 
-<h2 id="gameplay">Gameplay</h2>
+<p>That’s it for the summer!  This event was a lot of fun and I highly recommend it for anybody interested in roguelike development (as well as general game design - lots of good things to learn in the TCOD tutorial).</p>
 
-<p>As a fun aside, I fully anticipate that a large number of performance bugs will be cropping up, now that I’m going “to scale,” so to speak.</p>
+<h2 id="whats-next">What’s next?</h2>
 
-<p>Let’s start with bumping the number of rows/columns to 2500 each. This image became necessary in the canvas as it takes longer to receive the whole map now:</p>
+<p>Well, this proof of concept has the most promise of any of my little demos I’ve worked on, so I may pick at it throughout the school year either to iterate things or to use as demos for classes.</p>
 
-<div align="center">
-  <img src="https://i.imgur.com/HJqJ3ax.png" alt="loader" title="loader" />
-</div>
+<p>Some issues:</p>
 
-<p>I also started adding in a cellular automata for cave generation, but didn’t <em>quite</em> get it done in time for this post.  There are a significant amount of tweaks needed as well, but at least it is something!</p>
+<ul>
+  <li>
+    <p><em>Too many files to update</em> - when I make an update I need to update both the front-end and back-end code (for instance, adding a monster requires several steps internally to the back-end and visual representation on the front-end).  This is probably a lovely example of technical debt.</p>
+  </li>
+  <li>
+    <p><em>Instancing</em> - this game uses Flask as a server.  I’ve tested it with a small handful of players, but not scaled up.  Some load testing is in my future, as well as figuring out how to instance things.  Might be a fun diversion for looking into cloud services.</p>
+  </li>
+  <li>
+    <p><em>Saving</em> - right now everything exists in the <code class="language-plaintext highlighter-rouge">Game</code> class and is fairly easy to manage.  Some sort of local database and/or pickling may be in the future for saving game state.  Not something I’m entirely worried about at present.</p>
+  </li>
+  <li>
+    <p><em>NPCs</em> - I really wanted to add some flavor to the game by having settlements, people wandering, etc.  Didn’t get there but have some ideas, mostly involving <a href="http://www.crystalcodepalace.com/tracery.html" target="_blank">Tracery</a> for procedural text generation via grammars.</p>
+  </li>
+</ul>
 
-<p>I based the implementation off of my favorite blog post for making CAs - they outline the algorithm quite nicely: <a href="https://abitawake.com/news/articles/procedural-generation-with-godot-creating-caves-with-cellular-automata" target="_blank">A Bit Awake - Cellular Automata</a>.</p>
-
-<p>This was made while watching my kids playing outside so I gave 0 thought to tweaks and balance on all the parameters, but the skeleton is in place.</p>
-
-<div align="center">
-  <img src="https://imgur.com/iXYU6N6.png" alt="ca" title="ca" />
-</div>
-
-<p>As you can see here, the maps are very stringy.  I added a dev minimap to get a feel for what it looks like and clearly some optimizations need to be made.</p>
+<p>That’s it - thanks for reading along!</p>
 
 <hr />
 
-<p>That’s it for this week - next week I’m thinking game balancing, items, and bugfixes.</p>
-
-<hr />
-
-<p><a href="/rldev-5.html">Last post</a></p>
-
-<p><a href="/rldev-8.html">Next post</a></p>
+<p><a href="/rldev-6.html">Last post</a></p>
 
         </div>
         <div class="post-metadata">
             <p class="discography-album_release-date">
-    date: 09 August 2023
+    date: 20 August 2023
 </p>
 
 
