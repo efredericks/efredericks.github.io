@@ -124,4 +124,4 @@ That's it for this week - next week I'm thinking game balancing, items, and bugf
 
 [Last post](/rldev-5.html)
 
-Next post: TBD
+[Next post](/rldev-8.html)

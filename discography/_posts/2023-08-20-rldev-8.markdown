@@ -1,0 +1,123 @@
+---
+layout: post
+title: fredericks does the roguelikedev tutorial - 7/8
+description: a*, slimes, more fixes, the end (for now)
+# image: assets/img/z-is-for-zero.png
+# responsiveImage:
+#   - src: assets/img/300.png
+#     size: 300
+#   - src: assets/img/600.png
+#     size: 600
+#   - src: assets/img/z-is-for-zero.png
+#     size: 900
+type: blog
+# play:
+#     - name: YouTube
+#       url: https://www.youtube.com/
+#     - name: SoundCloud
+#       url: https://soundcloud.com/
+# buy:
+#   - url: https://backfromvoid.bandcamp.com/track/if-i-want-you-to
+#     name: BandCamp
+# embed_player:
+#   type: bandcamp
+#   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
+---
+
+<hr size="1" />
+
+* [Week 7 post](https://www.reddit.com/r/roguelikedev/comments/15rltmg/roguelikedev_does_the_complete_roguelike_tutorial/jwajwkt/){:target="_blank"}
+
+* [Week 8 post](https://www.reddit.com/r/roguelikedev/comments/15xppyg/roguelikedev_does_the_complete_roguelike_tutorial/jx9yz3e/){:target="_blank"}
+
+- [Project repo](https://github.com/efredericks/RL-MMO){:target="\_blank"}
+
+<hr size="1" />
+
+There really wasn't much to report for week 7 outside of a couple of minor things so I didn't write a separate post for it, so I'll include it in this last post for the roguelikedev tutorial event.  Overall it was quite fun and nice to see the other projects going as well.
+
+tl;dr - definitely try out the tutorial if you have any interest in roguelikes, or game development in general.  Absolutely a great starting point into the area.
+
+Reiterating my two favorites that this proof of concept was based on:
+
+* [TCOD v2 (Python)](http://rogueliketutorials.com/tutorials/tcod/v2/){:target="_blank"}
+
+* [Broughlike Tutorial (JavaScript)](https://nluqo.github.io/broughlike-tutorial/){:target="_blank"}
+
+---
+
+## Visual updates
+
+First things first, a lot of the glyphs were being oddly aligned, and I realized that I wasn't centering text when drawing to the canvas.  This has been corrected now and fixed with a simple call to update alignment prior to drawing the map (and setting it back to `left` when drawing the UI/chat messages):
+
+```
+ctx.textAlign = "center";
+```
+
+Easy enough!  The next visual update is probably my favorite way to represent HP in games like this.  I calculate the percentage of the entity's health based on their `HP` and `maxHP` and draw a pair of rectangles that represent this:
+
+![Centered animations and HP bars](https://i.imgur.com/PGXHjc6.gif)
+
+## Drops/Loot
+
+What is a game without loot?  Right now the only loot we have are apples, so that is the current thing to drop.  The intended extensions are scrolls, weapons, armor, etc., but that's for future developments (i.e., when there would be a purpose to have them).
+
+The easiest way to do this seemed to be having a drops table to aggregate everything,  Since I already have other lookup tables, it made the most sense to simply add on a new key:
+
+```
+drops': {
+    'rat': [('apple', 1, 0.25)],
+    'gobbo': [('apple', 3, 0.35)],
+    'snek': [('apple', 5, 0.5)],
+},
+```
+
+This table basically takes the entity name and provides options for what they drop and what the odds of that are.  When that monster is killed a simple check against `random.random()`. 
+
+## Second spell
+
+Setting yourself for future success is always a good thing.  One of the functions I added to the map/entity generation was a `getRandomPosition` call that would return an empty, valid cell on the current map level.  This is suggested in pretty much any tutorial as well.  No cooldown and highly-abusable, but I wanted to get it in there to make sure it worked.
+
+![Teleporting](https://i.imgur.com/BAJ5bIZ.gif)
+
+## Pathfinding
+
+Now the big one - enemies now follow the player around blocking cells.  Thanks to the [red blob games](https://www.redblobgames.com/pathfinding/a-star/implementation.html){:target="_blank"} post on getting me up and running with that.  (Note: the `tcod` library has this built in, I just haven't really been using that library at all so I didn't really feel like starting now).  I'll leave the algorithm particularls to the prior link, but it is quite satisfying to see things working.
+
+![Pathfinding](https://i.imgur.com/BI8rwJS.gif)
+
+## New enemy
+
+I started getting interested in the physarum simulation, particularly how to make one in GPU shaders (always a fun mental activity to move thinking to matrix math mode - [live display](https://observablehq.com/@johnowhitaker/dotswarm-exploring-slime-mould-inspired-shaders){:target="_blank"})., but thought it might be fun to replicate the Nethack-style slime mold that self-replicates randomly.  Right now it is just a random check to see if it replicates or not.
+
+But, the fun bit was that it abuses an existing function for get neighboring cells to pick a valid one, rather than introducing yet another search method for empty cells.  The nice bit was this caused me to slightly refactor my `Monster` class to better handle child classes.
+
+![Slime mold](https://i.imgur.com/ypEhIgB.gif)
+
+Last but not least, I gave the player a slight aura as one possible way to reflect what their current resists are (for instance, this one might be resistant against fire).  Not sure that I like this, but the other choice is figuring out doll parts for ASCII glpyhs...
+
+![Aura](https://i.imgur.com/J4VzQxJ.png)
+
+---
+
+That's it for the summer!  This event was a lot of fun and I highly recommend it for anybody interested in roguelike development (as well as general game design - lots of good things to learn in the TCOD tutorial).
+
+## What's next?
+
+Well, this proof of concept has the most promise of any of my little demos I've worked on, so I may pick at it throughout the school year either to iterate things or to use as demos for classes.
+
+Some issues:
+
+* *Too many files to update* - when I make an update I need to update both the front-end and back-end code (for instance, adding a monster requires several steps internally to the back-end and visual representation on the front-end).  This is probably a lovely example of technical debt.  
+
+* *Instancing* - this game uses Flask as a server.  I've tested it with a small handful of players, but not scaled up.  Some load testing is in my future, as well as figuring out how to instance things.  Might be a fun diversion for looking into cloud services.
+
+* *Saving* - right now everything exists in the `Game` class and is fairly easy to manage.  Some sort of local database and/or pickling may be in the future for saving game state.  Not something I'm entirely worried about at present.
+
+* *NPCs* - I really wanted to add some flavor to the game by having settlements, people wandering, etc.  Didn't get there but have some ideas, mostly involving [Tracery](http://www.crystalcodepalace.com/tracery.html){:target="_blank"} for procedural text generation via grammars.
+
+That's it - thanks for reading along!
+
+---
+
+[Last post](/rldev-6.html)
