@@ -1,4 +1,1705 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2023-08-24T10:37:53-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">fredericks does the roguelikedev tutorial - 7/8</title><link href="https://efredericks.github.io/rldev-8.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 7/8" /><published>2023-08-20T00:00:00-04:00</published><updated>2023-08-20T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-8</id><content type="html" xml:base="https://efredericks.github.io/rldev-8.html"><![CDATA[<hr size="1" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-09-03T19:53:08-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">GenerativeGI - Project Writeup</title><link href="http://localhost:4000/generativegi.html" rel="alternate" type="text/html" title="GenerativeGI - Project Writeup" /><published>2023-09-01T00:00:00-04:00</published><updated>2023-09-01T00:00:00-04:00</updated><id>http://localhost:4000/generativegi</id><content type="html" xml:base="http://localhost:4000/generativegi.html"><![CDATA[<hr size="1" />
+
+<ul>
+  <li>
+    <p><a href="https://github.com/GI2023-GenerativeGI/GI2023/tree/ASE-GI-Extension" target="\_blank">Project repo</a></p>
+  </li>
+  <li>
+    <p><a href="/publications/fredericks_GI_2023.pdf" target="\_blank">Original GI2023 workshop paper (Best Paper award recipient)</a></p>
+  </li>
+</ul>
+
+<hr size="1" />
+
+<h1 id="project-overview">Project Overview</h1>
+
+<p>This page is a short little overview of <code>GenerativeGI</code>, a project that brings together generative art and genetic improvement.  The idea of this post is to mainly present a bit of insight on the project itself and show off some of our favorite outputs.</p>
+
+<p><strong>Note - our journal submission is under review</strong></p>
+
+<h2 id="generativegi">GenerativeGI</h2>
+
+<h2 id="genetic-improvement">Genetic Improvement</h2>
+
+<h2 id="techniques">Techniques</h2>
+
+<hr />
+
+<p>Here are some of the best (note: ones that I mainly liked) and thought would be worth presenting.  Each of the specific runs get their own carousel of images and you can click on each to go to the full size image.</p>
+
+<h2 id="random">Random</h2>
+
+<div class="carousel__holder">
+    <div id="carousel2" class="carousel">
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2a" checked="checked" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2b" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2c" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2d" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2e" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2f" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2g" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2h" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2i" />
+        
+          <input class="carousel__activator" type="radio" name="carousel2" id="2j" />
+        
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2j"></label>
+              <label class="carousel__control carousel__control--forward" for="2b"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2a"></label>
+              <label class="carousel__control carousel__control--forward" for="2c"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2b"></label>
+              <label class="carousel__control carousel__control--forward" for="2d"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2c"></label>
+              <label class="carousel__control carousel__control--forward" for="2e"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2d"></label>
+              <label class="carousel__control carousel__control--forward" for="2f"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2e"></label>
+              <label class="carousel__control carousel__control--forward" for="2g"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2f"></label>
+              <label class="carousel__control carousel__control--forward" for="2h"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2g"></label>
+              <label class="carousel__control carousel__control--forward" for="2i"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2h"></label>
+              <label class="carousel__control carousel__control--forward" for="2j"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="2i"></label>
+              <label class="carousel__control carousel__control--forward" for="2a"></label>
+          </div>
+        
+        <div class="carousel__track">
+          <ul>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-6.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-6.png ">
+                <img src="/assets/img/GenerativeGI/random/img-6.png" title="/assets/img/GenerativeGI/random/img-6.png" alt="/assets/img/GenerativeGI/random/img-6.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-22.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-22.png ">
+                <img src="/assets/img/GenerativeGI/random/img-22.png" title="/assets/img/GenerativeGI/random/img-22.png" alt="/assets/img/GenerativeGI/random/img-22.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-46.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-46.png ">
+                <img src="/assets/img/GenerativeGI/random/img-46.png" title="/assets/img/GenerativeGI/random/img-46.png" alt="/assets/img/GenerativeGI/random/img-46.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-62.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-62.png ">
+                <img src="/assets/img/GenerativeGI/random/img-62.png" title="/assets/img/GenerativeGI/random/img-62.png" alt="/assets/img/GenerativeGI/random/img-62.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-64.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-64.png ">
+                <img src="/assets/img/GenerativeGI/random/img-64.png" title="/assets/img/GenerativeGI/random/img-64.png" alt="/assets/img/GenerativeGI/random/img-64.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-67.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-67.png ">
+                <img src="/assets/img/GenerativeGI/random/img-67.png" title="/assets/img/GenerativeGI/random/img-67.png" alt="/assets/img/GenerativeGI/random/img-67.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-71.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-71.png ">
+                <img src="/assets/img/GenerativeGI/random/img-71.png" title="/assets/img/GenerativeGI/random/img-71.png" alt="/assets/img/GenerativeGI/random/img-71.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-94.png ">
+                <img src="/assets/img/GenerativeGI/random/img-94.png" title="/assets/img/GenerativeGI/random/img-94.png" alt="/assets/img/GenerativeGI/random/img-94.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94-1.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-94-1.png ">
+                <img src="/assets/img/GenerativeGI/random/img-94-1.png" title="/assets/img/GenerativeGI/random/img-94-1.png" alt="/assets/img/GenerativeGI/random/img-94-1.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-98.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-98.png ">
+                <img src="/assets/img/GenerativeGI/random/img-98.png" title="/assets/img/GenerativeGI/random/img-98.png" alt="/assets/img/GenerativeGI/random/img-98.png" />
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="carousel__indicators">
+            
+              <label class="carousel__indicator" for="2a"></label>
+            
+              <label class="carousel__indicator" for="2b"></label>
+            
+              <label class="carousel__indicator" for="2c"></label>
+            
+              <label class="carousel__indicator" for="2d"></label>
+            
+              <label class="carousel__indicator" for="2e"></label>
+            
+              <label class="carousel__indicator" for="2f"></label>
+            
+              <label class="carousel__indicator" for="2g"></label>
+            
+              <label class="carousel__indicator" for="2h"></label>
+            
+              <label class="carousel__indicator" for="2i"></label>
+            
+              <label class="carousel__indicator" for="2j"></label>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+.carousel__holder {width: 100%; position: relative; padding-bottom: 50%; margin: 1rem 0 1rem;}
+.carousel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  padding: 0;
+}
+.carousel__controls,
+.carousel__activator {
+  display: none;
+}
+
+.carousel__activator:nth-of-type(1):checked ~ .carousel__track {
+  -webkit-transform: translateX(-000%);
+          transform: translateX(-000%);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__slide:nth-of-type(1) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__controls:nth-of-type(1) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(2):checked ~ .carousel__track {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__slide:nth-of-type(2) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__controls:nth-of-type(2) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(3):checked ~ .carousel__track {
+  -webkit-transform: translateX(-200%);
+          transform: translateX(-200%);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__slide:nth-of-type(3) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__controls:nth-of-type(3) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(4):checked ~ .carousel__track {
+  -webkit-transform: translateX(-300%);
+          transform: translateX(-300%);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__slide:nth-of-type(4) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__controls:nth-of-type(4) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(5):checked ~ .carousel__track {
+  -webkit-transform: translateX(-400%);
+          transform: translateX(-400%);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__slide:nth-of-type(5) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__controls:nth-of-type(5) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(6):checked ~ .carousel__track {
+  -webkit-transform: translateX(-500%);
+          transform: translateX(-500%);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__slide:nth-of-type(6) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__controls:nth-of-type(6) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(7):checked ~ .carousel__track {
+  -webkit-transform: translateX(-600%);
+          transform: translateX(-600%);
+}
+.carousel__activator:nth-of-type(7):checked ~ .carousel__slide:nth-of-type(7) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(7):checked ~ .carousel__controls:nth-of-type(7) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(7):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(7) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(8):checked ~ .carousel__track {
+  -webkit-transform: translateX(-700%);
+          transform: translateX(-700%);
+}
+.carousel__activator:nth-of-type(8):checked ~ .carousel__slide:nth-of-type(8) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(8):checked ~ .carousel__controls:nth-of-type(8) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(8):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(8) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(9):checked ~ .carousel__track {
+  -webkit-transform: translateX(-800%);
+          transform: translateX(-800%);
+}
+.carousel__activator:nth-of-type(9):checked ~ .carousel__slide:nth-of-type(9) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(9):checked ~ .carousel__controls:nth-of-type(9) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(9):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(9) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(10):checked ~ .carousel__track {
+  -webkit-transform: translateX(-900%);
+          transform: translateX(-900%);
+}
+.carousel__activator:nth-of-type(10):checked ~ .carousel__slide:nth-of-type(10) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(10):checked ~ .carousel__controls:nth-of-type(10) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(10):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(10) {
+  opacity: 1;
+}
+
+
+.carousel__control {
+  height: 30px;
+  width: 30px;
+  margin-top: -15px;
+  top: 50%;
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  border-width: 5px 5px 0 0;
+  border-style: solid;
+  border-color: #fafafa;
+  opacity: 0.35;
+  opacity: 1;
+  outline: 0;
+  z-index: 3;
+}
+.carousel__control:hover {
+  opacity: 1;
+}
+.carousel__control--backward {
+  left: 20px;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
+.carousel__control--forward {
+  right: 20px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.carousel__indicators {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+.carousel__indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  display: inline-block;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.35;
+  margin: 0 2.5px 0 2.5px;
+}
+.carousel__indicator:hover {
+  opacity: 0.75;
+}
+.carousel__track {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  transition: -webkit-transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+}
+.carousel__track .carousel__slide {
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.carousel__track .carousel__slide:nth-of-type(1) {
+  -webkit-transform: translateX(000%);
+          transform: translateX(000%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(2) {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(3) {
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(4) {
+  -webkit-transform: translateX(300%);
+          transform: translateX(300%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(5) {
+  -webkit-transform: translateX(400%);
+          transform: translateX(400%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(6) {
+  -webkit-transform: translateX(500%);
+          transform: translateX(500%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(7) {
+  -webkit-transform: translateX(600%);
+          transform: translateX(600%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(8) {
+  -webkit-transform: translateX(700%);
+          transform: translateX(700%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(9) {
+  -webkit-transform: translateX(800%);
+          transform: translateX(800%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(10) {
+  -webkit-transform: translateX(900%);
+          transform: translateX(900%);
+}
+
+
+.carousel--scale .carousel__slide {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.carousel__slide {
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+}
+.carousel__slide .overlay {height: 100%;}
+.carousel--thumb .carousel__indicator {
+  height: 30px;
+  width: 30px;
+}
+.carousel__indicator {
+  background-color: #fafafa;
+}
+
+.carousel__slide:nth-of-type(1),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(2),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(3),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(4),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(5),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(6),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(7),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(7) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(8),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(8) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(9),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(9) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(10),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(10) {
+  background-size: cover;
+  background-position: center;
+}
+
+</style>
+
+<script>
+  function isVisible(el) {
+        while (el) {
+            if (el === document) {
+                return true;
+            }
+
+            var $style = window.getComputedStyle(el, null);
+
+            if (!el) {
+                return false;
+            } else if (!$style) {
+                return false;
+            } else if ($style.display === 'none') {
+                return false;
+            } else if ($style.visibility === 'hidden') {
+                return false;
+            } else if (+$style.opacity === 0) {
+                return false;
+            } else if (($style.display === 'block' || $style.display === 'inline-block') &&
+                $style.height === '0px' && $style.overflow === 'hidden') {
+                return false;
+            } else {
+                return $style.position === 'fixed' || isVisible(el.parentNode);
+            }
+        }
+  }
+  
+  setInterval(function(){
+    var j=0;
+    var elements = document.querySelectorAll('#carousel2 .carousel__control--forward');
+    for(i=(elements.length - 1);i>-1;i--) {
+      if(isVisible(elements[i])) j=i;
+    }
+    elements[j].click();
+  },7000);
+  
+</script>
+
+<h2 id="single-objective-clear">Single-Objective (Clear)</h2>
+
+<div class="carousel__holder">
+    <div id="carousel0" class="carousel">
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0a" checked="checked" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0b" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0c" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0d" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0e" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0f" />
+        
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0f"></label>
+              <label class="carousel__control carousel__control--forward" for="0b"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0a"></label>
+              <label class="carousel__control carousel__control--forward" for="0c"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0b"></label>
+              <label class="carousel__control carousel__control--forward" for="0d"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0c"></label>
+              <label class="carousel__control carousel__control--forward" for="0e"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0d"></label>
+              <label class="carousel__control carousel__control--forward" for="0f"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0e"></label>
+              <label class="carousel__control carousel__control--forward" for="0a"></label>
+          </div>
+        
+        <div class="carousel__track">
+          <ul>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-46.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-46.png ">
+                <img src="/assets/img/GenerativeGI/img-46.png" title="/assets/img/GenerativeGI/img-46.png" alt="/assets/img/GenerativeGI/img-46.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-35.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-35.png ">
+                <img src="/assets/img/GenerativeGI/img-35.png" title="/assets/img/GenerativeGI/img-35.png" alt="/assets/img/GenerativeGI/img-35.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-36.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-36.png ">
+                <img src="/assets/img/GenerativeGI/img-36.png" title="/assets/img/GenerativeGI/img-36.png" alt="/assets/img/GenerativeGI/img-36.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-37.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-37.png ">
+                <img src="/assets/img/GenerativeGI/img-37.png" title="/assets/img/GenerativeGI/img-37.png" alt="/assets/img/GenerativeGI/img-37.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-39.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-39.png ">
+                <img src="/assets/img/GenerativeGI/img-39.png" title="/assets/img/GenerativeGI/img-39.png" alt="/assets/img/GenerativeGI/img-39.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-48.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-48.png ">
+                <img src="/assets/img/GenerativeGI/img-48.png" title="/assets/img/GenerativeGI/img-48.png" alt="/assets/img/GenerativeGI/img-48.png" />
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="carousel__indicators">
+            
+              <label class="carousel__indicator" for="0a"></label>
+            
+              <label class="carousel__indicator" for="0b"></label>
+            
+              <label class="carousel__indicator" for="0c"></label>
+            
+              <label class="carousel__indicator" for="0d"></label>
+            
+              <label class="carousel__indicator" for="0e"></label>
+            
+              <label class="carousel__indicator" for="0f"></label>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+.carousel__holder {width: 100%; position: relative; padding-bottom: 50%; margin: 1rem 0 1rem;}
+.carousel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  padding: 0;
+}
+.carousel__controls,
+.carousel__activator {
+  display: none;
+}
+
+.carousel__activator:nth-of-type(1):checked ~ .carousel__track {
+  -webkit-transform: translateX(-000%);
+          transform: translateX(-000%);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__slide:nth-of-type(1) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__controls:nth-of-type(1) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(2):checked ~ .carousel__track {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__slide:nth-of-type(2) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__controls:nth-of-type(2) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(3):checked ~ .carousel__track {
+  -webkit-transform: translateX(-200%);
+          transform: translateX(-200%);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__slide:nth-of-type(3) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__controls:nth-of-type(3) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(4):checked ~ .carousel__track {
+  -webkit-transform: translateX(-300%);
+          transform: translateX(-300%);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__slide:nth-of-type(4) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__controls:nth-of-type(4) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(5):checked ~ .carousel__track {
+  -webkit-transform: translateX(-400%);
+          transform: translateX(-400%);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__slide:nth-of-type(5) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__controls:nth-of-type(5) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(6):checked ~ .carousel__track {
+  -webkit-transform: translateX(-500%);
+          transform: translateX(-500%);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__slide:nth-of-type(6) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__controls:nth-of-type(6) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  opacity: 1;
+}
+
+
+.carousel__control {
+  height: 30px;
+  width: 30px;
+  margin-top: -15px;
+  top: 50%;
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  border-width: 5px 5px 0 0;
+  border-style: solid;
+  border-color: #fafafa;
+  opacity: 0.35;
+  opacity: 1;
+  outline: 0;
+  z-index: 3;
+}
+.carousel__control:hover {
+  opacity: 1;
+}
+.carousel__control--backward {
+  left: 20px;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
+.carousel__control--forward {
+  right: 20px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.carousel__indicators {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+.carousel__indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  display: inline-block;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.35;
+  margin: 0 2.5px 0 2.5px;
+}
+.carousel__indicator:hover {
+  opacity: 0.75;
+}
+.carousel__track {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  transition: -webkit-transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+}
+.carousel__track .carousel__slide {
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.carousel__track .carousel__slide:nth-of-type(1) {
+  -webkit-transform: translateX(000%);
+          transform: translateX(000%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(2) {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(3) {
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(4) {
+  -webkit-transform: translateX(300%);
+          transform: translateX(300%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(5) {
+  -webkit-transform: translateX(400%);
+          transform: translateX(400%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(6) {
+  -webkit-transform: translateX(500%);
+          transform: translateX(500%);
+}
+
+
+.carousel--scale .carousel__slide {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.carousel__slide {
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+}
+.carousel__slide .overlay {height: 100%;}
+.carousel--thumb .carousel__indicator {
+  height: 30px;
+  width: 30px;
+}
+.carousel__indicator {
+  background-color: #fafafa;
+}
+
+.carousel__slide:nth-of-type(1),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(2),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(3),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(4),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(5),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(6),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  background-size: cover;
+  background-position: center;
+}
+
+</style>
+
+<script>
+  function isVisible(el) {
+        while (el) {
+            if (el === document) {
+                return true;
+            }
+
+            var $style = window.getComputedStyle(el, null);
+
+            if (!el) {
+                return false;
+            } else if (!$style) {
+                return false;
+            } else if ($style.display === 'none') {
+                return false;
+            } else if ($style.visibility === 'hidden') {
+                return false;
+            } else if (+$style.opacity === 0) {
+                return false;
+            } else if (($style.display === 'block' || $style.display === 'inline-block') &&
+                $style.height === '0px' && $style.overflow === 'hidden') {
+                return false;
+            } else {
+                return $style.position === 'fixed' || isVisible(el.parentNode);
+            }
+        }
+  }
+  
+  setInterval(function(){
+    var j=0;
+    var elements = document.querySelectorAll('#carousel0 .carousel__control--forward');
+    for(i=(elements.length - 1);i>-1;i--) {
+      if(isVisible(elements[i])) j=i;
+    }
+    elements[j].click();
+  },7000);
+  
+</script>
+
+<div class="carousel__holder">
+    <div id="carousel1" class="carousel">
+        
+          <input class="carousel__activator" type="radio" name="carousel1" id="1a" checked="checked" />
+        
+          <input class="carousel__activator" type="radio" name="carousel1" id="1b" />
+        
+          <input class="carousel__activator" type="radio" name="carousel1" id="1c" />
+        
+          <input class="carousel__activator" type="radio" name="carousel1" id="1d" />
+        
+          <input class="carousel__activator" type="radio" name="carousel1" id="1e" />
+        
+          <input class="carousel__activator" type="radio" name="carousel1" id="1f" />
+        
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="1f"></label>
+              <label class="carousel__control carousel__control--forward" for="1b"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="1a"></label>
+              <label class="carousel__control carousel__control--forward" for="1c"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="1b"></label>
+              <label class="carousel__control carousel__control--forward" for="1d"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="1c"></label>
+              <label class="carousel__control carousel__control--forward" for="1e"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="1d"></label>
+              <label class="carousel__control carousel__control--forward" for="1f"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="1e"></label>
+              <label class="carousel__control carousel__control--forward" for="1a"></label>
+          </div>
+        
+        <div class="carousel__track">
+          <ul>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-46.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-46.png ">
+                <img src="/assets/img/GenerativeGI/img-46.png" title="/assets/img/GenerativeGI/img-46.png" alt="/assets/img/GenerativeGI/img-46.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-35.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-35.png ">
+                <img src="/assets/img/GenerativeGI/img-35.png" title="/assets/img/GenerativeGI/img-35.png" alt="/assets/img/GenerativeGI/img-35.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-36.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-36.png ">
+                <img src="/assets/img/GenerativeGI/img-36.png" title="/assets/img/GenerativeGI/img-36.png" alt="/assets/img/GenerativeGI/img-36.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-37.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-37.png ">
+                <img src="/assets/img/GenerativeGI/img-37.png" title="/assets/img/GenerativeGI/img-37.png" alt="/assets/img/GenerativeGI/img-37.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-39.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-39.png ">
+                <img src="/assets/img/GenerativeGI/img-39.png" title="/assets/img/GenerativeGI/img-39.png" alt="/assets/img/GenerativeGI/img-39.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/img-48.png');"> -->
+              <a href=" /assets/img/GenerativeGI/img-48.png ">
+                <img src="/assets/img/GenerativeGI/img-48.png" title="/assets/img/GenerativeGI/img-48.png" alt="/assets/img/GenerativeGI/img-48.png" />
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="carousel__indicators">
+            
+              <label class="carousel__indicator" for="1a"></label>
+            
+              <label class="carousel__indicator" for="1b"></label>
+            
+              <label class="carousel__indicator" for="1c"></label>
+            
+              <label class="carousel__indicator" for="1d"></label>
+            
+              <label class="carousel__indicator" for="1e"></label>
+            
+              <label class="carousel__indicator" for="1f"></label>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+.carousel__holder {width: 100%; position: relative; padding-bottom: 50%; margin: 1rem 0 1rem;}
+.carousel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  padding: 0;
+}
+.carousel__controls,
+.carousel__activator {
+  display: none;
+}
+
+.carousel__activator:nth-of-type(1):checked ~ .carousel__track {
+  -webkit-transform: translateX(-000%);
+          transform: translateX(-000%);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__slide:nth-of-type(1) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__controls:nth-of-type(1) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(2):checked ~ .carousel__track {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__slide:nth-of-type(2) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__controls:nth-of-type(2) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(3):checked ~ .carousel__track {
+  -webkit-transform: translateX(-200%);
+          transform: translateX(-200%);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__slide:nth-of-type(3) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__controls:nth-of-type(3) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(4):checked ~ .carousel__track {
+  -webkit-transform: translateX(-300%);
+          transform: translateX(-300%);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__slide:nth-of-type(4) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__controls:nth-of-type(4) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(5):checked ~ .carousel__track {
+  -webkit-transform: translateX(-400%);
+          transform: translateX(-400%);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__slide:nth-of-type(5) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__controls:nth-of-type(5) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(6):checked ~ .carousel__track {
+  -webkit-transform: translateX(-500%);
+          transform: translateX(-500%);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__slide:nth-of-type(6) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__controls:nth-of-type(6) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  opacity: 1;
+}
+
+
+.carousel__control {
+  height: 30px;
+  width: 30px;
+  margin-top: -15px;
+  top: 50%;
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  border-width: 5px 5px 0 0;
+  border-style: solid;
+  border-color: #fafafa;
+  opacity: 0.35;
+  opacity: 1;
+  outline: 0;
+  z-index: 3;
+}
+.carousel__control:hover {
+  opacity: 1;
+}
+.carousel__control--backward {
+  left: 20px;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
+.carousel__control--forward {
+  right: 20px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.carousel__indicators {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+.carousel__indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  display: inline-block;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.35;
+  margin: 0 2.5px 0 2.5px;
+}
+.carousel__indicator:hover {
+  opacity: 0.75;
+}
+.carousel__track {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  transition: -webkit-transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+}
+.carousel__track .carousel__slide {
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.carousel__track .carousel__slide:nth-of-type(1) {
+  -webkit-transform: translateX(000%);
+          transform: translateX(000%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(2) {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(3) {
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(4) {
+  -webkit-transform: translateX(300%);
+          transform: translateX(300%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(5) {
+  -webkit-transform: translateX(400%);
+          transform: translateX(400%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(6) {
+  -webkit-transform: translateX(500%);
+          transform: translateX(500%);
+}
+
+
+.carousel--scale .carousel__slide {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.carousel__slide {
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+}
+.carousel__slide .overlay {height: 100%;}
+.carousel--thumb .carousel__indicator {
+  height: 30px;
+  width: 30px;
+}
+.carousel__indicator {
+  background-color: #fafafa;
+}
+
+.carousel__slide:nth-of-type(1),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(2),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(3),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(4),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(5),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(6),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  background-size: cover;
+  background-position: center;
+}
+
+</style>
+
+<script>
+  function isVisible(el) {
+        while (el) {
+            if (el === document) {
+                return true;
+            }
+
+            var $style = window.getComputedStyle(el, null);
+
+            if (!el) {
+                return false;
+            } else if (!$style) {
+                return false;
+            } else if ($style.display === 'none') {
+                return false;
+            } else if ($style.visibility === 'hidden') {
+                return false;
+            } else if (+$style.opacity === 0) {
+                return false;
+            } else if (($style.display === 'block' || $style.display === 'inline-block') &&
+                $style.height === '0px' && $style.overflow === 'hidden') {
+                return false;
+            } else {
+                return $style.position === 'fixed' || isVisible(el.parentNode);
+            }
+        }
+  }
+  
+  setInterval(function(){
+    var j=0;
+    var elements = document.querySelectorAll('#carousel1 .carousel__control--forward');
+    for(i=(elements.length - 1);i>-1;i--) {
+      if(isVisible(elements[i])) j=i;
+    }
+    elements[j].click();
+  },7000);
+  
+</script>
+
+<h2 id="single-objective-no-clear">Single-Objective (No Clear)</h2>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[project overview and images]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 7/8</title><link href="http://localhost:4000/rldev-8.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 7/8" /><published>2023-08-20T00:00:00-04:00</published><updated>2023-08-20T00:00:00-04:00</updated><id>http://localhost:4000/rldev-8</id><content type="html" xml:base="http://localhost:4000/rldev-8.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -110,7 +1811,7 @@
 
 <hr />
 
-<p><a href="/rldev-6.html">Last post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[a*, slimes, more fixes, the end (for now)]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 6</title><link href="https://efredericks.github.io/rldev-6.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 6" /><published>2023-08-09T00:00:00-04:00</published><updated>2023-08-09T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-6</id><content type="html" xml:base="https://efredericks.github.io/rldev-6.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-6.html">Last post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[a*, slimes, more fixes, the end (for now)]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 6</title><link href="http://localhost:4000/rldev-6.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 6" /><published>2023-08-09T00:00:00-04:00</published><updated>2023-08-09T00:00:00-04:00</updated><id>http://localhost:4000/rldev-6</id><content type="html" xml:base="http://localhost:4000/rldev-6.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -214,7 +1915,7 @@ for e in self.enemies:
 
 <p><a href="/rldev-5.html">Last post</a></p>
 
-<p><a href="/rldev-8.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[bugfixes, big maps, cellular automata]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="https://efredericks.github.io/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-5</id><content type="html" xml:base="https://efredericks.github.io/rldev-5.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-8.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[bugfixes, big maps, cellular automata]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="http://localhost:4000/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>http://localhost:4000/rldev-5</id><content type="html" xml:base="http://localhost:4000/rldev-5.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -350,7 +2051,7 @@ for e in self.enemies:
 <hr />
 <p><a href="/rldev-4.html">Last post</a></p>
 
-<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="https://efredericks.github.io/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-4</id><content type="html" xml:base="https://efredericks.github.io/rldev-4.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="http://localhost:4000/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>http://localhost:4000/rldev-4</id><content type="html" xml:base="http://localhost:4000/rldev-4.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -503,7 +2204,7 @@ let SPRITESHEET = {
 
 <p><a href="/rldev-3.html">Last post</a></p>
 
-<p><a href="/rldev-5.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="https://efredericks.github.io/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-3</id><content type="html" xml:base="https://efredericks.github.io/rldev-3.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-5.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="http://localhost:4000/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>http://localhost:4000/rldev-3</id><content type="html" xml:base="http://localhost:4000/rldev-3.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -685,7 +2386,7 @@ playSound = (snd) =&gt; {
 
 <p><a href="/rldev-2.html">Last post</a></p>
 
-<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="https://efredericks.github.io/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-2</id><content type="html" xml:base="https://efredericks.github.io/rldev-2.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="http://localhost:4000/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>http://localhost:4000/rldev-2</id><content type="html" xml:base="http://localhost:4000/rldev-2.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -800,7 +2501,7 @@ class MoveableEntity(Entity):
 
 <p><a href="/rldev-1.html">Last post</a></p>
 
-<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="https://efredericks.github.io/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-1</id><content type="html" xml:base="https://efredericks.github.io/rldev-1.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="http://localhost:4000/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>http://localhost:4000/rldev-1</id><content type="html" xml:base="http://localhost:4000/rldev-1.html"><![CDATA[<hr size="1" />
 
 <p><a href="https://www.reddit.com/r/roguelikedev/comments/14q58js/roguelikedev_does_the_complete_roguelike_tutorial/jqr89ss/" target="_blank">Week 1 post</a></p>
 <hr size="1" />
@@ -886,25 +2587,18 @@ class MoveableEntity(Entity):
 
 <hr />
 
-<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>http://localhost:4000/yyy-example%20copy</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example</id><content type="html" xml:base="https://efredericks.github.io/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example</id><content type="html" xml:base="http://localhost:4000/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy-2.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-24T00:00:00-04:00</published><updated>2019-10-24T00:00:00-04:00</updated><id>https://efredericks.github.io/yyy-example%20copy%202</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy-2.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
-<ol>
-  <li>Y</li>
-  <li>Yy</li>
-  <li>YyY</li>
-  <li>YyYy</li>
-  <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
