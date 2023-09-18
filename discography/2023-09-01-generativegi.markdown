@@ -114,6 +114,12 @@ Here are all the techniques we included in the experiment.  You can find the Pyt
 
 ### Noisemap
 
+### Walkers
+
+### Trigonometry Functions
+
+### OpenCV Filters
+
 ---
 
 Here are some of the best (note: ones that I mainly liked) and thought would be worth presenting.  Each of the specific runs get their own carousel of images and you can click on each to go to the full size image.  Sadly they're only 1000x1000, otherwise the experiments would have taken a *long* time to run.
@@ -128,16 +134,24 @@ These results were from simply randomizing GenerativeGI without any guidance or 
 
 ## Single-Objective (Clear)
 
+This experiment focused on a single objective for optimization - pixel changes via [root-mean-square (RMS) difference analysis](https://en.wikipedia.org/wiki/Root-mean-square_deviation){:target="\_blank"}.  Additionally, the canvas object was cleared prior to evolutionary operations to provide a clean slate each time a new child was created.
+
   {% include carousel.html height="50" unit="%" duration="7" number="1" %}
 
   {% include carousel.html height="50" unit="%" duration="7" number="2" %}
 
 ## Single-Objective (No Clear)
 
+This experiment is the same as above (RMS difference), however the canvas object is not cleared to simulate a "pass-it-on" style of art where techniques overlap.
+
 ## Lexicase (Clear)
+
+This experiment runs the full Lexicase selection algorithm with all five fitness functions active: pairwise RMS difference, [pairwise Chebyshev difference](https://en.wikipedia.org/wiki/Chebyshev_distance){:target="\_blank"}, minimizing the length of the genome, maximizing the diversity of techniques in each genome, and maximizing the amount of negative space within an image (targeting 70% negative space).
 
   {% include carousel.html height="50" unit="%" duration="7" number="5" %}
 
 ## Lexicase (No Clear)
+
+Same as above, however the canvas is not cleared again to allow techniques to build upon each other throughout evolution.
 
   {% include carousel.html height="50" unit="%" duration="7" number="4" %}
