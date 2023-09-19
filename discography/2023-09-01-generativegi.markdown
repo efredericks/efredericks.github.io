@@ -90,7 +90,11 @@ This page is a short little overview of <code>GenerativeGI</code>, a project tha
 
 ## GenerativeGI
 
+GenerativeGI is a Python-based technique for using genetic improvement (GI) to string together a series of generative art techniques to create something new.  
+
 ## Genetic Improvement
+
+GI is an evolutionary computation-based technique for automatically improving the source code of programs.  Basically, a GI technique will try to search for the best possible combination of lines of source code that results in an optimal program (GI encodes the software as the genome).  
 
 ## Techniques
 
