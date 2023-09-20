@@ -86,15 +86,19 @@ carousels:
 
 This page is a short little overview of <code>GenerativeGI</code>, a project that brings together generative art (making art with code) and genetic improvement (fixing code with search algorithms).  The idea of this post is to mainly present a bit of insight on the project itself and show off some of our favorite outputs.
 
+Note - this is intentionally brief/reductive.  The [full paper](/publications/fredericks_GI_2023.pdf){:target="\_blank"} has all the details in lovely, dry, academic tones.
+
 **Note - our journal submission is under review**
 
 ## GenerativeGI
 
-GenerativeGI is a Python-based technique for using genetic improvement (GI) to string together a series of generative art techniques to create something new.  
+GenerativeGI is a Python-based technique for using genetic improvement (GI) to string together a series of generative art techniques to create something new.
 
 ## Genetic Improvement
 
 GI is an evolutionary computation-based technique for automatically improving the source code of programs.  Basically, a GI technique will try to search for the best possible combination of lines of source code that results in an optimal program (GI encodes the software as the genome).  
+
+For this work, we consider the source code to be a series of generative art techniques, each of which can accept parameters to vary their input.  The GI process then attempts to find the "best" way to combine techniques and parameters to create a glitch art aesthetic.
 
 ## Techniques
 
