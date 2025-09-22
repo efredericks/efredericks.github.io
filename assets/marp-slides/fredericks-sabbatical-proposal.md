@@ -51,14 +51,18 @@ Erik Fredericks, frederer@gvsu.edu
 
 | Winter 2026 | Fall 2026 | Winter 2027 |
 | --- | --- | --- |
-| Pre-planning | OER learning module development | Research project | 
-| ROS/Gazebo setup | Conversion of existing project to ROS | Grant writing | 
+| Pre-planning | OER learning module development | Research project (minimizing uncertainty for ROS-based systems) | 
+| ROS/Gazebo setup | Conversion of existing project to ROS | Grant writing (NSF SHF Future CoRe, AFRL Foundations of Trusted Systems, US Naval Research Laboratory Basic/Applied Research) | 
 | Discussions with B. Cheng | OER dissemination | Research dissemination |
 
 </center>
 
 OER materials: enable students (either research or in-classroom) to <u>quickly</u> get up and running with robotics simulations
 
-**Post-sabbatical**:
+---
+
+# Post-sabbatical
+
 - Develop SE/AI-focused robotics course
-- Disseminate remaining work and present outcomes to GVSU
+- Disseminate remaining work
+- Present outcomes to GVSU
