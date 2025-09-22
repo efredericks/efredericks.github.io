@@ -1,0 +1,66 @@
+section footer {
+  padding: 1em !important;  
+}
+img[alt~="top-right"] {
+  position: absolute;
+  top: 130px;
+  right: 30px;
+}
+
+img[alt~="bottom-right"] {
+  position: absolute;
+  top: 300px;
+  right: 50px;
+}
+
+img[alt~="top-corner"] {
+    position:absolute;
+    top:20px;
+    right:20px; 
+}
+
+img[alt~="bottom-corner"] {
+    position:absolute;
+    bottom:40px;
+    right:20px; 
+}
+
+.callout, .callout2 {
+  background: #ccc;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+#callout2 {
+  margin-top: 80px;
+}
+
+* {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3 {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+li {
+  line-height: 1.2em;
+}
+
+ul {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+#opaque {
+  background: #000000aa;
+}
+
+.language-bash {
+  font-family: monospace !important;
+}
