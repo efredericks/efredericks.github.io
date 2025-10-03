@@ -52,7 +52,7 @@
     <aside class="menu">
     <div class="menu-top">
         <div class="menu-top_logo">
-            <a href="/" >
+            <a href="/">
                 <img src="/assets/img/Fredericks-Small.jpg" alt="Logo" onerror="this.style.display='none'">
             </a>
         </div>
@@ -64,51 +64,37 @@
         <ul class="navigation">
             
             <li>
-                <a href="/" category="home" title=""
-                
-                >
+                <a href="/" category="home" title="">
                     <span>home</span>
                 </a>
             </li>
             
             <li>
-                <a href="/students.html" category="students" title="students tooltip"
-                
-                >
+                <a href="/students.html" category="students" title="students tooltip">
                     <span>students</span>
                 </a>
             </li>
             
             <li>
-                <a href="/teaching.html" category="teaching" title="teaching tooltip"
-                
-                >
+                <a href="/teaching.html" category="teaching" title="teaching tooltip">
                     <span>teaching</span>
                 </a>
             </li>
             
             <li>
-                <a href="/publications.html" category="publications" title="publications tooltip"
-                
-                >
+                <a href="/publications.html" category="publications" title="publications tooltip">
                     <span>publications</span>
                 </a>
             </li>
             
             <li>
-                <a href="/activities.html" category="activities" title="activities tooltip"
-                
-                >
+                <a href="/activities.html" category="activities" title="activities tooltip">
                     <span>activities</span>
                 </a>
             </li>
             
             <li>
-                <a href="/posts/" category="" title=""
-                
-                    class="selected"
-                
-                >
+                <a href="/posts/" category="" title="" class="selected">
                     <span>posts</span>
                 </a>
             </li>
@@ -118,27 +104,27 @@
     <div class="menu-contact">
         
 
-        <a href="https://github.com/efredericks" target="_blank">
+        <a href="https://github.com/efredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-github"></i>
         </a>
         
 
-        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank">
+        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-toilet-paper"></i>
         </a>
         
 
-        <a href="https://youtube.com/@erikfredericks" target="_blank">
+        <a href="https://youtube.com/@erikfredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-youtube-play"></i>
         </a>
         
 
-        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank">
+        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-twitch"></i>
         </a>
         
 
-        <a href="https://twitter.com/erik_fredericks" target="_blank">
+        <a href="https://twitter.com/erik_fredericks" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-twitter"></i>
         </a>
         
@@ -159,18 +145,18 @@
             
         </header>
         <div class="post-content">
-            <hr size="1" />
+            <hr size="1">
 
 <ul>
   <li>
-    <p><a href="https://www.reddit.com/r/roguelikedev/comments/159b1yu/roguelikedev_does_the_complete_roguelike_tutorial/jteeuhl/" target="_blank">Week 4 post</a></p>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/159b1yu/roguelikedev_does_the_complete_roguelike_tutorial/jteeuhl/" target="_blank" rel="noopener noreferrer">Week 4 post</a></p>
   </li>
   <li>
-    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank">Project repo</a></p>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank" rel="noopener noreferrer">Project repo</a></p>
   </li>
 </ul>
 
-<hr size="1" />
+<hr size="1">
 
 <p>This week I spent some time getting a limited chat up and running, along with basic procgen for the map and some extra hooks for HP.  All the screenshots will have the new procgen in there, but I’m going to talk about chat first.</p>
 
@@ -179,17 +165,17 @@
 <p>And that, at least, passed just fine.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/LF2TnIl.png" title="yay" alt="yay" />
+  <img src="https://i.imgur.com/LF2TnIl.png" title="yay" alt="yay">
 </div>
 
-<hr />
+<hr>
 
 <h2 id="chat">Chat</h2>
 
 <p>I wanted players to have a limited chat so that they can talk to each other.  Otherwise we lose a bit of the MMO-ness.  In taking a page from RotMG, I thought little speech bubbles would be a good idea.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/dVeW4gc.png" alt="rotmg chat" title="rotmg chat" />
+  <img src="https://i.imgur.com/dVeW4gc.png" alt="rotmg chat" title="rotmg chat">
 </div>
 
 <p>We’ll get there eventually, but each person only says one thing at a time - there is no buffer.  What I did was to give each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> a chat object - currently a list but that may get pared down a single object.  The list is forced into a mutable tuple - element 0 is the chat message and element 1 is the timer.</p>
@@ -201,14 +187,14 @@
 <p>The screenshot is a bit hard to see below, but the enemies will randomly select a bit of angry flavor text when they’re following you.  The rat is saying ‘!!’ at the moment.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/6hwUJQn.png" alt="rat chat" title="rat chat" />
+  <img src="https://i.imgur.com/6hwUJQn.png" alt="rat chat" title="rat chat">
 </div>
 
 <p>Colors and interface are by no means final and currently quite difficult to read, but I figured prettifying it would take a back seat to actual implementation.  Plus then I’d need to add things like text wrapping and all those fun calculations and my eyes glazed over a bit.</p>
 
 <p>Work for future me.</p>
 
-<hr />
+<hr>
 
 <h2 id="procgen">Procgen</h2>
 
@@ -220,7 +206,7 @@
 
 <p>Otherwise, this proof of concept will never be done.</p>
 
-<p>Anywho, I used the <code class="language-plaintext highlighter-rouge">opensimplex</code> noise library (<a href="https://pypi.org/project/opensimplex/" target="_blank">PyPi reference</a>) and simply mapped ranges to tile values.  As you can see below the level is fairly water-heavy.  I’ll be tweaking this significantly as I go, but I honestly like how it looks at the moment.</p>
+<p>Anywho, I used the <code class="language-plaintext highlighter-rouge">opensimplex</code> noise library (<a href="https://pypi.org/project/opensimplex/" target="_blank" rel="noopener noreferrer">PyPi reference</a>) and simply mapped ranges to tile values.  As you can see below the level is fairly water-heavy.  I’ll be tweaking this significantly as I go, but I honestly like how it looks at the moment.</p>
 
 <p>Pretty simple mapping that is fun to play with for a ‘standard’ Simplex noise look:</p>
 
@@ -238,8 +224,8 @@ _map[z][r].append(newtile)
 </code></pre></div></div>
 
 <div align="center">
-  <b>Floor 1</b><br />
-  <img src="https://i.imgur.com/AQV8rp1.png" alt="procgen 1" title="procgen 1" />
+  <b>Floor 1</b><br>
+  <img src="https://i.imgur.com/AQV8rp1.png" alt="procgen 1" title="procgen 1">
 </div>
 
 <p>Plus, as you descend in Z-levels the zoom changes as well.  This comes care of a handy utility function I always transpose from p5js:</p>
@@ -258,13 +244,13 @@ for z in range(self.NUM_LEVELS):
 </code></pre></div></div>
 
 <div align="center">
-  <b>Floor 3</b><br />
-  <img src="https://i.imgur.com/QTz0oiZ.png" alt="procgen 2" title="procgen 2" />
+  <b>Floor 3</b><br>
+  <img src="https://i.imgur.com/QTz0oiZ.png" alt="procgen 2" title="procgen 2">
 </div>
 
 <p>Gives a nice feeling of depth and the environments varying.</p>
 
-<hr />
+<hr>
 
 <h2 id="other">Other</h2>
 
@@ -298,17 +284,17 @@ let SPRITESHEET = {
 
 <p>To me, going this route is nicely extensible as I can also tack on sprite images as well if I’d like, or offsets into a spritesheet.  Previously it was all <code class="language-plaintext highlighter-rouge">if</code> checks in code for the exact sprite, so not very programmer-friendly.</p>
 
-<hr />
+<hr>
 
 <p>Next week I plan to work on enemy AI a bit, since right now everything either wanders or follows you.  Also, I’d like to start dipping into accessibility a bit to ensure that the game itself is playable for all.  I don’t have a whole lot of experience in managing that with a canvas, so some additional research is going to be needed.</p>
 
 <p>Here’s a GIF of current playing through a few levels and testing out chatting.  Even though I didn’t need any, I just couldn’t stop myself from picking up some apples.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/ZHLAHK8.gif" alt="playthrough" title="playthrough" />
+  <img src="https://i.imgur.com/ZHLAHK8.gif" alt="playthrough" title="playthrough">
 </div>
 
-<hr />
+<hr>
 
 <p><a href="/rldev-3.html">Last post</a></p>
 

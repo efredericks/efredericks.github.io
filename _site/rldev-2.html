@@ -52,7 +52,7 @@
     <aside class="menu">
     <div class="menu-top">
         <div class="menu-top_logo">
-            <a href="/" >
+            <a href="/">
                 <img src="/assets/img/Fredericks-Small.jpg" alt="Logo" onerror="this.style.display='none'">
             </a>
         </div>
@@ -64,51 +64,37 @@
         <ul class="navigation">
             
             <li>
-                <a href="/" category="home" title=""
-                
-                >
+                <a href="/" category="home" title="">
                     <span>home</span>
                 </a>
             </li>
             
             <li>
-                <a href="/students.html" category="students" title="students tooltip"
-                
-                >
+                <a href="/students.html" category="students" title="students tooltip">
                     <span>students</span>
                 </a>
             </li>
             
             <li>
-                <a href="/teaching.html" category="teaching" title="teaching tooltip"
-                
-                >
+                <a href="/teaching.html" category="teaching" title="teaching tooltip">
                     <span>teaching</span>
                 </a>
             </li>
             
             <li>
-                <a href="/publications.html" category="publications" title="publications tooltip"
-                
-                >
+                <a href="/publications.html" category="publications" title="publications tooltip">
                     <span>publications</span>
                 </a>
             </li>
             
             <li>
-                <a href="/activities.html" category="activities" title="activities tooltip"
-                
-                >
+                <a href="/activities.html" category="activities" title="activities tooltip">
                     <span>activities</span>
                 </a>
             </li>
             
             <li>
-                <a href="/posts/" category="" title=""
-                
-                    class="selected"
-                
-                >
+                <a href="/posts/" category="" title="" class="selected">
                     <span>posts</span>
                 </a>
             </li>
@@ -118,27 +104,27 @@
     <div class="menu-contact">
         
 
-        <a href="https://github.com/efredericks" target="_blank">
+        <a href="https://github.com/efredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-github"></i>
         </a>
         
 
-        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank">
+        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-toilet-paper"></i>
         </a>
         
 
-        <a href="https://youtube.com/@erikfredericks" target="_blank">
+        <a href="https://youtube.com/@erikfredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-youtube-play"></i>
         </a>
         
 
-        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank">
+        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-twitch"></i>
         </a>
         
 
-        <a href="https://twitter.com/erik_fredericks" target="_blank">
+        <a href="https://twitter.com/erik_fredericks" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-twitter"></i>
         </a>
         
@@ -159,22 +145,22 @@
             
         </header>
         <div class="post-content">
-            <hr size="1" />
+            <hr size="1">
 
 <ul>
   <li>
-    <p><a href="https://www.reddit.com/r/roguelikedev/comments/14wuzqa/roguelikedev_does_the_complete_roguelike_tutorial/jrkdlgr/" target="_blank">Week 2 post</a></p>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/14wuzqa/roguelikedev_does_the_complete_roguelike_tutorial/jrkdlgr/" target="_blank" rel="noopener noreferrer">Week 2 post</a></p>
   </li>
   <li>
-    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank">Project repo</a></p>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank" rel="noopener noreferrer">Project repo</a></p>
   </li>
 </ul>
 
-<hr size="1" />
+<hr size="1">
 
 <p>This week I wanted to start by turning my “simple” entities into proper objects.  Previously anything that moved was simply a row/column position dictionary.  Nice for prototyping, bad for anything else.</p>
 
-<p>Somewhat following a mishmash of multiple tutorials I created a base <code class="language-plaintext highlighter-rouge">Entity</code> class and a child <code class="language-plaintext highlighter-rouge">MoveableEntity</code> class, where <code class="language-plaintext highlighter-rouge">Entity</code> is intended to not move (e.g., items).  Every object also now gets a unique identifier so that I can track them, care of the <a href="https://docs.python.org/3/library/uuid.html" target="_blank"><code class="language-plaintext highlighter-rouge">uuid</code> Python class</a>.</p>
+<p>Somewhat following a mishmash of multiple tutorials I created a base <code class="language-plaintext highlighter-rouge">Entity</code> class and a child <code class="language-plaintext highlighter-rouge">MoveableEntity</code> class, where <code class="language-plaintext highlighter-rouge">Entity</code> is intended to not move (e.g., items).  Every object also now gets a unique identifier so that I can track them, care of the <a href="https://docs.python.org/3/library/uuid.html" target="_blank" rel="noopener noreferrer"><code class="language-plaintext highlighter-rouge">uuid</code> Python class</a>.</p>
 
 <p>I may end up needing to refactor as I’m not truly following the tutorial and just using it as an excuse to work on yet another roguelike, however here is where we’re at:</p>
 
@@ -229,21 +215,21 @@ class MoveableEntity(Entity):
 
 <p>So now, I can instantiate everything as an <code class="language-plaintext highlighter-rouge">Entity</code> or <code class="language-plaintext highlighter-rouge">MoveableEntity</code>, neat.</p>
 
-<hr />
+<hr>
 
 <p>Next up is to add in items to be scattered around for the player to pick up.  Here I used my new objects and created a new list focused around items - in this case apples.  Right now they serve no purpose other than to be picked up and added to the player’s inventory, however it works quite nicely.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/YXJFeSn.gif" alt="picking up apples" title="picking up apples" />
+  <img src="https://i.imgur.com/YXJFeSn.gif" alt="picking up apples" title="picking up apples">
 </div>
 
 <p>With some additional socket work (i.e., also sending the items array as well as the player inventories) this behavior also works nicely with multiple players.  Not too hard as the logic is pretty much the same as enemy updates and was mostly copy and paste.</p>
 
-<hr />
+<hr>
 
 <p>This leads me to one future point that I should address.  Right now all of my <em>things</em> in the game are separate in that I have a dictionary of players (keyed on the session ID provided by Flask), a list of enemies, and a list of items.  It <em>works</em>, however it really isn’t to my liking for efficiency.  At some point in the near future I’ll merge this into a single Entities object (or perhaps delineate Entities and MoveableEntities) and try to capture the logic into a bastardized Entity-Component pattern.</p>
 
-<hr />
+<hr>
 
 <p>Last update for the week - laying the groundwork for multiple levels/floors/instances/etc.  A new attribute was added to the position of all <code class="language-plaintext highlighter-rouge">Entity</code> objects: <code class="language-plaintext highlighter-rouge">level</code>.</p>
 
@@ -266,11 +252,11 @@ class MoveableEntity(Entity):
     return MoveableEntity("snek", self.getRandomPos(level=2), str(uuid.uuid4()))
 </code></pre></div></div>
 
-<hr />
+<hr>
 
 <p>That’s it for now - next week I’m hoping to add a camera system and/or a proper procedural content generation algorithm for the dungeon.  Or focus on a user interface so I don’t need to keep calling <code class="language-plaintext highlighter-rouge">console.log</code> any time I want to see data 🙄.</p>
 
-<hr />
+<hr>
 
 <p><a href="/rldev-1.html">Last post</a></p>
 

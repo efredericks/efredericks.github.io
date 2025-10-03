@@ -1,0 +1,179 @@
+---
+layout: post
+title: Computing Club Tutorial - Entity Component System (ECS)
+description: tutorial on ECS in p5js
+# image: assets/img/z-is-for-zero.png
+# responsiveImage:
+#   - src: assets/img/300.png
+#     size: 300
+#   - src: assets/img/600.png
+#     size: 600
+#   - src: assets/img/z-is-for-zero.png
+#     size: 900
+type: blog
+# play:
+#     - name: YouTube
+#       url: https://www.youtube.com/
+#     - name: SoundCloud
+#       url: https://soundcloud.com/
+# buy:
+#   - url: https://backfromvoid.bandcamp.com/track/if-i-want-you-to
+#     name: BandCamp
+# embed_player:
+#   type: bandcamp
+#   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
+carousels:
+  - images: # random
+    - image: /assets/img/GenerativeGI/random/img-6.png
+    - image: /assets/img/GenerativeGI/random/img-22.png
+    - image: /assets/img/GenerativeGI/random/img-46.png
+    - image: /assets/img/GenerativeGI/random/img-62.png
+    - image: /assets/img/GenerativeGI/random/img-64.png
+    - image: /assets/img/GenerativeGI/random/img-67.png
+    - image: /assets/img/GenerativeGI/random/img-71.png
+    - image: /assets/img/GenerativeGI/random/img-94.png
+    - image: /assets/img/GenerativeGI/random/img-94-1.png
+    - image: /assets/img/GenerativeGI/random/img-98.png
+  - images: # single no clear
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10047.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10050.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10051.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10057.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10063.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10066.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10080.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10095.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10097.png
+    - image: /assets/img/GenerativeGI/no-clear-single/img-10099.png
+  - images: # single clear
+    - image: /assets/img/GenerativeGI/clear-single/img-10045.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10048.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10059.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10059-1.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10068.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10074.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10076.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10087.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10087-1.png
+    - image: /assets/img/GenerativeGI/clear-single/img-10093.png
+  - images:  # lexicase no clear
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10019.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10058.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10062.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10068.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10078.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10084.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10088.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10090.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10092.png
+    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10099.png
+  - images:  # lexicase clear
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10056.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10073.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10085.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10088.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10092.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10095.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10096-1.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10096.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10099-1.png
+    - image: /assets/img/GenerativeGI/clear-lexicase/img-10099.png
+---
+
+<hr size="1" />
+
+- [functioning p5js sketch](tbd)
+
+<hr size="1" />
+
+# Tutorial overview
+
+We're going to be creating a 2D, tile-based game using p5js.  
+
+## What is ECS?
+
+The Entity-Component-System (ECS) design pattern is a lovely pattern for managing a lot of disparate types of things in your game.  Specifically, you might want to define characters that move, characters that don't move, items, items that hurt you, items that talk to you, NPCs, enemies of varying type, etc.
+
+The nice thing is that those all typically derive from the same base class.  They all need a position and a sprite, for example.  Essentially, we'll define an `Entity` class and inherit from that for all our varying types.
+
+We may also want to give them different abilities/characteristics.  Enter *components* -- the tl;dr is that you will "equip" an entity with a certain component, and that entity will then check its list of components for its abilities.
+
+This is a fairly reductive take on ECS and you can read about it in-depth on [Wikipedia](https://en.wikipedia.org/wiki/Entity_component_system) and [dev.to](https://dev.to/kspeakman/entity-component-system-an-old-new-thing-3224) and [this blog](https://www.richardlord.net/blog/ecs/why-use-an-entity-framework.html).
+
+
+## A note on resources
+
+Until you're ready to hire an artist, use royalty/copyright-free resources.  There are a **lot** available online, from [itch.io](https://itch.io/search?q=assets) to [opengameart](https://opengameart.org/) to (my favorite) [kenney.nl](https://kenney.nl).
+
+Whatever you do though:
+
+1. Avoid using copyrighted images (unless if you paid for it)
+2. Include the license **every time** you use a resource, and check the attribution requirements for the original file
+3. Avoid using AI-generated artwork - hire an artist
+
+## Setup
+
+1. Create an account on the p5js editor: [https://editor.p5js.org](p5js online editor)
+2. Grab a spritesheet from [kenney.nl](https://kenney.nl): I'll be using the [microrogue resource](https://kenney.nl/assets/micro-roguelike). Make sure you include the License when you upload!
+
+  <!-- {% include carousel.html height="50" unit="%" duration="15" number="1" %} -->
+
+
+## First steps
+
+1. Create a new project (directory structure)
+
+2. Upload your asset files
+
+3. Wire everything up
+
+4. Use p5js 2.0.x
+
+5. Draw your character to the screen
+
+6. Move them around
+
+## Entities (step 2)
+
+create a base entity class with empty functions (use vector instead of x,y)
+create a moveable entity class
+show update/draw
+create a player and enemy class
+create the array and add the player and enemies
+create dvd and follower
+
+## Components (step 3)
+
+remove custom entities for AI and replace with components
+
+## Handling a map (manually)
+
+generate a map
+
+## Camera follow
+
+.. tbd
+
+## Final steps?
+
+Performance optimization - record and see waht's going on
+
+## Next steps
+
+This is a taste of what you can do.  A few things:
+
+* p5js is canonically *slow* for JavaScript games as it makes some choices in terms of rendering performance.  It is for teaching and not necessarily production games.  Manually draw to the `canvas` with straight JavaScript or use a framework like [PhaserJS](https://phaser.io) to optimize your game.
+  * Check the Performance tab in your browser to profile!  Also, [p5 optimization suggestions](https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#identifying-slow-code-profiling)
+
+* Add gameplay!  We've essentially created a 2D walking simulator.
+
+* Wire in Tiled maps!  I've not tried it, but a lot of 2D games use the [Tiled Editor](https://www.mapeditor.org/) for setting up maps, obstacles, etc. [p5.tiledmap](https://github.com/linux-man/p5.tiledmap)
+
+* Check out the other [p5js libraries](https://p5js.org/libraries/)! There are a **ton** of things you can do with it!
+  * There is an [ECS library](https://github.com/RandomGamingDev/BasicECSJs/) as well that I've never tried, but it also includes a Scene Manager, which is nice (alternatively, just use a state machine to manage that yourself).
+
+* Make a roguelike game in Godot!  The [SelinaDev tutorial](https://selinadev.github.io/) is a nice introduction to Godot (and more imporantly for this, ECS).
+
+
+camera + sprites
+https://editor.p5js.org/efredericks/sketches/wErqg4bAf

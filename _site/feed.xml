@@ -1,4 +1,821 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-09-22T12:41:50-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">GenerativeGI - Project Writeup</title><link href="http://localhost:4000/generativegi.html" rel="alternate" type="text/html" title="GenerativeGI - Project Writeup" /><published>2023-09-20T00:00:00-04:00</published><updated>2023-09-20T00:00:00-04:00</updated><id>http://localhost:4000/generativegi</id><content type="html" xml:base="http://localhost:4000/generativegi.html"><![CDATA[<hr size="1" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-03T16:28:29-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr size="1" />
+
+<ul>
+  <li><a href="tbd">functioning p5js sketch</a></li>
+</ul>
+
+<hr size="1" />
+
+<h1 id="tutorial-overview">Tutorial overview</h1>
+
+<p>We’re going to be creating a 2D, tile-based game using p5js.</p>
+
+<h2 id="what-is-ecs">What is ECS?</h2>
+
+<p>The Entity-Component-System (ECS) design pattern is a lovely pattern for managing a lot of disparate types of things in your game.  Specifically, you might want to define characters that move, characters that don’t move, items, items that hurt you, items that talk to you, NPCs, enemies of varying type, etc.</p>
+
+<p>The nice thing is that those all typically derive from the same base class.  They all need a position and a sprite, for example.  Essentially, we’ll define an <code class="language-plaintext highlighter-rouge">Entity</code> class and inherit from that for all our varying types.</p>
+
+<p>We may also want to give them different abilities/characteristics.  Enter <em>components</em> – the tl;dr is that you will “equip” an entity with a certain component, and that entity will then check its list of components for its abilities.</p>
+
+<p>This is a fairly reductive take on ECS and you can read about it in-depth on <a href="https://en.wikipedia.org/wiki/Entity_component_system">Wikipedia</a> and <a href="https://dev.to/kspeakman/entity-component-system-an-old-new-thing-3224">dev.to</a> and <a href="https://www.richardlord.net/blog/ecs/why-use-an-entity-framework.html">this blog</a>.</p>
+
+<h2 id="a-note-on-resources">A note on resources</h2>
+
+<p>Until you’re ready to hire an artist, use royalty/copyright-free resources.  There are a <strong>lot</strong> available online, from <a href="https://itch.io/search?q=assets">itch.io</a> to <a href="https://opengameart.org/">opengameart</a> to (my favorite) <a href="https://kenney.nl">kenney.nl</a>.</p>
+
+<p>Whatever you do though:</p>
+
+<ol>
+  <li>Avoid using copyrighted images (unless if you paid for it)</li>
+  <li>Include the license <strong>every time</strong> you use a resource, and check the attribution requirements for the original file</li>
+  <li>Avoid using AI-generated artwork - hire an artist</li>
+</ol>
+
+<h2 id="setup">Setup</h2>
+
+<ol>
+  <li>Create an account on the p5js editor: <a href="p5js online editor">https://editor.p5js.org</a></li>
+  <li>Grab a spritesheet from <a href="https://kenney.nl">kenney.nl</a>: I’ll be using the <a href="https://kenney.nl/assets/micro-roguelike">microrogue resource</a>. Make sure you include the License when you upload!</li>
+</ol>
+
+<p>&lt;!–</p>
+
+<div class="carousel__holder">
+    <div id="carousel0" class="carousel">
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0a" checked="checked" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0b" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0c" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0d" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0e" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0f" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0g" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0h" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0i" />
+        
+          <input class="carousel__activator" type="radio" name="carousel0" id="0j" />
+        
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0j"></label>
+              <label class="carousel__control carousel__control--forward" for="0b"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0a"></label>
+              <label class="carousel__control carousel__control--forward" for="0c"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0b"></label>
+              <label class="carousel__control carousel__control--forward" for="0d"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0c"></label>
+              <label class="carousel__control carousel__control--forward" for="0e"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0d"></label>
+              <label class="carousel__control carousel__control--forward" for="0f"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0e"></label>
+              <label class="carousel__control carousel__control--forward" for="0g"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0f"></label>
+              <label class="carousel__control carousel__control--forward" for="0h"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0g"></label>
+              <label class="carousel__control carousel__control--forward" for="0i"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0h"></label>
+              <label class="carousel__control carousel__control--forward" for="0j"></label>
+          </div>
+        
+          
+          
+          
+          
+          <div class="carousel__controls">
+              <label class="carousel__control carousel__control--backward" for="0i"></label>
+              <label class="carousel__control carousel__control--forward" for="0a"></label>
+          </div>
+        
+        <div class="carousel__track">
+          <ul>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-6.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-6.png ">
+                <img src="/assets/img/GenerativeGI/random/img-6.png" title="/assets/img/GenerativeGI/random/img-6.png" alt="/assets/img/GenerativeGI/random/img-6.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-22.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-22.png ">
+                <img src="/assets/img/GenerativeGI/random/img-22.png" title="/assets/img/GenerativeGI/random/img-22.png" alt="/assets/img/GenerativeGI/random/img-22.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-46.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-46.png ">
+                <img src="/assets/img/GenerativeGI/random/img-46.png" title="/assets/img/GenerativeGI/random/img-46.png" alt="/assets/img/GenerativeGI/random/img-46.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-62.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-62.png ">
+                <img src="/assets/img/GenerativeGI/random/img-62.png" title="/assets/img/GenerativeGI/random/img-62.png" alt="/assets/img/GenerativeGI/random/img-62.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-64.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-64.png ">
+                <img src="/assets/img/GenerativeGI/random/img-64.png" title="/assets/img/GenerativeGI/random/img-64.png" alt="/assets/img/GenerativeGI/random/img-64.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-67.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-67.png ">
+                <img src="/assets/img/GenerativeGI/random/img-67.png" title="/assets/img/GenerativeGI/random/img-67.png" alt="/assets/img/GenerativeGI/random/img-67.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-71.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-71.png ">
+                <img src="/assets/img/GenerativeGI/random/img-71.png" title="/assets/img/GenerativeGI/random/img-71.png" alt="/assets/img/GenerativeGI/random/img-71.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-94.png ">
+                <img src="/assets/img/GenerativeGI/random/img-94.png" title="/assets/img/GenerativeGI/random/img-94.png" alt="/assets/img/GenerativeGI/random/img-94.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94-1.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-94-1.png ">
+                <img src="/assets/img/GenerativeGI/random/img-94-1.png" title="/assets/img/GenerativeGI/random/img-94-1.png" alt="/assets/img/GenerativeGI/random/img-94-1.png" />
+              </a>
+            </li>
+            
+            <li class="carousel__slide">
+              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-98.png');"> -->
+              <a href=" /assets/img/GenerativeGI/random/img-98.png ">
+                <img src="/assets/img/GenerativeGI/random/img-98.png" title="/assets/img/GenerativeGI/random/img-98.png" alt="/assets/img/GenerativeGI/random/img-98.png" />
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="carousel__indicators">
+            
+              <label class="carousel__indicator" for="0a"></label>
+            
+              <label class="carousel__indicator" for="0b"></label>
+            
+              <label class="carousel__indicator" for="0c"></label>
+            
+              <label class="carousel__indicator" for="0d"></label>
+            
+              <label class="carousel__indicator" for="0e"></label>
+            
+              <label class="carousel__indicator" for="0f"></label>
+            
+              <label class="carousel__indicator" for="0g"></label>
+            
+              <label class="carousel__indicator" for="0h"></label>
+            
+              <label class="carousel__indicator" for="0i"></label>
+            
+              <label class="carousel__indicator" for="0j"></label>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+.carousel__holder {width: 100%; position: relative; padding-bottom: 50%; margin: 1rem 0 1rem;}
+.carousel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  position: absolute;
+  padding: 0;
+}
+.carousel__controls,
+.carousel__activator {
+  display: none;
+}
+
+.carousel__activator:nth-of-type(1):checked ~ .carousel__track {
+  -webkit-transform: translateX(-000%);
+          transform: translateX(-000%);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__slide:nth-of-type(1) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__controls:nth-of-type(1) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(1):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(2):checked ~ .carousel__track {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__slide:nth-of-type(2) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__controls:nth-of-type(2) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(2):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(3):checked ~ .carousel__track {
+  -webkit-transform: translateX(-200%);
+          transform: translateX(-200%);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__slide:nth-of-type(3) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__controls:nth-of-type(3) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(3):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(4):checked ~ .carousel__track {
+  -webkit-transform: translateX(-300%);
+          transform: translateX(-300%);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__slide:nth-of-type(4) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__controls:nth-of-type(4) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(4):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(5):checked ~ .carousel__track {
+  -webkit-transform: translateX(-400%);
+          transform: translateX(-400%);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__slide:nth-of-type(5) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__controls:nth-of-type(5) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(5):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(6):checked ~ .carousel__track {
+  -webkit-transform: translateX(-500%);
+          transform: translateX(-500%);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__slide:nth-of-type(6) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__controls:nth-of-type(6) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(6):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(7):checked ~ .carousel__track {
+  -webkit-transform: translateX(-600%);
+          transform: translateX(-600%);
+}
+.carousel__activator:nth-of-type(7):checked ~ .carousel__slide:nth-of-type(7) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(7):checked ~ .carousel__controls:nth-of-type(7) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(7):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(7) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(8):checked ~ .carousel__track {
+  -webkit-transform: translateX(-700%);
+          transform: translateX(-700%);
+}
+.carousel__activator:nth-of-type(8):checked ~ .carousel__slide:nth-of-type(8) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(8):checked ~ .carousel__controls:nth-of-type(8) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(8):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(8) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(9):checked ~ .carousel__track {
+  -webkit-transform: translateX(-800%);
+          transform: translateX(-800%);
+}
+.carousel__activator:nth-of-type(9):checked ~ .carousel__slide:nth-of-type(9) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(9):checked ~ .carousel__controls:nth-of-type(9) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(9):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(9) {
+  opacity: 1;
+}
+
+.carousel__activator:nth-of-type(10):checked ~ .carousel__track {
+  -webkit-transform: translateX(-900%);
+          transform: translateX(-900%);
+}
+.carousel__activator:nth-of-type(10):checked ~ .carousel__slide:nth-of-type(10) {
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.carousel__activator:nth-of-type(10):checked ~ .carousel__controls:nth-of-type(10) {
+  display: block;
+  opacity: 1;
+}
+.carousel__activator:nth-of-type(10):checked ~ .carousel__indicators .carousel__indicator:nth-of-type(10) {
+  opacity: 1;
+}
+
+
+.carousel__control {
+  height: 30px;
+  width: 30px;
+  margin-top: -15px;
+  top: 50%;
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  border-width: 5px 5px 0 0;
+  border-style: solid;
+  border-color: #fafafa;
+  opacity: 0.35;
+  opacity: 1;
+  outline: 0;
+  z-index: 3;
+}
+.carousel__control:hover {
+  opacity: 1;
+}
+.carousel__control--backward {
+  left: 20px;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
+.carousel__control--forward {
+  right: 20px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.carousel__indicators {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+.carousel__indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  display: inline-block;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.35;
+  margin: 0 2.5px 0 2.5px;
+}
+.carousel__indicator:hover {
+  opacity: 0.75;
+}
+.carousel__track {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  transition: -webkit-transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s;
+  transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+}
+.carousel__track .carousel__slide {
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.carousel__track .carousel__slide:nth-of-type(1) {
+  -webkit-transform: translateX(000%);
+          transform: translateX(000%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(2) {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(3) {
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(4) {
+  -webkit-transform: translateX(300%);
+          transform: translateX(300%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(5) {
+  -webkit-transform: translateX(400%);
+          transform: translateX(400%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(6) {
+  -webkit-transform: translateX(500%);
+          transform: translateX(500%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(7) {
+  -webkit-transform: translateX(600%);
+          transform: translateX(600%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(8) {
+  -webkit-transform: translateX(700%);
+          transform: translateX(700%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(9) {
+  -webkit-transform: translateX(800%);
+          transform: translateX(800%);
+}
+
+.carousel__track .carousel__slide:nth-of-type(10) {
+  -webkit-transform: translateX(900%);
+          transform: translateX(900%);
+}
+
+
+.carousel--scale .carousel__slide {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.carousel__slide {
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+}
+.carousel__slide .overlay {height: 100%;}
+.carousel--thumb .carousel__indicator {
+  height: 30px;
+  width: 30px;
+}
+.carousel__indicator {
+  background-color: #fafafa;
+}
+
+.carousel__slide:nth-of-type(1),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(2),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(3),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(4),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(5),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(6),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(6) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(7),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(7) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(8),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(8) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(9),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(9) {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel__slide:nth-of-type(10),
+.carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(10) {
+  background-size: cover;
+  background-position: center;
+}
+
+</style>
+
+<script>
+  function isVisible(el) {
+        while (el) {
+            if (el === document) {
+                return true;
+            }
+
+            var $style = window.getComputedStyle(el, null);
+
+            if (!el) {
+                return false;
+            } else if (!$style) {
+                return false;
+            } else if ($style.display === 'none') {
+                return false;
+            } else if ($style.visibility === 'hidden') {
+                return false;
+            } else if (+$style.opacity === 0) {
+                return false;
+            } else if (($style.display === 'block' || $style.display === 'inline-block') &&
+                $style.height === '0px' && $style.overflow === 'hidden') {
+                return false;
+            } else {
+                return $style.position === 'fixed' || isVisible(el.parentNode);
+            }
+        }
+  }
+  
+  setInterval(function(){
+    var j=0;
+    var elements = document.querySelectorAll('#carousel0 .carousel__control--forward');
+    for(i=(elements.length - 1);i>-1;i--) {
+      if(isVisible(elements[i])) j=i;
+    }
+    elements[j].click();
+  },15000);
+  
+</script>
+<p>–&gt;</p>
+
+<h2 id="first-steps">First steps</h2>
+
+<ol>
+  <li>
+    <p>Create a new project (directory structure)</p>
+  </li>
+  <li>
+    <p>Upload your asset files</p>
+  </li>
+  <li>
+    <p>Wire everything up</p>
+  </li>
+  <li>
+    <p>Use p5js 2.0.x</p>
+  </li>
+  <li>
+    <p>Draw your character to the screen</p>
+  </li>
+  <li>
+    <p>Move them around</p>
+  </li>
+</ol>
+
+<h2 id="entities-step-2">Entities (step 2)</h2>
+
+<p>create a base entity class with empty functions (use vector instead of x,y)
+create a moveable entity class
+show update/draw
+create a player and enemy class
+create the array and add the player and enemies
+create dvd and follower</p>
+
+<h2 id="components-step-3">Components (step 3)</h2>
+
+<p>remove custom entities for AI and replace with components</p>
+
+<h2 id="handling-a-map-manually">Handling a map (manually)</h2>
+
+<p>generate a map</p>
+
+<h2 id="camera-follow">Camera follow</h2>
+
+<p>.. tbd</p>
+
+<h2 id="final-steps">Final steps?</h2>
+
+<p>Performance optimization - record and see waht’s going on</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>This is a taste of what you can do.  A few things:</p>
+
+<ul>
+  <li>p5js is canonically <em>slow</em> for JavaScript games as it makes some choices in terms of rendering performance.  It is for teaching and not necessarily production games.  Manually draw to the <code class="language-plaintext highlighter-rouge">canvas</code> with straight JavaScript or use a framework like <a href="https://phaser.io">PhaserJS</a> to optimize your game.
+    <ul>
+      <li>Check the Performance tab in your browser to profile!  Also, <a href="https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#identifying-slow-code-profiling">p5 optimization suggestions</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>Add gameplay!  We’ve essentially created a 2D walking simulator.</p>
+  </li>
+  <li>
+    <p>Wire in Tiled maps!  I’ve not tried it, but a lot of 2D games use the <a href="https://www.mapeditor.org/">Tiled Editor</a> for setting up maps, obstacles, etc. <a href="https://github.com/linux-man/p5.tiledmap">p5.tiledmap</a></p>
+  </li>
+  <li>Check out the other <a href="https://p5js.org/libraries/">p5js libraries</a>! There are a <strong>ton</strong> of things you can do with it!
+    <ul>
+      <li>There is an <a href="https://github.com/RandomGamingDev/BasicECSJs/">ECS library</a> as well that I’ve never tried, but it also includes a Scene Manager, which is nice (alternatively, just use a state machine to manage that yourself).</li>
+    </ul>
+  </li>
+  <li>Make a roguelike game in Godot!  The <a href="https://selinadev.github.io/">SelinaDev tutorial</a> is a nice introduction to Godot (and more imporantly for this, ECS).</li>
+</ul>
+
+<p>camera + sprites
+https://editor.p5js.org/efredericks/sketches/wErqg4bAf</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[tutorial on ECS in p5js]]></summary></entry><entry><title type="html">GenerativeGI - Project Writeup</title><link href="http://localhost:4000/generativegi.html" rel="alternate" type="text/html" title="GenerativeGI - Project Writeup" /><published>2023-09-20T00:00:00-04:00</published><updated>2023-09-20T00:00:00-04:00</updated><id>http://localhost:4000/generativegi</id><content type="html" xml:base="http://localhost:4000/generativegi.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -4445,13 +5262,6 @@ class MoveableEntity(Entity):
 <hr />
 
 <p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>http://localhost:4000/yyy-example%20copy</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
-<ol>
-  <li>Y</li>
-  <li>Yy</li>
-  <li>YyY</li>
-  <li>YyYy</li>
-  <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-10-25T00:00:00-04:00</published><updated>2019-10-25T00:00:00-04:00</updated><id>http://localhost:4000/yyy-example</id><content type="html" xml:base="http://localhost:4000/yyy-example.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>

@@ -52,7 +52,7 @@
     <aside class="menu">
     <div class="menu-top">
         <div class="menu-top_logo">
-            <a href="/" >
+            <a href="/">
                 <img src="/assets/img/Fredericks-Small.jpg" alt="Logo" onerror="this.style.display='none'">
             </a>
         </div>
@@ -64,51 +64,37 @@
         <ul class="navigation">
             
             <li>
-                <a href="/" category="home" title=""
-                
-                >
+                <a href="/" category="home" title="">
                     <span>home</span>
                 </a>
             </li>
             
             <li>
-                <a href="/students.html" category="students" title="students tooltip"
-                
-                >
+                <a href="/students.html" category="students" title="students tooltip">
                     <span>students</span>
                 </a>
             </li>
             
             <li>
-                <a href="/teaching.html" category="teaching" title="teaching tooltip"
-                
-                >
+                <a href="/teaching.html" category="teaching" title="teaching tooltip">
                     <span>teaching</span>
                 </a>
             </li>
             
             <li>
-                <a href="/publications.html" category="publications" title="publications tooltip"
-                
-                >
+                <a href="/publications.html" category="publications" title="publications tooltip">
                     <span>publications</span>
                 </a>
             </li>
             
             <li>
-                <a href="/activities.html" category="activities" title="activities tooltip"
-                
-                >
+                <a href="/activities.html" category="activities" title="activities tooltip">
                     <span>activities</span>
                 </a>
             </li>
             
             <li>
-                <a href="/posts/" category="" title=""
-                
-                    class="selected"
-                
-                >
+                <a href="/posts/" category="" title="" class="selected">
                     <span>posts</span>
                 </a>
             </li>
@@ -118,27 +104,27 @@
     <div class="menu-contact">
         
 
-        <a href="https://github.com/efredericks" target="_blank">
+        <a href="https://github.com/efredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-github"></i>
         </a>
         
 
-        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank">
+        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-toilet-paper"></i>
         </a>
         
 
-        <a href="https://youtube.com/@erikfredericks" target="_blank">
+        <a href="https://youtube.com/@erikfredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-youtube-play"></i>
         </a>
         
 
-        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank">
+        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-twitch"></i>
         </a>
         
 
-        <a href="https://twitter.com/erik_fredericks" target="_blank">
+        <a href="https://twitter.com/erik_fredericks" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-twitter"></i>
         </a>
         
@@ -159,18 +145,18 @@
             
         </header>
         <div class="post-content">
-            <hr size="1" />
+            <hr size="1">
 
 <ul>
   <li>
-    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15lnxy2/roguelikedev_does_the_complete_roguelike_tutorial/jvfnwkh/" target="_blank">Week 6 post</a></p>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15lnxy2/roguelikedev_does_the_complete_roguelike_tutorial/jvfnwkh/" target="_blank" rel="noopener noreferrer">Week 6 post</a></p>
   </li>
   <li>
-    <p><a href="https://github.com/efredericks/RL-MMO" target="\_blank">Project repo</a></p>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank" rel="noopener noreferrer">Project repo</a></p>
   </li>
 </ul>
 
-<hr size="1" />
+<hr size="1">
 
 <p>This week involved a bit of navel gazing - what do I want this game to eventually be? What is fun and what is not?</p>
 
@@ -178,7 +164,7 @@
 
 <p>Also some bugfixing and basic animation. Lets start there, shall we?</p>
 
-<hr />
+<hr>
 
 <h2 id="animation">Animation</h2>
 
@@ -186,7 +172,7 @@
 
 <p>It wasn’t really.</p>
 
-<p>I always go back to the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="\_blank">Broughlike tutorial</a> for JS roguelikes.  It involves adding an <code class="language-plaintext highlighter-rouge">offset</code> attribute for the x/y coordinates and nicely degrading it as we animate in. I was able to do something similar.</p>
+<p>I always go back to the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="_blank" rel="noopener noreferrer">Broughlike tutorial</a> for JS roguelikes.  It involves adding an <code class="language-plaintext highlighter-rouge">offset</code> attribute for the x/y coordinates and nicely degrading it as we animate in. I was able to do something similar.</p>
 
 <p>Each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> gets an <code class="language-plaintext highlighter-rouge">offsetX</code>/<code class="language-plaintext highlighter-rouge">offsetY</code> attribute on instantiation.</p>
 
@@ -203,7 +189,7 @@ player.offsetY -= Math.sign(player.offsetY) * (1/8);
 
 <p><code class="language-plaintext highlighter-rouge">offsetX</code> and <code class="language-plaintext highlighter-rouge">offsetY</code> get set whenever the player presses a movement key. The nice thing here is that if the movement is invalid (wall, enemy, deep water, etc.) then the player’s position will revert back. The offset will give a mild stutter and look like the player is bumping into something.</p>
 
-<p><img src="https://i.imgur.com/ZtI90n8.gif" alt="player animation" /></p>
+<p><img src="https://i.imgur.com/ZtI90n8.gif" alt="player animation"></p>
 
 <p>(Right now enemies don’t make use of this field, but it is there for future updates).</p>
 
@@ -231,7 +217,7 @@ for e in self.enemies:
 
 <p>Easy enough. Also highly abusable in a production environment, but we’ll save that for when it is time to balance this monstrosity.</p>
 
-<hr />
+<hr>
 
 <h2 id="gameplay">Gameplay</h2>
 
@@ -240,26 +226,26 @@ for e in self.enemies:
 <p>Let’s start with bumping the number of rows/columns to 2500 each. This image became necessary in the canvas as it takes longer to receive the whole map now:</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/HJqJ3ax.png" alt="loader" title="loader" />
+  <img src="https://i.imgur.com/HJqJ3ax.png" alt="loader" title="loader">
 </div>
 
 <p>I also started adding in a cellular automata for cave generation, but didn’t <em>quite</em> get it done in time for this post.  There are a significant amount of tweaks needed as well, but at least it is something!</p>
 
-<p>I based the implementation off of my favorite blog post for making CAs - they outline the algorithm quite nicely: <a href="https://abitawake.com/news/articles/procedural-generation-with-godot-creating-caves-with-cellular-automata" target="_blank">A Bit Awake - Cellular Automata</a>.</p>
+<p>I based the implementation off of my favorite blog post for making CAs - they outline the algorithm quite nicely: <a href="https://abitawake.com/news/articles/procedural-generation-with-godot-creating-caves-with-cellular-automata" target="_blank" rel="noopener noreferrer">A Bit Awake - Cellular Automata</a>.</p>
 
 <p>This was made while watching my kids playing outside so I gave 0 thought to tweaks and balance on all the parameters, but the skeleton is in place.</p>
 
 <div align="center">
-  <img src="https://imgur.com/iXYU6N6.png" alt="ca" title="ca" />
+  <img src="https://imgur.com/iXYU6N6.png" alt="ca" title="ca">
 </div>
 
 <p>As you can see here, the maps are very stringy.  I added a dev minimap to get a feel for what it looks like and clearly some optimizations need to be made.</p>
 
-<hr />
+<hr>
 
 <p>That’s it for this week - next week I’m thinking game balancing, items, and bugfixes.</p>
 
-<hr />
+<hr>
 
 <p><a href="/rldev-5.html">Last post</a></p>
 

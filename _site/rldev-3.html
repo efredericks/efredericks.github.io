@@ -52,7 +52,7 @@
     <aside class="menu">
     <div class="menu-top">
         <div class="menu-top_logo">
-            <a href="/" >
+            <a href="/">
                 <img src="/assets/img/Fredericks-Small.jpg" alt="Logo" onerror="this.style.display='none'">
             </a>
         </div>
@@ -64,51 +64,37 @@
         <ul class="navigation">
             
             <li>
-                <a href="/" category="home" title=""
-                
-                >
+                <a href="/" category="home" title="">
                     <span>home</span>
                 </a>
             </li>
             
             <li>
-                <a href="/students.html" category="students" title="students tooltip"
-                
-                >
+                <a href="/students.html" category="students" title="students tooltip">
                     <span>students</span>
                 </a>
             </li>
             
             <li>
-                <a href="/teaching.html" category="teaching" title="teaching tooltip"
-                
-                >
+                <a href="/teaching.html" category="teaching" title="teaching tooltip">
                     <span>teaching</span>
                 </a>
             </li>
             
             <li>
-                <a href="/publications.html" category="publications" title="publications tooltip"
-                
-                >
+                <a href="/publications.html" category="publications" title="publications tooltip">
                     <span>publications</span>
                 </a>
             </li>
             
             <li>
-                <a href="/activities.html" category="activities" title="activities tooltip"
-                
-                >
+                <a href="/activities.html" category="activities" title="activities tooltip">
                     <span>activities</span>
                 </a>
             </li>
             
             <li>
-                <a href="/posts/" category="" title=""
-                
-                    class="selected"
-                
-                >
+                <a href="/posts/" category="" title="" class="selected">
                     <span>posts</span>
                 </a>
             </li>
@@ -118,27 +104,27 @@
     <div class="menu-contact">
         
 
-        <a href="https://github.com/efredericks" target="_blank">
+        <a href="https://github.com/efredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-github"></i>
         </a>
         
 
-        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank">
+        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-toilet-paper"></i>
         </a>
         
 
-        <a href="https://youtube.com/@erikfredericks" target="_blank">
+        <a href="https://youtube.com/@erikfredericks" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-youtube-play"></i>
         </a>
         
 
-        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank">
+        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-twitch"></i>
         </a>
         
 
-        <a href="https://twitter.com/erik_fredericks" target="_blank">
+        <a href="https://twitter.com/erik_fredericks" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-twitter"></i>
         </a>
         
@@ -159,30 +145,30 @@
             
         </header>
         <div class="post-content">
-            <hr size="1" />
+            <hr size="1">
 
 <ul>
   <li>
-    <p><a href="https://www.reddit.com/r/roguelikedev/comments/152ns71/roguelikedev_does_the_complete_roguelike_tutorial/jsez1go/" target="_blank">Week 3 post</a></p>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/152ns71/roguelikedev_does_the_complete_roguelike_tutorial/jsez1go/" target="_blank" rel="noopener noreferrer">Week 3 post</a></p>
   </li>
   <li>
-    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank">Project repo</a></p>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank" rel="noopener noreferrer">Project repo</a></p>
   </li>
 </ul>
 
-<hr size="1" />
+<hr size="1">
 
 <p>This week was all about refinement and starting to prep things for procedural generation.  Also, this post is probably going to be fairly terse as there were a lot of little updates and I have some other deadlines not related to this.</p>
 
 <p>Here we go!</p>
 
-<hr />
+<hr>
 
-<p>First of all we have a bit of a user interface refinement.  First we have some relevant stats being reported in the game window sidebar (<code class="language-plaintext highlighter-rouge">console.log</code> was getting annoying), some animated CSS background trickery to spice things up, and a new font, <a href="https://fonts.google.com/specimen/Chivo+Mono" target="_blank">Chivo Mono, c/o Google</a>.</p>
+<p>First of all we have a bit of a user interface refinement.  First we have some relevant stats being reported in the game window sidebar (<code class="language-plaintext highlighter-rouge">console.log</code> was getting annoying), some animated CSS background trickery to spice things up, and a new font, <a href="https://fonts.google.com/specimen/Chivo+Mono" target="_blank" rel="noopener noreferrer">Chivo Mono, c/o Google</a>.</p>
 
 <p>For the animated background I just gave my main window a pair of drop shadows and animated their blurriness and placement.  Nothing too crazy, but hits that vaporwave aesthetic that is oh so pleasing.</p>
 
-<p><img src="https://i.imgur.com/W2Cz22N.png" alt="Screenshot" /></p>
+<p><img src="https://i.imgur.com/W2Cz22N.png" alt="Screenshot"></p>
 
 <p>Here is the relevant code if you’re interested (we’ll talk about that little checkbox in a bit):</p>
 
@@ -226,9 +212,9 @@
 
 <p>This is also a good reminder (to myself) that I need to download the font locally, as I was doing some testing in a place without WiFi and defaulting to <code class="language-plaintext highlighter-rouge">monospace</code> wasn’t nearly as nice to look at (for me).</p>
 
-<p>We also have a series of dots in the background that are fudged via some <code class="language-plaintext highlighter-rouge">linear-gradient</code> calls and are the result of me googling “animated CSS background.”  The only thing I changed here is the background color and the original was here: <a href="https://codepen.io/edmundojr/pen/xOYJGw" target="_blank">https://codepen.io/edmundojr/pen/xOYJGw</a>.</p>
+<p>We also have a series of dots in the background that are fudged via some <code class="language-plaintext highlighter-rouge">linear-gradient</code> calls and are the result of me googling “animated CSS background.”  The only thing I changed here is the background color and the original was here: <a href="https://codepen.io/edmundojr/pen/xOYJGw" target="_blank" rel="noopener noreferrer">https://codepen.io/edmundojr/pen/xOYJGw</a>.</p>
 
-<hr />
+<hr>
 
 <p>Next up we have … Z-levels! I mean dungeon depth.  Everything so far has been mainly proof of concept, adding the ability for the dungeon to have floors starts to make it a bit more real.</p>
 
@@ -242,9 +228,9 @@
 
 <p>Another thing I added was stairs, though right now the player’s placement is a bit random upon entering and leaving them - work for future me.</p>
 
-<hr />
+<hr>
 
-<p>After this I wanted to add a bit more non-tutorial bits to it, so we have some sounds!  I took a note out of the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="_blank">Broughlike tutorial</a> for managing them and found a nice <a href="https://filmcow.itch.io/filmcow-sfx" target="_blank">royalty free sound pack by the group that did Charlie the Unicorn</a>.</p>
+<p>After this I wanted to add a bit more non-tutorial bits to it, so we have some sounds!  I took a note out of the <a href="https://nluqo.github.io/broughlike-tutorial/stage7.html" target="_blank" rel="noopener noreferrer">Broughlike tutorial</a> for managing them and found a nice <a href="https://filmcow.itch.io/filmcow-sfx" target="_blank" rel="noopener noreferrer">royalty free sound pack by the group that did Charlie the Unicorn</a>.</p>
 
 <p>Now we have ambient sounds, sound effects upon all sorts of things, and whatnot.  Right now they’re mainly placeholders and absolutely zero sound normalization has been done, but I like it!</p>
 
@@ -277,7 +263,7 @@ playSound = (snd) =&gt; {
 
 <p>I also bulk-converted all the <code class="language-plaintext highlighter-rouge">wav</code> files to <code class="language-plaintext highlighter-rouge">ogg</code> in the thought that it would be better for file size.  I did 0 checks to make sure this was the case.</p>
 
-<hr />
+<hr>
 
 <p>Two more things, camera and drops!  First lets talk drops.  I updated my <code class="language-plaintext highlighter-rouge">Entity</code> system a bit to include the type(s) of items that can be dropped as well as how many. Right now all we have are apples so that’s all that can be dropped.  However this is setup in a nice little global loot table that I can balance later.</p>
 
@@ -317,27 +303,27 @@ playSound = (snd) =&gt; {
 
 <p>That’s not terribly exciting though and is really just object/state management.  What is fun is scrolling cameras!</p>
 
-<p><img src="https://i.imgur.com/TrwjCX1.gif" alt="Scrolling camera" /></p>
+<p><img src="https://i.imgur.com/TrwjCX1.gif" alt="Scrolling camera"></p>
 
 <p>This is always the bane of my existence because I always do this kind of thing by hand (note: Unity/Godot make this ridiculously easy).  However, I’ve done it enough times now that I can cheat by looking at old code and just transplant it.</p>
 
-<p>The basis is here: <a href="https://www.roguebasin.com/index.php/Scrolling_map" target="_blank">https://www.roguebasin.com/index.php/Scrolling_map</a></p>
+<p>The basis is here: <a href="https://www.roguebasin.com/index.php/Scrolling_map" target="_blank" rel="noopener noreferrer">https://www.roguebasin.com/index.php/Scrolling_map</a></p>
 
 <p>Essentially, we create a viewport around the player and only draw things within that viewport.  Note - this is lovely for performance optimization as you only need to manage visuals for things in view.  You do still need to update AI and whatnot for things off screen, but at least we don’t have to draw it all.</p>
 
 <p>The scrolling camera and larger map are what will be the requirement for my procedural generation as I like large worlds, however keeping it constrained for this use case will be a fun challenge.</p>
 
-<hr />
+<hr>
 
 <p>Last but not least, I started working on the README file so that I could remember how to do things in the future when I invariably run out of time.  The semester start is a month away and that means that it is nigh time for class prep to begin.  How to add enemies and items, etc.</p>
 
-<hr />
+<hr>
 
 <p>Next week I’m planning on adding proper procedural generation, so hoping to either make use of the <code class="language-plaintext highlighter-rouge">tcod</code> library for that or <code class="language-plaintext highlighter-rouge">opensimplex</code>.  Perhaps some drunken walking for caves, we shall see.</p>
 
 <p>Also a slew of bugs/issues to fix, including player placement from stairs.</p>
 
-<hr />
+<hr>
 
 <p><a href="/rldev-2.html">Last post</a></p>
 
