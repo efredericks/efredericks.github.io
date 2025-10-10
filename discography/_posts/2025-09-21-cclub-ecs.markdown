@@ -108,6 +108,8 @@ We may also want to give them different abilities/characteristics.  Enter *compo
 
 This is a fairly reductive take on ECS and you can read about it in-depth on [Wikipedia](https://en.wikipedia.org/wiki/Entity_component_system) and [dev.to](https://dev.to/kspeakman/entity-component-system-an-old-new-thing-3224) and [this blog](https://www.richardlord.net/blog/ecs/why-use-an-entity-framework.html).
 
+There also is an ECS framework available as well: [FLECS](https://www.flecs.dev/flecs/) and a correlated [FAQ](https://github.com/SanderMertens/ecs-faq).
+
 ## A note on resources
 
 Until you're ready to hire an artist, use royalty/copyright-free resources.  There are a **lot** available online, from [itch.io](https://itch.io/search?q=assets) to [opengameart](https://opengameart.org/) to (my favorite) [kenney.nl](https://kenney.nl).
@@ -155,7 +157,7 @@ Note - if you want to upload to a folder then you need to hover over it and clic
 
 In your `index.html` file, add the following lines *above* the call to include `sketch.js`:
 
-```
+```javascript
 <script src="components.js"></script>
 <script src="entities.js"></script>
 <script src="sketch.js"></script>
@@ -171,7 +173,7 @@ Let's start you off with the latest version of p5js - click the version number (
 
 At the top of your `sketch.js` file (in global space), add a variable:
 
-```
+```javascript
 let spritesheet;
 
 ...
@@ -182,7 +184,7 @@ function setup() {
 
 And then modify your `setup` and `draw` functions to look like this:
 
-```
+```javascript
 async function setup() {
   // load in sprite sheet - change the filename to match your file
   await loadImage("assets/spritesheet.png"); 
@@ -203,7 +205,7 @@ You should now see your spritesheet being drawn to the top left corner!  Note th
 
 In the global space create an object for a character - eventually we'll replace it with a class, however for now it'll just keep an eye on the location:
 
-```
+```javascript
 let spritesheet;
 let player;
 
@@ -234,17 +236,17 @@ Note - if you're using a different spritesheet, check the documentation inside f
 
 At the top of `sketch.js` add the following (using your sprite size):
 
-```
-const SPRITE_SIZE = 8;  // size of sprite in spritesheet
+```javascript
+const SPRITE_SIZE  = 8; // size of sprite in spritesheet
 const SPRITE_SCALE = 4; // amount to scale base sprite
-let SPRITE_SCALED = 1;  // calculated scale value
+let SPRITE_SCALED  = 1; // calculated scale value
 ```
 
 What going to do is use the `SPRITE_SIZE` variable to calculate where in the sprite sheet our desired image is located, and then scale it up when drawing so it isn't tiny.
 
 Inside `setup()` make sure you calculate SPRITE_SCALED:
 
-```
+```javascript
 async function setup() {
   ...
 
@@ -256,7 +258,7 @@ async function setup() {
 
 Add the following to the bottom of your `sketch.js`:
 
-```
+```javascript
 // utility function for drawing a single sprite from the spritesheet 
 // note: assumes using the 'packed' version (no spaces/gutters)
 function drawSprite(sprite_id, x, y) {
@@ -284,7 +286,7 @@ HOWEVER, we have an undefined variable!  We need to create a lookup table so tha
 
 At the top:
 
-```
+```javascript
 let sprite_dict = {
   player:   { r: 0, c: 4 },
   npc:      { r: 0, c: 5 },
@@ -307,7 +309,7 @@ Last but not least, we need to direct the canvas to be optimized for pixel art. 
 
 After your call to `createCanvas(400, 400)` add the following:
 
-```
+```javascript
 async function setup() {
   // load in sprite sheet - change the filename to match your file
   await loadImage("assets/spritesheet.png"); 
@@ -334,13 +336,13 @@ What you need to do is figure out what the color of your sprite background is an
 
 For me, it is <span style='background:#222323;color:#eee;'>#222323</span>, so at the top:
 
-```
+```javascript
 const sprite_bg = "#222323";
 ```
 
 and then in `draw`:
 
-```
+```javascript
 function draw() {
   background(sprite_bg);
 
@@ -352,7 +354,7 @@ Ok, fun time - p5js handles keypresses in an interesting fashion.  You can use t
 
 At the bottom of `draw` (i.e., let's handle player input after updating/drawing the game state):
 
-```
+```javascript
 function draw() {
 
   ...
@@ -379,13 +381,42 @@ Here we're using the arrow or WADS keys for movement.  You can define whichever 
 
 Your player should now move around the screen, a little bit at a time.  You can play with the increment/decrement values to make it faster, however we'll bake that into our Entity later on.
 
+> Note: at this point, you can define any number of sprites on the screen - for example:
+> 
+> `drawSprite('snake', 100, 100);`
+
 ---
 
 [GitHub Repository - Step 1](s1 branch)
 
 ---
 
-## Entities (step 2)
+## Entities
+
+A lot of stuff to get things drawn!  Fortunately, that was a lot of the heavy lifting!  Let's now make our player a bit more useful and turn it into an `Entity` - by doing so we can **easily** abstract out every single other entity in our game.
+
+> Note: the overall goal is to end up with an array of entities that we can loop over and simply call their respective `update()` and `draw()` functions - no spaghetti mess of if statements!  If you've a software engineering background then you might be familiar with the concept of having classes responsible for themselves.  Essentially, we're looking to partition out effort and responsibility.
+
+First, we'll create a **base entity class**.  Move over to `entities.js` and add the following:
+
+```javascript
+class Entity {
+  constructor(sprite, x, y, w, h) {
+    this.sprite = sprite;
+    this.position = createVector(x, y);
+    this.size = createVector(w, h);
+  }
+
+  update() {}
+
+  draw() {
+    drawImage(this.sprite, this.position.x, this.position.y);
+  }
+}
+```
+
+This gives us a *base class* that we can extend others off of.  It'll have a sprite variable, a position, and a size.  You'll note we're using `createVector` to store the x/y and w/h of the object.  This is because later on we'll be using some vector math and it is easier to manage now rather than creating temporary variables (plus, it's a bit cleaner).
+
 
 create a base entity class with empty functions (use vector instead of x,y)
 create a moveable entity class
@@ -394,11 +425,11 @@ create a player and enemy class
 create the array and add the player and enemies
 create dvd and follower
 
-## Components (step 3)
+## Components
 
 remove custom entities for AI and replace with components
 
-## Handling a map (manually)
+## Handling a map 
 
 generate a map
 
@@ -406,9 +437,6 @@ generate a map
 
 .. tbd
 
-## Final steps?
-
-Performance optimization - record and see waht's going on
 
 ## Next steps
 

@@ -170,11 +170,10 @@
       <li><a href="#6-move-them-around" id="markdown-toc-6-move-them-around">6. Move them around</a></li>
     </ul>
   </li>
-  <li><a href="#entities-step-2" id="markdown-toc-entities-step-2">Entities (step 2)</a></li>
-  <li><a href="#components-step-3" id="markdown-toc-components-step-3">Components (step 3)</a></li>
-  <li><a href="#handling-a-map-manually" id="markdown-toc-handling-a-map-manually">Handling a map (manually)</a></li>
+  <li><a href="#entities" id="markdown-toc-entities">Entities</a></li>
+  <li><a href="#components" id="markdown-toc-components">Components</a></li>
+  <li><a href="#handling-a-map" id="markdown-toc-handling-a-map">Handling a map</a></li>
   <li><a href="#camera-follow" id="markdown-toc-camera-follow">Camera follow</a></li>
-  <li><a href="#final-steps" id="markdown-toc-final-steps">Final steps?</a></li>
   <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
 </ul>
 
@@ -193,6 +192,8 @@
 <p>We may also want to give them different abilities/characteristics.  Enter <em>components</em> – the tl;dr is that you will “equip” an entity with a certain component, and that entity will then check its list of components for its abilities.</p>
 
 <p>This is a fairly reductive take on ECS and you can read about it in-depth on <a href="https://en.wikipedia.org/wiki/Entity_component_system" target="_blank" rel="noopener noreferrer">Wikipedia</a> and <a href="https://dev.to/kspeakman/entity-component-system-an-old-new-thing-3224" target="_blank" rel="noopener noreferrer">dev.to</a> and <a href="https://www.richardlord.net/blog/ecs/why-use-an-entity-framework.html" target="_blank" rel="noopener noreferrer">this blog</a>.</p>
+
+<p>There also is an ECS framework available as well: <a href="https://www.flecs.dev/flecs/" target="_blank" rel="noopener noreferrer">FLECS</a> and a correlated <a href="https://github.com/SanderMertens/ecs-faq" target="_blank" rel="noopener noreferrer">FAQ</a>.</p>
 
 <h2 id="a-note-on-resources">A note on resources</h2>
 
@@ -254,10 +255,10 @@
 
 <p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="components.js"&gt;&lt;/script&gt;
-&lt;script src="entities.js"&gt;&lt;/script&gt;
-&lt;script src="sketch.js"&gt;&lt;/script&gt;
-</code></pre></div></div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">components.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">entities.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">sketch.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
 
 <p>We need to put them above as they need to be parsed before <code class="language-plaintext highlighter-rouge">sketch.js</code> is parsed (for instance, any global variables we might want to share).</p>
 
@@ -271,26 +272,26 @@
 
 <p>At the top of your <code class="language-plaintext highlighter-rouge">sketch.js</code> file (in global space), add a variable:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let spritesheet;
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">spritesheet</span><span class="p">;</span>
 
-...
+<span class="p">...</span>
 
-function setup() {
-  ...
+<span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
 </code></pre></div></div>
 
 <p>And then modify your <code class="language-plaintext highlighter-rouge">setup</code> and <code class="language-plaintext highlighter-rouge">draw</code> functions to look like this:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
-  // load in sprite sheet - change the filename to match your file
-  await loadImage("assets/spritesheet.png"); 
-  createCanvas(400, 400);
-}
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// load in sprite sheet - change the filename to match your file</span>
+  <span class="k">await</span> <span class="nx">loadImage</span><span class="p">(</span><span class="dl">"</span><span class="s2">assets/spritesheet.png</span><span class="dl">"</span><span class="p">);</span> 
+  <span class="nx">createCanvas</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+<span class="p">}</span>
 
-function draw() {
-  background(0);
-  image(spritesheet, 0, 0);
-}
+<span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">background</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nx">image</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>You should now see your spritesheet being drawn to the top left corner!  Note that we also draw the background to give the illusion of animation (once things start to move).  If you didn’t redraw the background then things would smear the screen.</p>
@@ -301,18 +302,18 @@ function draw() {
 
 <p>In the global space create an object for a character - eventually we’ll replace it with a class, however for now it’ll just keep an eye on the location:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let spritesheet;
-let player;
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">spritesheet</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">player</span><span class="p">;</span>
 
-...
+<span class="p">...</span>
 
-async function setup() {
-  ...
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
 
-  player = {x: 20, y: 20};
+  <span class="nx">player</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">20</span><span class="p">};</span>
 
-  ...
-}
+  <span class="p">...</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>This gives our player a position in 2D space - note that the origin is at the top left corner (and all images/rectanges are drawn with their respective top left corners as the origin).</p>
@@ -335,41 +336,41 @@ async function setup() {
 
 <p>At the top of <code class="language-plaintext highlighter-rouge">sketch.js</code> add the following (using your sprite size):</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const SPRITE_SIZE = 8;  // size of sprite in spritesheet
-const SPRITE_SCALE = 4; // amount to scale base sprite
-let SPRITE_SCALED = 1;  // calculated scale value
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SPRITE_SIZE</span>  <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="c1">// size of sprite in spritesheet</span>
+<span class="kd">const</span> <span class="nx">SPRITE_SCALE</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// amount to scale base sprite</span>
+<span class="kd">let</span> <span class="nx">SPRITE_SCALED</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// calculated scale value</span>
 </code></pre></div></div>
 
 <p>What going to do is use the <code class="language-plaintext highlighter-rouge">SPRITE_SIZE</code> variable to calculate where in the sprite sheet our desired image is located, and then scale it up when drawing so it isn’t tiny.</p>
 
 <p>Inside <code class="language-plaintext highlighter-rouge">setup()</code> make sure you calculate SPRITE_SCALED:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
-  ...
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
 
-  SPRITE_SCALED = SPRITE_SCALE * SPRITE_SIZE;
+  <span class="nx">SPRITE_SCALED</span> <span class="o">=</span> <span class="nx">SPRITE_SCALE</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">;</span>
 
-  ...
-}
+  <span class="p">...</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>Add the following to the bottom of your <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// utility function for drawing a single sprite from the spritesheet 
-// note: assumes using the 'packed' version (no spaces/gutters)
-function drawSprite(sprite_id, x, y) {
-  image(
-    spritesheet,   // spritesheet object
-    x,             // x location to draw on screen
-    y,             // y location to draw on screen
-    sprite_scaled, // the **new** width of the sprite
-    sprite_scaled, // the **new** height of the sprite
-    sprite_dict[sprite_id].c * SPRITE_SIZE, // its x location in the spritesheet
-    sprite_dict[sprite_id].r * SPRITE_SIZE, // its y location in the spritesheet
-    SPRITE_SIZE,   // the **original** width of the sprite
-    SPRITE_SIZE    // the **original** height of the sprite
-  );
-}
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// utility function for drawing a single sprite from the spritesheet </span>
+<span class="c1">// note: assumes using the 'packed' version (no spaces/gutters)</span>
+<span class="kd">function</span> <span class="nx">drawSprite</span><span class="p">(</span><span class="nx">sprite_id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">image</span><span class="p">(</span>
+    <span class="nx">spritesheet</span><span class="p">,</span>   <span class="c1">// spritesheet object</span>
+    <span class="nx">x</span><span class="p">,</span>             <span class="c1">// x location to draw on screen</span>
+    <span class="nx">y</span><span class="p">,</span>             <span class="c1">// y location to draw on screen</span>
+    <span class="nx">sprite_scaled</span><span class="p">,</span> <span class="c1">// the **new** width of the sprite</span>
+    <span class="nx">sprite_scaled</span><span class="p">,</span> <span class="c1">// the **new** height of the sprite</span>
+    <span class="nx">sprite_dict</span><span class="p">[</span><span class="nx">sprite_id</span><span class="p">].</span><span class="nx">c</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="c1">// its x location in the spritesheet</span>
+    <span class="nx">sprite_dict</span><span class="p">[</span><span class="nx">sprite_id</span><span class="p">].</span><span class="nx">r</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="c1">// its y location in the spritesheet</span>
+    <span class="nx">SPRITE_SIZE</span><span class="p">,</span>   <span class="c1">// the **original** width of the sprite</span>
+    <span class="nx">SPRITE_SIZE</span>    <span class="c1">// the **original** height of the sprite</span>
+  <span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>This uses the extended syntax of the <code class="language-plaintext highlighter-rouge">image()</code> function (see <a href="https://p5js.org/reference/p5/image/" target="_blank" rel="noopener noreferrer">https://p5js.org/reference/p5/image/</a>), however to explain what is going on:</p>
@@ -384,12 +385,12 @@ function drawSprite(sprite_id, x, y) {
 
 <p>At the top:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let sprite_dict = {
-  player:   { r: 0, c: 4 },
-  npc:      { r: 0, c: 5 },
-  beholder: { r: 0, c: 13 },
-  snake:    { r: 1, c: 4 },
-};
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">sprite_dict</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">player</span><span class="p">:</span>   <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">4</span> <span class="p">},</span>
+  <span class="na">npc</span><span class="p">:</span>      <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">5</span> <span class="p">},</span>
+  <span class="na">beholder</span><span class="p">:</span> <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">13</span> <span class="p">},</span>
+  <span class="na">snake</span><span class="p">:</span>    <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">4</span> <span class="p">},</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>This defines a dictionary for every single character in our game.  Some spritesheets come with a <code class="language-plaintext highlighter-rouge">json</code> file for easy unpacking, however these ones don’t.  Gives you a bit more control!</p>
@@ -408,16 +409,16 @@ function drawSprite(sprite_id, x, y) {
 
 <p>After your call to <code class="language-plaintext highlighter-rouge">createCanvas(400, 400)</code> add the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
-  // load in sprite sheet - change the filename to match your file
-  await loadImage("assets/spritesheet.png"); 
-  createCanvas(400, 400);
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// load in sprite sheet - change the filename to match your file</span>
+  <span class="k">await</span> <span class="nx">loadImage</span><span class="p">(</span><span class="dl">"</span><span class="s2">assets/spritesheet.png</span><span class="dl">"</span><span class="p">);</span> 
+  <span class="nx">createCanvas</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
 
-  drawingContext.imageSmoothingEnabled = false;
+  <span class="nx">drawingContext</span><span class="p">.</span><span class="nx">imageSmoothingEnabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
-  ...
+  <span class="p">...</span>
 
-}
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>The image should be a bit crisper now.</p>
@@ -434,40 +435,40 @@ function drawSprite(sprite_id, x, y) {
 
 <p>For me, it is <span style="background:#222323;color:#eee;">#222323</span>, so at the top:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const sprite_bg = "#222323";
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sprite_bg</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">#222323</span><span class="dl">"</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>and then in <code class="language-plaintext highlighter-rouge">draw</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function draw() {
-  background(sprite_bg);
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">background</span><span class="p">(</span><span class="nx">sprite_bg</span><span class="p">);</span>
 
-  ...
-}
+  <span class="p">...</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>Ok, fun time - p5js handles keypresses in an interesting fashion.  You can use the <code class="language-plaintext highlighter-rouge">keyPressed</code> function, the <code class="language-plaintext highlighter-rouge">isKeyPressed</code> function (within <code class="language-plaintext highlighter-rouge">draw</code>), and so on.  Since we’re going for a game where the user can hold down keys, we’ll use the <code class="language-plaintext highlighter-rouge">isKeyPressed</code> approach.</p>
 
 <p>At the bottom of <code class="language-plaintext highlighter-rouge">draw</code> (i.e., let’s handle player input after updating/drawing the game state):</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function draw() {
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
 
-  ...
+  <span class="p">...</span>
 
-  // enable continuous movement
-  if (keyIsDown(LEFT_ARROW) || keyIsDown("a")) {
-    player.x--;
-  }
-  if (keyIsDown(RIGHT_ARROW) || keyIsDown("d")) {
-    player.x++;
-  }
-  if (keyIsDown(UP_ARROW) || keyIsDown("w")) {
-    player.y--;
-  }
-  if (keyIsDown(DOWN_ARROW) || keyIsDown("s")) {
-    player.y++;
-  }
-}
+  <span class="c1">// enable continuous movement</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">LEFT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">RIGHT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">d</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">UP_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">w</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">DOWN_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">s</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>Here we’re using the arrow or WADS keys for movement.  You can define whichever keys you want to use (or gamepads, for instance).</p>
@@ -478,13 +479,44 @@ function drawSprite(sprite_id, x, y) {
 
 <p>Your player should now move around the screen, a little bit at a time.  You can play with the increment/decrement values to make it faster, however we’ll bake that into our Entity later on.</p>
 
+<blockquote>
+  <p>Note: at this point, you can define any number of sprites on the screen - for example:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">drawSprite('snake', 100, 100);</code></p>
+</blockquote>
+
 <hr>
 
 <p><a href="s1%20branch">GitHub Repository - Step 1</a></p>
 
 <hr>
 
-<h2 id="entities-step-2">Entities (step 2)</h2>
+<h2 id="entities">Entities</h2>
+
+<p>A lot of stuff to get things drawn!  Fortunately, that was a lot of the heavy lifting!  Let’s now make our player a bit more useful and turn it into an <code class="language-plaintext highlighter-rouge">Entity</code> - by doing so we can <strong>easily</strong> abstract out every single other entity in our game.</p>
+
+<blockquote>
+  <p>Note: the overall goal is to end up with an array of entities that we can loop over and simply call their respective <code class="language-plaintext highlighter-rouge">update()</code> and <code class="language-plaintext highlighter-rouge">draw()</code> functions - no spaghetti mess of if statements!  If you’ve a software engineering background then you might be familiar with the concept of having classes responsible for themselves.  Essentially, we’re looking to partition out effort and responsibility.</p>
+</blockquote>
+
+<p>First, we’ll create a <strong>base entity class</strong>.  Move over to <code class="language-plaintext highlighter-rouge">entities.js</code> and add the following:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Entity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">sprite</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">update</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This gives us a <em>base class</em> that we can extend others off of.  It’ll have a sprite variable, a position, and a size.  You’ll note we’re using <code class="language-plaintext highlighter-rouge">createVector</code> to store the x/y and w/h of the object.  This is because later on we’ll be using some vector math and it is easier to manage now rather than creating temporary variables (plus, it’s a bit cleaner).</p>
 
 <p>create a base entity class with empty functions (use vector instead of x,y)
 create a moveable entity class
@@ -493,21 +525,17 @@ create a player and enemy class
 create the array and add the player and enemies
 create dvd and follower</p>
 
-<h2 id="components-step-3">Components (step 3)</h2>
+<h2 id="components">Components</h2>
 
 <p>remove custom entities for AI and replace with components</p>
 
-<h2 id="handling-a-map-manually">Handling a map (manually)</h2>
+<h2 id="handling-a-map">Handling a map</h2>
 
 <p>generate a map</p>
 
 <h2 id="camera-follow">Camera follow</h2>
 
 <p>.. tbd</p>
-
-<h2 id="final-steps">Final steps?</h2>
-
-<p>Performance optimization - record and see waht’s going on</p>
 
 <h2 id="next-steps">Next steps</h2>
 
