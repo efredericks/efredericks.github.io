@@ -165,7 +165,7 @@
 <p>And that, at least, passed just fine.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/LF2TnIl.png" title="yay" alt="yay">
+  <p><img src="https://i.imgur.com/LF2TnIl.png" title="yay" alt="yay"></p>
 </div>
 
 <hr>
@@ -175,7 +175,7 @@
 <p>I wanted players to have a limited chat so that they can talk to each other.  Otherwise we lose a bit of the MMO-ness.  In taking a page from RotMG, I thought little speech bubbles would be a good idea.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/dVeW4gc.png" alt="rotmg chat" title="rotmg chat">
+  <p><img src="https://i.imgur.com/dVeW4gc.png" alt="rotmg chat" title="rotmg chat"></p>
 </div>
 
 <p>We’ll get there eventually, but each person only says one thing at a time - there is no buffer.  What I did was to give each <code class="language-plaintext highlighter-rouge">MoveableEntity</code> a chat object - currently a list but that may get pared down a single object.  The list is forced into a mutable tuple - element 0 is the chat message and element 1 is the timer.</p>
@@ -187,7 +187,7 @@
 <p>The screenshot is a bit hard to see below, but the enemies will randomly select a bit of angry flavor text when they’re following you.  The rat is saying ‘!!’ at the moment.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/6hwUJQn.png" alt="rat chat" title="rat chat">
+  <p><img src="https://i.imgur.com/6hwUJQn.png" alt="rat chat" title="rat chat"></p>
 </div>
 
 <p>Colors and interface are by no means final and currently quite difficult to read, but I figured prettifying it would take a back seat to actual implementation.  Plus then I’d need to add things like text wrapping and all those fun calculations and my eyes glazed over a bit.</p>
@@ -224,8 +224,8 @@ _map[z][r].append(newtile)
 </code></pre></div></div>
 
 <div align="center">
-  <b>Floor 1</b><br>
-  <img src="https://i.imgur.com/AQV8rp1.png" alt="procgen 1" title="procgen 1">
+  <p><b>Floor 1</b><br>
+  <img src="https://i.imgur.com/AQV8rp1.png" alt="procgen 1" title="procgen 1"></p>
 </div>
 
 <p>Plus, as you descend in Z-levels the zoom changes as well.  This comes care of a handy utility function I always transpose from p5js:</p>
@@ -244,8 +244,8 @@ for z in range(self.NUM_LEVELS):
 </code></pre></div></div>
 
 <div align="center">
-  <b>Floor 3</b><br>
-  <img src="https://i.imgur.com/QTz0oiZ.png" alt="procgen 2" title="procgen 2">
+  <p><b>Floor 3</b><br>
+  <img src="https://i.imgur.com/QTz0oiZ.png" alt="procgen 2" title="procgen 2"></p>
 </div>
 
 <p>Gives a nice feeling of depth and the environments varying.</p>
@@ -291,7 +291,7 @@ let SPRITESHEET = {
 <p>Here’s a GIF of current playing through a few levels and testing out chatting.  Even though I didn’t need any, I just couldn’t stop myself from picking up some apples.</p>
 
 <div align="center">
-  <img src="https://i.imgur.com/ZHLAHK8.gif" alt="playthrough" title="playthrough">
+  <p><img src="https://i.imgur.com/ZHLAHK8.gif" alt="playthrough" title="playthrough"></p>
 </div>
 
 <hr>

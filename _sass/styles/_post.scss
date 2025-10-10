@@ -44,6 +44,7 @@
             // font-weight: 300;
             // padding-bottom: 0.5em;
             color: $p_text;
+            padding: 0;
     }
 
     & &-content, & &-metadata {
@@ -113,5 +114,16 @@
         padding: 1em;
         font-style: italic;
         border-radius: 1em;
+    }
+
+    #markdown-toc {
+        font-size: 0.8em;
+        background: $toc_bg; /* rgba(80,0,80,0.5);*/
+        padding: 3em;
+        border-radius: 1em;
+    }
+    #markdown-toc ul, #markdown-toc li {
+        margin: 0;
+        font-size: 1.0em;
     }
 }

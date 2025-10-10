@@ -80,15 +80,23 @@ carousels:
     - image: /assets/img/GenerativeGI/clear-lexicase/img-10099.png
 ---
 
-<hr size="1" />
+---
 
 - [functioning p5js sketch](tbd)
+- [GitHub repository](tbd)
 
-<hr size="1" />
+---
 
-# Tutorial overview
+**Table of Contents** 
 
-We're going to be creating a 2D, tile-based game using p5js.  
+* TOC 
+{:toc}
+
+---
+
+<!-- # ECS Tutorial overview -->
+
+We're going to be creating a 2D, top-down, tile-based game demo using p5js.  
 
 ## What is ECS?
 
@@ -109,20 +117,20 @@ Whatever you do though:
 1. Avoid using copyrighted images (unless if you paid for it)
 2. Include the license **every time** you use a resource, and check the attribution requirements for the original file
 3. Avoid using AI-generated artwork - hire an artist
+4. Since we're using p5js you'll want to become familiar with their documentation.  There are a large number of resources, tutorials, libraries, and **well-written** API documentation pages on their site: [https://p5js.org/reference/](https://p5js.org/reference/).
 
 ## Setup
 
-1. Create an account on the p5js editor: [https://editor.p5js.org](p5js online editor)
+1. Create an account on the p5js editor: [https://editor.p5js.org](p5js online editor) - I've linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.
 2. Grab a spritesheet from [kenney.nl](https://kenney.nl): I'll be using the [microrogue resource](https://kenney.nl/assets/micro-roguelike). Make sure you include the License when you upload!
-  * Double-note - we're using the "packed" sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn't work very well.
+  * Double-note - we're using the "packed" sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn't work very well.  The non-packed sheet adds a gutter in between images - great for slicing up in something like Tiled or Godot but not as easy to use when calculating based on pixel size (though, to be fair it would just be an offset -- we'll get there).
 
-  <!-- {% include carousel.html height="50" unit="%" duration="15" number="1" %} -->
 
 ## First steps
 
 Ok, here we go!  Everything we'll be doing is in the online p5js editor, however you can export it to any website you want after we're done.
 
-### 1. **Create a new project (directory structure)**
+### 1. Create a new project (directory structure)
 
 Let's start by defining a directory structure.  By default you'll have some p5 libraries, an `index.html`, and a `sketch.js`. 
 
@@ -133,7 +141,7 @@ If you aren't familiar:
   * `setup` runs before the `draw` cycle (or, the forever loop).  Set variable states and do all of your setup in this function.  With p5js 2.0 and beyond, all file loading happens in `setup` as well!
   * `draw` is your forever loop - it runs either as fast as possible or at a specified frame rate.
 
-### 2. **Upload your asset files and create empty files**
+### 2. Upload your asset files and create empty files
 
 Create a directory on the side called assets and upload your spritesheet **and** its license file.  While you're working there, create files named `components.js` and `entities.js` at the root of your directory (we could add sub-folders for organization, but for this we'll just keep it on the same level).
 
@@ -143,7 +151,7 @@ Note - if you want to upload to a folder then you need to hover over it and clic
 
 ![uploading to folder](/assets/img/ecs-js/uploading2.png)
 
-### 3. **Wire everything up**
+### 3. Wire everything up
 
 In your `index.html` file, add the following lines *above* the call to include `sketch.js`:
 
@@ -157,7 +165,7 @@ We need to put them above as they need to be parsed before `sketch.js` is parsed
 
 > Note that we are setting up a structure that is good for a quick demo - it would be much better to refactor our code to say, have a `Game` class controlling everything, ingesting the assets, managing entities, etc.  However, we're going to just use a few global variables to get things working.
 
-### 4. **Use p5js 2.0.x**
+### 4. Use p5js 2.0.x
 
 Let's start you off with the latest version of p5js - click the version number (next to the gear icon) in the top right and select the latest 2.0.x version - I'm on 2.0.5.  This introduces a plethora of new features - the ones I'm most familiar with are that assets are now loaded in via `async`/`await` calls (instead of using a `preload` function).  Let's try it out:
 
@@ -191,9 +199,111 @@ You should now see your spritesheet being drawn to the top left corner!  Note th
 
 ![spritesheet](/assets/img/ecs-js/spritesheet-draw.png)
 
-### 5. **Draw your character to the screen**
+### 5. Draw your character to the screen
 
-Last but not least, we need to direct the canvas to be optimized for pixel art.  If you look at the p5js documentation there are `smooth()` and `noSmooth()` functions, however they don't see to have the desired effect (note: I don't know why).
+In the global space create an object for a character - eventually we'll replace it with a class, however for now it'll just keep an eye on the location:
+
+```
+let spritesheet;
+let player;
+
+...
+
+async function setup() {
+  ...
+
+  player = {x: 20, y: 20};
+
+  ...
+}
+```
+
+This gives our player a position in 2D space - note that the origin is at the top left corner (and all images/rectanges are drawn with their respective top left corners as the origin).
+
+> You can test this out by the way, when drawing the spritesheet you can use the player position:
+>
+> `draw(spritesheet, player.x, player.y);`
+
+However, we want to draw a single sprite from our spritesheet, not the entirety of it.
+
+> There are different approaches to loading sprites - we're doing it the 'low-impact' way where we only load in a single image, rather than hundreds.  This has the benefit of saving memory (1 image vs. hundreds) at the cost of a slight bit of complexity.
+
+We need to add a helper function and some information to draw a single sprite.  What we will do is add a variable to tell us the width and height of a sprite (they *should* all be the same size in your spritesheets - some of the more complicated ones use varying sizes and that can be a pain to manually calculate).
+
+Note - if you're using a different spritesheet, check the documentation inside for how large a sprite is.
+
+At the top of `sketch.js` add the following (using your sprite size):
+
+```
+const SPRITE_SIZE = 8;  // size of sprite in spritesheet
+const SPRITE_SCALE = 4; // amount to scale base sprite
+let SPRITE_SCALED = 1;  // calculated scale value
+```
+
+What going to do is use the `SPRITE_SIZE` variable to calculate where in the sprite sheet our desired image is located, and then scale it up when drawing so it isn't tiny.
+
+Inside `setup()` make sure you calculate SPRITE_SCALED:
+
+```
+async function setup() {
+  ...
+
+  SPRITE_SCALED = SPRITE_SCALE * SPRITE_SIZE;
+
+  ...
+}
+```
+
+Add the following to the bottom of your `sketch.js`:
+
+```
+// utility function for drawing a single sprite from the spritesheet 
+// note: assumes using the 'packed' version (no spaces/gutters)
+function drawSprite(sprite_id, x, y) {
+  image(
+    spritesheet,   // spritesheet object
+    x,             // x location to draw on screen
+    y,             // y location to draw on screen
+    sprite_scaled, // the **new** width of the sprite
+    sprite_scaled, // the **new** height of the sprite
+    sprite_dict[sprite_id].c * SPRITE_SIZE, // its x location in the spritesheet
+    sprite_dict[sprite_id].r * SPRITE_SIZE, // its y location in the spritesheet
+    SPRITE_SIZE,   // the **original** width of the sprite
+    SPRITE_SIZE    // the **original** height of the sprite
+  );
+}
+```
+
+This uses the extended syntax of the `image()` function (see [https://p5js.org/reference/p5/image/](https://p5js.org/reference/p5/image/)), however to explain what is going on:
+
+> `image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])`
+
+![image drawing](https://p5js.org/assets/drawImage.png)
+
+HOWEVER, we have an undefined variable!  We need to create a lookup table so that we define which **row** and **column** a specific sprite is!
+
+At the top:
+
+```
+let sprite_dict = {
+  player:   { r: 0, c: 4 },
+  npc:      { r: 0, c: 5 },
+  beholder: { r: 0, c: 13 },
+  snake:    { r: 1, c: 4 },
+};
+```
+
+This defines a dictionary for every single character in our game.  Some spritesheets come with a `json` file for easy unpacking, however these ones don't.  Gives you a bit more control!
+
+> Feel free to pick whatever sprites you want for the various characters we'll be drawing.
+
+---
+
+You may have noticed things don't look ... great.  That's because we're scaling a small image up and its edges are supposed to be nice and crisp.
+
+![smoothed](/assets/img/ecs-js/smoothed.png)
+
+Last but not least, we need to direct the canvas to be optimized for pixel art.  If you look at the p5js documentation there are `smooth()` and `noSmooth()` functions, however they don't seem to have the desired effect (note: I don't know why).
 
 After your call to `createCanvas(400, 400)` add the following:
 
@@ -204,12 +314,76 @@ async function setup() {
   createCanvas(400, 400);
 
   drawingContext.imageSmoothingEnabled = false;
+
+  ...
+
 }
 ```
 
-The image should be a bit crisper now, though if you have the 'small' tileset you won't notice.
+The image should be a bit crisper now.
 
-### 6. **Move them around**
+![nosmooth](/assets/img/ecs-js/nosmoothed.png/)
+
+### 6. Move them around
+
+We have the ability to draw sprites and they should look crisp.  Let's now move our player around the screen.
+
+Before we get into it, you might notice your background doesn't match mine.  That's because I told you to use 0 (black), however the sprite background is somewhat gray (if you're using the microroguelike one).
+
+What you need to do is figure out what the color of your sprite background is and set the color each draw cycle to that!  (If the sprites have a transparent background you don't need to worry about this - and in the olden days we used to filter based on a magic color: <span style='background:#ff00ff'>#ff00ff</span>).
+
+For me, it is <span style='background:#222323;color:#eee;'>#222323</span>, so at the top:
+
+```
+const sprite_bg = "#222323";
+```
+
+and then in `draw`:
+
+```
+function draw() {
+  background(sprite_bg);
+
+  ...
+}
+```
+
+Ok, fun time - p5js handles keypresses in an interesting fashion.  You can use the `keyPressed` function, the `isKeyPressed` function (within `draw`), and so on.  Since we're going for a game where the user can hold down keys, we'll use the `isKeyPressed` approach.
+
+At the bottom of `draw` (i.e., let's handle player input after updating/drawing the game state):
+
+```
+function draw() {
+
+  ...
+
+  // enable continuous movement
+  if (keyIsDown(LEFT_ARROW) || keyIsDown("a")) {
+    player.x--;
+  }
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown("d")) {
+    player.x++;
+  }
+  if (keyIsDown(UP_ARROW) || keyIsDown("w")) {
+    player.y--;
+  }
+  if (keyIsDown(DOWN_ARROW) || keyIsDown("s")) {
+    player.y++;
+  }
+}
+```
+
+Here we're using the arrow or WADS keys for movement.  You can define whichever keys you want to use (or gamepads, for instance).
+
+> Note: again, there are nicer ways of doing this.  Defining a lookup table of keys, for example, so that you can easily have your users configure their controls...
+
+Your player should now move around the screen, a little bit at a time.  You can play with the increment/decrement values to make it faster, however we'll bake that into our Entity later on.
+
+---
+
+[GitHub Repository - Step 1](s1 branch)
+
+---
 
 ## Entities (step 2)
 
@@ -255,3 +429,5 @@ This is a taste of what you can do.  A few things:
 
 camera + sprites
 https://editor.p5js.org/efredericks/sketches/wErqg4bAf
+
+{% include carousel.html height="50" unit="%" duration="15" number="1" %}

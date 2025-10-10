@@ -452,7 +452,8 @@ pre {
     padding-inline-start: 40px; }
   .post li {
     display: list-item;
-    color: #000000; }
+    color: #000000;
+    padding: 0; }
   .post .post-content, .post .post-metadata {
     background: #FFF;
     padding: 0 2rem 1rem 2rem;
@@ -507,6 +508,15 @@ pre {
     padding: 1em;
     font-style: italic;
     border-radius: 1em; }
+  .post #markdown-toc {
+    font-size: 0.8em;
+    background: #83eaff71;
+    /* rgba(80,0,80,0.5);*/
+    padding: 3em;
+    border-radius: 1em; }
+  .post #markdown-toc ul, .post #markdown-toc li {
+    margin: 0;
+    font-size: 1.0em; }
 
 .cookie-container {
   position: fixed;

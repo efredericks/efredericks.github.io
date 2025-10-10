@@ -145,17 +145,44 @@
             
         </header>
         <div class="post-content">
-            <hr size="1">
+            <hr>
 
 <ul>
   <li><a href="tbd">functioning p5js sketch</a></li>
+  <li><a href="tbd">GitHub repository</a></li>
 </ul>
 
-<hr size="1">
+<hr>
 
-<h1 id="tutorial-overview">Tutorial overview</h1>
+<p><strong>Table of Contents</strong></p>
 
-<p>We’re going to be creating a 2D, tile-based game using p5js.</p>
+<ul id="markdown-toc">
+  <li><a href="#what-is-ecs" id="markdown-toc-what-is-ecs">What is ECS?</a></li>
+  <li><a href="#a-note-on-resources" id="markdown-toc-a-note-on-resources">A note on resources</a></li>
+  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+  <li>
+<a href="#first-steps" id="markdown-toc-first-steps">First steps</a>    <ul>
+      <li><a href="#1-create-a-new-project-directory-structure" id="markdown-toc-1-create-a-new-project-directory-structure">1. Create a new project (directory structure)</a></li>
+      <li><a href="#2-upload-your-asset-files-and-create-empty-files" id="markdown-toc-2-upload-your-asset-files-and-create-empty-files">2. Upload your asset files and create empty files</a></li>
+      <li><a href="#3-wire-everything-up" id="markdown-toc-3-wire-everything-up">3. Wire everything up</a></li>
+      <li><a href="#4-use-p5js-20x" id="markdown-toc-4-use-p5js-20x">4. Use p5js 2.0.x</a></li>
+      <li><a href="#5-draw-your-character-to-the-screen" id="markdown-toc-5-draw-your-character-to-the-screen">5. Draw your character to the screen</a></li>
+      <li><a href="#6-move-them-around" id="markdown-toc-6-move-them-around">6. Move them around</a></li>
+    </ul>
+  </li>
+  <li><a href="#entities-step-2" id="markdown-toc-entities-step-2">Entities (step 2)</a></li>
+  <li><a href="#components-step-3" id="markdown-toc-components-step-3">Components (step 3)</a></li>
+  <li><a href="#handling-a-map-manually" id="markdown-toc-handling-a-map-manually">Handling a map (manually)</a></li>
+  <li><a href="#camera-follow" id="markdown-toc-camera-follow">Camera follow</a></li>
+  <li><a href="#final-steps" id="markdown-toc-final-steps">Final steps?</a></li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
+</ul>
+
+<hr>
+
+<!-- # ECS Tutorial overview -->
+
+<p>We’re going to be creating a 2D, top-down, tile-based game demo using p5js.</p>
 
 <h2 id="what-is-ecs">What is ECS?</h2>
 
@@ -177,235 +204,554 @@
   <li>Avoid using copyrighted images (unless if you paid for it)</li>
   <li>Include the license <strong>every time</strong> you use a resource, and check the attribution requirements for the original file</li>
   <li>Avoid using AI-generated artwork - hire an artist</li>
+  <li>Since we’re using p5js you’ll want to become familiar with their documentation.  There are a large number of resources, tutorials, libraries, and <strong>well-written</strong> API documentation pages on their site: <a href="https://p5js.org/reference/" target="_blank" rel="noopener noreferrer">https://p5js.org/reference/</a>.</li>
 </ol>
 
 <h2 id="setup">Setup</h2>
 
 <ol>
-  <li>Create an account on the p5js editor: <a href="p5js%20online%20editor">https://editor.p5js.org</a>
-</li>
+  <li>Create an account on the p5js editor: <a href="p5js%20online%20editor">https://editor.p5js.org</a> - I’ve linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.</li>
   <li>Grab a spritesheet from <a href="https://kenney.nl" target="_blank" rel="noopener noreferrer">kenney.nl</a>: I’ll be using the <a href="https://kenney.nl/assets/micro-roguelike" target="_blank" rel="noopener noreferrer">microrogue resource</a>. Make sure you include the License when you upload!
     <ul>
-      <li>Double-note - we’re using the “packed” sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn’t work very well.</li>
+      <li>Double-note - we’re using the “packed” sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn’t work very well.  The non-packed sheet adds a gutter in between images - great for slicing up in something like Tiled or Godot but not as easy to use when calculating based on pixel size (though, to be fair it would just be an offset – we’ll get there).</li>
     </ul>
   </li>
 </ol>
 
-<p>&lt;!–</p>
+<h2 id="first-steps">First steps</h2>
+
+<p>Ok, here we go!  Everything we’ll be doing is in the online p5js editor, however you can export it to any website you want after we’re done.</p>
+
+<h3 id="1-create-a-new-project-directory-structure">1. Create a new project (directory structure)</h3>
+
+<p>Let’s start by defining a directory structure.  By default you’ll have some p5 libraries, an <code class="language-plaintext highlighter-rouge">index.html</code>, and a <code class="language-plaintext highlighter-rouge">sketch.js</code>.</p>
+
+<p>If you aren’t familiar:</p>
+
+<ul>
+  <li>Any time we add a new <code class="language-plaintext highlighter-rouge">js</code> file we need to link to it within the <code class="language-plaintext highlighter-rouge">index.html</code> file - <strong>before</strong> we include the <code class="language-plaintext highlighter-rouge">sketch.js</code> file.  HTML/JavaScript is (typically) rendered <strong>in-order</strong>, so dependencies must be specified in the correct order.</li>
+  <li>p5js uses a few functions to set things up:
+    <ul>
+      <li>
+<code class="language-plaintext highlighter-rouge">setup</code> runs before the <code class="language-plaintext highlighter-rouge">draw</code> cycle (or, the forever loop).  Set variable states and do all of your setup in this function.  With p5js 2.0 and beyond, all file loading happens in <code class="language-plaintext highlighter-rouge">setup</code> as well!</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">draw</code> is your forever loop - it runs either as fast as possible or at a specified frame rate.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-upload-your-asset-files-and-create-empty-files">2. Upload your asset files and create empty files</h3>
+
+<p>Create a directory on the side called assets and upload your spritesheet <strong>and</strong> its license file.  While you’re working there, create files named <code class="language-plaintext highlighter-rouge">components.js</code> and <code class="language-plaintext highlighter-rouge">entities.js</code> at the root of your directory (we could add sub-folders for organization, but for this we’ll just keep it on the same level).</p>
+
+<p><img src="/assets/img/ecs-js/uploading.png" alt="uploading"></p>
+
+<p>Note - if you want to upload to a folder then you need to hover over it and click the little dropdown triangle to the side, otherwise you upload to the root of the structure.</p>
+
+<p><img src="/assets/img/ecs-js/uploading2.png" alt="uploading to folder"></p>
+
+<h3 id="3-wire-everything-up">3. Wire everything up</h3>
+
+<p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="components.js"&gt;&lt;/script&gt;
+&lt;script src="entities.js"&gt;&lt;/script&gt;
+&lt;script src="sketch.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
+<p>We need to put them above as they need to be parsed before <code class="language-plaintext highlighter-rouge">sketch.js</code> is parsed (for instance, any global variables we might want to share).</p>
+
+<blockquote>
+  <p>Note that we are setting up a structure that is good for a quick demo - it would be much better to refactor our code to say, have a <code class="language-plaintext highlighter-rouge">Game</code> class controlling everything, ingesting the assets, managing entities, etc.  However, we’re going to just use a few global variables to get things working.</p>
+</blockquote>
+
+<h3 id="4-use-p5js-20x">4. Use p5js 2.0.x</h3>
+
+<p>Let’s start you off with the latest version of p5js - click the version number (next to the gear icon) in the top right and select the latest 2.0.x version - I’m on 2.0.5.  This introduces a plethora of new features - the ones I’m most familiar with are that assets are now loaded in via <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> calls (instead of using a <code class="language-plaintext highlighter-rouge">preload</code> function).  Let’s try it out:</p>
+
+<p>At the top of your <code class="language-plaintext highlighter-rouge">sketch.js</code> file (in global space), add a variable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let spritesheet;
+
+...
+
+function setup() {
+  ...
+</code></pre></div></div>
+
+<p>And then modify your <code class="language-plaintext highlighter-rouge">setup</code> and <code class="language-plaintext highlighter-rouge">draw</code> functions to look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
+  // load in sprite sheet - change the filename to match your file
+  await loadImage("assets/spritesheet.png"); 
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(0);
+  image(spritesheet, 0, 0);
+}
+</code></pre></div></div>
+
+<p>You should now see your spritesheet being drawn to the top left corner!  Note that we also draw the background to give the illusion of animation (once things start to move).  If you didn’t redraw the background then things would smear the screen.</p>
+
+<p><img src="/assets/img/ecs-js/spritesheet-draw.png" alt="spritesheet"></p>
+
+<h3 id="5-draw-your-character-to-the-screen">5. Draw your character to the screen</h3>
+
+<p>In the global space create an object for a character - eventually we’ll replace it with a class, however for now it’ll just keep an eye on the location:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let spritesheet;
+let player;
+
+...
+
+async function setup() {
+  ...
+
+  player = {x: 20, y: 20};
+
+  ...
+}
+</code></pre></div></div>
+
+<p>This gives our player a position in 2D space - note that the origin is at the top left corner (and all images/rectanges are drawn with their respective top left corners as the origin).</p>
+
+<blockquote>
+  <p>You can test this out by the way, when drawing the spritesheet you can use the player position:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">draw(spritesheet, player.x, player.y);</code></p>
+</blockquote>
+
+<p>However, we want to draw a single sprite from our spritesheet, not the entirety of it.</p>
+
+<blockquote>
+  <p>There are different approaches to loading sprites - we’re doing it the ‘low-impact’ way where we only load in a single image, rather than hundreds.  This has the benefit of saving memory (1 image vs. hundreds) at the cost of a slight bit of complexity.</p>
+</blockquote>
+
+<p>We need to add a helper function and some information to draw a single sprite.  What we will do is add a variable to tell us the width and height of a sprite (they <em>should</em> all be the same size in your spritesheets - some of the more complicated ones use varying sizes and that can be a pain to manually calculate).</p>
+
+<p>Note - if you’re using a different spritesheet, check the documentation inside for how large a sprite is.</p>
+
+<p>At the top of <code class="language-plaintext highlighter-rouge">sketch.js</code> add the following (using your sprite size):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const SPRITE_SIZE = 8;  // size of sprite in spritesheet
+const SPRITE_SCALE = 4; // amount to scale base sprite
+let SPRITE_SCALED = 1;  // calculated scale value
+</code></pre></div></div>
+
+<p>What going to do is use the <code class="language-plaintext highlighter-rouge">SPRITE_SIZE</code> variable to calculate where in the sprite sheet our desired image is located, and then scale it up when drawing so it isn’t tiny.</p>
+
+<p>Inside <code class="language-plaintext highlighter-rouge">setup()</code> make sure you calculate SPRITE_SCALED:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
+  ...
+
+  SPRITE_SCALED = SPRITE_SCALE * SPRITE_SIZE;
+
+  ...
+}
+</code></pre></div></div>
+
+<p>Add the following to the bottom of your <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// utility function for drawing a single sprite from the spritesheet 
+// note: assumes using the 'packed' version (no spaces/gutters)
+function drawSprite(sprite_id, x, y) {
+  image(
+    spritesheet,   // spritesheet object
+    x,             // x location to draw on screen
+    y,             // y location to draw on screen
+    sprite_scaled, // the **new** width of the sprite
+    sprite_scaled, // the **new** height of the sprite
+    sprite_dict[sprite_id].c * SPRITE_SIZE, // its x location in the spritesheet
+    sprite_dict[sprite_id].r * SPRITE_SIZE, // its y location in the spritesheet
+    SPRITE_SIZE,   // the **original** width of the sprite
+    SPRITE_SIZE    // the **original** height of the sprite
+  );
+}
+</code></pre></div></div>
+
+<p>This uses the extended syntax of the <code class="language-plaintext highlighter-rouge">image()</code> function (see <a href="https://p5js.org/reference/p5/image/" target="_blank" rel="noopener noreferrer">https://p5js.org/reference/p5/image/</a>), however to explain what is going on:</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])</code></p>
+</blockquote>
+
+<p><img src="https://p5js.org/assets/drawImage.png" alt="image drawing"></p>
+
+<p>HOWEVER, we have an undefined variable!  We need to create a lookup table so that we define which <strong>row</strong> and <strong>column</strong> a specific sprite is!</p>
+
+<p>At the top:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let sprite_dict = {
+  player:   { r: 0, c: 4 },
+  npc:      { r: 0, c: 5 },
+  beholder: { r: 0, c: 13 },
+  snake:    { r: 1, c: 4 },
+};
+</code></pre></div></div>
+
+<p>This defines a dictionary for every single character in our game.  Some spritesheets come with a <code class="language-plaintext highlighter-rouge">json</code> file for easy unpacking, however these ones don’t.  Gives you a bit more control!</p>
+
+<blockquote>
+  <p>Feel free to pick whatever sprites you want for the various characters we’ll be drawing.</p>
+</blockquote>
+
+<hr>
+
+<p>You may have noticed things don’t look … great.  That’s because we’re scaling a small image up and its edges are supposed to be nice and crisp.</p>
+
+<p><img src="/assets/img/ecs-js/smoothed.png" alt="smoothed"></p>
+
+<p>Last but not least, we need to direct the canvas to be optimized for pixel art.  If you look at the p5js documentation there are <code class="language-plaintext highlighter-rouge">smooth()</code> and <code class="language-plaintext highlighter-rouge">noSmooth()</code> functions, however they don’t seem to have the desired effect (note: I don’t know why).</p>
+
+<p>After your call to <code class="language-plaintext highlighter-rouge">createCanvas(400, 400)</code> add the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
+  // load in sprite sheet - change the filename to match your file
+  await loadImage("assets/spritesheet.png"); 
+  createCanvas(400, 400);
+
+  drawingContext.imageSmoothingEnabled = false;
+
+  ...
+
+}
+</code></pre></div></div>
+
+<p>The image should be a bit crisper now.</p>
+
+<p><img src="/assets/img/ecs-js/nosmoothed.png/" alt="nosmooth"></p>
+
+<h3 id="6-move-them-around">6. Move them around</h3>
+
+<p>We have the ability to draw sprites and they should look crisp.  Let’s now move our player around the screen.</p>
+
+<p>Before we get into it, you might notice your background doesn’t match mine.  That’s because I told you to use 0 (black), however the sprite background is somewhat gray (if you’re using the microroguelike one).</p>
+
+<p>What you need to do is figure out what the color of your sprite background is and set the color each draw cycle to that!  (If the sprites have a transparent background you don’t need to worry about this - and in the olden days we used to filter based on a magic color: <span style="background:#ff00ff">#ff00ff</span>).</p>
+
+<p>For me, it is <span style="background:#222323;color:#eee;">#222323</span>, so at the top:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const sprite_bg = "#222323";
+</code></pre></div></div>
+
+<p>and then in <code class="language-plaintext highlighter-rouge">draw</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function draw() {
+  background(sprite_bg);
+
+  ...
+}
+</code></pre></div></div>
+
+<p>Ok, fun time - p5js handles keypresses in an interesting fashion.  You can use the <code class="language-plaintext highlighter-rouge">keyPressed</code> function, the <code class="language-plaintext highlighter-rouge">isKeyPressed</code> function (within <code class="language-plaintext highlighter-rouge">draw</code>), and so on.  Since we’re going for a game where the user can hold down keys, we’ll use the <code class="language-plaintext highlighter-rouge">isKeyPressed</code> approach.</p>
+
+<p>At the bottom of <code class="language-plaintext highlighter-rouge">draw</code> (i.e., let’s handle player input after updating/drawing the game state):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function draw() {
+
+  ...
+
+  // enable continuous movement
+  if (keyIsDown(LEFT_ARROW) || keyIsDown("a")) {
+    player.x--;
+  }
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown("d")) {
+    player.x++;
+  }
+  if (keyIsDown(UP_ARROW) || keyIsDown("w")) {
+    player.y--;
+  }
+  if (keyIsDown(DOWN_ARROW) || keyIsDown("s")) {
+    player.y++;
+  }
+}
+</code></pre></div></div>
+
+<p>Here we’re using the arrow or WADS keys for movement.  You can define whichever keys you want to use (or gamepads, for instance).</p>
+
+<blockquote>
+  <p>Note: again, there are nicer ways of doing this.  Defining a lookup table of keys, for example, so that you can easily have your users configure their controls…</p>
+</blockquote>
+
+<p>Your player should now move around the screen, a little bit at a time.  You can play with the increment/decrement values to make it faster, however we’ll bake that into our Entity later on.</p>
+
+<hr>
+
+<p><a href="s1%20branch">GitHub Repository - Step 1</a></p>
+
+<hr>
+
+<h2 id="entities-step-2">Entities (step 2)</h2>
+
+<p>create a base entity class with empty functions (use vector instead of x,y)
+create a moveable entity class
+show update/draw
+create a player and enemy class
+create the array and add the player and enemies
+create dvd and follower</p>
+
+<h2 id="components-step-3">Components (step 3)</h2>
+
+<p>remove custom entities for AI and replace with components</p>
+
+<h2 id="handling-a-map-manually">Handling a map (manually)</h2>
+
+<p>generate a map</p>
+
+<h2 id="camera-follow">Camera follow</h2>
+
+<p>.. tbd</p>
+
+<h2 id="final-steps">Final steps?</h2>
+
+<p>Performance optimization - record and see waht’s going on</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>This is a taste of what you can do.  A few things:</p>
+
+<ul>
+  <li>p5js is canonically <em>slow</em> for JavaScript games as it makes some choices in terms of rendering performance.  It is for teaching and not necessarily production games.  Manually draw to the <code class="language-plaintext highlighter-rouge">canvas</code> with straight JavaScript or use a framework like <a href="https://phaser.io" target="_blank" rel="noopener noreferrer">PhaserJS</a> to optimize your game.
+    <ul>
+      <li>Check the Performance tab in your browser to profile!  Also, <a href="https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#identifying-slow-code-profiling" target="_blank" rel="noopener noreferrer">p5 optimization suggestions</a>
+</li>
+    </ul>
+  </li>
+  <li>
+    <p>Add gameplay!  We’ve essentially created a 2D walking simulator.</p>
+  </li>
+  <li>
+    <p>Wire in Tiled maps!  I’ve not tried it, but a lot of 2D games use the <a href="https://www.mapeditor.org/" target="_blank" rel="noopener noreferrer">Tiled Editor</a> for setting up maps, obstacles, etc. <a href="https://github.com/linux-man/p5.tiledmap" target="_blank" rel="noopener noreferrer">p5.tiledmap</a></p>
+  </li>
+  <li>Check out the other <a href="https://p5js.org/libraries/" target="_blank" rel="noopener noreferrer">p5js libraries</a>! There are a <strong>ton</strong> of things you can do with it!
+    <ul>
+      <li>There is an <a href="https://github.com/RandomGamingDev/BasicECSJs/" target="_blank" rel="noopener noreferrer">ECS library</a> as well that I’ve never tried, but it also includes a Scene Manager, which is nice (alternatively, just use a state machine to manage that yourself).</li>
+    </ul>
+  </li>
+  <li>Make a roguelike game in Godot!  The <a href="https://selinadev.github.io/" target="_blank" rel="noopener noreferrer">SelinaDev tutorial</a> is a nice introduction to Godot (and more imporantly for this, ECS).</li>
+</ul>
+
+<p>camera + sprites
+https://editor.p5js.org/efredericks/sketches/wErqg4bAf</p>
 
 <div class="carousel__holder">
-    <div id="carousel0" class="carousel">
+  <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>&lt;div id="carousel0" class="carousel"&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0a" checked="checked" /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0b"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0c"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0d"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0e"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0f"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0g"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0h"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0i"  /&gt;
+    
+      &lt;input class="carousel__activator" type="radio" name="carousel0" id="0j"  /&gt;
+    
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0j"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0b"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0a"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0c"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0b"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0d"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0c"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0e"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0d"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0f"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0e"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0g"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0f"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0h"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0g"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0i"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0h"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0j"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+      
+      
+      
+      
+      &lt;div class="carousel__controls"&gt;
+          &lt;label class="carousel__control carousel__control--backward" for="0i"&gt;&lt;/label&gt;
+          &lt;label class="carousel__control carousel__control--forward" for="0a"&gt;&lt;/label&gt;
+      &lt;/div&gt;
+    
+    &lt;div class="carousel__track"&gt;
+      &lt;ul&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0a" checked>
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-6.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-6.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-6.png" title="/assets/img/GenerativeGI/random/img-6.png" alt="/assets/img/GenerativeGI/random/img-6.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0b">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-22.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-22.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-22.png" title="/assets/img/GenerativeGI/random/img-22.png" alt="/assets/img/GenerativeGI/random/img-22.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0c">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-46.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-46.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-46.png" title="/assets/img/GenerativeGI/random/img-46.png" alt="/assets/img/GenerativeGI/random/img-46.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0d">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-62.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-62.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-62.png" title="/assets/img/GenerativeGI/random/img-62.png" alt="/assets/img/GenerativeGI/random/img-62.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0e">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-64.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-64.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-64.png" title="/assets/img/GenerativeGI/random/img-64.png" alt="/assets/img/GenerativeGI/random/img-64.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0f">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-67.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-67.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-67.png" title="/assets/img/GenerativeGI/random/img-67.png" alt="/assets/img/GenerativeGI/random/img-67.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0g">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-71.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-71.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-71.png" title="/assets/img/GenerativeGI/random/img-71.png" alt="/assets/img/GenerativeGI/random/img-71.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0h">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-94.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-94.png" title="/assets/img/GenerativeGI/random/img-94.png" alt="/assets/img/GenerativeGI/random/img-94.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0i">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94-1.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-94-1.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-94-1.png" title="/assets/img/GenerativeGI/random/img-94-1.png" alt="/assets/img/GenerativeGI/random/img-94-1.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
-          <input class="carousel__activator" type="radio" name="carousel0" id="0j">
+        &lt;li class="carousel__slide"&gt;
+          &lt;!-- style="background-image: url('/assets/img/GenerativeGI/random/img-98.png');"&gt; --&gt;
+          &lt;a href=" /assets/img/GenerativeGI/random/img-98.png "&gt;
+            &lt;img src="/assets/img/GenerativeGI/random/img-98.png" title="/assets/img/GenerativeGI/random/img-98.png" alt="/assets/img/GenerativeGI/random/img-98.png" /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
         
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel__indicators"&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0j"></label>
-              <label class="carousel__control carousel__control--forward" for="0b"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0a"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0a"></label>
-              <label class="carousel__control carousel__control--forward" for="0c"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0b"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0b"></label>
-              <label class="carousel__control carousel__control--forward" for="0d"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0c"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0c"></label>
-              <label class="carousel__control carousel__control--forward" for="0e"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0d"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0d"></label>
-              <label class="carousel__control carousel__control--forward" for="0f"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0e"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0e"></label>
-              <label class="carousel__control carousel__control--forward" for="0g"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0f"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0f"></label>
-              <label class="carousel__control carousel__control--forward" for="0h"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0g"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0g"></label>
-              <label class="carousel__control carousel__control--forward" for="0i"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0h"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0h"></label>
-              <label class="carousel__control carousel__control--forward" for="0j"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0i"&gt;&lt;/label&gt;
         
-          
-          
-          
-          
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="0i"></label>
-              <label class="carousel__control carousel__control--forward" for="0a"></label>
-          </div>
+          &lt;label class="carousel__indicator" for="0j"&gt;&lt;/label&gt;
         
-        <div class="carousel__track">
-          <ul>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-6.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-6.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-6.png" title="/assets/img/GenerativeGI/random/img-6.png" alt="/assets/img/GenerativeGI/random/img-6.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-22.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-22.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-22.png" title="/assets/img/GenerativeGI/random/img-22.png" alt="/assets/img/GenerativeGI/random/img-22.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-46.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-46.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-46.png" title="/assets/img/GenerativeGI/random/img-46.png" alt="/assets/img/GenerativeGI/random/img-46.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-62.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-62.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-62.png" title="/assets/img/GenerativeGI/random/img-62.png" alt="/assets/img/GenerativeGI/random/img-62.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-64.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-64.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-64.png" title="/assets/img/GenerativeGI/random/img-64.png" alt="/assets/img/GenerativeGI/random/img-64.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-67.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-67.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-67.png" title="/assets/img/GenerativeGI/random/img-67.png" alt="/assets/img/GenerativeGI/random/img-67.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-71.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-71.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-71.png" title="/assets/img/GenerativeGI/random/img-71.png" alt="/assets/img/GenerativeGI/random/img-71.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-94.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-94.png" title="/assets/img/GenerativeGI/random/img-94.png" alt="/assets/img/GenerativeGI/random/img-94.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-94-1.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-94-1.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-94-1.png" title="/assets/img/GenerativeGI/random/img-94-1.png" alt="/assets/img/GenerativeGI/random/img-94-1.png">
-              </a>
-            </li>
-            
-            <li class="carousel__slide">
-              <!-- style="background-image: url('/assets/img/GenerativeGI/random/img-98.png');"> -->
-              <a href="/assets/img/GenerativeGI/random/img-98.png%20">
-                <img src="/assets/img/GenerativeGI/random/img-98.png" title="/assets/img/GenerativeGI/random/img-98.png" alt="/assets/img/GenerativeGI/random/img-98.png">
-              </a>
-            </li>
-            
-          </ul>
-        </div>
-        <div class="carousel__indicators">
-            
-              <label class="carousel__indicator" for="0a"></label>
-            
-              <label class="carousel__indicator" for="0b"></label>
-            
-              <label class="carousel__indicator" for="0c"></label>
-            
-              <label class="carousel__indicator" for="0d"></label>
-            
-              <label class="carousel__indicator" for="0e"></label>
-            
-              <label class="carousel__indicator" for="0f"></label>
-            
-              <label class="carousel__indicator" for="0g"></label>
-            
-              <label class="carousel__indicator" for="0h"></label>
-            
-              <label class="carousel__indicator" for="0i"></label>
-            
-              <label class="carousel__indicator" for="0j"></label>
-            
-        </div>
-    </div>
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div>  </div>
 </div>
 
 <style>
@@ -892,164 +1238,7 @@
   },15000);
   
 </script>
-<p>–&gt;</p>
 
-<h2 id="first-steps">First steps</h2>
-
-<p>Ok, here we go!  Everything we’ll be doing is in the online p5js editor, however you can export it to any website you want after we’re done.</p>
-
-<h3 id="1-create-a-new-project-directory-structure">1. <strong>Create a new project (directory structure)</strong>
-</h3>
-
-<p>Let’s start by defining a directory structure.  By default you’ll have some p5 libraries, an <code class="language-plaintext highlighter-rouge">index.html</code>, and a <code class="language-plaintext highlighter-rouge">sketch.js</code>.</p>
-
-<p>If you aren’t familiar:</p>
-
-<ul>
-  <li>Any time we add a new <code class="language-plaintext highlighter-rouge">js</code> file we need to link to it within the <code class="language-plaintext highlighter-rouge">index.html</code> file - <strong>before</strong> we include the <code class="language-plaintext highlighter-rouge">sketch.js</code> file.  HTML/JavaScript is (typically) rendered <strong>in-order</strong>, so dependencies must be specified in the correct order.</li>
-  <li>p5js uses a few functions to set things up:
-    <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">setup</code> runs before the <code class="language-plaintext highlighter-rouge">draw</code> cycle (or, the forever loop).  Set variable states and do all of your setup in this function.  With p5js 2.0 and beyond, all file loading happens in <code class="language-plaintext highlighter-rouge">setup</code> as well!</li>
-      <li>
-<code class="language-plaintext highlighter-rouge">draw</code> is your forever loop - it runs either as fast as possible or at a specified frame rate.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="2-upload-your-asset-files-and-create-empty-files">2. <strong>Upload your asset files and create empty files</strong>
-</h3>
-
-<p>Create a directory on the side called assets and upload your spritesheet <strong>and</strong> its license file.  While you’re working there, create files named <code class="language-plaintext highlighter-rouge">components.js</code> and <code class="language-plaintext highlighter-rouge">entities.js</code> at the root of your directory (we could add sub-folders for organization, but for this we’ll just keep it on the same level).</p>
-
-<p><img src="/assets/img/ecs-js/uploading.png" alt="uploading"></p>
-
-<p>Note - if you want to upload to a folder then you need to hover over it and click the little dropdown triangle to the side, otherwise you upload to the root of the structure.</p>
-
-<p><img src="/assets/img/ecs-js/uploading2.png" alt="uploading to folder"></p>
-
-<h3 id="3-wire-everything-up">3. <strong>Wire everything up</strong>
-</h3>
-
-<p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="components.js"&gt;&lt;/script&gt;
-&lt;script src="entities.js"&gt;&lt;/script&gt;
-&lt;script src="sketch.js"&gt;&lt;/script&gt;
-</code></pre></div></div>
-
-<p>We need to put them above as they need to be parsed before <code class="language-plaintext highlighter-rouge">sketch.js</code> is parsed (for instance, any global variables we might want to share).</p>
-
-<blockquote>
-  <p>Note that we are setting up a structure that is good for a quick demo - it would be much better to refactor our code to say, have a <code class="language-plaintext highlighter-rouge">Game</code> class controlling everything, ingesting the assets, managing entities, etc.  However, we’re going to just use a few global variables to get things working.</p>
-</blockquote>
-
-<h3 id="4-use-p5js-20x">4. <strong>Use p5js 2.0.x</strong>
-</h3>
-
-<p>Let’s start you off with the latest version of p5js - click the version number (next to the gear icon) in the top right and select the latest 2.0.x version - I’m on 2.0.5.  This introduces a plethora of new features - the ones I’m most familiar with are that assets are now loaded in via <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> calls (instead of using a <code class="language-plaintext highlighter-rouge">preload</code> function).  Let’s try it out:</p>
-
-<p>At the top of your <code class="language-plaintext highlighter-rouge">sketch.js</code> file (in global space), add a variable:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let spritesheet;
-
-...
-
-function setup() {
-  ...
-</code></pre></div></div>
-
-<p>And then modify your <code class="language-plaintext highlighter-rouge">setup</code> and <code class="language-plaintext highlighter-rouge">draw</code> functions to look like this:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
-  // load in sprite sheet - change the filename to match your file
-  await loadImage("assets/spritesheet.png"); 
-  createCanvas(400, 400);
-}
-
-function draw() {
-  background(0);
-  image(spritesheet, 0, 0);
-}
-</code></pre></div></div>
-
-<p>You should now see your spritesheet being drawn to the top left corner!  Note that we also draw the background to give the illusion of animation (once things start to move).  If you didn’t redraw the background then things would smear the screen.</p>
-
-<p><img src="/assets/img/ecs-js/spritesheet-draw.png" alt="spritesheet"></p>
-
-<h3 id="5-draw-your-character-to-the-screen">5. <strong>Draw your character to the screen</strong>
-</h3>
-
-<p>Last but not least, we need to direct the canvas to be optimized for pixel art.  If you look at the p5js documentation there are <code class="language-plaintext highlighter-rouge">smooth()</code> and <code class="language-plaintext highlighter-rouge">noSmooth()</code> functions, however they don’t see to have the desired effect (note: I don’t know why).</p>
-
-<p>After your call to <code class="language-plaintext highlighter-rouge">createCanvas(400, 400)</code> add the following:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
-  // load in sprite sheet - change the filename to match your file
-  await loadImage("assets/spritesheet.png"); 
-  createCanvas(400, 400);
-
-  drawingContext.imageSmoothingEnabled = false;
-}
-</code></pre></div></div>
-
-<p>The image should be a bit crisper now, though if you have the ‘small’ tileset you won’t notice.</p>
-
-<h3 id="6-move-them-around">6. <strong>Move them around</strong>
-</h3>
-
-<h2 id="entities-step-2">Entities (step 2)</h2>
-
-<p>create a base entity class with empty functions (use vector instead of x,y)
-create a moveable entity class
-show update/draw
-create a player and enemy class
-create the array and add the player and enemies
-create dvd and follower</p>
-
-<h2 id="components-step-3">Components (step 3)</h2>
-
-<p>remove custom entities for AI and replace with components</p>
-
-<h2 id="handling-a-map-manually">Handling a map (manually)</h2>
-
-<p>generate a map</p>
-
-<h2 id="camera-follow">Camera follow</h2>
-
-<p>.. tbd</p>
-
-<h2 id="final-steps">Final steps?</h2>
-
-<p>Performance optimization - record and see waht’s going on</p>
-
-<h2 id="next-steps">Next steps</h2>
-
-<p>This is a taste of what you can do.  A few things:</p>
-
-<ul>
-  <li>p5js is canonically <em>slow</em> for JavaScript games as it makes some choices in terms of rendering performance.  It is for teaching and not necessarily production games.  Manually draw to the <code class="language-plaintext highlighter-rouge">canvas</code> with straight JavaScript or use a framework like <a href="https://phaser.io" target="_blank" rel="noopener noreferrer">PhaserJS</a> to optimize your game.
-    <ul>
-      <li>Check the Performance tab in your browser to profile!  Also, <a href="https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#identifying-slow-code-profiling" target="_blank" rel="noopener noreferrer">p5 optimization suggestions</a>
-</li>
-    </ul>
-  </li>
-  <li>
-    <p>Add gameplay!  We’ve essentially created a 2D walking simulator.</p>
-  </li>
-  <li>
-    <p>Wire in Tiled maps!  I’ve not tried it, but a lot of 2D games use the <a href="https://www.mapeditor.org/" target="_blank" rel="noopener noreferrer">Tiled Editor</a> for setting up maps, obstacles, etc. <a href="https://github.com/linux-man/p5.tiledmap" target="_blank" rel="noopener noreferrer">p5.tiledmap</a></p>
-  </li>
-  <li>Check out the other <a href="https://p5js.org/libraries/" target="_blank" rel="noopener noreferrer">p5js libraries</a>! There are a <strong>ton</strong> of things you can do with it!
-    <ul>
-      <li>There is an <a href="https://github.com/RandomGamingDev/BasicECSJs/" target="_blank" rel="noopener noreferrer">ECS library</a> as well that I’ve never tried, but it also includes a Scene Manager, which is nice (alternatively, just use a state machine to manage that yourself).</li>
-    </ul>
-  </li>
-  <li>Make a roguelike game in Godot!  The <a href="https://selinadev.github.io/" target="_blank" rel="noopener noreferrer">SelinaDev tutorial</a> is a nice introduction to Godot (and more imporantly for this, ECS).</li>
-</ul>
-
-<p>camera + sprites
-https://editor.p5js.org/efredericks/sketches/wErqg4bAf</p>
 
         </div>
         <div class="post-metadata">

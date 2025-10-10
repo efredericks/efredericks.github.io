@@ -17,6 +17,8 @@ plugins:
   - jekyll-target-blank
 # Build settings
 markdown: kramdown
+kramdown: 
+  parse_block_html: true
 remote_theme: ItsPatrq/minimal-music-project
 permalink: /:title.html
 pagination:
