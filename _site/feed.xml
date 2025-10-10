@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-03T16:28:29-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr size="1" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-10T08:16:01-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li><a href="tbd">functioning p5js sketch</a></li>
@@ -36,7 +36,11 @@
 
 <ol>
   <li>Create an account on the p5js editor: <a href="p5js online editor">https://editor.p5js.org</a></li>
-  <li>Grab a spritesheet from <a href="https://kenney.nl">kenney.nl</a>: I’ll be using the <a href="https://kenney.nl/assets/micro-roguelike">microrogue resource</a>. Make sure you include the License when you upload!</li>
+  <li>Grab a spritesheet from <a href="https://kenney.nl">kenney.nl</a>: I’ll be using the <a href="https://kenney.nl/assets/micro-roguelike">microrogue resource</a>. Make sure you include the License when you upload!
+    <ul>
+      <li>Double-note - we’re using the “packed” sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn’t work very well.</li>
+    </ul>
+  </li>
 </ol>
 
 <p>&lt;!–</p>
@@ -744,26 +748,99 @@
 
 <h2 id="first-steps">First steps</h2>
 
-<ol>
-  <li>
-    <p>Create a new project (directory structure)</p>
+<p>Ok, here we go!  Everything we’ll be doing is in the online p5js editor, however you can export it to any website you want after we’re done.</p>
+
+<h3 id="1-create-a-new-project-directory-structure">1. <strong>Create a new project (directory structure)</strong></h3>
+
+<p>Let’s start by defining a directory structure.  By default you’ll have some p5 libraries, an <code class="language-plaintext highlighter-rouge">index.html</code>, and a <code class="language-plaintext highlighter-rouge">sketch.js</code>.</p>
+
+<p>If you aren’t familiar:</p>
+
+<ul>
+  <li>Any time we add a new <code class="language-plaintext highlighter-rouge">js</code> file we need to link to it within the <code class="language-plaintext highlighter-rouge">index.html</code> file - <strong>before</strong> we include the <code class="language-plaintext highlighter-rouge">sketch.js</code> file.  HTML/JavaScript is (typically) rendered <strong>in-order</strong>, so dependencies must be specified in the correct order.</li>
+  <li>p5js uses a few functions to set things up:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">setup</code> runs before the <code class="language-plaintext highlighter-rouge">draw</code> cycle (or, the forever loop).  Set variable states and do all of your setup in this function.  With p5js 2.0 and beyond, all file loading happens in <code class="language-plaintext highlighter-rouge">setup</code> as well!</li>
+      <li><code class="language-plaintext highlighter-rouge">draw</code> is your forever loop - it runs either as fast as possible or at a specified frame rate.</li>
+    </ul>
   </li>
-  <li>
-    <p>Upload your asset files</p>
-  </li>
-  <li>
-    <p>Wire everything up</p>
-  </li>
-  <li>
-    <p>Use p5js 2.0.x</p>
-  </li>
-  <li>
-    <p>Draw your character to the screen</p>
-  </li>
-  <li>
-    <p>Move them around</p>
-  </li>
-</ol>
+</ul>
+
+<h3 id="2-upload-your-asset-files-and-create-empty-files">2. <strong>Upload your asset files and create empty files</strong></h3>
+
+<p>Create a directory on the side called assets and upload your spritesheet <strong>and</strong> its license file.  While you’re working there, create files named <code class="language-plaintext highlighter-rouge">components.js</code> and <code class="language-plaintext highlighter-rouge">entities.js</code> at the root of your directory (we could add sub-folders for organization, but for this we’ll just keep it on the same level).</p>
+
+<p><img src="/assets/img/ecs-js/uploading.png" alt="uploading" /></p>
+
+<p>Note - if you want to upload to a folder then you need to hover over it and click the little dropdown triangle to the side, otherwise you upload to the root of the structure.</p>
+
+<p><img src="/assets/img/ecs-js/uploading2.png" alt="uploading to folder" /></p>
+
+<h3 id="3-wire-everything-up">3. <strong>Wire everything up</strong></h3>
+
+<p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="components.js"&gt;&lt;/script&gt;
+&lt;script src="entities.js"&gt;&lt;/script&gt;
+&lt;script src="sketch.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
+<p>We need to put them above as they need to be parsed before <code class="language-plaintext highlighter-rouge">sketch.js</code> is parsed (for instance, any global variables we might want to share).</p>
+
+<blockquote>
+  <p>Note that we are setting up a structure that is good for a quick demo - it would be much better to refactor our code to say, have a <code class="language-plaintext highlighter-rouge">Game</code> class controlling everything, ingesting the assets, managing entities, etc.  However, we’re going to just use a few global variables to get things working.</p>
+</blockquote>
+
+<h3 id="4-use-p5js-20x">4. <strong>Use p5js 2.0.x</strong></h3>
+
+<p>Let’s start you off with the latest version of p5js - click the version number (next to the gear icon) in the top right and select the latest 2.0.x version - I’m on 2.0.5.  This introduces a plethora of new features - the ones I’m most familiar with are that assets are now loaded in via <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> calls (instead of using a <code class="language-plaintext highlighter-rouge">preload</code> function).  Let’s try it out:</p>
+
+<p>At the top of your <code class="language-plaintext highlighter-rouge">sketch.js</code> file (in global space), add a variable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let spritesheet;
+
+...
+
+function setup() {
+  ...
+</code></pre></div></div>
+
+<p>And then modify your <code class="language-plaintext highlighter-rouge">setup</code> and <code class="language-plaintext highlighter-rouge">draw</code> functions to look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
+  // load in sprite sheet - change the filename to match your file
+  await loadImage("assets/spritesheet.png"); 
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(0);
+  image(spritesheet, 0, 0);
+}
+</code></pre></div></div>
+
+<p>You should now see your spritesheet being drawn to the top left corner!  Note that we also draw the background to give the illusion of animation (once things start to move).  If you didn’t redraw the background then things would smear the screen.</p>
+
+<p><img src="/assets/img/ecs-js/spritesheet-draw.png" alt="spritesheet" /></p>
+
+<h3 id="5-draw-your-character-to-the-screen">5. <strong>Draw your character to the screen</strong></h3>
+
+<p>Last but not least, we need to direct the canvas to be optimized for pixel art.  If you look at the p5js documentation there are <code class="language-plaintext highlighter-rouge">smooth()</code> and <code class="language-plaintext highlighter-rouge">noSmooth()</code> functions, however they don’t see to have the desired effect (note: I don’t know why).</p>
+
+<p>After your call to <code class="language-plaintext highlighter-rouge">createCanvas(400, 400)</code> add the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async function setup() {
+  // load in sprite sheet - change the filename to match your file
+  await loadImage("assets/spritesheet.png"); 
+  createCanvas(400, 400);
+
+  drawingContext.imageSmoothingEnabled = false;
+}
+</code></pre></div></div>
+
+<p>The image should be a bit crisper now, though if you have the ‘small’ tileset you won’t notice.</p>
+
+<h3 id="6-move-them-around">6. <strong>Move them around</strong></h3>
 
 <h2 id="entities-step-2">Entities (step 2)</h2>
 

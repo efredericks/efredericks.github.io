@@ -452,7 +452,6 @@ pre {
     padding-inline-start: 40px; }
   .post li {
     display: list-item;
-    font-size: 0.9em;
     color: #000000; }
   .post .post-content, .post .post-metadata {
     background: #FFF;
@@ -500,8 +499,14 @@ pre {
     height: auto;
     max-height: 65vh;
     margin: auto; }
-  .post a {
-    font-size: 1em; }
+  .post h2, .post h3, .post h4, .post h5 {
+    margin: 1em 0em; }
+  .post blockquote {
+    background: #a300a371;
+    /* rgba(80,0,80,0.5);*/
+    padding: 1em;
+    font-style: italic;
+    border-radius: 1em; }
 
 .cookie-container {
   position: fixed;

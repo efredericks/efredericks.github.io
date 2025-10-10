@@ -39,7 +39,7 @@
     }
     li {
         display: list-item;
-            font-size: 0.9em;
+            // font-size: 0.9em;
             // line-height: 1em;
             // font-weight: 300;
             // padding-bottom: 0.5em;
@@ -101,6 +101,17 @@
     }
 
     a {
-        font-size: 1em;
+        // font-size: 1em;
+    }
+
+    h2, h3, h4, h5 {
+        margin: 1em 0em;
+    }
+
+    blockquote {
+        background: $bq_bg; /* rgba(80,0,80,0.5);*/
+        padding: 1em;
+        font-style: italic;
+        border-radius: 1em;
     }
 }
