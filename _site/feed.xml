@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-10T12:18:35-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-13T09:34:33-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr />
 
 <ul>
   <li><a href="tbd">functioning p5js sketch</a></li>
@@ -22,10 +22,17 @@
       <li><a href="#6-move-them-around" id="markdown-toc-6-move-them-around">6. Move them around</a></li>
     </ul>
   </li>
-  <li><a href="#entities" id="markdown-toc-entities">Entities</a></li>
+  <li><a href="#entities" id="markdown-toc-entities">Entities</a>    <ul>
+      <li><a href="#creating-a-base-entity-class" id="markdown-toc-creating-a-base-entity-class">Creating a base entity class</a></li>
+      <li><a href="#create-our-child-classes" id="markdown-toc-create-our-child-classes">Create our child classes</a></li>
+    </ul>
+  </li>
   <li><a href="#components" id="markdown-toc-components">Components</a></li>
-  <li><a href="#handling-a-map" id="markdown-toc-handling-a-map">Handling a map</a></li>
-  <li><a href="#camera-follow" id="markdown-toc-camera-follow">Camera follow</a></li>
+  <li><a href="#the-extra-bits" id="markdown-toc-the-extra-bits">The extra bits</a>    <ul>
+      <li><a href="#handling-a-map" id="markdown-toc-handling-a-map">Handling a map</a></li>
+      <li><a href="#camera-follow" id="markdown-toc-camera-follow">Camera follow</a></li>
+    </ul>
+  </li>
   <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
 </ul>
 
@@ -46,6 +53,9 @@
 <p>This is a fairly reductive take on ECS and you can read about it in-depth on <a href="https://en.wikipedia.org/wiki/Entity_component_system">Wikipedia</a> and <a href="https://dev.to/kspeakman/entity-component-system-an-old-new-thing-3224">dev.to</a> and <a href="https://www.richardlord.net/blog/ecs/why-use-an-entity-framework.html">this blog</a>.</p>
 
 <p>There also is an ECS framework available as well: <a href="https://www.flecs.dev/flecs/">FLECS</a> and a correlated <a href="https://github.com/SanderMertens/ecs-faq">FAQ</a>.</p>
+
+<p>ECS, c/o WikiPedia:
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/ECS_Simple_Layout.svg/512px-ECS_Simple_Layout.svg.png" alt="ECS (ECS)" /></p>
 
 <h2 id="a-note-on-resources">A note on resources</h2>
 
@@ -171,7 +181,7 @@
 <blockquote>
   <p>You can test this out by the way, when drawing the spritesheet you can use the player position:</p>
 
-  <p><code class="language-plaintext highlighter-rouge">draw(spritesheet, player.x, player.y);</code></p>
+  <p><code class="language-plaintext highlighter-rouge">image(spritesheet, player.x, player.y);</code></p>
 </blockquote>
 
 <p>However, we want to draw a single sprite from our spritesheet, not the entirety of it.</p>
@@ -244,6 +254,13 @@
 </code></pre></div></div>
 
 <p>This defines a dictionary for every single character in our game.  Some spritesheets come with a <code class="language-plaintext highlighter-rouge">json</code> file for easy unpacking, however these ones don’t.  Gives you a bit more control!</p>
+
+<p>Now draw the player:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">drawSprite</span><span class="p">(</span><span class="dl">'</span><span class="s1">player</span><span class="dl">'</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p> </p>
 
 <blockquote>
   <p>Feel free to pick whatever sprites you want for the various characters we’ll be drawing.</p>
@@ -333,11 +350,13 @@
   <p>Note: at this point, you can define any number of sprites on the screen - for example:</p>
 
   <p><code class="language-plaintext highlighter-rouge">drawSprite('snake', 100, 100);</code></p>
+
+  <p>Also, if you want to see the screen smearing example then comment out the call to <code class="language-plaintext highlighter-rouge">background</code> within the <code class="language-plaintext highlighter-rouge">draw</code> loop.</p>
 </blockquote>
 
 <hr />
 
-<p><a href="s1 branch">GitHub Repository - Step 1</a></p>
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="s1 branch">GitHub Repository - Step 1</a></p>
 
 <hr />
 
@@ -349,43 +368,278 @@
   <p>Note: the overall goal is to end up with an array of entities that we can loop over and simply call their respective <code class="language-plaintext highlighter-rouge">update()</code> and <code class="language-plaintext highlighter-rouge">draw()</code> functions - no spaghetti mess of if statements!  If you’ve a software engineering background then you might be familiar with the concept of having classes responsible for themselves.  Essentially, we’re looking to partition out effort and responsibility.</p>
 </blockquote>
 
+<h3 id="creating-a-base-entity-class">Creating a base entity class</h3>
+
 <p>First, we’ll create a <strong>base entity class</strong>.  Move over to <code class="language-plaintext highlighter-rouge">entities.js</code> and add the following:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Entity</span> <span class="p">{</span>
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">sprite</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">=</span> <span class="nx">w</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">=</span> <span class="nx">h</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="nx">update</span><span class="p">()</span> <span class="p">{}</span>
 
   <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>This gives us a <em>base class</em> that we can extend others off of.  It’ll have a sprite variable, a position, and a size.  You’ll note we’re using <code class="language-plaintext highlighter-rouge">createVector</code> to store the x/y and w/h of the object.  This is because later on we’ll be using some vector math and it is easier to manage now rather than creating temporary variables (plus, it’s a bit cleaner).</p>
+<p>This gives us a <em>base class</em> that we can extend others off of.  It’ll have a sprite variable, a position (x, y), and a size (w, h).  Note that we could use vectors here (via the <code class="language-plaintext highlighter-rouge">createVector</code> call), however we’ll go simpler for now.</p>
 
-<p>create a base entity class with empty functions (use vector instead of x,y)
-create a moveable entity class
-show update/draw
-create a player and enemy class
-create the array and add the player and enemies
-create dvd and follower</p>
+<p>We’re also doubly-storing the size of the sprite given that they are square, however this approach is a bit more extensable if you end up with sprites that have non-square sizes (looking at you, <a href="https://opengameart.org/content/dungeon-crawl-32x32-tiles">dcss sprites</a>).</p>
+
+<blockquote>
+  <p>Note: any <em>generic</em> functions that you want all entities to have should go in your base class.  You can leave them empty if it is to be specialized by child classes (like the <code class="language-plaintext highlighter-rouge">update</code> function is).  Note that the <code class="language-plaintext highlighter-rouge">draw</code> function has code since all entities will have the same draw approach.</p>
+</blockquote>
+
+<h3 id="create-our-child-classes">Create our child classes</h3>
+
+<p>We <em>could</em> have our player be an entity, however let’s move ahead and specialize.  Here are the types of entities we’ll consider here (feel free to experiment/extrapolate!):</p>
+
+<ul>
+  <li>An entity that can move (e.g., the player, monsters, NPCs)</li>
+  <li>An entity that cannot move (e.g., an item, something in the environment, an NPC that is geo-locked)</li>
+</ul>
+
+<p>Interestingly, we’re not going to get <em>too</em> crazy with our specializations.  We could, but we’ll leave that to our <strong>component</strong> setup.  (And, if we did it here we’d have a lot of refactoring to do, which is not really all that much fun).  What we will do for deeper specializations is to <em>equip</em> each entity with a suite of components, making it a touch more data-driven.</p>
+
+<p>So, let’s delineate our children - create a few sub-classes:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// an entity that can move</span>
+<span class="kd">class</span> <span class="nx">MoveableEntity</span> <span class="kd">extends</span> <span class="nx">Entity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="nx">speed</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// make sure the move is valid before doing it!</span>
+  <span class="nx">tryMove</span><span class="p">(</span><span class="nx">move</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">||</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">&gt;</span> <span class="nx">height</span>
+    <span class="p">)</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Our player class - this is a bit special as we'll do some one-off</span>
+<span class="c1">// coding in here.  </span>
+<span class="kd">class</span> <span class="nx">Player</span> <span class="kd">extends</span> <span class="nx">MoveableEntity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">"</span><span class="s2">player</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">);</span> <span class="c1">// this magic number should be defined in a lookup table!</span>
+  <span class="p">}</span>
+
+  <span class="c1">// handle player movement</span>
+  <span class="nx">move</span><span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="p">};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">up</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span> <span class="o">-=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">down</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">left</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">right</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Movement not supported</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tryMove</span><span class="p">(</span><span class="nx">next_move</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// temporary entities - we'll modify/delete them later!</span>
+<span class="kd">class</span> <span class="nx">Enemy</span> <span class="kd">extends</span> <span class="nx">MoveableEntity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// enemy AI</span>
+  <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+        <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+      <span class="p">};</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tryMove</span><span class="p">(</span><span class="nx">next_move</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// a bouncy friend</span>
+<span class="kd">class</span> <span class="nx">DVD</span> <span class="kd">extends</span> <span class="nx">MoveableEntity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span><span class="p">,</span>
+      <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="c1">// if (this.tryMove(next_move)) {</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// }</span>
+<span class="p">}</span>
+
+<span class="c1">// a followey friend</span>
+<span class="kd">class</span> <span class="nx">Follower</span> <span class="kd">extends</span> <span class="nx">MoveableEntity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">=</span> <span class="nx">target</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">super</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">my_v</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+      <span class="kd">let</span> <span class="nx">t_v</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+      <span class="kd">let</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">p5</span><span class="p">.</span><span class="nx">Vector</span><span class="p">.</span><span class="nx">sub</span><span class="p">(</span><span class="nx">t_v</span><span class="p">,</span> <span class="nx">my_v</span><span class="p">);</span>
+      <span class="nx">direction</span><span class="p">.</span><span class="nx">normalize</span><span class="p">();</span>
+      <span class="nx">direction</span><span class="p">.</span><span class="nx">mult</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+      <span class="nx">my_v</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>OK, we now have some specialized classes.  We have a <code class="language-plaintext highlighter-rouge">Player</code> that will manage our player, a generic <code class="language-plaintext highlighter-rouge">Enemy</code> that will randomly jitter, a bouncing <code class="language-plaintext highlighter-rouge">DVD</code> logo, and something that follows the player around with a bit of vector math.</p>
+
+<blockquote>
+  <p>If you run it now, you should see nothing - that’s because we haven’t instantiated them yet.</p>
+</blockquote>
+
+<p>First, let’s make sure the player still works.  Replace your player creation code (in <code class="language-plaintext highlighter-rouge">setup</code>) with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Player</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>and in the <code class="language-plaintext highlighter-rouge">draw</code> function, replace the call to <code class="language-plaintext highlighter-rouge">drawSprite('player' ...)</code> with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>and where you handle the keyboard:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// enable continuous movement</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">LEFT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">left</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">RIGHT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">d</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">right</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">UP_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">w</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">up</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">keyIsDown</span><span class="p">(</span><span class="nx">DOWN_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nx">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">s</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">down</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="c1">// end of draw loop</span>
+</code></pre></div></div>
+
+<p>We’re now deferring handling player movement to our child entity class.  If you run it now it should look identical to before.</p>
+
+<hr />
+
+<p>However, we had all those fun other classes to play with, so, let’s instantiate them!  Back in <code class="language-plaintext highlighter-rouge">sketch.js</code>, add a list at the top that will hold our entities:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">entities</span> <span class="o">=</span> <span class="p">[];</span>
+</code></pre></div></div>
+
+<p>Now, let’s show off how useful this can be.  In <code class="language-plaintext highlighter-rouge">setup</code> at the bottom, create some things for the player to see, as well as to add the player to the list of entities:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span> <span class="c1">// player is always our 0-th entity</span>
+
+  <span class="c1">// create a few monsters</span>
+  <span class="nx">choices</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">npc</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">_</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">_</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Enemy</span><span class="p">(</span>
+      <span class="nx">random</span><span class="p">(</span><span class="nx">choices</span><span class="p">),</span>
+      <span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nx">random</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="c1">// end of setup loop</span>
+</code></pre></div></div>
+
+<p>Now, <strong>remove</strong> the call to <code class="language-plaintext highlighter-rouge">player.update()</code> and <code class="language-plaintext highlighter-rouge">player.draw()</code> in the <code class="language-plaintext highlighter-rouge">draw()</code> function.  Replace it with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">e</span> <span class="k">of</span> <span class="nx">entities</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>All entities will be looped over and have their updates/draws deferred to their respective classes.  Nice and clean in your main code.</p>
+
+<p>Add in the DVD bouncer and follower now as well in <code class="language-plaintext highlighter-rouge">setup</code> at the bottom:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DVD</span><span class="p">(</span><span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">,</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Follower</span><span class="p">(</span><span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">f</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// end of setup loop</span>
+</code></pre></div></div>
+
+<p>No updates necessary to the <code class="language-plaintext highlighter-rouge">draw</code> loop because everything is handled!  Time to move on to components now to give them some things to do.</p>
 
 <h2 id="components">Components</h2>
 
 <p>remove custom entities for AI and replace with components</p>
 
-<h2 id="handling-a-map">Handling a map</h2>
+<hr />
+
+<h2 id="the-extra-bits">The extra bits</h2>
+
+<h3 id="handling-a-map">Handling a map</h3>
 
 <p>generate a map</p>
 
-<h2 id="camera-follow">Camera follow</h2>
+<h3 id="camera-follow">Camera follow</h3>
 
 <p>.. tbd</p>
+
+<hr />
 
 <h2 id="next-steps">Next steps</h2>
 

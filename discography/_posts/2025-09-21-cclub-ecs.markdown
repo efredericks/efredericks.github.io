@@ -110,6 +110,9 @@ This is a fairly reductive take on ECS and you can read about it in-depth on [Wi
 
 There also is an ECS framework available as well: [FLECS](https://www.flecs.dev/flecs/) and a correlated [FAQ](https://github.com/SanderMertens/ecs-faq).
 
+ECS, c/o WikiPedia:
+![ECS (ECS)](https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/ECS_Simple_Layout.svg/512px-ECS_Simple_Layout.svg.png)
+
 ## A note on resources
 
 Until you're ready to hire an artist, use royalty/copyright-free resources.  There are a **lot** available online, from [itch.io](https://itch.io/search?q=assets) to [opengameart](https://opengameart.org/) to (my favorite) [kenney.nl](https://kenney.nl).
@@ -224,7 +227,7 @@ This gives our player a position in 2D space - note that the origin is at the to
 
 > You can test this out by the way, when drawing the spritesheet you can use the player position:
 >
-> `draw(spritesheet, player.x, player.y);`
+> `image(spritesheet, player.x, player.y);`
 
 However, we want to draw a single sprite from our spritesheet, not the entirety of it.
 
@@ -296,6 +299,14 @@ let sprite_dict = {
 ```
 
 This defines a dictionary for every single character in our game.  Some spritesheets come with a `json` file for easy unpacking, however these ones don't.  Gives you a bit more control!
+
+Now draw the player:
+
+```javascript
+drawSprite('player', player.x, player.y);
+```
+
+&nbsp;
 
 > Feel free to pick whatever sprites you want for the various characters we'll be drawing.
 
@@ -384,10 +395,12 @@ Your player should now move around the screen, a little bit at a time.  You can 
 > Note: at this point, you can define any number of sprites on the screen - for example:
 > 
 > `drawSprite('snake', 100, 100);`
+>
+> Also, if you want to see the screen smearing example then comment out the call to `background` within the `draw` loop.
 
 ---
 
-[GitHub Repository - Step 1](s1 branch)
+If you ran into issues or want to check your code, then this branch will put you into a working state for this step: [GitHub Repository - Step 1](s1 branch)
 
 ---
 
@@ -397,46 +410,284 @@ A lot of stuff to get things drawn!  Fortunately, that was a lot of the heavy li
 
 > Note: the overall goal is to end up with an array of entities that we can loop over and simply call their respective `update()` and `draw()` functions - no spaghetti mess of if statements!  If you've a software engineering background then you might be familiar with the concept of having classes responsible for themselves.  Essentially, we're looking to partition out effort and responsibility.
 
+### Creating a base entity class
+
 First, we'll create a **base entity class**.  Move over to `entities.js` and add the following:
 
 ```javascript
 class Entity {
   constructor(sprite, x, y, w, h) {
     this.sprite = sprite;
-    this.position = createVector(x, y);
-    this.size = createVector(w, h);
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
   }
 
   update() {}
 
   draw() {
-    drawImage(this.sprite, this.position.x, this.position.y);
+    drawImage(this.sprite, this.x, this.y);
   }
 }
 ```
 
-This gives us a *base class* that we can extend others off of.  It'll have a sprite variable, a position, and a size.  You'll note we're using `createVector` to store the x/y and w/h of the object.  This is because later on we'll be using some vector math and it is easier to manage now rather than creating temporary variables (plus, it's a bit cleaner).
+This gives us a *base class* that we can extend others off of.  It'll have a sprite variable, a position (x, y), and a size (w, h).  Note that we could use vectors here (via the `createVector` call), however we'll go simpler for now.  
+
+We're also doubly-storing the size of the sprite given that they are square, however this approach is a bit more extensable if you end up with sprites that have non-square sizes (looking at you, [dcss sprites](https://opengameart.org/content/dungeon-crawl-32x32-tiles)).
+
+> Note: any *generic* functions that you want all entities to have should go in your base class.  You can leave them empty if it is to be specialized by child classes (like the `update` function is).  Note that the `draw` function has code since all entities will have the same draw approach.
+
+### Create our child classes
+
+We *could* have our player be an entity, however let's move ahead and specialize.  Here are the types of entities we'll consider here (feel free to experiment/extrapolate!):
+
+* An entity that can move (e.g., the player, monsters, NPCs)
+* An entity that cannot move (e.g., an item, something in the environment, an NPC that is geo-locked)
+
+Interestingly, we're not going to get *too* crazy with our specializations.  We could, but we'll leave that to our **component** setup.  (And, if we did it here we'd have a lot of refactoring to do, which is not really all that much fun).  What we will do for deeper specializations is to *equip* each entity with a suite of components, making it a touch more data-driven.
+
+So, let's delineate our children - create a few sub-classes:
+
+```javascript
+// an entity that can move
+class MoveableEntity extends Entity {
+  constructor(sprite, x, y, w, h, speed = 1.0) {
+    super(sprite, x, y, w, h);
+    this.speed = speed;
+  }
+
+  // make sure the move is valid before doing it!
+  tryMove(move) {
+    if (
+      this.x + move.x < 0 ||
+      this.x + this.w > width ||
+      this.y + move.y < 0 ||
+      this.y + this.h > height
+    )
+      return false;
+    return true;
+  }
+}
+
+// Our player class - this is a bit special as we'll do some one-off
+// coding in here.  
+class Player extends MoveableEntity {
+  constructor(x, y, w, h) {
+    super("player", x, y, w, h, 12.0); // this magic number should be defined in a lookup table!
+  }
+
+  // handle player movement
+  move(dir) {
+    let next_move = { x: this.x, y: this.y };
+    if (dir == "up") next_move.y -= this.speed;
+    else if (dir == "down") next_move.y += this.speed;
+    else if (dir == "left") next_move.x -= this.speed;
+    else if (dir == "right") next_move.x += this.speed;
+    else console.log("Movement not supported");
+
+    if (this.tryMove(next_move)) {
+      this.x = next_move.x;
+      this.y = next_move.y;
+    }
+
+    this.x = constrain(this.x, 0, width - this.w);
+    this.y = constrain(this.y, 0, height - this.h);
+  }
+}
+
+// temporary entities - we'll modify/delete them later!
+class Enemy extends MoveableEntity {
+  constructor(sprite, x, y, w, h, speed) {
+    super(sprite, x, y, w, h, speed);
+  }
+
+  // enemy AI
+  update() {
+    if (random() > 0.8) {
+      let next_move = {
+        x: this.x + random([-1, 0, 1]) * this.speed,
+        y: this.y + random([-1, 0, 1]) * this.speed,
+      };
+      if (this.tryMove(next_move)) {
+        this.x = next_move.x;
+        this.y = next_move.y;
+        this.x = constrain(this.x, 0, width - this.w);
+        this.y = constrain(this.y, 0, height - this.h);
+      }
+    }
+  }
+}
+
+// a bouncy friend
+class DVD extends MoveableEntity {
+  constructor(sprite, x, y, w, h, speed) {
+    super(sprite, x, y, w, h, speed);
+    this.vx = 1;
+    this.vy = 1;
+  }
+  update() {
+    let next_move = {
+      x: this.x + this.speed * this.vx,
+      y: this.y + this.speed * this.vy,
+    };
+    // if (this.tryMove(next_move)) {
+    this.x = next_move.x;
+    this.y = next_move.y;
+
+    if (this.x > width - this.w || this.x < 0) this.vx *= -1;
+
+    if (this.y > height - this.h || this.y < 0) this.vy *= -1;
+
+    this.x = constrain(this.x, 0, width - this.w);
+    this.y = constrain(this.y, 0, height - this.h);
+  }
+  // }
+}
+
+// a followey friend
+class Follower extends MoveableEntity {
+  constructor(sprite, x, y, w, h, speed, target) {
+    super(sprite, x, y, w, h, speed);
+    this.vx = 1;
+    this.vy = 1;
+    this.target = target;
+  }
+  update() {
+    if (this.target == null) super.update();
+    else {
+      let my_v = createVector(this.x, this.y);
+      let t_v = createVector(this.target.x, this.target.y);
+
+      let direction = p5.Vector.sub(t_v, my_v);
+      direction.normalize();
+      direction.mult(this.speed);
+      my_v.add(direction);
+
+      this.x = my_v.x;
+      this.y = my_v.y;
+    }
+
+    if (this.x > width - this.w || this.x < 0) this.vx *= -1;
+    if (this.y > height - this.h || this.y < 0) this.vy *= -1;
+
+    this.x = constrain(this.x, 0, width - this.w);
+    this.y = constrain(this.y, 0, height - this.h);
+  }
+}
+```
+
+OK, we now have some specialized classes.  We have a `Player` that will manage our player, a generic `Enemy` that will randomly jitter, a bouncing `DVD` logo, and something that follows the player around with a bit of vector math.
+
+> If you run it now, you should see nothing - that's because we haven't instantiated them yet.
+
+First, let's make sure the player still works.  Replace your player creation code (in `setup`) with:
+
+```javascript
+player = new Player(80, 80, SPRITE_SCALED, SPRITE_SCALED);
+```
+
+and in the `draw` function, replace the call to `drawSprite('player' ...)` with:
+
+```javascript
+player.update();
+player.draw();
+```
+
+and where you handle the keyboard:
+
+```javascript
+  // enable continuous movement
+  if (keyIsDown(LEFT_ARROW) || keyIsDown("a")) {
+    player.move("left");
+  }
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown("d")) {
+    player.move("right");
+  }
+  if (keyIsDown(UP_ARROW) || keyIsDown("w")) {
+    player.move("up");
+  }
+  if (keyIsDown(DOWN_ARROW) || keyIsDown("s")) {
+    player.move("down");
+  }
+} // end of draw loop
+```
+
+We're now deferring handling player movement to our child entity class.  If you run it now it should look identical to before.
+
+---
+
+However, we had all those fun other classes to play with, so, let's instantiate them!  Back in `sketch.js`, add a list at the top that will hold our entities:
+
+```javascript
+let entities = [];
+```
+
+Now, let's show off how useful this can be.  In `setup` at the bottom, create some things for the player to see, as well as to add the player to the list of entities:
+
+```javascript
+  entities.push(player); // player is always our 0-th entity
+
+  // create a few monsters
+  choices = ["npc", "snake", "beholder"];
+  for (let _ = 0; _ < 10; _++) {
+    let e = new Enemy(
+      random(choices),
+      random(0, width - SPRITE_SCALED),
+      random(0, height - SPRITE_SCALED),
+      SPRITE_SCALED,
+      SPRITE_SCALED,
+      random(1.0, 5.0)
+    );
+    entities.push(e);
+  }
+} // end of setup loop
+```
+
+Now, **remove** the call to `player.update()` and `player.draw()` in the `draw()` function.  Replace it with:
+
+```javascript
+for (let e of entities) {
+  e.update();
+  e.draw();
+}
+```
+
+All entities will be looped over and have their updates/draws deferred to their respective classes.  Nice and clean in your main code.
+
+Add in the DVD bouncer and follower now as well in `setup` at the bottom:
+
+```javascript
+  let d = new DVD("beholder", width / 2, height / 2, SPRITE_SCALED, SPRITE_SCALED, 2.0);
+  entities.push(d);
+
+  let f = new Follower("snake", 20, 20, SPRITE_SCALED, SPRITE_SCALED, 1.0, player);
+  entities.push(f);
+} // end of setup loop
+```
+
+No updates necessary to the `draw` loop because everything is handled!  Time to move on to components now to give them some things to do.
 
 
-create a base entity class with empty functions (use vector instead of x,y)
-create a moveable entity class
-show update/draw
-create a player and enemy class
-create the array and add the player and enemies
-create dvd and follower
 
 ## Components
 
 remove custom entities for AI and replace with components
 
-## Handling a map 
+---
+
+## The extra bits
+
+### Handling a map 
 
 generate a map
 
-## Camera follow
+### Camera follow
 
 .. tbd
 
+
+---
 
 ## Next steps
 
