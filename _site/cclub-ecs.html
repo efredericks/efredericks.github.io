@@ -180,7 +180,7 @@
   <li>
 <a href="#the-extra-bits" id="markdown-toc-the-extra-bits">The extra bits</a>    <ul>
       <li><a href="#handling-a-map" id="markdown-toc-handling-a-map">Handling a map</a></li>
-      <li><a href="#camera-follow" id="markdown-toc-camera-follow">Camera follow</a></li>
+      <li><a href="#camera-follo" id="markdown-toc-camera-follo">Camera follo</a></li>
     </ul>
   </li>
   <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
@@ -265,7 +265,7 @@
 
 <h3 id="3-wire-everything-up">3. Wire everything up</h3>
 
-<p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
+<p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code> (I’m including <code class="language-plaintext highlighter-rouge">sketch.js</code> here to show where to go - don’t double-include it!):</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">components.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">entities.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
@@ -586,7 +586,8 @@
 <span class="c1">// coding in here.  </span>
 <span class="kd">class</span> <span class="nx">Player</span> <span class="kd">extends</span> <span class="nx">MoveableEntity</span> <span class="p">{</span>
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">(</span><span class="dl">"</span><span class="s2">player</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">);</span> <span class="c1">// this magic number should be defined in a lookup table!</span>
+    <span class="c1">// fyi, this magic number should be defined in a lookup table!</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">"</span><span class="s2">player</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">);</span> 
   <span class="p">}</span>
 
   <span class="c1">// handle player movement</span>
@@ -643,7 +644,7 @@
       <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span><span class="p">,</span>
       <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span><span class="p">,</span>
     <span class="p">};</span>
-    <span class="c1">// if (this.tryMove(next_move)) {</span>
+
     <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 
@@ -654,7 +655,6 @@
     <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
   <span class="p">}</span>
-  <span class="c1">// }</span>
 <span class="p">}</span>
 
 <span class="c1">// a followey friend</span>
@@ -668,6 +668,9 @@
   <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">super</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
     <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// calculate the distance to the player (our target),</span>
+      <span class="c1">// normalize that vector, and then calculate our</span>
+      <span class="c1">// new path by incorporating the speed and direction</span>
       <span class="kd">let</span> <span class="nx">my_v</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
       <span class="kd">let</span> <span class="nx">t_v</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
 
@@ -679,9 +682,6 @@
       <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
     <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
@@ -763,6 +763,19 @@
 
 <p>All entities will be looped over and have their updates/draws deferred to their respective classes.  Nice and clean in your main code.</p>
 
+<blockquote>
+  <p>Note: if you are allowing entities to die, then we’ll want to handle it a touch differently:</p>
+
+  <div class="language-javascript highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">entities</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">entities</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+
+  <p>The reason why is that if we want to remove an entity from the list, then we’ll need to start at the end and work backwards.  This is because iterating over the list in a forward direction would be problematic if entities disappear during the loop!</p>
+
+</blockquote>
+
 <p>Add in the DVD bouncer and follower now as well in <code class="language-plaintext highlighter-rouge">setup</code> at the bottom:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DVD</span><span class="p">(</span><span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">,</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
@@ -777,17 +790,39 @@
 
 <h2 id="components">Components</h2>
 
+<p>On to the <strong>C</strong>omponent part of ECS.  This portion will give each of our entities a <em>thing</em> that has responsibility for itself.  Essentially we’re avoiding the creation of sub-sub-sub classes for each specialization.</p>
+
+<p>An easy example to think of is if something can be hurt or not in the game.  Typically that means it gets health, defense, strength, etc.  We could add that as a parameter to the <code class="language-plaintext highlighter-rouge">MoveableEntity</code> class, but then <strong>all</strong> moveable entities will have health.  Not necessarily a bad thing if you want it, but what if its an item that can scurry around?</p>
+
+<p>An easier way is to make all of that a <code class="language-plaintext highlighter-rouge">Component</code> - for example we could make a <code class="language-plaintext highlighter-rouge">FighterComponent</code> that has those attributes.  Or, we could create an <code class="language-plaintext highlighter-rouge">AI</code> component that defines the behavior of how enemies move, follow, etc.</p>
+
+<blockquote>
+  <p>We’ll be removing all those special enemy entities and replacing them with components!</p>
+</blockquote>
+
+<p>How is this useful?  We’ll add a lookup table for components in our base entity class, and then we’ll check in its <code class="language-plaintext highlighter-rouge">update</code> call if it has a particular component.  There are probably nicer ways of handling this, but we’ll add it as a dictionary.</p>
+
+<p>Over to <code class="language-plaintext highlighter-rouge">components.js</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+
 <p>remove custom entities for AI and replace with components</p>
 
 <hr>
 
 <h2 id="the-extra-bits">The extra bits</h2>
 
+<p>I highly doubt we get here during the club meeting, but here are a couple of extra topics to add some more to the game - a map and a camera.</p>
+
+<blockquote>
+  <p>This <strong>definitely</strong> isn’t a reason for me to write out how to do this so I have a personal reference in the future to how I do it…</p>
+</blockquote>
+
 <h3 id="handling-a-map">Handling a map</h3>
 
 <p>generate a map</p>
 
-<h3 id="camera-follow">Camera follow</h3>
+<h3 id="camera-follo">Camera follo</h3>
 
 <p>.. tbd</p>
 
