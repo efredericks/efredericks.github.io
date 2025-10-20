@@ -22,62 +22,6 @@ type: blog
 # embed_player:
 #   type: bandcamp
 #   src: track=2250182265/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/
-carousels:
-  - images: # random
-    - image: /assets/img/GenerativeGI/random/img-6.png
-    - image: /assets/img/GenerativeGI/random/img-22.png
-    - image: /assets/img/GenerativeGI/random/img-46.png
-    - image: /assets/img/GenerativeGI/random/img-62.png
-    - image: /assets/img/GenerativeGI/random/img-64.png
-    - image: /assets/img/GenerativeGI/random/img-67.png
-    - image: /assets/img/GenerativeGI/random/img-71.png
-    - image: /assets/img/GenerativeGI/random/img-94.png
-    - image: /assets/img/GenerativeGI/random/img-94-1.png
-    - image: /assets/img/GenerativeGI/random/img-98.png
-  - images: # single no clear
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10047.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10050.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10051.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10057.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10063.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10066.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10080.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10095.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10097.png
-    - image: /assets/img/GenerativeGI/no-clear-single/img-10099.png
-  - images: # single clear
-    - image: /assets/img/GenerativeGI/clear-single/img-10045.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10048.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10059.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10059-1.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10068.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10074.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10076.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10087.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10087-1.png
-    - image: /assets/img/GenerativeGI/clear-single/img-10093.png
-  - images:  # lexicase no clear
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10019.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10058.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10062.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10068.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10078.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10084.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10088.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10090.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10092.png
-    - image: /assets/img/GenerativeGI/no-clear-lexicase/img-10099.png
-  - images:  # lexicase clear
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10056.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10073.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10085.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10088.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10092.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10095.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10096-1.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10096.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10099-1.png
-    - image: /assets/img/GenerativeGI/clear-lexicase/img-10099.png
 ---
 
 ---
@@ -97,6 +41,8 @@ carousels:
 <!-- # ECS Tutorial overview -->
 
 We're going to be creating a 2D, top-down, tile-based game demo using p5js.  
+
+![demo](/assets/img/ecs-js/demo.gif)
 
 ## What is ECS?
 
@@ -934,7 +880,7 @@ Now add the components within `sketch.js` - replace the code where you're instan
 
 Last, remove all your Enemy subclasses (i.e., `DVD`, `Follower`) -- they're not needed anymore!  Leave the `Enemy` one though.
 
-Your game *should* look the same as before, however now it is more data-driven!  
+Your game *should* look the same as before, however now it is more data-driven!  You can now add as many different *reusable* components as you want!   
 
 ---
 
@@ -974,5 +920,3 @@ This is a taste of what you can do.  A few things:
 
 camera + sprites
 https://editor.p5js.org/efredericks/sketches/wErqg4bAf
-
-{% include carousel.html height="50" unit="%" duration="15" number="1" %}
