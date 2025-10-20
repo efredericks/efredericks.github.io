@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-18T12:09:54-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-19T23:02:25-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr />
 
 <ul>
   <li><a href="tbd">functioning p5js sketch</a></li>
@@ -649,11 +649,247 @@
 
 <p>How is this useful?  We’ll add a lookup table for components in our base entity class, and then we’ll check in its <code class="language-plaintext highlighter-rouge">update</code> call if it has a particular component.  There are probably nicer ways of handling this, but we’ll add it as a dictionary.</p>
 
-<p>Over to <code class="language-plaintext highlighter-rouge">components.js</code>:</p>
+<p>Over to <code class="language-plaintext highlighter-rouge">components.js</code> -</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<p>Let’s create the base component class that all others will extend from:</p>
 
-<p>remove custom entities for AI and replace with components</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">key</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>For now, we’ll keep this basic, since our components won’t have much overlap.  However, if you go a bit crazy and add all kinds of components you’ll start to notice patterns, the same variables, etc.  Those would go into your base class to prevent redundancy.</p>
+
+<p>Let’s now add the <code class="language-plaintext highlighter-rouge">FighterComponent</code> to give our character and the enemies some abilities.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">FighterComponent</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">hp</span><span class="p">,</span> <span class="nx">def</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">'</span><span class="s1">fighter</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">=</span> <span class="nx">hp</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">maxHP</span> <span class="o">=</span> <span class="nx">hp</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">def</span> <span class="o">=</span> <span class="nx">def</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">maxDef</span> <span class="o">=</span> <span class="nx">def</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// returns the percentage of health remaining</span>
+  <span class="nx">getPerc</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">/</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxHP</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// damage the entity </span>
+  <span class="nx">takeDamage</span><span class="p">(</span><span class="nx">dmg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">-=</span> <span class="nx">dmg</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">die</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// handle death - can delegate to the entity or handle here</span>
+  <span class="nx">die</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">oof</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Ok, we now have a component!  You should hopefully know what to do now - any entity that you want to be able to fight gets a <code class="language-plaintext highlighter-rouge">FighterComponent</code>.  To do so we’ll need to add a place for them to go.  In <code class="language-plaintext highlighter-rouge">entities.js</code>, add a new variable and helper function in the base <code class="language-plaintext highlighter-rouge">Entity</code> class:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Entity</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">components</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="p">}</span>
+
+  <span class="nx">addComponent</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">[</span><span class="nx">c</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This helper function is exceedingly sparse and does nothing if you accidentally try to add the same component more than once.  You should protect it better with a polished program, but for now this will work.  Just be careful with what you add.</p>
+
+<p>Now, back over to <code class="language-plaintext highlighter-rouge">sketch.js</code>, add the new component to the <code class="language-plaintext highlighter-rouge">Player</code> (in the <code class="language-plaintext highlighter-rouge">setup</code> function, where you initially defined it):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Player</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nx">sprite_w</span><span class="p">,</span> <span class="nx">sprite_w</span><span class="p">);</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+<span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Last, let’s go ahead and make use of the health bar and show the entity’s status in real time.  Back in <code class="language-plaintext highlighter-rouge">entities.js</code> in the base <code class="language-plaintext highlighter-rouge">Entity</code> class, extend the <code class="language-plaintext highlighter-rouge">draw</code> function to check for the fighter component:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+    <span class="c1">// draw HP bar</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">"</span><span class="s2">fighter</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">perc</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="nx">fighter</span><span class="p">.</span><span class="nx">getPerc</span><span class="p">();</span>
+      <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+
+      <span class="nx">noStroke</span><span class="p">();</span>
+      <span class="nx">fill</span><span class="p">(</span><span class="dl">"</span><span class="s2">rgba(224,72,72,0.6)</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nx">rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span><span class="p">);</span>
+
+      <span class="kd">let</span> <span class="nx">w</span> <span class="o">=</span> <span class="nx">map</span><span class="p">(</span><span class="nx">perc</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+      <span class="nx">fill</span><span class="p">(</span><span class="dl">"</span><span class="s2">rgba(0,255,0, 0.6)</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nx">rect</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here, we’re checking to see if the fighter key exists, and if so, draw a health bar using the percentage of the entity’s health and the size of its sprite.  Essentially, drawing a red background with a green rectangle that is scaled to the percentage (the <code class="language-plaintext highlighter-rouge">map</code> function takes a value and maps it from one range to another).</p>
+
+<blockquote>
+  <p>If you want to add a little debugging check, we can mess with the HP on the player pretty easily (and the idea would be you would extend this to a collision detection of some sort):</p>
+
+  <p>In <code class="language-plaintext highlighter-rouge">sketch.js</code> (at the bottom):</p>
+  <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">keyPressed</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">)</span> <span class="nx">player</span><span class="p">.</span><span class="nx">takeDamage</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// hurt</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">)</span> <span class="nx">player</span><span class="p">.</span><span class="nx">takeDamage</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// heal</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>We will leave fighting/hitting each other for another time unfortunately.  However, let’s go ahead and define some AI components that will replace all the custom entities.  There are a couple of options where we could go - create an <code class="language-plaintext highlighter-rouge">AIComponent</code> class and then extend it further (kind of like we did earlier), or create a single <code class="language-plaintext highlighter-rouge">AIComponent</code> and delegate the logic to itself.  Since our AI is only going to be based on movement we’ll do the latter, however if there was to be more delineation it would be better to have additional subclasses.</p>
+
+<p>So, back to <code class="language-plaintext highlighter-rouge">components.js</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">AIComponent</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">entity</span><span class="p">,</span> <span class="nx">vx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">vy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">target</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">"</span><span class="s2">AI</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">entity</span> <span class="o">=</span> <span class="nx">entity</span><span class="p">;</span> <span class="c1">// reference to parent</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">=</span> <span class="nx">vx</span><span class="p">;</span> <span class="c1">// follower and DVD logo</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="nx">vy</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">=</span> <span class="nx">target</span><span class="p">;</span> <span class="c1">// for the follower</span>
+  <span class="p">}</span>
+
+  <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// random mover</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">random</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+          <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">tryMove</span><span class="p">(</span><span class="nx">next_move</span><span class="p">))</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">// bouncing dvd logo</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">DVD</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span><span class="p">,</span>
+        <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span><span class="p">,</span>
+      <span class="p">};</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+      <span class="c1">// follow a target</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">my_v</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">t_v</span> <span class="o">=</span> <span class="nx">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+        <span class="kd">let</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">p5</span><span class="p">.</span><span class="nx">Vector</span><span class="p">.</span><span class="nx">sub</span><span class="p">(</span><span class="nx">t_v</span><span class="p">,</span> <span class="nx">my_v</span><span class="p">);</span>
+        <span class="nx">direction</span><span class="p">.</span><span class="nx">normalize</span><span class="p">();</span>
+        <span class="nx">direction</span><span class="p">.</span><span class="nx">mult</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+        <span class="nx">my_v</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// else do nothing</span>
+
+    <span class="c1">// stay in bounds</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You’ll note that we took all the special <code class="language-plaintext highlighter-rouge">update</code> code from the subclasses and moved it to this particular component.  We’re also passing in the parent entity so that we can have a reference to it.  Looks like a lot, but that’s all the code from the specific entity subclasses.</p>
+
+<blockquote>
+  <p>All positions/sizes are now replaced by <code class="language-plaintext highlighter-rouge">this.entity.&lt;param&gt;</code> as those are owned by the parent entity class now.</p>
+</blockquote>
+
+<p>Ok, time to wire it up.  Since we’re going to allow any entity to have an AI, we’ll check it in the <em>base</em> class.  However, you’ll need to update the <code class="language-plaintext highlighter-rouge">Enemy</code> class as well!  First, <strong>remove</strong> the <code class="language-plaintext highlighter-rouge">update</code> function from the <code class="language-plaintext highlighter-rouge">Enemy</code> class.</p>
+
+<blockquote>
+  <p>If you want your enemies or other entities to take advantage of the <code class="language-plaintext highlighter-rouge">AIComponent</code> you’ll need to check for it within that class’ <code class="language-plaintext highlighter-rouge">update</code> function - the base class’ <code class="language-plaintext highlighter-rouge">update</code> doesn’t run if a child class has an instance of it.</p>
+</blockquote>
+
+<p>Update the base <code class="language-plaintext highlighter-rouge">Entity</code> class <code class="language-plaintext highlighter-rouge">update</code> function:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Entity</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">"</span><span class="s2">AI</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="nx">AI</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now add the components within <code class="language-plaintext highlighter-rouge">sketch.js</code> - replace the code where you’re instantiating all the non-player entities (in <code class="language-plaintext highlighter-rouge">setup</code>) with this (basically the same, just now adding components):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">choices</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">npc</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">_</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">_</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Enemy</span><span class="p">(</span>
+      <span class="nx">random</span><span class="p">(</span><span class="nx">choices</span><span class="p">),</span>
+      <span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nx">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nx">random</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">AIComponent</span><span class="p">(</span><span class="dl">'</span><span class="s1">random</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span><span class="p">));</span>
+
+    <span class="c1">// console.log(e)</span>
+    <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Enemy</span><span class="p">(</span><span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">,</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+  <span class="nx">d</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="nx">d</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">AIComponent</span><span class="p">(</span><span class="dl">'</span><span class="s1">DVD</span><span class="dl">'</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Enemy</span><span class="p">(</span><span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+  <span class="nx">f</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="nx">f</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">AIComponent</span><span class="p">(</span><span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span><span class="p">,</span> <span class="nx">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">player</span><span class="p">));</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">f</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// end of setup</span>
+</code></pre></div></div>
+
+<p>Last, remove all your Enemy subclasses (i.e., <code class="language-plaintext highlighter-rouge">DVD</code>, <code class="language-plaintext highlighter-rouge">Follower</code>) – they’re not needed anymore!  Leave the <code class="language-plaintext highlighter-rouge">Enemy</code> one though.</p>
+
+<p>Your game <em>should</em> look the same as before, however now it is more data-driven!</p>
 
 <hr />
 
