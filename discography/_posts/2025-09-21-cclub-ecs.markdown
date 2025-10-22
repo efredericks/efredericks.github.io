@@ -884,23 +884,6 @@ Your game *should* look the same as before, however now it is more data-driven! 
 
 ---
 
-## The extra bits
-
-I highly doubt we get here during the club meeting, but here are a couple of extra topics to add some more to the game - a map and a camera.
-
-> This **definitely** isn't a reason for me to write out how to do this so I have a personal reference in the future to how I do it...
-
-### Handling a map 
-
-generate a map
-
-### Camera follo
-
-.. tbd
-
-
----
-
 ## Next steps
 
 This is a taste of what you can do.  A few things:
