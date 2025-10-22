@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-22T09:45:48-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="http://localhost:4000/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>http://localhost:4000/cclub-ecs</id><content type="html" xml:base="http://localhost:4000/cclub-ecs.html"><![CDATA[<hr />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://efredericks.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://efredericks.github.io/" rel="alternate" type="text/html" /><updated>2025-10-22T11:37:21-04:00</updated><id>https://efredericks.github.io/feed.xml</id><title type="html">erik fredericks</title><subtitle>this is my homepage</subtitle><author><name>efredericks</name></author><entry><title type="html">Computing Club Tutorial - Entity Component System (ECS)</title><link href="https://efredericks.github.io/cclub-ecs.html" rel="alternate" type="text/html" title="Computing Club Tutorial - Entity Component System (ECS)" /><published>2025-09-21T00:00:00-04:00</published><updated>2025-09-21T00:00:00-04:00</updated><id>https://efredericks.github.io/cclub-ecs</id><content type="html" xml:base="https://efredericks.github.io/cclub-ecs.html"><![CDATA[<hr />
 
 <ul>
   <li><a href="https://editor.p5js.org/frederer/sketches/saybmOwu4">functioning p5js sketch</a></li>
@@ -141,7 +141,8 @@
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// load in sprite sheet - change the filename to match your file</span>
-  <span class="k">await</span> <span class="nx">loadImage</span><span class="p">(</span><span class="dl">"</span><span class="s2">assets/spritesheet.png</span><span class="dl">"</span><span class="p">);</span> 
+  <span class="c1">// mine is colored_tilemap_packed.png</span>
+  <span class="nx">spritesheet</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">loadImage</span><span class="p">(</span><span class="dl">"</span><span class="s2">assets/spritesheet.png</span><span class="dl">"</span><span class="p">);</span>  
   <span class="nx">createCanvas</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -220,8 +221,8 @@
     <span class="nx">spritesheet</span><span class="p">,</span>   <span class="c1">// spritesheet object</span>
     <span class="nx">x</span><span class="p">,</span>             <span class="c1">// x location to draw on screen</span>
     <span class="nx">y</span><span class="p">,</span>             <span class="c1">// y location to draw on screen</span>
-    <span class="nx">sprite_scaled</span><span class="p">,</span> <span class="c1">// the **new** width of the sprite</span>
-    <span class="nx">sprite_scaled</span><span class="p">,</span> <span class="c1">// the **new** height of the sprite</span>
+    <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="c1">// the **new** width of the sprite</span>
+    <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="c1">// the **new** height of the sprite</span>
     <span class="nx">sprite_dict</span><span class="p">[</span><span class="nx">sprite_id</span><span class="p">].</span><span class="nx">c</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="c1">// its x location in the spritesheet</span>
     <span class="nx">sprite_dict</span><span class="p">[</span><span class="nx">sprite_id</span><span class="p">].</span><span class="nx">r</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="c1">// its y location in the spritesheet</span>
     <span class="nx">SPRITE_SIZE</span><span class="p">,</span>   <span class="c1">// the **original** width of the sprite</span>
@@ -261,6 +262,12 @@
 
 <blockquote>
   <p>Feel free to pick whatever sprites you want for the various characters we’ll be drawing.</p>
+</blockquote>
+
+<p>Another note:</p>
+
+<blockquote>
+  <p>All of your errors will go to your browser console!  Pop open the dev tools and keep an eye on the console to see your typos/errors/etc.</p>
 </blockquote>
 
 <hr />
@@ -381,7 +388,7 @@
   <span class="nx">update</span><span class="p">()</span> <span class="p">{}</span>
 
   <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="nx">drawSprite</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -700,6 +707,7 @@
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Entity</span> <span class="p">{</span>
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">;</span> <span class="c1">// height of the HP bar</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">components</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="p">}</span>
 
@@ -715,7 +723,7 @@
 
 <p>Now, back over to <code class="language-plaintext highlighter-rouge">sketch.js</code>, add the new component to the <code class="language-plaintext highlighter-rouge">Player</code> (in the <code class="language-plaintext highlighter-rouge">setup</code> function, where you initially defined it):</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Player</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nx">sprite_w</span><span class="p">,</span> <span class="nx">sprite_w</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Player</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">);</span>
 <span class="nx">player</span><span class="p">.</span><span class="nx">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nx">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
 <span class="nx">entities</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
 </code></pre></div></div>
@@ -723,7 +731,7 @@
 <p>Last, let’s go ahead and make use of the health bar and show the entity’s status in real time.  Back in <code class="language-plaintext highlighter-rouge">entities.js</code> in the base <code class="language-plaintext highlighter-rouge">Entity</code> class, extend the <code class="language-plaintext highlighter-rouge">draw</code> function to check for the fighter component:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="nx">drawSprite</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
 
     <span class="c1">// draw HP bar</span>
     <span class="k">if</span> <span class="p">(</span><span class="dl">"</span><span class="s2">fighter</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
@@ -740,9 +748,17 @@
       <span class="nx">rect</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">}</span>
+
+  <span class="nx">takeDamage</span><span class="p">(</span><span class="nx">dmg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="dl">"</span><span class="s2">fighter</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="nx">fighter</span><span class="p">.</span><span class="nx">takeDamage</span><span class="p">(</span><span class="nx">dmg</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 </code></pre></div></div>
 
 <p>Here, we’re checking to see if the fighter key exists, and if so, draw a health bar using the percentage of the entity’s health and the size of its sprite.  Essentially, drawing a red background with a green rectangle that is scaled to the percentage (the <code class="language-plaintext highlighter-rouge">map</code> function takes a value and maps it from one range to another).</p>
+
+<p>We also added in the <code class="language-plaintext highlighter-rouge">takeDamage</code> function, which gives us an entity-level function to call to hurt an entity.  Again, probably better ways to do this but we have a check to see if the component exists, and if so, call its related function.</p>
 
 <blockquote>
   <p>If you want to add a little debugging check, we can mess with the HP on the player pretty easily (and the idea would be you would extend this to a collision detection of some sort):</p>
@@ -890,7 +906,7 @@
 
 <p>Your game <em>should</em> look the same as before, however now it is more data-driven!  You can now add as many different <em>reusable</em> components as you want!</p>
 
-<p>If you ran into issues or want to check your code, then the main branch will put you into a working state: <a href="https://github.com/efredericks/p5-ecs-demo">GitHub Repository - Completed</a></p>
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="https://github.com/efredericks/p5-ecs-demo/tree/part3">GitHub Repository - Step 3</a></p>
 
 <hr />
 
@@ -918,8 +934,7 @@
   <li>Make a roguelike game in Godot!  The <a href="https://selinadev.github.io/">SelinaDev tutorial</a> is a nice introduction to Godot (and more imporantly for this, ECS).</li>
 </ul>
 
-<p>camera + sprites
-https://editor.p5js.org/efredericks/sketches/wErqg4bAf</p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[tutorial on ECS in p5js]]></summary></entry><entry><title type="html">GenerativeGI - Project Writeup</title><link href="http://localhost:4000/generativegi.html" rel="alternate" type="text/html" title="GenerativeGI - Project Writeup" /><published>2023-09-20T00:00:00-04:00</published><updated>2023-09-20T00:00:00-04:00</updated><id>http://localhost:4000/generativegi</id><content type="html" xml:base="http://localhost:4000/generativegi.html"><![CDATA[<hr size="1" />
+<hr />]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[tutorial on ECS in p5js]]></summary></entry><entry><title type="html">GenerativeGI - Project Writeup</title><link href="https://efredericks.github.io/generativegi.html" rel="alternate" type="text/html" title="GenerativeGI - Project Writeup" /><published>2023-09-20T00:00:00-04:00</published><updated>2023-09-20T00:00:00-04:00</updated><id>https://efredericks.github.io/generativegi</id><content type="html" xml:base="https://efredericks.github.io/generativegi.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -4482,7 +4497,7 @@ https://editor.p5js.org/efredericks/sketches/wErqg4bAf</p>]]></content><author><
     elements[j].click();
   },15000);
   
-</script>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[project overview and images]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 7/8</title><link href="http://localhost:4000/rldev-8.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 7/8" /><published>2023-08-20T00:00:00-04:00</published><updated>2023-08-20T00:00:00-04:00</updated><id>http://localhost:4000/rldev-8</id><content type="html" xml:base="http://localhost:4000/rldev-8.html"><![CDATA[<hr size="1" />
+</script>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[project overview and images]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 7/8</title><link href="https://efredericks.github.io/rldev-8.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 7/8" /><published>2023-08-20T00:00:00-04:00</published><updated>2023-08-20T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-8</id><content type="html" xml:base="https://efredericks.github.io/rldev-8.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -4594,7 +4609,7 @@ https://editor.p5js.org/efredericks/sketches/wErqg4bAf</p>]]></content><author><
 
 <hr />
 
-<p><a href="/rldev-6.html">Last post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[a*, slimes, more fixes, the end (for now)]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 6</title><link href="http://localhost:4000/rldev-6.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 6" /><published>2023-08-09T00:00:00-04:00</published><updated>2023-08-09T00:00:00-04:00</updated><id>http://localhost:4000/rldev-6</id><content type="html" xml:base="http://localhost:4000/rldev-6.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-6.html">Last post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[a*, slimes, more fixes, the end (for now)]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 6</title><link href="https://efredericks.github.io/rldev-6.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 6" /><published>2023-08-09T00:00:00-04:00</published><updated>2023-08-09T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-6</id><content type="html" xml:base="https://efredericks.github.io/rldev-6.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -4698,7 +4713,7 @@ for e in self.enemies:
 
 <p><a href="/rldev-5.html">Last post</a></p>
 
-<p><a href="/rldev-8.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[bugfixes, big maps, cellular automata]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="http://localhost:4000/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>http://localhost:4000/rldev-5</id><content type="html" xml:base="http://localhost:4000/rldev-5.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-8.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[bugfixes, big maps, cellular automata]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 5</title><link href="https://efredericks.github.io/rldev-5.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 5" /><published>2023-08-01T00:00:00-04:00</published><updated>2023-08-01T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-5</id><content type="html" xml:base="https://efredericks.github.io/rldev-5.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -4834,7 +4849,7 @@ for e in self.enemies:
 <hr />
 <p><a href="/rldev-4.html">Last post</a></p>
 
-<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="http://localhost:4000/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>http://localhost:4000/rldev-4</id><content type="html" xml:base="http://localhost:4000/rldev-4.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-6.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[aoe, procgen, chat]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 4</title><link href="https://efredericks.github.io/rldev-4.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 4" /><published>2023-07-21T00:00:00-04:00</published><updated>2023-07-21T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-4</id><content type="html" xml:base="https://efredericks.github.io/rldev-4.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -4987,7 +5002,7 @@ let SPRITESHEET = {
 
 <p><a href="/rldev-3.html">Last post</a></p>
 
-<p><a href="/rldev-5.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="http://localhost:4000/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>http://localhost:4000/rldev-3</id><content type="html" xml:base="http://localhost:4000/rldev-3.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-5.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[chat, procgen, cleanup]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 3</title><link href="https://efredericks.github.io/rldev-3.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 3" /><published>2023-07-14T00:00:00-04:00</published><updated>2023-07-14T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-3</id><content type="html" xml:base="https://efredericks.github.io/rldev-3.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -5169,7 +5184,7 @@ playSound = (snd) =&gt; {
 
 <p><a href="/rldev-2.html">Last post</a></p>
 
-<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="http://localhost:4000/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>http://localhost:4000/rldev-2</id><content type="html" xml:base="http://localhost:4000/rldev-2.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-4.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[Z-levels, UI refinement, camera, sounds, drops]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 2</title><link href="https://efredericks.github.io/rldev-2.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 2" /><published>2023-07-11T00:00:00-04:00</published><updated>2023-07-11T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-2</id><content type="html" xml:base="https://efredericks.github.io/rldev-2.html"><![CDATA[<hr size="1" />
 
 <ul>
   <li>
@@ -5284,7 +5299,7 @@ class MoveableEntity(Entity):
 
 <p><a href="/rldev-1.html">Last post</a></p>
 
-<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="http://localhost:4000/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>http://localhost:4000/rldev-1</id><content type="html" xml:base="http://localhost:4000/rldev-1.html"><![CDATA[<hr size="1" />
+<p><a href="/rldev-3.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[objects, items, levels, packet optimization]]></summary></entry><entry><title type="html">fredericks does the roguelikedev tutorial - 1</title><link href="https://efredericks.github.io/rldev-1.html" rel="alternate" type="text/html" title="fredericks does the roguelikedev tutorial - 1" /><published>2023-07-07T00:00:00-04:00</published><updated>2023-07-07T00:00:00-04:00</updated><id>https://efredericks.github.io/rldev-1</id><content type="html" xml:base="https://efredericks.github.io/rldev-1.html"><![CDATA[<hr size="1" />
 
 <p><a href="https://www.reddit.com/r/roguelikedev/comments/14q58js/roguelikedev_does_the_complete_roguelike_tutorial/jqr89ss/" target="_blank">Week 1 post</a></p>
 <hr size="1" />
@@ -5370,11 +5385,11 @@ class MoveableEntity(Entity):
 
 <hr />
 
-<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="http://localhost:4000/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>http://localhost:4000/yyy-example%20copy</id><content type="html" xml:base="http://localhost:4000/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
+<p><a href="/rldev-2.html">Next post</a></p>]]></content><author><name>efredericks</name></author><category term="discography" /><summary type="html"><![CDATA[introductory post for my participation in roguelikedev tutorial this summer.]]></summary></entry><entry><title type="html">Example for the pagination test</title><link href="https://efredericks.github.io/yyy-example-copy.html" rel="alternate" type="text/html" title="Example for the pagination test" /><published>2019-11-25T00:00:00-05:00</published><updated>2019-11-25T00:00:00-05:00</updated><id>https://efredericks.github.io/yyy-example%20copy</id><content type="html" xml:base="https://efredericks.github.io/yyy-example-copy.html"><![CDATA[<p>Here you can write more about a certain release, e.g. tracklist:</p>
 <ol>
   <li>Y</li>
   <li>Yy</li>
   <li>YyY</li>
   <li>YyYy</li>
   <li>YyYyY</li>
-</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/img/YyY-Cover.png" /><media:content medium="image" url="http://localhost:4000/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ol>]]></content><author><name>efredericks</name></author><category term="collaborations" /><summary type="html"><![CDATA[This is description of a post. It will appear in the page of it's category with the description or excerpt shown. Clicking each of them will redirect to the page of the post, the same with clicking "Read More"]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://efredericks.github.io/assets/img/YyY-Cover.png" /><media:content medium="image" url="https://efredericks.github.io/assets/img/YyY-Cover.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -136,7 +136,8 @@ And then modify your `setup` and `draw` functions to look like this:
 ```javascript
 async function setup() {
   // load in sprite sheet - change the filename to match your file
-  await loadImage("assets/spritesheet.png"); 
+  // mine is colored_tilemap_packed.png
+  spritesheet = await loadImage("assets/spritesheet.png");  
   createCanvas(400, 400);
 }
 
@@ -215,8 +216,8 @@ function drawSprite(sprite_id, x, y) {
     spritesheet,   // spritesheet object
     x,             // x location to draw on screen
     y,             // y location to draw on screen
-    sprite_scaled, // the **new** width of the sprite
-    sprite_scaled, // the **new** height of the sprite
+    SPRITE_SCALED, // the **new** width of the sprite
+    SPRITE_SCALED, // the **new** height of the sprite
     sprite_dict[sprite_id].c * SPRITE_SIZE, // its x location in the spritesheet
     sprite_dict[sprite_id].r * SPRITE_SIZE, // its y location in the spritesheet
     SPRITE_SIZE,   // the **original** width of the sprite
@@ -255,6 +256,10 @@ drawSprite('player', player.x, player.y);
 &nbsp;
 
 > Feel free to pick whatever sprites you want for the various characters we'll be drawing.
+
+Another note:
+
+> All of your errors will go to your browser console!  Pop open the dev tools and keep an eye on the console to see your typos/errors/etc.
 
 ---
 
@@ -373,7 +378,7 @@ class Entity {
   update() {}
 
   draw() {
-    drawImage(this.sprite, this.x, this.y);
+    drawSprite(this.sprite, this.x, this.y);
   }
 }
 ```
@@ -694,6 +699,7 @@ Ok, we now have a component!  You should hopefully know what to do now - any ent
 class Entity {
   constructor(sprite, x, y, w, h) {
     ...
+    this.bar_h = this.h * 0.2; // height of the HP bar
     this.components = {};
   }
 
@@ -710,7 +716,7 @@ This helper function is exceedingly sparse and does nothing if you accidentally 
 Now, back over to `sketch.js`, add the new component to the `Player` (in the `setup` function, where you initially defined it):
 
 ```javascript
-player = new Player(80, 80, sprite_w, sprite_w);
+player = new Player(80, 80, SPRITE_SCALED, SPRITE_SCALED);
 player.addComponent(new FighterComponent(10, 1, 1));
 entities.push(player);
 ```
@@ -719,7 +725,7 @@ Last, let's go ahead and make use of the health bar and show the entity's status
 
 ```javascript
   draw() {
-    drawImage(this.sprite, this.x, this.y);
+    drawSprite(this.sprite, this.x, this.y);
 
     // draw HP bar
     if ("fighter" in this.components) {
@@ -736,9 +742,17 @@ Last, let's go ahead and make use of the health bar and show the entity's status
       rect(x + 1, y + 1, w, this.bar_h - 2);
     }
   }
+
+  takeDamage(dmg) {
+    if ("fighter" in this.components) {
+      this.components.fighter.takeDamage(dmg);
+    }
+  }
 ```
 
 Here, we're checking to see if the fighter key exists, and if so, draw a health bar using the percentage of the entity's health and the size of its sprite.  Essentially, drawing a red background with a green rectangle that is scaled to the percentage (the `map` function takes a value and maps it from one range to another).
+
+We also added in the `takeDamage` function, which gives us an entity-level function to call to hurt an entity.  Again, probably better ways to do this but we have a check to see if the component exists, and if so, call its related function.
 
 > If you want to add a little debugging check, we can mess with the HP on the player pretty easily (and the idea would be you would extend this to a collision detection of some sort):
 >
@@ -884,7 +898,7 @@ Last, remove all your Enemy subclasses (i.e., `DVD`, `Follower`) -- they're not 
 
 Your game *should* look the same as before, however now it is more data-driven!  You can now add as many different *reusable* components as you want!   
 
-If you ran into issues or want to check your code, then the main branch will put you into a working state: [GitHub Repository - Completed](https://github.com/efredericks/p5-ecs-demo)
+If you ran into issues or want to check your code, then this branch will put you into a working state for this step: [GitHub Repository - Step 3](https://github.com/efredericks/p5-ecs-demo/tree/part3)
 
 ---
 
@@ -904,6 +918,4 @@ This is a taste of what you can do.  A few things:
 
 * Make a roguelike game in Godot!  The [SelinaDev tutorial](https://selinadev.github.io/) is a nice introduction to Godot (and more imporantly for this, ECS).
 
-
-camera + sprites
-https://editor.p5js.org/efredericks/sketches/wErqg4bAf
+---
