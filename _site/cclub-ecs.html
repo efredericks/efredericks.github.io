@@ -148,8 +148,8 @@
             <hr>
 
 <ul>
-  <li><a href="tbd">functioning p5js sketch</a></li>
-  <li><a href="tbd">GitHub repository</a></li>
+  <li><a href="https://editor.p5js.org/frederer/sketches/saybmOwu4" target="_blank" rel="noopener noreferrer">functioning p5js sketch</a></li>
+  <li><a href="https://github.com/efredericks/p5-ecs-demo" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
 </ul>
 
 <hr>
@@ -177,12 +177,6 @@
     </ul>
   </li>
   <li><a href="#components" id="markdown-toc-components">Components</a></li>
-  <li>
-<a href="#the-extra-bits" id="markdown-toc-the-extra-bits">The extra bits</a>    <ul>
-      <li><a href="#handling-a-map" id="markdown-toc-handling-a-map">Handling a map</a></li>
-      <li><a href="#camera-follo" id="markdown-toc-camera-follo">Camera follo</a></li>
-    </ul>
-  </li>
   <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
 </ul>
 
@@ -225,7 +219,7 @@
 <h2 id="setup">Setup</h2>
 
 <ol>
-  <li>Create an account on the p5js editor: <a href="p5js%20online%20editor">https://editor.p5js.org</a> - I’ve linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.</li>
+  <li>Create an account on the p5js editor: <a href="https://editor.p5js.org" target="_blank" rel="noopener noreferrer">p5js online editor</a> - I’ve linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.</li>
   <li>Grab a spritesheet from <a href="https://kenney.nl" target="_blank" rel="noopener noreferrer">kenney.nl</a>: I’ll be using the <a href="https://kenney.nl/assets/micro-roguelike" target="_blank" rel="noopener noreferrer">microrogue resource</a>. Make sure you include the License when you upload!
     <ul>
       <li>Double-note - we’re using the “packed” sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn’t work very well.  The non-packed sheet adds a gutter in between images - great for slicing up in something like Tiled or Godot but not as easy to use when calculating based on pixel size (though, to be fair it would just be an offset – we’ll get there).</li>
@@ -510,7 +504,7 @@
 
 <hr>
 
-<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="s1%20branch">GitHub Repository - Step 1</a></p>
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="https://github.com/efredericks/p5-ecs-demo/tree/part1" target="_blank" rel="noopener noreferrer">GitHub Repository - Step 1</a></p>
 
 <hr>
 
@@ -790,6 +784,8 @@
 
 <p>No updates necessary to the <code class="language-plaintext highlighter-rouge">draw</code> loop because everything is handled!  Time to move on to components now to give them some things to do.</p>
 
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="https://github.com/efredericks/p5-ecs-demo/tree/part2" target="_blank" rel="noopener noreferrer">GitHub Repository - Step 2</a></p>
+
 <h2 id="components">Components</h2>
 
 <p>On to the <strong>C</strong>omponent part of ECS.  This portion will give each of our entities a <em>thing</em> that has responsibility for itself.  Essentially we’re avoiding the creation of sub-sub-sub classes for each specialization.</p>
@@ -1047,23 +1043,7 @@
 
 <p>Your game <em>should</em> look the same as before, however now it is more data-driven!  You can now add as many different <em>reusable</em> components as you want!</p>
 
-<hr>
-
-<h2 id="the-extra-bits">The extra bits</h2>
-
-<p>I highly doubt we get here during the club meeting, but here are a couple of extra topics to add some more to the game - a map and a camera.</p>
-
-<blockquote>
-  <p>This <strong>definitely</strong> isn’t a reason for me to write out how to do this so I have a personal reference in the future to how I do it…</p>
-</blockquote>
-
-<h3 id="handling-a-map">Handling a map</h3>
-
-<p>generate a map</p>
-
-<h3 id="camera-follo">Camera follo</h3>
-
-<p>.. tbd</p>
+<p>If you ran into issues or want to check your code, then the main branch will put you into a working state: <a href="https://github.com/efredericks/p5-ecs-demo" target="_blank" rel="noopener noreferrer">GitHub Repository - Completed</a></p>
 
 <hr>
 

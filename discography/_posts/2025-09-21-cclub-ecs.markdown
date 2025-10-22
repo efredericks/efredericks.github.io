@@ -26,8 +26,8 @@ type: blog
 
 ---
 
-- [functioning p5js sketch](tbd)
-- [GitHub repository](tbd)
+- [functioning p5js sketch](https://editor.p5js.org/frederer/sketches/saybmOwu4)
+- [GitHub repository](https://github.com/efredericks/p5-ecs-demo)
 
 ---
 
@@ -72,7 +72,7 @@ Whatever you do though:
 
 ## Setup
 
-1. Create an account on the p5js editor: [https://editor.p5js.org](p5js online editor) - I've linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.
+1. Create an account on the p5js editor: [p5js online editor](https://editor.p5js.org) - I've linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.
 2. Grab a spritesheet from [kenney.nl](https://kenney.nl): I'll be using the [microrogue resource](https://kenney.nl/assets/micro-roguelike). Make sure you include the License when you upload!
   * Double-note - we're using the "packed" sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn't work very well.  The non-packed sheet adds a gutter in between images - great for slicing up in something like Tiled or Godot but not as easy to use when calculating based on pixel size (though, to be fair it would just be an offset -- we'll get there).
 
@@ -346,7 +346,7 @@ Your player should now move around the screen, a little bit at a time.  You can 
 
 ---
 
-If you ran into issues or want to check your code, then this branch will put you into a working state for this step: [GitHub Repository - Step 1](s1 branch)
+If you ran into issues or want to check your code, then this branch will put you into a working state for this step: [GitHub Repository - Step 1](https://github.com/efredericks/p5-ecs-demo/tree/part1)
 
 ---
 
@@ -625,6 +625,8 @@ Add in the DVD bouncer and follower now as well in `setup` at the bottom:
 
 No updates necessary to the `draw` loop because everything is handled!  Time to move on to components now to give them some things to do.
 
+If you ran into issues or want to check your code, then this branch will put you into a working state for this step: [GitHub Repository - Step 2](https://github.com/efredericks/p5-ecs-demo/tree/part2)
+
 ## Components
 
 On to the **C**omponent part of ECS.  This portion will give each of our entities a *thing* that has responsibility for itself.  Essentially we're avoiding the creation of sub-sub-sub classes for each specialization.
@@ -881,6 +883,8 @@ Now add the components within `sketch.js` - replace the code where you're instan
 Last, remove all your Enemy subclasses (i.e., `DVD`, `Follower`) -- they're not needed anymore!  Leave the `Enemy` one though.
 
 Your game *should* look the same as before, however now it is more data-driven!  You can now add as many different *reusable* components as you want!   
+
+If you ran into issues or want to check your code, then the main branch will put you into a working state: [GitHub Repository - Completed](https://github.com/efredericks/p5-ecs-demo)
 
 ---
 
