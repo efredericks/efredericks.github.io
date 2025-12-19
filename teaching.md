@@ -5,7 +5,7 @@ permalink: /teaching/
 ---
 
 <div class="content-container about">
-  <p class="highlight" style="padding:2rem; border-left:0.5rem solid #ff00ff">Herein lies my list of courses.</p>
+  <p  style="padding:2rem; border-left:0.5rem solid #ff00ff">Herein lies my list of courses.</p>
   <h3>W2026 Course Webpages</h3>
   <ul>
   <li><a href="https://efredericks.github.io/gvsu-cis373/" target="_blank">CIS373 - Pervasive Computing</a></li>
