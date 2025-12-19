@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en-us" class="h-100">
+  <head>
+    <title>
+      Computing Club Tutorial - Entity Component System (ECS) – erik fredericks – assoc prof @ gvsu
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The page supports both dark and light color schemes, and the page author prefers / default is light. -->
+    <meta name="color-scheme" content="dark light" />
+    <!-- Stylesheet that includes Bootstrap dark mode & custom stylesheet -->
+    <link
+      rel="stylesheet"
+      href="/assets/css/styles.css"
+    />
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <!-- Meta Theme Color is also supported on Safari and Chrome -->
+    <meta
+      name="theme-color"
+      content="#eeeeee"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#111111"
+      media="(prefers-color-scheme: light)"
+    />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Computing Club Tutorial - Entity Component System (ECS) | assoc prof @ gvsu.eduo</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Computing Club Tutorial - Entity Component System (ECS)" />
+<meta name="author" content="erik-fredericks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="tutorial on ECS in p5js" />
+<meta property="og:description" content="tutorial on ECS in p5js" />
+<meta property="og:site_name" content="assoc prof @ gvsu.eduo" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-22T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Computing Club Tutorial - Entity Component System (ECS)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"erik-fredericks"},"dateModified":"2025-10-22T00:00:00-04:00","datePublished":"2025-10-22T00:00:00-04:00","description":"tutorial on ECS in p5js","headline":"Computing Club Tutorial - Entity Component System (ECS)","mainEntityOfPage":{"@type":"WebPage","@id":"/2025/10/22/cclub-ecs/"},"url":"/2025/10/22/cclub-ecs/"}</script>
+<!-- End Jekyll SEO tag -->
+ <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="assoc prof @ gvsu.eduo" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.js"></script>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand p-0" href="/">
+    
+    <img src="/assets/images/Fredericks-Small.jpg" alt="light avatar" width="30" class="d-inline-block align-top m-0 light-avatar">
+    <img src="/assets/images/Fredericks-Small.jpg" alt="dark avatar" width="30" class="d-inline-block align-top m-0 dark-avatar">
+    
+      erik fredericks</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a href="/"  class="nav-link" >home</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/about/"  class="nav-link" >about</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/publications/"  class="nav-link" >publications</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/teaching/"  class="nav-link" >teaching</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/students/"  class="nav-link" >students</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/activities/"  class="nav-link" >activities</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/posts/"  class="nav-link" >posts</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="body"><div class="post">
+  <h1>Computing Club Tutorial - Entity Component System (ECS)</h1>
+  <span class="fs-4 text-muted">Oct 22, 25</span>
+  <div class="mt-4"><hr />
+
+<ul>
+  <li><a href="https://editor.p5js.org/frederer/sketches/saybmOwu4">functioning p5js sketch</a></li>
+  <li><a href="https://github.com/efredericks/p5-ecs-demo">GitHub repository</a></li>
+</ul>
+
+<hr />
+
+<p><strong>Table of Contents</strong></p>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-ecs" id="markdown-toc-what-is-ecs">What is ECS?</a></li>
+  <li><a href="#a-note-on-resources" id="markdown-toc-a-note-on-resources">A note on resources</a></li>
+  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+  <li><a href="#first-steps" id="markdown-toc-first-steps">First steps</a>    <ul>
+      <li><a href="#1-create-a-new-project-directory-structure" id="markdown-toc-1-create-a-new-project-directory-structure">1. Create a new project (directory structure)</a></li>
+      <li><a href="#2-upload-your-asset-files-and-create-empty-files" id="markdown-toc-2-upload-your-asset-files-and-create-empty-files">2. Upload your asset files and create empty files</a></li>
+      <li><a href="#3-wire-everything-up" id="markdown-toc-3-wire-everything-up">3. Wire everything up</a></li>
+      <li><a href="#4-use-p5js-20x" id="markdown-toc-4-use-p5js-20x">4. Use p5js 2.0.x</a></li>
+      <li><a href="#5-draw-your-character-to-the-screen" id="markdown-toc-5-draw-your-character-to-the-screen">5. Draw your character to the screen</a></li>
+      <li><a href="#6-move-them-around" id="markdown-toc-6-move-them-around">6. Move them around</a></li>
+    </ul>
+  </li>
+  <li><a href="#entities" id="markdown-toc-entities">Entities</a>    <ul>
+      <li><a href="#creating-a-base-entity-class" id="markdown-toc-creating-a-base-entity-class">Creating a base entity class</a></li>
+      <li><a href="#create-our-child-classes" id="markdown-toc-create-our-child-classes">Create our child classes</a></li>
+    </ul>
+  </li>
+  <li><a href="#components" id="markdown-toc-components">Components</a></li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next steps</a></li>
+</ul>
+
+<hr />
+
+<!-- # ECS Tutorial overview -->
+
+<p>We’re going to be creating a 2D, top-down, tile-based game demo using p5js.</p>
+
+<p><img src="/assets/img/ecs-js/demo.gif" alt="demo" /></p>
+
+<h2 id="what-is-ecs">What is ECS?</h2>
+
+<p>The Entity-Component-System (ECS) design pattern is a lovely pattern for managing a lot of disparate types of things in your game.  Specifically, you might want to define characters that move, characters that don’t move, items, items that hurt you, items that talk to you, NPCs, enemies of varying type, etc.</p>
+
+<p>The nice thing is that those all typically derive from the same base class.  They all need a position and a sprite, for example.  Essentially, we’ll define an <code class="language-plaintext highlighter-rouge">Entity</code> class and inherit from that for all our varying types.</p>
+
+<p>We may also want to give them different abilities/characteristics.  Enter <em>components</em> – the tl;dr is that you will “equip” an entity with a certain component, and that entity will then check its list of components for its abilities.</p>
+
+<p>This is a fairly reductive take on ECS and you can read about it in-depth on <a href="https://en.wikipedia.org/wiki/Entity_component_system">Wikipedia</a> and <a href="https://dev.to/kspeakman/entity-component-system-an-old-new-thing-3224">dev.to</a> and <a href="https://www.richardlord.net/blog/ecs/why-use-an-entity-framework.html">this blog</a>.</p>
+
+<p>There also is an ECS framework available as well: <a href="https://www.flecs.dev/flecs/">FLECS</a> and a correlated <a href="https://github.com/SanderMertens/ecs-faq">FAQ</a>.</p>
+
+<p>ECS, c/o WikiPedia:
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/ECS_Simple_Layout.svg/512px-ECS_Simple_Layout.svg.png" alt="ECS (ECS)" /></p>
+
+<h2 id="a-note-on-resources">A note on resources</h2>
+
+<p>Until you’re ready to hire an artist, use royalty/copyright-free resources.  There are a <strong>lot</strong> available online, from <a href="https://itch.io/search?q=assets">itch.io</a> to <a href="https://opengameart.org/">opengameart</a> to (my favorite) <a href="https://kenney.nl">kenney.nl</a>.</p>
+
+<p>Whatever you do though:</p>
+
+<ol>
+  <li>Avoid using copyrighted images (unless if you paid for it)</li>
+  <li>Include the license <strong>every time</strong> you use a resource, and check the attribution requirements for the original file</li>
+  <li>Avoid using AI-generated artwork - hire an artist</li>
+  <li>Since we’re using p5js you’ll want to become familiar with their documentation.  There are a large number of resources, tutorials, libraries, and <strong>well-written</strong> API documentation pages on their site: <a href="https://p5js.org/reference/">https://p5js.org/reference/</a>.</li>
+</ol>
+
+<h2 id="setup">Setup</h2>
+
+<ol>
+  <li>Create an account on the p5js editor: <a href="https://editor.p5js.org">p5js online editor</a> - I’ve linked my GitHub to it for ease of sign in, however you can use whatever method you prefer.</li>
+  <li>Grab a spritesheet from <a href="https://kenney.nl">kenney.nl</a>: I’ll be using the <a href="https://kenney.nl/assets/micro-roguelike">microrogue resource</a>. Make sure you include the License when you upload!
+    <ul>
+      <li>Double-note - we’re using the “packed” sprite sheet, not individual images!  Both have pros and cons, however uploading hundreds of images to the online editor doesn’t work very well.  The non-packed sheet adds a gutter in between images - great for slicing up in something like Tiled or Godot but not as easy to use when calculating based on pixel size (though, to be fair it would just be an offset – we’ll get there).</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="first-steps">First steps</h2>
+
+<p>Ok, here we go!  Everything we’ll be doing is in the online p5js editor, however you can export it to any website you want after we’re done.</p>
+
+<h3 id="1-create-a-new-project-directory-structure">1. Create a new project (directory structure)</h3>
+
+<p>Let’s start by defining a directory structure.  By default you’ll have some p5 libraries, an <code class="language-plaintext highlighter-rouge">index.html</code>, and a <code class="language-plaintext highlighter-rouge">sketch.js</code>.</p>
+
+<p>If you aren’t familiar:</p>
+
+<ul>
+  <li>Any time we add a new <code class="language-plaintext highlighter-rouge">js</code> file we need to link to it within the <code class="language-plaintext highlighter-rouge">index.html</code> file - <strong>before</strong> we include the <code class="language-plaintext highlighter-rouge">sketch.js</code> file.  HTML/JavaScript is (typically) rendered <strong>in-order</strong>, so dependencies must be specified in the correct order.</li>
+  <li>p5js uses a few functions to set things up:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">setup</code> runs before the <code class="language-plaintext highlighter-rouge">draw</code> cycle (or, the forever loop).  Set variable states and do all of your setup in this function.  With p5js 2.0 and beyond, all file loading happens in <code class="language-plaintext highlighter-rouge">setup</code> as well!</li>
+      <li><code class="language-plaintext highlighter-rouge">draw</code> is your forever loop - it runs either as fast as possible or at a specified frame rate.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-upload-your-asset-files-and-create-empty-files">2. Upload your asset files and create empty files</h3>
+
+<p>Create a directory on the side called assets and upload your spritesheet <strong>and</strong> its license file.  While you’re working there, create files named <code class="language-plaintext highlighter-rouge">components.js</code> and <code class="language-plaintext highlighter-rouge">entities.js</code> at the root of your directory (we could add sub-folders for organization, but for this we’ll just keep it on the same level).</p>
+
+<p><img src="/assets/img/ecs-js/uploading.png" alt="uploading" /></p>
+
+<p>Note - if you want to upload to a folder then you need to hover over it and click the little dropdown triangle to the side, otherwise you upload to the root of the structure.</p>
+
+<p><img src="/assets/img/ecs-js/uploading2.png" alt="uploading to folder" /></p>
+
+<h3 id="3-wire-everything-up">3. Wire everything up</h3>
+
+<p>In your <code class="language-plaintext highlighter-rouge">index.html</code> file, add the following lines <em>above</em> the call to include <code class="language-plaintext highlighter-rouge">sketch.js</code> (I’m including <code class="language-plaintext highlighter-rouge">sketch.js</code> here to show where to go - don’t double-include it!):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">components.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">entities.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">sketch.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>We need to put them above as they need to be parsed before <code class="language-plaintext highlighter-rouge">sketch.js</code> is parsed (for instance, any global variables we might want to share).</p>
+
+<blockquote>
+  <p>Note that we are setting up a structure that is good for a quick demo - it would be much better to refactor our code to say, have a <code class="language-plaintext highlighter-rouge">Game</code> class controlling everything, ingesting the assets, managing entities, etc.  However, we’re going to just use a few global variables to get things working.</p>
+</blockquote>
+
+<h3 id="4-use-p5js-20x">4. Use p5js 2.0.x</h3>
+
+<p>Let’s start you off with the latest version of p5js - click the version number (next to the gear icon) in the top right and select the latest 2.0.x version - I’m on 2.0.5.  This introduces a plethora of new features - the ones I’m most familiar with are that assets are now loaded in via <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code> calls (instead of using a <code class="language-plaintext highlighter-rouge">preload</code> function).  Let’s try it out:</p>
+
+<p>At the top of your <code class="language-plaintext highlighter-rouge">sketch.js</code> file (in global space), add a variable:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">spritesheet</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="kd">function</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+</code></pre></div></div>
+
+<p>And then modify your <code class="language-plaintext highlighter-rouge">setup</code> and <code class="language-plaintext highlighter-rouge">draw</code> functions to look like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// load in sprite sheet - change the filename to match your file</span>
+  <span class="c1">// mine is colored_tilemap_packed.png</span>
+  <span class="nx">spritesheet</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">loadImage</span><span class="p">(</span><span class="dl">"</span><span class="s2">assets/spritesheet.png</span><span class="dl">"</span><span class="p">);</span>  
+  <span class="nf">createCanvas</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">background</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="nf">image</span><span class="p">(</span><span class="nx">spritesheet</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You should now see your spritesheet being drawn to the top left corner!  Note that we also draw the background to give the illusion of animation (once things start to move).  If you didn’t redraw the background then things would smear the screen.</p>
+
+<p><img src="/assets/img/ecs-js/spritesheet-draw.png" alt="spritesheet" /></p>
+
+<h3 id="5-draw-your-character-to-the-screen">5. Draw your character to the screen</h3>
+
+<p>In the global space create an object for a character - eventually we’ll replace it with a class, however for now it’ll just keep an eye on the location:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">spritesheet</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">player</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+
+  <span class="nx">player</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">20</span><span class="p">};</span>
+
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This gives our player a position in 2D space - note that the origin is at the top left corner (and all images/rectanges are drawn with their respective top left corners as the origin).</p>
+
+<blockquote>
+  <p>You can test this out by the way, when drawing the spritesheet you can use the player position:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">image(spritesheet, player.x, player.y);</code></p>
+</blockquote>
+
+<p>However, we want to draw a single sprite from our spritesheet, not the entirety of it.</p>
+
+<blockquote>
+  <p>There are different approaches to loading sprites - we’re doing it the ‘low-impact’ way where we only load in a single image, rather than hundreds.  This has the benefit of saving memory (1 image vs. hundreds) at the cost of a slight bit of complexity.</p>
+</blockquote>
+
+<p>We need to add a helper function and some information to draw a single sprite.  What we will do is add a variable to tell us the width and height of a sprite (they <em>should</em> all be the same size in your spritesheets - some of the more complicated ones use varying sizes and that can be a pain to manually calculate).</p>
+
+<p>Note - if you’re using a different spritesheet, check the documentation inside for how large a sprite is.</p>
+
+<p>At the top of <code class="language-plaintext highlighter-rouge">sketch.js</code> add the following (using your sprite size):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SPRITE_SIZE</span>  <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="c1">// size of sprite in spritesheet</span>
+<span class="kd">const</span> <span class="nx">SPRITE_SCALE</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// amount to scale base sprite</span>
+<span class="kd">let</span> <span class="nx">SPRITE_SCALED</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// calculated scale value</span>
+</code></pre></div></div>
+
+<p>What going to do is use the <code class="language-plaintext highlighter-rouge">SPRITE_SIZE</code> variable to calculate where in the sprite sheet our desired image is located, and then scale it up when drawing so it isn’t tiny.</p>
+
+<p>Inside <code class="language-plaintext highlighter-rouge">setup()</code> make sure you calculate SPRITE_SCALED:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">...</span>
+
+  <span class="nx">SPRITE_SCALED</span> <span class="o">=</span> <span class="nx">SPRITE_SCALE</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">;</span>
+
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Add the following to the bottom of your <code class="language-plaintext highlighter-rouge">sketch.js</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// utility function for drawing a single sprite from the spritesheet </span>
+<span class="c1">// note: assumes using the 'packed' version (no spaces/gutters)</span>
+<span class="kd">function</span> <span class="nf">drawSprite</span><span class="p">(</span><span class="nx">sprite_id</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">image</span><span class="p">(</span>
+    <span class="nx">spritesheet</span><span class="p">,</span>   <span class="c1">// spritesheet object</span>
+    <span class="nx">x</span><span class="p">,</span>             <span class="c1">// x location to draw on screen</span>
+    <span class="nx">y</span><span class="p">,</span>             <span class="c1">// y location to draw on screen</span>
+    <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="c1">// the **new** width of the sprite</span>
+    <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="c1">// the **new** height of the sprite</span>
+    <span class="nx">sprite_dict</span><span class="p">[</span><span class="nx">sprite_id</span><span class="p">].</span><span class="nx">c</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="c1">// its x location in the spritesheet</span>
+    <span class="nx">sprite_dict</span><span class="p">[</span><span class="nx">sprite_id</span><span class="p">].</span><span class="nx">r</span> <span class="o">*</span> <span class="nx">SPRITE_SIZE</span><span class="p">,</span> <span class="c1">// its y location in the spritesheet</span>
+    <span class="nx">SPRITE_SIZE</span><span class="p">,</span>   <span class="c1">// the **original** width of the sprite</span>
+    <span class="nx">SPRITE_SIZE</span>    <span class="c1">// the **original** height of the sprite</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This uses the extended syntax of the <code class="language-plaintext highlighter-rouge">image()</code> function (see <a href="https://p5js.org/reference/p5/image/">https://p5js.org/reference/p5/image/</a>), however to explain what is going on:</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])</code></p>
+</blockquote>
+
+<p><img src="https://p5js.org/assets/drawImage.png" alt="image drawing" /></p>
+
+<p>HOWEVER, we have an undefined variable!  We need to create a lookup table so that we define which <strong>row</strong> and <strong>column</strong> a specific sprite is!</p>
+
+<p>At the top:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">sprite_dict</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">player</span><span class="p">:</span>   <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">4</span> <span class="p">},</span>
+  <span class="na">npc</span><span class="p">:</span>      <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">5</span> <span class="p">},</span>
+  <span class="na">beholder</span><span class="p">:</span> <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">13</span> <span class="p">},</span>
+  <span class="na">snake</span><span class="p">:</span>    <span class="p">{</span> <span class="na">r</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="mi">4</span> <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>This defines a dictionary for every single character in our game.  Some spritesheets come with a <code class="language-plaintext highlighter-rouge">json</code> file for easy unpacking, however these ones don’t.  Gives you a bit more control!</p>
+
+<p>Now draw the player:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">drawSprite</span><span class="p">(</span><span class="dl">'</span><span class="s1">player</span><span class="dl">'</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p> </p>
+
+<blockquote>
+  <p>Feel free to pick whatever sprites you want for the various characters we’ll be drawing.</p>
+</blockquote>
+
+<p>Another note:</p>
+
+<blockquote>
+  <p>All of your errors will go to your browser console!  Pop open the dev tools and keep an eye on the console to see your typos/errors/etc.</p>
+</blockquote>
+
+<hr />
+
+<p>You may have noticed things don’t look … great.  That’s because we’re scaling a small image up and its edges are supposed to be nice and crisp.</p>
+
+<p><img src="/assets/img/ecs-js/smoothed.png" alt="smoothed" /></p>
+
+<p>Last but not least, we need to direct the canvas to be optimized for pixel art.  If you look at the p5js documentation there are <code class="language-plaintext highlighter-rouge">smooth()</code> and <code class="language-plaintext highlighter-rouge">noSmooth()</code> functions, however they don’t seem to have the desired effect (note: I don’t know why).</p>
+
+<p>After your call to <code class="language-plaintext highlighter-rouge">createCanvas(400, 400)</code> add the following:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// load in sprite sheet - change the filename to match your file</span>
+  <span class="k">await</span> <span class="nf">loadImage</span><span class="p">(</span><span class="dl">"</span><span class="s2">assets/spritesheet.png</span><span class="dl">"</span><span class="p">);</span> 
+  <span class="nf">createCanvas</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+  <span class="nx">drawingContext</span><span class="p">.</span><span class="nx">imageSmoothingEnabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="p">...</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The image should be a bit crisper now.</p>
+
+<p><img src="/assets/img/ecs-js/nosmoothed.png/" alt="nosmooth" /></p>
+
+<h3 id="6-move-them-around">6. Move them around</h3>
+
+<p>We have the ability to draw sprites and they should look crisp.  Let’s now move our player around the screen.</p>
+
+<p>Before we get into it, you might notice your background doesn’t match mine.  That’s because I told you to use 0 (black), however the sprite background is somewhat gray (if you’re using the microroguelike one).</p>
+
+<p>What you need to do is figure out what the color of your sprite background is and set the color each draw cycle to that!  (If the sprites have a transparent background you don’t need to worry about this - and in the olden days we used to filter based on a magic color: <span style="background:#ff00ff">#ff00ff</span>).</p>
+
+<p>For me, it is <span style="background:#222323;color:#eee;">#222323</span>, so at the top:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sprite_bg</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">#222323</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>and then in <code class="language-plaintext highlighter-rouge">draw</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">background</span><span class="p">(</span><span class="nx">sprite_bg</span><span class="p">);</span>
+
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Ok, fun time - p5js handles keypresses in an interesting fashion.  You can use the <code class="language-plaintext highlighter-rouge">keyPressed</code> function, the <code class="language-plaintext highlighter-rouge">isKeyPressed</code> function (within <code class="language-plaintext highlighter-rouge">draw</code>), and so on.  Since we’re going for a game where the user can hold down keys, we’ll use the <code class="language-plaintext highlighter-rouge">isKeyPressed</code> approach.</p>
+
+<p>At the bottom of <code class="language-plaintext highlighter-rouge">draw</code> (i.e., let’s handle player input after updating/drawing the game state):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="p">...</span>
+
+  <span class="c1">// enable continuous movement</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">LEFT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">RIGHT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">d</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">x</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">UP_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">w</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">DOWN_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">s</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nx">y</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we’re using the arrow or WADS keys for movement.  You can define whichever keys you want to use (or gamepads, for instance).</p>
+
+<blockquote>
+  <p>Note: again, there are nicer ways of doing this.  Defining a lookup table of keys, for example, so that you can easily have your users configure their controls…</p>
+</blockquote>
+
+<p>Your player should now move around the screen, a little bit at a time.  You can play with the increment/decrement values to make it faster, however we’ll bake that into our Entity later on.</p>
+
+<blockquote>
+  <p>Note: at this point, you can define any number of sprites on the screen - for example:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">drawSprite('snake', 100, 100);</code></p>
+
+  <p>Also, if you want to see the screen smearing example then comment out the call to <code class="language-plaintext highlighter-rouge">background</code> within the <code class="language-plaintext highlighter-rouge">draw</code> loop.</p>
+</blockquote>
+
+<hr />
+
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="https://github.com/efredericks/p5-ecs-demo/tree/part1">GitHub Repository - Step 1</a></p>
+
+<hr />
+
+<h2 id="entities">Entities</h2>
+
+<p>A lot of stuff to get things drawn!  Fortunately, that was a lot of the heavy lifting!  Let’s now make our player a bit more useful and turn it into an <code class="language-plaintext highlighter-rouge">Entity</code> - by doing so we can <strong>easily</strong> abstract out every single other entity in our game.</p>
+
+<blockquote>
+  <p>Note: the overall goal is to end up with an array of entities that we can loop over and simply call their respective <code class="language-plaintext highlighter-rouge">update()</code> and <code class="language-plaintext highlighter-rouge">draw()</code> functions - no spaghetti mess of if statements!  If you’ve a software engineering background then you might be familiar with the concept of having classes responsible for themselves.  Essentially, we’re looking to partition out effort and responsibility.</p>
+</blockquote>
+
+<h3 id="creating-a-base-entity-class">Creating a base entity class</h3>
+
+<p>First, we’ll create a <strong>base entity class</strong>.  Move over to <code class="language-plaintext highlighter-rouge">entities.js</code> and add the following:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Entity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">sprite</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">=</span> <span class="nx">w</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">=</span> <span class="nx">h</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nf">update</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">drawSprite</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This gives us a <em>base class</em> that we can extend others off of.  It’ll have a sprite variable, a position (x, y), and a size (w, h).  Note that we could use vectors here (via the <code class="language-plaintext highlighter-rouge">createVector</code> call), however we’ll go simpler for now.</p>
+
+<p>We’re also doubly-storing the size of the sprite given that they are square, however this approach is a bit more extensable if you end up with sprites that have non-square sizes (looking at you, <a href="https://opengameart.org/content/dungeon-crawl-32x32-tiles">dcss sprites</a>).</p>
+
+<blockquote>
+  <p>Note: any <em>generic</em> functions that you want all entities to have should go in your base class.  You can leave them empty if it is to be specialized by child classes (like the <code class="language-plaintext highlighter-rouge">update</code> function is).  Note that the <code class="language-plaintext highlighter-rouge">draw</code> function has code since all entities will have the same draw approach.</p>
+</blockquote>
+
+<h3 id="create-our-child-classes">Create our child classes</h3>
+
+<p>We <em>could</em> have our player be an entity, however let’s move ahead and specialize.  Here are the types of entities we’ll consider here (feel free to experiment/extrapolate!):</p>
+
+<ul>
+  <li>An entity that can move (e.g., the player, monsters, NPCs)</li>
+  <li>An entity that cannot move (e.g., an item, something in the environment, an NPC that is geo-locked)</li>
+</ul>
+
+<p>Interestingly, we’re not going to get <em>too</em> crazy with our specializations.  We could, but we’ll leave that to our <strong>component</strong> setup.  (And, if we did it here we’d have a lot of refactoring to do, which is not really all that much fun).  What we will do for deeper specializations is to <em>equip</em> each entity with a suite of components, making it a touch more data-driven.</p>
+
+<p>So, let’s delineate our children - create a few sub-classes:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// an entity that can move</span>
+<span class="kd">class</span> <span class="nc">MoveableEntity</span> <span class="kd">extends</span> <span class="nc">Entity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="nx">speed</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// make sure the move is valid before doing it!</span>
+  <span class="nf">tryMove</span><span class="p">(</span><span class="nx">move</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">||</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">move</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">&gt;</span> <span class="nx">height</span>
+    <span class="p">)</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Our player class - this is a bit special as we'll do some one-off</span>
+<span class="c1">// coding in here.  </span>
+<span class="kd">class</span> <span class="nc">Player</span> <span class="kd">extends</span> <span class="nc">MoveableEntity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// fyi, this magic number should be defined in a lookup table!</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">"</span><span class="s2">player</span><span class="dl">"</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">);</span> 
+  <span class="p">}</span>
+
+  <span class="c1">// handle player movement</span>
+  <span class="nf">move</span><span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="p">};</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">up</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span> <span class="o">-=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">down</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">left</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span> <span class="o">-=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">dir</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">right</span><span class="dl">"</span><span class="p">)</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Movement not supported</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">tryMove</span><span class="p">(</span><span class="nx">next_move</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// temporary entities - we'll modify/delete them later!</span>
+<span class="kd">class</span> <span class="nc">Enemy</span> <span class="kd">extends</span> <span class="nc">MoveableEntity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// enemy AI</span>
+  <span class="nf">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nf">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+        <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nf">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+      <span class="p">};</span>
+      <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">tryMove</span><span class="p">(</span><span class="nx">next_move</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// a bouncy friend</span>
+<span class="kd">class</span> <span class="nc">DVD</span> <span class="kd">extends</span> <span class="nc">MoveableEntity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nf">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span><span class="p">,</span>
+      <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span><span class="p">,</span>
+    <span class="p">};</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// a followey friend</span>
+<span class="kd">class</span> <span class="nc">Follower</span> <span class="kd">extends</span> <span class="nc">MoveableEntity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">speed</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">=</span> <span class="nx">target</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nf">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">super</span><span class="p">.</span><span class="nf">update</span><span class="p">();</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// calculate the distance to the player (our target),</span>
+      <span class="c1">// normalize that vector, and then calculate our</span>
+      <span class="c1">// new path by incorporating the speed and direction</span>
+      <span class="kd">let</span> <span class="nx">my_v</span> <span class="o">=</span> <span class="nf">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+      <span class="kd">let</span> <span class="nx">t_v</span> <span class="o">=</span> <span class="nf">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+      <span class="kd">let</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">p5</span><span class="p">.</span><span class="nx">Vector</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="nx">t_v</span><span class="p">,</span> <span class="nx">my_v</span><span class="p">);</span>
+      <span class="nx">direction</span><span class="p">.</span><span class="nf">normalize</span><span class="p">();</span>
+      <span class="nx">direction</span><span class="p">.</span><span class="nf">mult</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+      <span class="nx">my_v</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>OK, we now have some specialized classes.  We have a <code class="language-plaintext highlighter-rouge">Player</code> that will manage our player, a generic <code class="language-plaintext highlighter-rouge">Enemy</code> that will randomly jitter, a bouncing <code class="language-plaintext highlighter-rouge">DVD</code> logo, and something that follows the player around with a bit of vector math.</p>
+
+<blockquote>
+  <p>If you run it now, you should see nothing - that’s because we haven’t instantiated them yet.</p>
+</blockquote>
+
+<p>First, let’s make sure the player still works.  Replace your player creation code (in <code class="language-plaintext highlighter-rouge">setup</code>) with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Player</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>and in the <code class="language-plaintext highlighter-rouge">draw</code> function, replace the call to <code class="language-plaintext highlighter-rouge">drawSprite('player' ...)</code> with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span><span class="p">.</span><span class="nf">update</span><span class="p">();</span>
+<span class="nx">player</span><span class="p">.</span><span class="nf">draw</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>and where you handle the keyboard:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// enable continuous movement</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">LEFT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nf">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">left</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">RIGHT_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">d</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nf">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">right</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">UP_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">w</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nf">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">up</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if </span><span class="p">(</span><span class="nf">keyIsDown</span><span class="p">(</span><span class="nx">DOWN_ARROW</span><span class="p">)</span> <span class="o">||</span> <span class="nf">keyIsDown</span><span class="p">(</span><span class="dl">"</span><span class="s2">s</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">player</span><span class="p">.</span><span class="nf">move</span><span class="p">(</span><span class="dl">"</span><span class="s2">down</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="c1">// end of draw loop</span>
+</code></pre></div></div>
+
+<p>We’re now deferring handling player movement to our child entity class.  If you run it now it should look identical to before.</p>
+
+<hr />
+
+<p>However, we had all those fun other classes to play with, so, let’s instantiate them!  Back in <code class="language-plaintext highlighter-rouge">sketch.js</code>, add a list at the top that will hold our entities:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">entities</span> <span class="o">=</span> <span class="p">[];</span>
+</code></pre></div></div>
+
+<p>Now, let’s show off how useful this can be.  In <code class="language-plaintext highlighter-rouge">setup</code> at the bottom, create some things for the player to see, as well as to add the player to the list of entities:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span> <span class="c1">// player is always our 0-th entity</span>
+
+  <span class="c1">// create a few monsters</span>
+  <span class="nx">choices</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">npc</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">];</span>
+  <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">_</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">_</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Enemy</span><span class="p">(</span>
+      <span class="nf">random</span><span class="p">(</span><span class="nx">choices</span><span class="p">),</span>
+      <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nf">random</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="c1">// end of setup loop</span>
+</code></pre></div></div>
+
+<p>Now, <strong>remove</strong> the call to <code class="language-plaintext highlighter-rouge">player.update()</code> and <code class="language-plaintext highlighter-rouge">player.draw()</code> in the <code class="language-plaintext highlighter-rouge">draw()</code> function.  Replace it with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">e</span> <span class="k">of</span> <span class="nx">entities</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nf">update</span><span class="p">();</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nf">draw</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>All entities will be looped over and have their updates/draws deferred to their respective classes.  Nice and clean in your main code.</p>
+
+<blockquote>
+  <p>Note: if you are allowing entities to die, then we’ll want to handle it a touch differently:</p>
+
+  <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">entities</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">entities</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+
+  <p>The reason why is that if we want to remove an entity from the list, then we’ll need to start at the end and work backwards.  This is because iterating over the list in a forward direction would be problematic if entities disappear during the loop!</p>
+
+</blockquote>
+
+<p>Add in the DVD bouncer and follower now as well in <code class="language-plaintext highlighter-rouge">setup</code> at the bottom:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DVD</span><span class="p">(</span><span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">,</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Follower</span><span class="p">(</span><span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nx">player</span><span class="p">);</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">f</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// end of setup loop</span>
+</code></pre></div></div>
+
+<p>No updates necessary to the <code class="language-plaintext highlighter-rouge">draw</code> loop because everything is handled!  Time to move on to components now to give them some things to do.</p>
+
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="https://github.com/efredericks/p5-ecs-demo/tree/part2">GitHub Repository - Step 2</a></p>
+
+<h2 id="components">Components</h2>
+
+<p>On to the <strong>C</strong>omponent part of ECS.  This portion will give each of our entities a <em>thing</em> that has responsibility for itself.  Essentially we’re avoiding the creation of sub-sub-sub classes for each specialization.</p>
+
+<p>An easy example to think of is if something can be hurt or not in the game.  Typically that means it gets health, defense, strength, etc.  We could add that as a parameter to the <code class="language-plaintext highlighter-rouge">MoveableEntity</code> class, but then <strong>all</strong> moveable entities will have health.  Not necessarily a bad thing if you want it, but what if its an item that can scurry around?</p>
+
+<p>An easier way is to make all of that a <code class="language-plaintext highlighter-rouge">Component</code> - for example we could make a <code class="language-plaintext highlighter-rouge">FighterComponent</code> that has those attributes.  Or, we could create an <code class="language-plaintext highlighter-rouge">AI</code> component that defines the behavior of how enemies move, follow, etc.</p>
+
+<blockquote>
+  <p>We’ll be removing all those special enemy entities and replacing them with components!</p>
+</blockquote>
+
+<p>How is this useful?  We’ll add a lookup table for components in our base entity class, and then we’ll check in its <code class="language-plaintext highlighter-rouge">update</code> call if it has a particular component.  There are probably nicer ways of handling this, but we’ll add it as a dictionary.</p>
+
+<p>Over to <code class="language-plaintext highlighter-rouge">components.js</code> -</p>
+
+<p>Let’s create the base component class that all others will extend from:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Component</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">key</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>For now, we’ll keep this basic, since our components won’t have much overlap.  However, if you go a bit crazy and add all kinds of components you’ll start to notice patterns, the same variables, etc.  Those would go into your base class to prevent redundancy.</p>
+
+<p>Let’s now add the <code class="language-plaintext highlighter-rouge">FighterComponent</code> to give our character and the enemies some abilities.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">FighterComponent</span> <span class="kd">extends</span> <span class="nc">Component</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">hp</span><span class="p">,</span> <span class="nx">def</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">'</span><span class="s1">fighter</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">=</span> <span class="nx">hp</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">maxHP</span> <span class="o">=</span> <span class="nx">hp</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">def</span> <span class="o">=</span> <span class="nx">def</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">maxDef</span> <span class="o">=</span> <span class="nx">def</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// returns the percentage of health remaining</span>
+  <span class="nf">getPerc</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">/</span> <span class="k">this</span><span class="p">.</span><span class="nx">maxHP</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// damage the entity </span>
+  <span class="nf">takeDamage</span><span class="p">(</span><span class="nx">dmg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">-=</span> <span class="nx">dmg</span><span class="p">;</span>
+    
+    <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">hp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nf">die</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// handle death - can delegate to the entity or handle here</span>
+  <span class="nf">die</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">oof</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Ok, we now have a component!  You should hopefully know what to do now - any entity that you want to be able to fight gets a <code class="language-plaintext highlighter-rouge">FighterComponent</code>.  To do so we’ll need to add a place for them to go.  In <code class="language-plaintext highlighter-rouge">entities.js</code>, add a new variable and helper function in the base <code class="language-plaintext highlighter-rouge">Entity</code> class:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Entity</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">sprite</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">;</span> <span class="c1">// height of the HP bar</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">components</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="p">}</span>
+
+  <span class="nf">addComponent</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">[</span><span class="nx">c</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This helper function is exceedingly sparse and does nothing if you accidentally try to add the same component more than once.  You should protect it better with a polished program, but for now this will work.  Just be careful with what you add.</p>
+
+<p>Now, back over to <code class="language-plaintext highlighter-rouge">sketch.js</code>, add the new component to the <code class="language-plaintext highlighter-rouge">Player</code> (in the <code class="language-plaintext highlighter-rouge">setup</code> function, where you initially defined it):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Player</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">);</span>
+<span class="nx">player</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+<span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">player</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Last, let’s go ahead and make use of the health bar and show the entity’s status in real time.  Back in <code class="language-plaintext highlighter-rouge">entities.js</code> in the base <code class="language-plaintext highlighter-rouge">Entity</code> class, extend the <code class="language-plaintext highlighter-rouge">draw</code> function to check for the fighter component:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nf">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">drawSprite</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sprite</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+    <span class="c1">// draw HP bar</span>
+    <span class="k">if </span><span class="p">(</span><span class="dl">"</span><span class="s2">fighter</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">perc</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="nx">fighter</span><span class="p">.</span><span class="nf">getPerc</span><span class="p">();</span>
+      <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+
+      <span class="nf">noStroke</span><span class="p">();</span>
+      <span class="nf">fill</span><span class="p">(</span><span class="dl">"</span><span class="s2">rgba(224,72,72,0.6)</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nf">rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span><span class="p">);</span>
+
+      <span class="kd">let</span> <span class="nx">w</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nx">perc</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">w</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+      <span class="nf">fill</span><span class="p">(</span><span class="dl">"</span><span class="s2">rgba(0,255,0, 0.6)</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nf">rect</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">bar_h</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nf">takeDamage</span><span class="p">(</span><span class="nx">dmg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="dl">"</span><span class="s2">fighter</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="nx">fighter</span><span class="p">.</span><span class="nf">takeDamage</span><span class="p">(</span><span class="nx">dmg</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here, we’re checking to see if the fighter key exists, and if so, draw a health bar using the percentage of the entity’s health and the size of its sprite.  Essentially, drawing a red background with a green rectangle that is scaled to the percentage (the <code class="language-plaintext highlighter-rouge">map</code> function takes a value and maps it from one range to another).</p>
+
+<p>We also added in the <code class="language-plaintext highlighter-rouge">takeDamage</code> function, which gives us an entity-level function to call to hurt an entity.  Again, probably better ways to do this but we have a check to see if the component exists, and if so, call its related function.</p>
+
+<blockquote>
+  <p>If you want to add a little debugging check, we can mess with the HP on the player pretty easily (and the idea would be you would extend this to a collision detection of some sort):</p>
+
+  <p>In <code class="language-plaintext highlighter-rouge">sketch.js</code> (at the bottom):</p>
+  <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">keyPressed</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">key</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">)</span> <span class="nx">player</span><span class="p">.</span><span class="nf">takeDamage</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// hurt</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">key</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">)</span> <span class="nx">player</span><span class="p">.</span><span class="nf">takeDamage</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// heal</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>We will leave fighting/hitting each other for another time unfortunately.  However, let’s go ahead and define some AI components that will replace all the custom entities.  There are a couple of options where we could go - create an <code class="language-plaintext highlighter-rouge">AIComponent</code> class and then extend it further (kind of like we did earlier), or create a single <code class="language-plaintext highlighter-rouge">AIComponent</code> and delegate the logic to itself.  Since our AI is only going to be based on movement we’ll do the latter, however if there was to be more delineation it would be better to have additional subclasses.</p>
+
+<p>So, back to <code class="language-plaintext highlighter-rouge">components.js</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">AIComponent</span> <span class="kd">extends</span> <span class="nc">Component</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">entity</span><span class="p">,</span> <span class="nx">vx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">vy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">target</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="dl">"</span><span class="s2">AI</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">entity</span> <span class="o">=</span> <span class="nx">entity</span><span class="p">;</span> <span class="c1">// reference to parent</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">=</span> <span class="nx">vx</span><span class="p">;</span> <span class="c1">// follower and DVD logo</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">=</span> <span class="nx">vy</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">=</span> <span class="nx">target</span><span class="p">;</span> <span class="c1">// for the follower</span>
+  <span class="p">}</span>
+
+  <span class="nf">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// random mover</span>
+    <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">random</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="nf">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nf">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+          <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nf">random</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span><span class="p">,</span>
+        <span class="p">};</span>
+        <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nf">tryMove</span><span class="p">(</span><span class="nx">next_move</span><span class="p">))</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">// bouncing dvd logo</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">DVD</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">next_move</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">x</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vx</span><span class="p">,</span>
+        <span class="na">y</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">vy</span><span class="p">,</span>
+      <span class="p">};</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">next_move</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+
+      <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+      <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+      <span class="c1">// follow a target</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">follow</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">my_v</span> <span class="o">=</span> <span class="nf">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">t_v</span> <span class="o">=</span> <span class="nf">createVector</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+
+        <span class="kd">let</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">p5</span><span class="p">.</span><span class="nx">Vector</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="nx">t_v</span><span class="p">,</span> <span class="nx">my_v</span><span class="p">);</span>
+        <span class="nx">direction</span><span class="p">.</span><span class="nf">normalize</span><span class="p">();</span>
+        <span class="nx">direction</span><span class="p">.</span><span class="nf">mult</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">speed</span><span class="p">);</span>
+        <span class="nx">my_v</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">my_v</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">w</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vx</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+      <span class="k">if </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">h</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vy</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// else do nothing</span>
+
+    <span class="c1">// stay in bounds</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">w</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nf">constrain</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">entity</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You’ll note that we took all the special <code class="language-plaintext highlighter-rouge">update</code> code from the subclasses and moved it to this particular component.  We’re also passing in the parent entity so that we can have a reference to it.  Looks like a lot, but that’s all the code from the specific entity subclasses.</p>
+
+<blockquote>
+  <p>All positions/sizes are now replaced by <code class="language-plaintext highlighter-rouge">this.entity.&lt;param&gt;</code> as those are owned by the parent entity class now.</p>
+</blockquote>
+
+<p>Ok, time to wire it up.  Since we’re going to allow any entity to have an AI, we’ll check it in the <em>base</em> class.  However, you’ll need to update the <code class="language-plaintext highlighter-rouge">Enemy</code> class as well!  First, <strong>remove</strong> the <code class="language-plaintext highlighter-rouge">update</code> function from the <code class="language-plaintext highlighter-rouge">Enemy</code> class.</p>
+
+<blockquote>
+  <p>If you want your enemies or other entities to take advantage of the <code class="language-plaintext highlighter-rouge">AIComponent</code> you’ll need to check for it within that class’ <code class="language-plaintext highlighter-rouge">update</code> function - the base class’ <code class="language-plaintext highlighter-rouge">update</code> doesn’t run if a child class has an instance of it.</p>
+</blockquote>
+
+<p>Update the base <code class="language-plaintext highlighter-rouge">Entity</code> class <code class="language-plaintext highlighter-rouge">update</code> function:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Entity</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="nf">update</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="dl">"</span><span class="s2">AI</span><span class="dl">"</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">components</span><span class="p">.</span><span class="nx">AI</span><span class="p">.</span><span class="nf">update</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now add the components within <code class="language-plaintext highlighter-rouge">sketch.js</code> - replace the code where you’re instantiating all the non-player entities (in <code class="language-plaintext highlighter-rouge">setup</code>) with this (basically the same, just now adding components):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">choices</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">npc</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">];</span>
+  <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">_</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">_</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Enemy</span><span class="p">(</span>
+      <span class="nf">random</span><span class="p">(</span><span class="nx">choices</span><span class="p">),</span>
+      <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">SPRITE_SCALED</span><span class="p">),</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nx">SPRITE_SCALED</span><span class="p">,</span>
+      <span class="nf">random</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">AIComponent</span><span class="p">(</span><span class="dl">'</span><span class="s1">random</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span><span class="p">));</span>
+
+    <span class="c1">// console.log(e)</span>
+    <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Enemy</span><span class="p">(</span><span class="dl">"</span><span class="s2">beholder</span><span class="dl">"</span><span class="p">,</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+  <span class="nx">d</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="nx">d</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">AIComponent</span><span class="p">(</span><span class="dl">'</span><span class="s1">DVD</span><span class="dl">'</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Enemy</span><span class="p">(</span><span class="dl">"</span><span class="s2">snake</span><span class="dl">"</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="nx">SPRITE_SCALED</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+  <span class="nx">f</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">FighterComponent</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="nx">f</span><span class="p">.</span><span class="nf">addComponent</span><span class="p">(</span><span class="k">new</span> <span class="nc">AIComponent</span><span class="p">(</span><span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span><span class="p">,</span> <span class="nx">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">player</span><span class="p">));</span>
+  <span class="nx">entities</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">f</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// end of setup</span>
+</code></pre></div></div>
+
+<p>Last, remove all your Enemy subclasses (i.e., <code class="language-plaintext highlighter-rouge">DVD</code>, <code class="language-plaintext highlighter-rouge">Follower</code>) – they’re not needed anymore!  Leave the <code class="language-plaintext highlighter-rouge">Enemy</code> one though.</p>
+
+<p>Your game <em>should</em> look the same as before, however now it is more data-driven!  You can now add as many different <em>reusable</em> components as you want!</p>
+
+<p>If you ran into issues or want to check your code, then this branch will put you into a working state for this step: <a href="https://github.com/efredericks/p5-ecs-demo/tree/part3">GitHub Repository - Step 3</a></p>
+
+<hr />
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>This is a taste of what you can do.  A few things:</p>
+
+<ul>
+  <li>p5js is canonically <em>slow</em> for JavaScript games as it makes some choices in terms of rendering performance.  It is for teaching and not necessarily production games.  Manually draw to the <code class="language-plaintext highlighter-rouge">canvas</code> with straight JavaScript or use a framework like <a href="https://phaser.io">PhaserJS</a> to optimize your game.
+    <ul>
+      <li>Check the Performance tab in your browser to profile!  Also, <a href="https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#identifying-slow-code-profiling">p5 optimization suggestions</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>Add gameplay!  We’ve essentially created a 2D walking simulator.</p>
+  </li>
+  <li>
+    <p>Wire in Tiled maps!  I’ve not tried it, but a lot of 2D games use the <a href="https://www.mapeditor.org/">Tiled Editor</a> for setting up maps, obstacles, etc. <a href="https://github.com/linux-man/p5.tiledmap">p5.tiledmap</a></p>
+  </li>
+  <li>Check out the other <a href="https://p5js.org/libraries/">p5js libraries</a>! There are a <strong>ton</strong> of things you can do with it!
+    <ul>
+      <li>There is an <a href="https://github.com/RandomGamingDev/BasicECSJs/">ECS library</a> as well that I’ve never tried, but it also includes a Scene Manager, which is nice (alternatively, just use a state machine to manage that yourself).</li>
+    </ul>
+  </li>
+  <li>Make a roguelike game in Godot!  The <a href="https://selinadev.github.io/">SelinaDev tutorial</a> is a nice introduction to Godot (and more imporantly for this, ECS).</li>
+</ul>
+
+<hr />
+</div>
+</div>
+</div>
+    </div>
+    <footer class="footer mt-auto py-3">
+  <div class="container footer-container">
+<a class="footer-icon-links" href="mailto:frederer@gvsu.edu">
+  <i class="bi bi-envelope-at"></i>
+</a>
+  
+
+<a
+  class="footer-icon-links"
+  href="https://github.com/efredericks"
+  >
+  <i class="bi bi-github"></i>
+</a>
+ 
+
+<a
+  class="footer-icon-links"
+  href="https://www.twitter.com/erik_fredericks"
+  >
+  <i class="bi bi-twitter"></i>
+</a>
+  
+ 
+<a class="footer-icon-links" href="https://youtube.com/@erikfredericks">
+  <i class="bi bi-youtube"></i>
+</a>
+
+<a class="footer-icon-links" href="https://twitch.tv/mrdoktorprofessor">
+  <i class="bi bi-twitch"></i>
+</a>
+
+
+<a class="footer-icon-links" href="/feed.xml"
+  >
+  <i class="bi bi-rss"></i>
+</a>
+
+
+<a class="footer-icon-links" href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ">
+ <!-- Toilet Paper icon by Arthur Shlain from Usefulicons.com -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" x="0px" y="0px" 
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-rss footer-icons"
+    viewBox="0 0 100 100"
+>
+  <path d="M75,10L42,10C47,17.2,50,27.7,50,40L90,40C90,23.4,83.3,10,75,10Z" stroke="currentColor"></path><path d="M40,40C40,23.4,33.3,10,25,10S10,23.4,10,40S16.7,70,25,70S40,56.6,40,40ZM20,40C20,34.5,22.2,30,25,30S30,34.5,30,40C30,45.5,27.8,50,25,50S20,45.5,20,40Z" stroke="currentColor"></path><path d="M50,50L90,50L90,90L50,90L50,50Z" stroke="currentColor"></path></svg>
+  </a> 
+  </div>
+</footer>
+
+    <!-- JS for Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

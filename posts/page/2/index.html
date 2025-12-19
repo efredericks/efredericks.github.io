@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      posts - page 2 &middot; erik fredericks
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/hyde/public/css/poole.css">
+  <link rel="stylesheet" href="/hyde/public/css/syntax.css">
+  <link rel="stylesheet" href="/hyde/public/css/hyde.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/hyde/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/hyde/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+<script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.js"></script>
+</head>
+
+
+  <body>
+
+ <!-- class="theme-base-0c"> -->
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/hyde/" class="rubik-glitch-regular">
+          erik fredericks
+        </a>
+      </h1>
+      <p class="lead">assoc prof @ gvsu</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/hyde/">home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            
+            <a class="sidebar-nav-item" href="/about/">about me</a>
+            
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            
+            <a class="sidebar-nav-item" href="/publications.html">publications</a>
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+
+      <!-- <a class="sidebar-nav-item" href="https://github.com/efredericks/archive/v2.1.0.zip">Download</a> -->
+      <a class="sidebar-nav-item" href="https://github.com/efredericks">github</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+       <hr size="1" class="smolmargin" />
+
+      <a class="sidebar-nav-item" href="/posts/">posts</a>
+
+    </nav>
+
+    <p>&copy; 2025. all rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">posts - page 2</h1>
+  <!-- <body class="theme-base-0c canvas-page"> -->
+
+
+
+<!-- <div id="canvas-container">
+  hi
+  <div id="canvas-container-2">
+    <div id="script-author"></div>
+  </div>
+</div> -->
+
+<div id="canvas-container" class="main-content">
+    <div id="script-author"></div>
+</div>
+
+<script>
+  // pick a random sketch to show on load
+  let author_urls = {
+    "Erik Fredericks": "https://efredericks.github.io",
+    // "Benoit + p5✨": "https://softwarediversity.eu",
+  };
+  let js_files = [
+    // 'fredericks-sega-1.js',
+
+    {'script': 'fredericks-sega-2.js', 'author': 'Erik Fredericks'},
+    {'script': 'fredericks-sega-3.js', 'author': 'Erik Fredericks'},
+    {'script': 'fredericks-sega-4.js', 'author': 'Erik Fredericks'},
+    { script: "fredericks-sega-5.js", author: "Erik Fredericks" },
+  ];
+  let index = Math.floor(Math.random() * js_files.length);
+  const the_file = js_files[index].script;
+  const scriptElement = document.createElement("script");
+  scriptElement.src = `/hyde//assets/js/sketches/${the_file}`;
+  document.body.appendChild(scriptElement);
+
+  let author = js_files[index].author;
+  let author_url = author_urls[author];
+  document.getElementById(
+    "script-author"
+  ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+</script>
+
+<!-- </body> -->
+</div>
+
+    </div>
+
+  </body>
+</html>

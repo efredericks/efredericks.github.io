@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us" class="h-100">
+  <head>
+    <title>
+      fredericks does the roguelikedev tutorial - 7/8 – erik fredericks – assoc prof @ gvsu
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The page supports both dark and light color schemes, and the page author prefers / default is light. -->
+    <meta name="color-scheme" content="dark light" />
+    <!-- Stylesheet that includes Bootstrap dark mode & custom stylesheet -->
+    <link
+      rel="stylesheet"
+      href="/assets/css/styles.css"
+    />
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <!-- Meta Theme Color is also supported on Safari and Chrome -->
+    <meta
+      name="theme-color"
+      content="#eeeeee"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#111111"
+      media="(prefers-color-scheme: light)"
+    />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>fredericks does the roguelikedev tutorial - 7/8 | assoc prof @ gvsu.eduo</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="fredericks does the roguelikedev tutorial - 7/8" />
+<meta name="author" content="erik-fredericks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="a*, slimes, more fixes, the end (for now)" />
+<meta property="og:description" content="a*, slimes, more fixes, the end (for now)" />
+<meta property="og:site_name" content="assoc prof @ gvsu.eduo" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-08-20T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="fredericks does the roguelikedev tutorial - 7/8" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"erik-fredericks"},"dateModified":"2023-08-20T00:00:00-04:00","datePublished":"2023-08-20T00:00:00-04:00","description":"a*, slimes, more fixes, the end (for now)","headline":"fredericks does the roguelikedev tutorial - 7/8","mainEntityOfPage":{"@type":"WebPage","@id":"/2023/08/20/rldev-8/"},"url":"/2023/08/20/rldev-8/"}</script>
+<!-- End Jekyll SEO tag -->
+ <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="assoc prof @ gvsu.eduo" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.js"></script>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand p-0" href="/">
+    
+    <img src="/assets/images/Fredericks-Small.jpg" alt="light avatar" width="30" class="d-inline-block align-top m-0 light-avatar">
+    <img src="/assets/images/Fredericks-Small.jpg" alt="dark avatar" width="30" class="d-inline-block align-top m-0 dark-avatar">
+    
+      erik fredericks</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        
+          <li class="nav-item">
+            <a href="/"  class="nav-link" >home</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/about/"  class="nav-link" >about</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/publications/"  class="nav-link" >publications</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/teaching/"  class="nav-link" >teaching</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/students/"  class="nav-link" >students</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/activities/"  class="nav-link" >activities</a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="/posts/"  class="nav-link" >posts</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="body"><div class="post">
+  <h1>fredericks does the roguelikedev tutorial - 7/8</h1>
+  <span class="fs-4 text-muted">Aug 20, 23</span>
+  <div class="mt-4"><hr size="1" />
+
+<ul>
+  <li>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15rltmg/roguelikedev_does_the_complete_roguelike_tutorial/jwajwkt/" target="_blank">Week 7 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15xppyg/roguelikedev_does_the_complete_roguelike_tutorial/jx9yz3e/" target="_blank">Week 8 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="\_blank">Project repo</a></p>
+  </li>
+</ul>
+
+<hr size="1" />
+
+<p>There really wasn’t much to report for week 7 outside of a couple of minor things so I didn’t write a separate post for it, so I’ll include it in this last post for the roguelikedev tutorial event.  Overall it was quite fun and nice to see the other projects going as well.</p>
+
+<p>tl;dr - definitely try out the tutorial if you have any interest in roguelikes, or game development in general.  Absolutely a great starting point into the area.</p>
+
+<p>Reiterating my two favorites that this proof of concept was based on:</p>
+
+<ul>
+  <li>
+    <p><a href="http://rogueliketutorials.com/tutorials/tcod/v2/" target="_blank">TCOD v2 (Python)</a></p>
+  </li>
+  <li>
+    <p><a href="https://nluqo.github.io/broughlike-tutorial/" target="_blank">Broughlike Tutorial (JavaScript)</a></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="visual-updates">Visual updates</h2>
+
+<p>First things first, a lot of the glyphs were being oddly aligned, and I realized that I wasn’t centering text when drawing to the canvas.  This has been corrected now and fixed with a simple call to update alignment prior to drawing the map (and setting it back to <code class="language-plaintext highlighter-rouge">left</code> when drawing the UI/chat messages):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctx.textAlign = "center";
+</code></pre></div></div>
+
+<p>Easy enough!  The next visual update is probably my favorite way to represent HP in games like this.  I calculate the percentage of the entity’s health based on their <code class="language-plaintext highlighter-rouge">HP</code> and <code class="language-plaintext highlighter-rouge">maxHP</code> and draw a pair of rectangles that represent this:</p>
+
+<p><img src="https://i.imgur.com/PGXHjc6.gif" alt="Centered animations and HP bars" /></p>
+
+<h2 id="dropsloot">Drops/Loot</h2>
+
+<p>What is a game without loot?  Right now the only loot we have are apples, so that is the current thing to drop.  The intended extensions are scrolls, weapons, armor, etc., but that’s for future developments (i.e., when there would be a purpose to have them).</p>
+
+<p>The easiest way to do this seemed to be having a drops table to aggregate everything,  Since I already have other lookup tables, it made the most sense to simply add on a new key:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drops': {
+    'rat': [('apple', 1, 0.25)],
+    'gobbo': [('apple', 3, 0.35)],
+    'snek': [('apple', 5, 0.5)],
+},
+</code></pre></div></div>
+
+<p>This table basically takes the entity name and provides options for what they drop and what the odds of that are.  When that monster is killed a simple check against <code class="language-plaintext highlighter-rouge">random.random()</code>.</p>
+
+<h2 id="second-spell">Second spell</h2>
+
+<p>Setting yourself for future success is always a good thing.  One of the functions I added to the map/entity generation was a <code class="language-plaintext highlighter-rouge">getRandomPosition</code> call that would return an empty, valid cell on the current map level.  This is suggested in pretty much any tutorial as well.  No cooldown and highly-abusable, but I wanted to get it in there to make sure it worked.</p>
+
+<p><img src="https://i.imgur.com/BAJ5bIZ.gif" alt="Teleporting" /></p>
+
+<h2 id="pathfinding">Pathfinding</h2>
+
+<p>Now the big one - enemies now follow the player around blocking cells.  Thanks to the <a href="https://www.redblobgames.com/pathfinding/a-star/implementation.html" target="_blank">red blob games</a> post on getting me up and running with that.  (Note: the <code class="language-plaintext highlighter-rouge">tcod</code> library has this built in, I just haven’t really been using that library at all so I didn’t really feel like starting now).  I’ll leave the algorithm particularls to the prior link, but it is quite satisfying to see things working.</p>
+
+<p><img src="https://i.imgur.com/BI8rwJS.gif" alt="Pathfinding" /></p>
+
+<h2 id="new-enemy">New enemy</h2>
+
+<p>I started getting interested in the physarum simulation, particularly how to make one in GPU shaders (always a fun mental activity to move thinking to matrix math mode - <a href="https://observablehq.com/@johnowhitaker/dotswarm-exploring-slime-mould-inspired-shaders" target="_blank">live display</a>)., but thought it might be fun to replicate the Nethack-style slime mold that self-replicates randomly.  Right now it is just a random check to see if it replicates or not.</p>
+
+<p>But, the fun bit was that it abuses an existing function for get neighboring cells to pick a valid one, rather than introducing yet another search method for empty cells.  The nice bit was this caused me to slightly refactor my <code class="language-plaintext highlighter-rouge">Monster</code> class to better handle child classes.</p>
+
+<p><img src="https://i.imgur.com/ypEhIgB.gif" alt="Slime mold" /></p>
+
+<p>Last but not least, I gave the player a slight aura as one possible way to reflect what their current resists are (for instance, this one might be resistant against fire).  Not sure that I like this, but the other choice is figuring out doll parts for ASCII glpyhs…</p>
+
+<p><img src="https://i.imgur.com/J4VzQxJ.png" alt="Aura" /></p>
+
+<hr />
+
+<p>That’s it for the summer!  This event was a lot of fun and I highly recommend it for anybody interested in roguelike development (as well as general game design - lots of good things to learn in the TCOD tutorial).</p>
+
+<h2 id="whats-next">What’s next?</h2>
+
+<p>Well, this proof of concept has the most promise of any of my little demos I’ve worked on, so I may pick at it throughout the school year either to iterate things or to use as demos for classes.</p>
+
+<p>Some issues:</p>
+
+<ul>
+  <li>
+    <p><em>Too many files to update</em> - when I make an update I need to update both the front-end and back-end code (for instance, adding a monster requires several steps internally to the back-end and visual representation on the front-end).  This is probably a lovely example of technical debt.</p>
+  </li>
+  <li>
+    <p><em>Instancing</em> - this game uses Flask as a server.  I’ve tested it with a small handful of players, but not scaled up.  Some load testing is in my future, as well as figuring out how to instance things.  Might be a fun diversion for looking into cloud services.</p>
+  </li>
+  <li>
+    <p><em>Saving</em> - right now everything exists in the <code class="language-plaintext highlighter-rouge">Game</code> class and is fairly easy to manage.  Some sort of local database and/or pickling may be in the future for saving game state.  Not something I’m entirely worried about at present.</p>
+  </li>
+  <li>
+    <p><em>NPCs</em> - I really wanted to add some flavor to the game by having settlements, people wandering, etc.  Didn’t get there but have some ideas, mostly involving <a href="http://www.crystalcodepalace.com/tracery.html" target="_blank">Tracery</a> for procedural text generation via grammars.</p>
+  </li>
+</ul>
+
+<p>That’s it - thanks for reading along!</p>
+
+<hr />
+
+<p><a href="/rldev-6.html">Last post</a></p>
+</div>
+</div>
+</div>
+    </div>
+    <footer class="footer mt-auto py-3">
+  <div class="container footer-container">
+<a class="footer-icon-links" href="mailto:frederer@gvsu.edu">
+  <i class="bi bi-envelope-at"></i>
+</a>
+  
+
+<a
+  class="footer-icon-links"
+  href="https://github.com/efredericks"
+  >
+  <i class="bi bi-github"></i>
+</a>
+ 
+
+<a
+  class="footer-icon-links"
+  href="https://www.twitter.com/erik_fredericks"
+  >
+  <i class="bi bi-twitter"></i>
+</a>
+  
+ 
+<a class="footer-icon-links" href="https://youtube.com/@erikfredericks">
+  <i class="bi bi-youtube"></i>
+</a>
+
+<a class="footer-icon-links" href="https://twitch.tv/mrdoktorprofessor">
+  <i class="bi bi-twitch"></i>
+</a>
+
+
+<a class="footer-icon-links" href="/feed.xml"
+  >
+  <i class="bi bi-rss"></i>
+</a>
+
+
+<a class="footer-icon-links" href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ">
+ <!-- Toilet Paper icon by Arthur Shlain from Usefulicons.com -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" x="0px" y="0px" 
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-rss footer-icons"
+    viewBox="0 0 100 100"
+>
+  <path d="M75,10L42,10C47,17.2,50,27.7,50,40L90,40C90,23.4,83.3,10,75,10Z" stroke="currentColor"></path><path d="M40,40C40,23.4,33.3,10,25,10S10,23.4,10,40S16.7,70,25,70S40,56.6,40,40ZM20,40C20,34.5,22.2,30,25,30S30,34.5,30,40C30,45.5,27.8,50,25,50S20,45.5,20,40Z" stroke="currentColor"></path><path d="M50,50L90,50L90,90L50,90L50,50Z" stroke="currentColor"></path></svg>
+  </a> 
+  </div>
+</footer>
+
+    <!-- JS for Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

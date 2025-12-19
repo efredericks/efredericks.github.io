@@ -1,549 +1,169 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en-us">
+
   <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/assets/styles/styles.css">
-<link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
-<script src="https://kit.fontawesome.com/79c31398dc.js" crossorigin="anonymous"></script>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-<!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
-<link rel="manifest" href="/assets/img/site.webmanifest">
-<link rel="mask-icon" href="/assets/img/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="/assets/img/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="/assets/img/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-<!-- feed -->
-<link type="application/atom+xml" rel="alternate" href="https://efredericks.github.io/feed.xml" title="erik fredericks" />
+  <title>
+    
+      posts &middot; erik fredericks
+    
+  </title>
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="/hyde/public/css/poole.css">
+  <link rel="stylesheet" href="/hyde/public/css/syntax.css">
+  <link rel="stylesheet" href="/hyde/public/css/hyde.css">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&display=swap" rel="stylesheet">
 
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/hyde/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/hyde/public/favicon.ico">
 
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>posts | erik fredericks</title>
-<meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="posts" />
-<meta name="author" content="efredericks" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="this is my homepage" />
-<meta property="og:description" content="this is my homepage" />
-<meta property="twitter:description" content="this is my homepage" />
-<link rel="canonical" href="https://efredericks.github.io/posts/" />
-<meta property="og:url" content="https://efredericks.github.io/posts/" />
-<meta property="og:site_name" content="erik fredericks" />
-<meta property="og:type" content="website" />
-<link rel="next" href="https://efredericks.github.io/posts/page2/" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="posts" />
-<meta name="twitter:site" content="@efredericks" />
-<meta name="twitter:creator" content="@efredericks" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"efredericks"},"description":"this is my homepage","headline":"posts","url":"https://efredericks.github.io/posts/"}</script>
-<!-- End Jekyll SEO tag -->
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+<script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.js"></script>
+</head>
 
 
-  </head>
   <body>
-    <aside class="menu">
-    <div class="menu-top">
-        <div class="menu-top_logo">
-            <a href="/">
-                <img src="/assets/img/Fredericks-Small.jpg" alt="Logo" onerror="this.style.display='none'">
-            </a>
-        </div>
-        <div class="menu-top_expand" onclick="toggleExpander(this)">
-            <div class="bar_top"></div>
-            <div class="bar_middle"></div>
-            <div class="bar_bottom"></div>
-        </div>
-        <ul class="navigation">
-            
-            <li>
-                <a href="/" category="home" title="">
-                    <span>home</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/students.html" category="students" title="students tooltip">
-                    <span>students</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/teaching.html" category="teaching" title="teaching tooltip">
-                    <span>teaching</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/publications.html" category="publications" title="publications tooltip">
-                    <span>publications</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/activities.html" category="activities" title="activities tooltip">
-                    <span>activities</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="/posts/" category="" title="">
-                    <span>posts</span>
-                </a>
-            </li>
-            
-        </ul>
+
+ <!-- class="theme-base-0c"> -->
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/hyde/" class="rubik-glitch-regular">
+          erik fredericks
+        </a>
+      </h1>
+      <p class="lead">assoc prof @ gvsu</p>
     </div>
-    <div class="menu-contact">
-        
 
-        <a href="https://github.com/efredericks" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-github"></i>
-        </a>
-        
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/hyde/">home</a>
 
-        <a href="https://scholar.google.com/citations?user=wpdiGa0AAAAJ" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-toilet-paper"></i>
-        </a>
-        
-
-        <a href="https://youtube.com/@erikfredericks" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-youtube-play"></i>
-        </a>
-        
-
-        <a href="https://twitch.tv/mrdoktorprofessor" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-twitch"></i>
-        </a>
-        
-
-        <a href="https://twitter.com/erik_fredericks" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-twitter"></i>
-        </a>
-        
-
-        <a href="mailto:frederer@gvsu.edu" target="">
-            <i class="fas fa-envelope"></i>
-        </a>
-        
-    </div>
-</aside>
-
-      <main class="content-layout">
-          <div class="content-container">
-    <div class="discography">
-        
-        
-        
-        <hr>
-        <article class="discography-album">
-        <!--
-    <header>
-        <figure class="discography-album_cover-wrapper">
-            <div class="discography-album_cover">
-                <div class="click-to-enlarge">
-                    <img
-                        click-to-enlarge
-                        
-                        src=""
-                        
-                    />
-                </div>
-            </div>
-        </figure>
-    </header>
-    -->
-    <section>
-        
-            <a href="/cclub-ecs.html">
-                
-                <h2 class="discography-album_title">
-                    Computing Club Tutorial - Entity Component System (ECS)
-                </h2>
-            </a>
-            <p class="discography-album_summary">
-                
-                tutorial on ECS in p5js
-                
-            </p>
-            <p class="discography-album_release-date">
-    date: 22 October 2025
-</p>
-
-
-<p class="discography-album_type">
-    post type: blog
-</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </section>
-    <span class="read-more">
-    
-        <a href="/cclub-ecs.html">
-             
-            
-            More info →
-            
-        </a>
-</span>
-</article>
-
-        
-        
-        
-        <hr>
-        <article class="discography-album">
-        <!--
-    <header>
-        <figure class="discography-album_cover-wrapper">
-            <div class="discography-album_cover">
-                <div class="click-to-enlarge">
-                    <img
-                        click-to-enlarge
-                        
-                        src=""
-                        
-                    />
-                </div>
-            </div>
-        </figure>
-    </header>
-    -->
-    <section>
-        
-            <a href="/generativegi.html">
-                
-                <h2 class="discography-album_title">
-                    GenerativeGI - Project Writeup
-                </h2>
-            </a>
-            <p class="discography-album_summary">
-                
-                project overview and images
-                
-            </p>
-            <p class="discography-album_release-date">
-    date: 20 September 2023
-</p>
-
-
-<p class="discography-album_type">
-    post type: blog
-</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </section>
-    <span class="read-more">
-    
-        <a href="/generativegi.html">
-             
-            
-            More info →
-            
-        </a>
-</span>
-</article>
-
-        
-        
-        
-        <hr>
-        <article class="discography-album">
-        <!--
-    <header>
-        <figure class="discography-album_cover-wrapper">
-            <div class="discography-album_cover">
-                <div class="click-to-enlarge">
-                    <img
-                        click-to-enlarge
-                        
-                        src=""
-                        
-                    />
-                </div>
-            </div>
-        </figure>
-    </header>
-    -->
-    <section>
-        
-            <a href="/rldev-8.html">
-                
-                <h2 class="discography-album_title">
-                    fredericks does the roguelikedev tutorial - 7/8
-                </h2>
-            </a>
-            <p class="discography-album_summary">
-                
-                a*, slimes, more fixes, the end (for now)
-                
-            </p>
-            <p class="discography-album_release-date">
-    date: 20 August 2023
-</p>
-
-
-<p class="discography-album_type">
-    post type: blog
-</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </section>
-    <span class="read-more">
-    
-        <a href="/rldev-8.html">
-             
-            
-            More info →
-            
-        </a>
-</span>
-</article>
-
-        
-        
-        
-        <hr>
-        <article class="discography-album">
-        <!--
-    <header>
-        <figure class="discography-album_cover-wrapper">
-            <div class="discography-album_cover">
-                <div class="click-to-enlarge">
-                    <img
-                        click-to-enlarge
-                        
-                        src=""
-                        
-                    />
-                </div>
-            </div>
-        </figure>
-    </header>
-    -->
-    <section>
-        
-            <a href="/rldev-6.html">
-                
-                <h2 class="discography-album_title">
-                    fredericks does the roguelikedev tutorial - 6
-                </h2>
-            </a>
-            <p class="discography-album_summary">
-                
-                bugfixes, big maps, cellular automata
-                
-            </p>
-            <p class="discography-album_release-date">
-    date: 09 August 2023
-</p>
-
-
-<p class="discography-album_type">
-    post type: blog
-</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </section>
-    <span class="read-more">
-    
-        <a href="/rldev-6.html">
-             
-            
-            More info →
-            
-        </a>
-</span>
-</article>
-
-        
-        
-
-        
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/posts/page2/">Older Posts →</a>
-    </li>
-    
-</ul>
-
-    </div>
-</div>
-          <script>
-    window.addEventListener("load", () => {
-        document.getElementsByClassName("copyrights")[0].innerHTML =
-            `Copyrights &copy; ${new Date().getFullYear()} erik fredericks | template c/o <a href='https://github.com/ItsPatrq/minimal-music-project' target='_blank'>minimal-music-project</a>`;
-    });
-</script>
-<footer>
-    <p class="copyrights">
-    </p>
-</footer>
-      </main>
       
-    <script>
-      (function () {
-    window.toggleExpander = function toggleExpander(x) {
-        const menu = document.getElementsByClassName("menu")[0];
-        const navigation = document.getElementsByClassName("navigation")[0];
-        if (menu.classList.contains('expanded--visible')) {
-            menu.classList.toggle('expanded--visible');
-            navigation.addEventListener('transitionend', function(e) {
-                menu.classList.toggle("expanded");
-              }, {
-                capture: false,
-                once: true,
-                passive: false
-              });
-        } else {
-            menu.classList.toggle("expanded");
-            setTimeout(() => menu.classList.toggle('expanded--visible'), 20);
-        }
-    };
-    window.addEventListener("load", () => {
-        // #region click to enlarge images 
-        const imageWrappers = document.querySelectorAll(".click-to-enlarge");
-        imageWrappers.forEach(imageWrapper => {
-            
-            imageWrapper.addEventListener("click", () => {
-                const img = imageWrapper.getElementsByTagName("img")[0];
-                const src = img.attributes.getNamedItem("src");
-                const modal = document.createElement("div");
-                const removeModal = function() {
-                    modal.classList.add("hidden");
-                    setTimeout(() => {
-                        document.body.removeChild(modal);
-                    }, 200);
-                };
-                const newImage = document.createElement("img");
-                newImage.classList.add("modal__picture-zoomed--image");
-                newImage.setAttribute("src", src.value);
-                modal.classList.add("modal__picture-zoomed", "hidden");
-                // modal.style.backgroundImage = `URL("${src.value}")`;
-                modal.addEventListener("click", removeModal);
-                modal.append(newImage);
-                document.body.append(modal);
-                document.body.addEventListener("keyup", e => {
-                    if (e.key === 'Escape') {
-                        removeModal();
-                    }
-                }, {once : true});
-                setTimeout(() => {
-                    modal.classList.remove("hidden");
-                }, 0);
-            });
-            
-        });
-        // #endregion click to enlarge images 
-        // #region embedded audio players
-        const players = document.querySelectorAll("iframe.embedded-player");
-        const getParamsByPlayerType = (src, type) => {
-            const rt = (src, height) => ({
-                src: src,
-                height: height
-            });
-            switch (type.toLocaleLowerCase()) {
-                case "soundcloud":
-                    return rt(`https://w.soundcloud.com/player/?url=${src}`, 125);
-                case "bandcamp":
-                    return rt(`https://bandcamp.com/EmbeddedPlayer/${src}`, 125);
-                case "spotify":
-                    return rt(`https://open.spotify.com/embed/track/${src}`, 80);
-                case "spotifyalbum":
-                    return rt(`https://open.spotify.com/embed/album/${src}`, 80);
-                case "spotifyplaylist":
-                    return rt(`https://open.spotify.com/embed/playlist/${src}`, 80);
-                case "spotifyepisode":
-                    return rt(`https://open.spotify.com/embed/episode/${src}`, 152);
-                case "spotifyshow":
-                    return rt(`https://open.spotify.com/embed/show/${src}`, 152);
-                case "youtube":
-                    return rt(`https://www.youtube.com/embed/${src}`, 350);
-                case "anchor.fm":
-                    return rt(`https://anchor.fm/sucias/embed/episodes/${src}`,102);
-                default:
-                    return rt(src, 125);
-            }
-        };
-        players.forEach(player => {
-            const givenSrc = player.getAttribute("givenSrc");
-            const type = player.getAttribute("type");
-            const { src, height } = getParamsByPlayerType(givenSrc, type);
-            player.setAttribute("src", src);
-            player.setAttribute("height", height);
-            player.classList.remove("hidden");
-        });
-        // #endregion embedded audio players
-    });
-})();
-    </script>
-    
 
+      
+      
+        
+          
+        
+      
+        
+          
+            
+            <a class="sidebar-nav-item" href="/about/">about me</a>
+            
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            
+            <a class="sidebar-nav-item" href="/publications.html">publications</a>
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+
+      <!-- <a class="sidebar-nav-item" href="https://github.com/efredericks/archive/v2.1.0.zip">Download</a> -->
+      <a class="sidebar-nav-item" href="https://github.com/efredericks">github</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+       <hr size="1" class="smolmargin" />
+
+      <a class="sidebar-nav-item" href="/posts/">posts</a>
+
+    </nav>
+
+    <p>&copy; 2025. all rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="page">
+  <h1 class="page-title">posts</h1>
+  <!-- <body class="theme-base-0c canvas-page"> -->
+
+
+
+<!-- <div id="canvas-container">
+  hi
+  <div id="canvas-container-2">
+    <div id="script-author"></div>
+  </div>
+</div> -->
+
+<div id="canvas-container" class="main-content">
+    <div id="script-author"></div>
+</div>
+
+<script>
+  // pick a random sketch to show on load
+  let author_urls = {
+    "Erik Fredericks": "https://efredericks.github.io",
+    // "Benoit + p5✨": "https://softwarediversity.eu",
+  };
+  let js_files = [
+    // 'fredericks-sega-1.js',
+
+    {'script': 'fredericks-sega-2.js', 'author': 'Erik Fredericks'},
+    {'script': 'fredericks-sega-3.js', 'author': 'Erik Fredericks'},
+    {'script': 'fredericks-sega-4.js', 'author': 'Erik Fredericks'},
+    { script: "fredericks-sega-5.js", author: "Erik Fredericks" },
+  ];
+  let index = Math.floor(Math.random() * js_files.length);
+  const the_file = js_files[index].script;
+  const scriptElement = document.createElement("script");
+  scriptElement.src = `/hyde//assets/js/sketches/${the_file}`;
+  document.body.appendChild(scriptElement);
+
+  let author = js_files[index].author;
+  let author_url = author_urls[author];
+  document.getElementById(
+    "script-author"
+  ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+</script>
+
+<!-- </body> -->
+</div>
+
+    </div>
 
   </body>
 </html>

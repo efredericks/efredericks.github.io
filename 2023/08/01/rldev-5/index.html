@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      fredericks does the roguelikedev tutorial - 5 &middot; erik fredericks
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/hyde/public/css/poole.css">
+  <link rel="stylesheet" href="/hyde/public/css/syntax.css">
+  <link rel="stylesheet" href="/hyde/public/css/hyde.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Glitch&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/hyde/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/hyde/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+<script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.js"></script>
+</head>
+
+
+  <body>
+
+ <!-- class="theme-base-0c"> -->
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/hyde/" class="rubik-glitch-regular">
+          erik fredericks
+        </a>
+      </h1>
+      <p class="lead">assoc prof @ gvsu</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/hyde/">home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            
+            <a class="sidebar-nav-item" href="/about/">about me</a>
+            
+          
+        
+      
+        
+      
+        
+      
+        
+          
+            
+            <a class="sidebar-nav-item" href="/publications.html">publications</a>
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+
+      <!-- <a class="sidebar-nav-item" href="https://github.com/efredericks/archive/v2.1.0.zip">Download</a> -->
+      <a class="sidebar-nav-item" href="https://github.com/efredericks">github</a>
+      <!-- <span class="sidebar-nav-item">Currently v2.1.0</span> -->
+       <hr size="1" class="smolmargin" />
+
+      <a class="sidebar-nav-item" href="/posts/">posts</a>
+
+    </nav>
+
+    <p>&copy; 2025. all rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">fredericks does the roguelikedev tutorial - 5</h1>
+  <span class="post-date">01 Aug 2023</span>
+  <hr size="1" />
+
+<ul>
+  <li>
+    <p><a href="https://www.reddit.com/r/roguelikedev/comments/15fd445/roguelikedev_does_the_complete_roguelike_tutorial/jucg531/" target="_blank">Week 5 post</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/efredericks/RL-MMO" target="_blank">Project repo</a></p>
+  </li>
+</ul>
+
+<hr size="1" />
+
+<p>This week introduces player area of effect spells (singular currently), a Drunkard’s Walk algorithm for map generation, and chat backgrounds for players (enemies lose theirs).  Mostly it was in touching up some things on the backend to better support the effects.</p>
+
+<p>Also, enemy pathfinding gets a touch of rework so that enemies “forget” about players.</p>
+
+<hr />
+
+<h2 id="chat-backgrounds">Chat Backgrounds</h2>
+
+<p>I was really not up for doing the calculations necessary to draw a chat balloon in the canvas, so I turned to our old friend StackOverflow to see if there were pre-existing solutions to the problem.  Fortunately, chat bubbles are pretty common things to have, so there were numerous questions out there for how to draw them.</p>
+
+<p>I liked this one the most, though I removed the little directional bit (for now):  <a href="https://stackoverflow.com/questions/21597644/speech-buble-html5-canvas-js" target="_blank">https://stackoverflow.com/questions/21597644/speech-buble-html5-canvas-js</a></p>
+
+<div align="center">
+  <img src="https://i.imgur.com/G55Vmv6.png" alt="player chat" title="player chat" />
+</div>
+
+<p>Enemies also lose their bubbles because the screen got <em>really</em> messy with everybody chattering.  I still think I prefer this to a message log though - we’ll see if “important” messages still get logged.  It makes sense for a traditional roguelike, though here I don’t know that it does.</p>
+
+<hr />
+
+<h2 id="procgen---drunkards-walk">Procgen - Drunkard’s Walk</h2>
+
+<p>First off, I tweaked the order of generation.  The overworld gets the Simplex noise forest and sub-levels are now created via a <a href="https://en.wikipedia.org/wiki/Random_walk" target="_blank">drunkard’s walk</a>.  The <em>tentative</em> plan is for sub-levels to have their own algorithms creating them (caves, dungeons, etc.).  I think if and when I get to an actual narrative those choices will become clearer.</p>
+
+<p>However, this one is easy enough.  Fill a map with walls and then carve out walkable spaces based on the stumblings of a drunkard.  My implementation currently does not take connectivity into account, so there are chances that I’ll have disconnected areas.</p>
+
+<p>Targets of optimization for a future flood fill check (when a cellular automata gets added).  Right now I give it enough iterations/time that it hasn’t been an issue for the smaller map size.</p>
+
+<p>Here’s the algorithm - again, fairly simple.  <code class="language-plaintext highlighter-rouge">ENEMY_DIRS</code> is a global list of possible directions that enemies can walk in (essentially the cardinal/ordinal directions) that I just reused here.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def drunkardsMap(self, z):
+    _map = [['wall2'] * self.NUM_COLS for _ in range(self.NUM_ROWS)]
+
+    center_c = self.NUM_COLS//2
+    center_r = self.NUM_ROWS//2
+
+    for _ in range(DRUNK_ITERATIONS):
+        curr_c = center_c
+        curr_r = center_r
+        DRUNK_LIFETIME = self.NUM_COLS * self.NUM_ROWS
+
+        for i in range(DRUNK_LIFETIME):
+            _map[curr_r][curr_c] = random.choice(['empty', 'empty', 'floor1', 'floor1', 'floor2'])
+
+            new_dir = random.choice(ENEMY_DIRS)
+            curr_r += new_dir['r']
+            curr_c += new_dir['c']
+
+            # out of bounds
+            if curr_c == 0 or curr_r == 1 or curr_c == self.NUM_COLS-1 or curr_r == self.NUM_ROWS-1:
+                break
+
+    return _map
+</code></pre></div></div>
+
+<p>Here we have the player going down to the first sub-level.  Looks like a fairly standard randomly-carved out space!</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/a2T233M.gif" alt="drunkard" title="drunkard" />
+</div>
+
+<p>(Note to future self: fix the odd offset between ASCII and Unicode characters):</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/DjVFihK.png" alt="offset" title="offset" />
+</div>
+
+<hr />
+
+<h2 id="aoe---fire">AoE - Fire</h2>
+
+<p>This took a little longer than I thought as I had figured I could re-use my <code class="language-plaintext highlighter-rouge">Item</code> entity setup for spawning fireballs surrounding the player.  It would have been more special handling than I wanted in that class, so <code class="language-plaintext highlighter-rouge">effects</code> are now their own thing.</p>
+
+<p>What it boils down to is that I spawn a set of effect objects, give them a lifetime, define <em>what</em> they do, and then track them like all other entities.</p>
+
+<p><strong>Note: what should probably happen is that every entity gets their own <code class="language-plaintext highlighter-rouge">update</code> function and self-handles - I haven’t gotten there yet with refactoring</strong>.</p>
+
+<p>However, for now it just goes into the lookup table:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># key: {attr:impact, timeout: upper}
+'effects': {
+    'fire': {'hp': -3, 'timer': 10},
+    'heal': {'hp': 1, 'timer': 5},
+}
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">timer</code> field is the upper limit of how long it lasts.  Essentially a target for future randomization (perhaps the fire lasts for <code class="language-plaintext highlighter-rouge">random.randint(5, LOOKUP_STATS['effects']['fire']['timer'])</code>).</p>
+
+<p>Anyway, here’s a shot of some rats and goblins getting toasted:</p>
+
+<div align="center">
+  <img src="https://i.imgur.com/GtnnYcF.gif" alt="fire!" title="fire!" />
+</div>
+
+<p>Right now it doesn’t hurt the player to walk over their own flames, though I might change that up as it seems a bit overpowered to leave firebombs burning while the player escapes unharmed.</p>
+
+<p>I’d really like AoE effects to interact with the environment (fire burns grasses, trees, etc.), but we’ll see how that pans out.  To do that I’d need a separate hook for the environment to respawn over time, then we’re talking going down the path of simulating a world’s ecological systems, and that might be a bit <em>too</em> much to bite off right now.</p>
+
+<p>Other spell targets are a group heal, electricity, etc.</p>
+
+<hr />
+
+<h2 id="enemy-following">Enemy Following</h2>
+
+<p>Enemies now follow a particular player rather than simply wandering and locking on to whoever is closest.  Enemies will wander until a player is close enough (currently the camera range) and will then try to follow that person.  If the player goes out of range the enemy will forget about them and go back to wandering/scanning.</p>
+
+<p>Essentially, players can now escape the clutches of the hordes of the underdark.  No GIF here as it would be fairly boring, but enemies will basically stop following you if you just walk away from them.</p>
+
+<p>(This is somewhat extensible to different follow/forget types of enemies as well - larger/smaller radii, etc.)</p>
+
+<hr />
+
+<p>Last little bit - I started breaking up the files into specific uses - e.g., utility functions go in <code class="language-plaintext highlighter-rouge">utils.js</code>, etc.  I’ve been keeping everything in single files just to avoid navigating through 30 different files (something that is annoying during development to me personally - I know that long term it is a terrible idea and freely admit that).  However, for posterity things are getting broken apart and placed into their proper locations.  Not done yet, but the process has begun.</p>
+
+<hr />
+
+<p>Next time I’d really like to get <em>some</em> sort of feedback from attacks, as the bump to attack feels very unsatisfying at the moment.  I’ve been playing with the sound off as well, so no additions there.</p>
+
+<p>Also, more procgen algorithms!  Eyeballing cellular automata and BSP generation.</p>
+
+<hr />
+<p><a href="/rldev-4.html">Last post</a></p>
+
+<p><a href="/rldev-6.html">Next post</a></p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2025/10/22/cclub-ecs/">
+            Computing Club Tutorial - Entity Component System (ECS)
+            <small>22 Oct 2025</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2023/09/20/generativegi/">
+            GenerativeGI - Project Writeup
+            <small>20 Sep 2023</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2023/08/20/rldev-8/">
+            fredericks does the roguelikedev tutorial - 7/8
+            <small>20 Aug 2023</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
