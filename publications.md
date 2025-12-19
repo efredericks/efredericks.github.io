@@ -1,0 +1,22 @@
+---
+layout: page
+title: publications
+permalink: publications.html
+category: publications
+permalink: /publications/
+---
+<div class="content-container about">
+    <!-- <h1>publications</h1> -->
+    <h2>journal articles</h2>
+    {% bibliography -q @article %}
+    <br />
+    <h2>conference / workshop papers</h2>
+    {% bibliography -q @inproceedings %}
+    <br />
+    <h2>book chapters</h2>
+    {% bibliography -q @inbook %}
+    <br />
+    <h2>theses</h2>
+    {% bibliography -q @phdthesis %}
+    {% bibliography -q @mastersthesis %}
+</div>

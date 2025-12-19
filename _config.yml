@@ -1,43 +1,61 @@
-title: erik fredericks
-tagline: assistant prof @ gvsu.edu
-email: frederer@gvsu.edu
-description: >-
-  this is my homepage
-url: "https://efredericks.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-author: efredericks
-twitter:
-  username: efredericks
-  card: summary
+#
+# This file contains configuration flags to customize your site
+#
+
+# Name of your site (displayed in the navbar)
+name: erik fredericks
+
+# Your site's title (e.g., Ben's Awesome Site, The GitHub Blog, etc.), used as part of the title tag like Home | Ben's Awesome Site.
+title: assoc prof @ gvsu.eduo
+
+# Link to avatar in the navbar (/assets/images/avatar.png). Leave empty if no logo desired. Two avatars for light and dark mode.
+# Avatar for light mode site
+lightavatar: /assets/images/Fredericks-Small.jpg #/assets/images/light_bauhaus_logo.png
+# Avatar for dark mode site
+darkavatar: /assets/images/Fredericks-Small.jpg #/assets/images/dark_bauhaus_logo.png
+
+# A short description (e.g., A blog dedicated to reviewing cat gifs), used as part of the title tag like Ben's Awesome Site | A blog dedicated to reviewing cat gifs instead of Ben's Awesome Site | Long description about a blog dedicated to reviewing cat gifs that would be used when page.title is not defined.
+tagline: assoc prof @ gvsu
+
+# A longer description used for the description meta tag. Also used as fallback for pages that don't provide their own description, and also as part of the page's title tag if neither page.title nor site.tagline has been defined.
+description: assoc prof @ gvsu
+
+# The full URL to your site. Note: site.github.url will be used by default.
+url:
+
+# If you're hosting your site at a Project repository on GitHub pages
+# (http://yourusername.github.io/repository-name)
+# and NOT your User repository (http://yourusername.github.io)
+# then add in the baseurl here, like this: "/repository-name"
+baseurl: ""
+
+# global author information
+author: erik-fredericks
+
+# URL to a site-wide logo (e.g., /assets/your-company-logo.png)
+logo: #/assets/images/light_bauhaus_logo.png
+
+# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
+google_analytics:
+
+permalink: /:year/:month/:day/:title/
+
+# Includes an icon in the footer for each username you enter
+footer-links:
+  email: frederer@gvsu.edu
+  facebook:
+  github: efredericks
+  # instagram: andrewhwanpark
+  # linkedin: andrewhwanpark
+  rss: rss# just type anything here for a working RSS icon
+  twitter: erik_fredericks
+  youtube: https://youtube.com/@erikfredericks
+
 plugins:
   - jekyll-seo-tag
-  - jekyll-feed
   - jekyll-sitemap
-  - jekyll-paginate-v2
+  - jekyll-feed
   - jekyll-scholar
-  - jekyll-target-blank
-# Build settings
-markdown: kramdown
-kramdown: 
-  parse_block_html: true
-remote_theme: ItsPatrq/minimal-music-project
-permalink: /:title.html
-pagination:
-  enabled: true
-  per_page: 4
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
-
-  exclude:
-  - CHANGELOG.md
-  - CNAME
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README.md
-  - screenshot.png
-  - docs/
-  - node_modules
 
 scholar:
   style: apa
@@ -49,16 +67,16 @@ scholar:
   group_by: none
   group_order: ascending
 
-  source: ./assets
-  bibliography: pubs.bib
+  # source: /_bibliography
+  # bibliography: references.bib
   bibliography_template: "bibtemplate"
 
-  repository: /publications
+  repository: ./publications
 
   replace_strings: true
   join_strings:    true
 
-  use_raw_bibtex_entry: false
+  # use_raw_bibtex_entry: false
 
   details_dir:    bibliography
   details_layout: publications.html

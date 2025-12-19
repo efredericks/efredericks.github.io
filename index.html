@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+<div class="parent-flex-container">
+  <div id="canvas-container" class="child-div">
+  </div>
+  <div id="script-author"></div>
+</div>
+
+<script>
+  // pick a random sketch to show on load
+  let author_urls = {
+    "Erik Fredericks": "https://efredericks.github.io",
+    // "Benoit + p5✨": "https://softwarediversity.eu",
+  };
+  let js_files = [
+    // 'fredericks-sega-1.js',
+
+    { script: "fredericks-sega-2.js", author: "Erik Fredericks" },
+    { script: "fredericks-sega-3.js", author: "Erik Fredericks" },
+    { script: "fredericks-sega-4.js", author: "Erik Fredericks" },
+    { script: "fredericks-sega-5.js", author: "Erik Fredericks" },
+  ];
+  let index = Math.floor(Math.random() * js_files.length);
+  const the_file = js_files[index].script;
+  const scriptElement = document.createElement("script");
+  scriptElement.src = `{{ site.baseurl }}/assets/js/sketches/${the_file}`;
+  document.body.appendChild(scriptElement);
+
+  let author = js_files[index].author;
+  let author_url = author_urls[author];
+  document.getElementById(
+    "script-author"
+  ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+</script>
+
+<!-- <div class="archive">
+  {% for post in site.posts %} {% assign currDate = post.date | date: "%Y" %} {%
+  if currDate != date %}
+  <h1 class="archive-year">{{ currDate }}</h1>
+  {% assign date = currDate %} {% endif %}
+  <div class="archive-item">
+    <span class="post-date archive-date fs-4"
+      >{{ post.date | date: "%B %d, %Y" }}</span
+    >
+    <a href="{{ post.url | relative_url }}" class="archive-title fs-4"
+      >{{ post.title }}</a
+    >
+  </div>
+  {% endfor %}
+</div> -->
