@@ -17,10 +17,10 @@ layout: default
   let js_files = [
     // 'fredericks-sega-1.js',
 
-    { script: "fredericks-sega-2.js", author: "Erik Fredericks" },
-    { script: "fredericks-sega-3.js", author: "Erik Fredericks" },
-    { script: "fredericks-sega-4.js", author: "Erik Fredericks" },
-    { script: "fredericks-sega-5.js", author: "Erik Fredericks" },
+    { script: "fredericks-sega-2.js", author: "Erik Fredericks", tag:"Random colored squares with vaporwave color palette" },
+    { script: "fredericks-sega-3.js", author: "Erik Fredericks", tag:"SEGA2026 workshop" },
+    { script: "fredericks-sega-4.js", author: "Erik Fredericks", tag:"Checkered patterns rotated and dithered" },
+    { script: "fredericks-sega-5.js", author: "Erik Fredericks", tag:"Animated simplex noise" },
   ];
   let index = Math.floor(Math.random() * js_files.length);
   const the_file = js_files[index].script;
@@ -30,9 +30,12 @@ layout: default
 
   let author = js_files[index].author;
   let author_url = author_urls[author];
+  let author_tag = js_files[index].tag;
+  let script_url = `{{ site.baseurl }}/assets/js/sketches/${the_file}`;
   document.getElementById(
     "script-author"
-  ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+  // ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+  ).innerHTML = `<a href='${script_url}' target='_blank'>${author_tag}</a>`;
 </script>
 
 <!-- <div class="archive">
