@@ -107,10 +107,10 @@
   let js_files = [
     // 'fredericks-sega-1.js',
 
-    { script: "fredericks-sega-2.js", author: "Erik Fredericks" },
-    { script: "fredericks-sega-3.js", author: "Erik Fredericks" },
-    { script: "fredericks-sega-4.js", author: "Erik Fredericks" },
-    { script: "fredericks-sega-5.js", author: "Erik Fredericks" },
+    { script: "fredericks-sega-2.js", author: "Erik Fredericks", tag:"Random colored squares with vaporwave color palette" },
+    { script: "fredericks-sega-3.js", author: "Erik Fredericks", tag:"SEGA2026 workshop" },
+    { script: "fredericks-sega-4.js", author: "Erik Fredericks", tag:"Checkered patterns rotated and dithered" },
+    { script: "fredericks-sega-5.js", author: "Erik Fredericks", tag:"Animated simplex noise" },
   ];
   let index = Math.floor(Math.random() * js_files.length);
   const the_file = js_files[index].script;
@@ -120,9 +120,12 @@
 
   let author = js_files[index].author;
   let author_url = author_urls[author];
+  let author_tag = js_files[index].tag;
+  let script_url = `/assets/js/sketches/${the_file}`;
   document.getElementById(
     "script-author"
-  ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+  // ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
+  ).innerHTML = `<a href='${script_url}' target='_blank'>${author_tag}</a>`;
 </script>
 
 <!-- <div class="archive">
@@ -264,7 +267,10 @@
 >
   <path d="M75,10L42,10C47,17.2,50,27.7,50,40L90,40C90,23.4,83.3,10,75,10Z" stroke="currentColor"></path><path d="M40,40C40,23.4,33.3,10,25,10S10,23.4,10,40S16.7,70,25,70S40,56.6,40,40ZM20,40C20,34.5,22.2,30,25,30S30,34.5,30,40C30,45.5,27.8,50,25,50S20,45.5,20,40Z" stroke="currentColor"></path><path d="M50,50L90,50L90,90L50,90L50,50Z" stroke="currentColor"></path></svg>
   </a> 
-  </div>
+  
+  |
+
+  based on <a href="https://github.com/andrewhwanpark/brutalist-blog" target="_blank">brutalist-blog theme</a></div>
 </footer>
 
     <!-- JS for Bootstrap -->
