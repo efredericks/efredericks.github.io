@@ -11,10 +11,18 @@ permalink: /teaching/
   <li><a href="https://efredericks.github.io/gvsu-cis373/" target="_blank">CIS373 - Pervasive Computing</a></li>
   <li><a href="https://efredericks.github.io/gvsu-cis437/" target="_blank">CIS437 - Cloud Computing</a></li>
   </ul>
+  <h3>F2025 Course Webpages</h3>
+  <ul>
+  <li><a href="https://efredericks.github.io/gvsu-cis241/" target="_blank">CIS241 - Systems Level Programming and Utilities</a></li>
+  <li><i>CIS437 updated for W26</i></li>
+  </ul>
 
   <br />
   <h2>@ grand valley state university</h2>
   <ul>
+    <li>
+      CIS241 - Systems Level Programming and Utilities (Fall 2025)
+    </li>
     <li>
       CIS350 - Intro. to Software Engineering (Fall 2020 x2, 2021 x2, 2022,
       2023)
