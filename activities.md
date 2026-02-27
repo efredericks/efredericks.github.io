@@ -14,6 +14,7 @@ permalink: /activities/
         <h2>invited talks</h2>
         <ul>
 
+		<li><a href="/assets/marp-slides/fredericks-computingclub-2026-procgen.html" target="_blank" rel="noopener noreferrer">GVSU School of Computing W26 - Procedural Content Generation</a></li>
 		<li><a href="/assets/slides/fredericks-computing24-seminar.pdf" target="_blank" rel="noopener noreferrer">GVSU School of Computing F24 Seminar Series - Express Yourself: Creative Coding and Generative Art</a></li>
                 <li><a href="http://kessentini.net/ise-lab" target="_blank" rel="noopener noreferrer">University of
                                 Michigan
