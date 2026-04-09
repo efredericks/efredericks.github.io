@@ -1,6 +1,7 @@
 #!/bin/bash
 
-odir="./rendered"
+odir="."
+#odir="./rendered"
 # convert all
 if [[ $# -ne 1 ]]; then
   for f in *.md; do
