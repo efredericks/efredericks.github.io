@@ -1,0 +1,356 @@
+<style> @import url('./cis241.css'); </style>
+
+<!-- # Bridging Esoteric Software Engineering Practices to the Video Games Domain -->
+<h1 id="opportunities-for-esoteric-software-engineering-practices-in-games">Opportunities for Esoteric Software Engineering Practices in Games</h1>
+
+<h3 id="fase4games-keynote-07052026">FaSE4Games Keynote (07/05/2026)</h3>
+
+<p>Erik Fredericks, frederer@gvsu.edu</p>
+
+<blockquote>
+  <p><a href="https://efredericks.github.io">https://efredericks.github.io</a></p>
+</blockquote>
+
+<!-- ![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif) -->
+
+<p><img src="img/qrcode_efredericks.github.io.png" alt="bottom-corner w:200 (website qr code)" /></p>
+
+<hr />
+
+<!-- _footer: . -->
+
+<h1 id="acknowledgements">Acknowledgements</h1>
+
+<div class="container">
+<div class="col">
+<b>Current/Former Students</b>
+<p>(Too many to list, but most recently)</p>
+<ul>
+<li>Abigail Diller</li>
+<li>Steven Streasick</li>
+<li>Skyler Burden</li>
+<li>Mallory Jacobs</li>
+<li>Cameron Schneider</li>
+<li>Andrew Goodling</li>
+<li>Astha Thapa</li>
+</ul>
+</div>
+<div class="col">
+<b>Collaborators and Mentors</b>
+<ul>
+<li>Byron DeVries</li>
+<li>Jared Moore</li>
+<li>Ira Woodring</li>
+<li>Betty H. C. Cheng</li>
+</ul>
+</div>
+<div class="col">
+<b>Sponsors</b>
+<ul>
+<li>Grand Valley State University</li>
+<li>Michigan Space Grant Consortium</li>
+<li>National Science Foundation</li>
+</ul>
+</div>
+</div>
+
+<hr />
+
+<h1 id="what-is-the-purpose-of-this-keynote">What is the purpose of this keynote?</h1>
+
+<p>What am I talking about?</p>
+<ul>
+  <li>EC</li>
+  <li>SAS</li>
+  <li>Fuzzing</li>
+</ul>
+
+<hr />
+
+<p>Why si this interesting?
+I’m not pitching you a career’s worth of work but rather opportunities for future work</p>
+
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+
+<h1 id="but-first-how-do-we-make-a-game-map">But first, <strong>how</strong> do we make a game map?</h1>
+
+<p><img src="https://assetsio.gnwcdn.com/A-Link-to-the-Past-Map-Header1-05292020.jpg" alt="bg left w:500 (lttp)" /></p>
+
+<p><img src="img/sunless_skies.jpeg" alt="bg left w:500 (sunless skies)" /></p>
+
+<p>(and, what does the data structure look like?)</p>
+
+<!-- _footer: . -->
+
+<hr />
+
+<h1 id="any-reason-for-not-doing-it-by-hand">Any reason for not doing it by hand?</h1>
+
+<p><img src="https://img.itch.zone/aW1hZ2UvMjg3NjgvNjcwOTk1LnBuZw==/original/tg4IqL.png" alt="bg left w:500" />
+<img src="https://api.arcade.academy/en/2.6.17/_images/use_tileset.png" alt="bg right w:500" /></p>
+
+<hr />
+
+<!-- # Examples! -->
+
+<p><img src="img/noita-map.png" alt="bg (noita)" />
+<img src="https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg" alt="bg (boi)" /></p>
+
+<hr />
+
+<h1 id="procedural-content-generation-pcg">Procedural Content Generation (PCG)</h1>
+
+<p>What is PCG?</p>
+<ul>
+  <li>Algorithmically-placing content!</li>
+</ul>
+
+<p>Why is PCG?</p>
+<ul>
+  <li>Save the developer/designer time and effort!
+    <ul>
+      <li>One would think…</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Why bother talking about this?</p>
+<ul>
+  <li>I recently sent out a paper on it and thought you might find it interesting</li>
+  <li>Plus, useful for gamejam things</li>
+</ul>
+
+<hr />
+
+<h1 id="basic-concept">Basic concept</h1>
+
+<p>Use math/algorithms to place content intelligently</p>
+<ul>
+  <li>Dungeons, items, etc.</li>
+</ul>
+
+<p>Noise functions:</p>
+<ul>
+  <li>Calculate a noise value based on inputs and configurations</li>
+  <li>Your job is to map that value to something useful</li>
+</ul>
+
+<p><img src="https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d" alt="bg cover (minecraft) opacity:0.2" /></p>
+
+<hr />
+
+<h1 id="for-example---perlin-noise">For example - Perlin noise</h1>
+
+<p>Typically, returns a value in [-1.0, 1.0], though p5js uses [0.0, 1.0]</p>
+
+<p>For example (in p5):
+<code class="language-plaintext highlighter-rouge">let n = noise(x * 0.01, y * 0.01);</code></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">n = [0.0, 0.5] -- (x, y) -&gt; water</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n = (0.5, 0.6] -- (x, y) -&gt; beach</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n = (0.6, 0.9] -- (x, y) -&gt; grass</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n = (0.9, 1.0] -- (x, y) -&gt; rock</code></li>
+</ul>
+
+<p>You do <em>effectively</em> the same in any language/editor!</p>
+
+<p>There are other noise functions!  Worley noise, Simplex noise, etc.</p>
+
+<hr />
+
+<h1 id="how-does-noise-generate-this">How does noise generate this?</h1>
+
+<p><img src="https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d" alt="bg cover (minecraft) opacity:0.5" /></p>
+
+<hr />
+
+<h1 id="demo-time">Demo time</h1>
+
+<div class="callout-dark" style="background:#333"><a href="https://tinyurl.com/24c9sftw">https://tinyurl.com/24c9sftw</a></div>
+
+<p>This time I made a pre-baked p5js template for you.  Go to this link and <code class="language-plaintext highlighter-rouge">File -&gt; Duplicate</code></p>
+<ul>
+  <li>Make sure you login and save often</li>
+</ul>
+
+<h2 id="the-sketch">The sketch</h2>
+
+<ul>
+  <li>You should have a little ASCII happy face that you can move around with your arrow keys</li>
+  <li>Your game map is represented as a <strong>two-dimensional grid</strong> where the first index is the row and the second index is the column</li>
+  <li>There is also a basic camera that follows your player so that we can make big maps</li>
+</ul>
+
+<!-- _footer: . -->
+
+<hr />
+
+<h1 id="the-map">The map</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[[</span><span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="p">...,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">],</span>
+ <span class="p">[</span><span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">,</span> <span class="p">...,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">],</span>
+ <span class="p">[</span><span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">t</span><span class="dl">'</span><span class="p">,</span> <span class="p">...,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">],</span>
+ <span class="p">[...],</span>
+ <span class="p">[</span><span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">,</span> <span class="p">...,</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">game_map[2][1]</code> returns a ???</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.</code></li>
+</ul>
+
+<p>By default, the map puts walls on the outside and nothing on the inside - your job is to fill it with things</p>
+
+<hr />
+
+<h1 id="valid-things">Valid things:</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Character</th>
+      <th>Walkable?</th>
+      <th>Represents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">#</code></td>
+      <td>No</td>
+      <td>Stone wall</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">t</code></td>
+      <td>No</td>
+      <td>Tree</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">w</code></td>
+      <td>No</td>
+      <td>Water</td>
+    </tr>
+    <tr>
+      <td>` `</td>
+      <td>Yes</td>
+      <td>Empty space</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">.</code></td>
+      <td>Yes</td>
+      <td>Pebbles</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">g</code></td>
+      <td>Yes</td>
+      <td>Grass</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Try setting some random cells to these characters!</p>
+<ul>
+  <li>such as, <code class="language-plaintext highlighter-rouge">game_map[2][3] = 'g';</code> in <code class="language-plaintext highlighter-rouge">setup()</code> AFTER the game map is created</li>
+</ul>
+
+<p><img src="https://images.squarespace-cdn.com/content/v1/5f960514ad64315671f581a2/1616704085936-WQ1CKH7U0ZDLUC0HA0PI/Do+it+now.gif" alt="bottom-right (keanuuu)" /></p>
+
+<div class="callout">Try hitting <code>~</code> and see what happens!</div>
+
+<!-- _footer: . -->
+
+<hr />
+
+<h1 id="first-lets-randomize-things">First, let’s randomize things</h1>
+
+<p>After the call to <code class="language-plaintext highlighter-rouge">setupGameMap()</code> (which again, just gives us an empty grid with borders)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">r</span> <span class="o">&lt;</span> <span class="nx">num_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">r</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">c</span> <span class="o">&lt;</span> <span class="nx">num_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">c</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">r</span> <span class="o">=</span> <span class="nf">random</span><span class="p">();</span>
+    <span class="kd">let</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">r</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">;</span>
+
+    <span class="nx">game_map</span><span class="p">[</span><span class="nx">r</span><span class="p">][</span><span class="nx">c</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ch</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="callout">Is this something interesting?</div>
+
+<hr />
+
+<h1 id="now-lets-give-it-a-bit-of-detail">Now let’s give it a bit of detail</h1>
+
+<p>First, comment out what you did inside that double loop.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">zoom</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">;</span>
+<span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">r</span> <span class="o">&lt;</span> <span class="nx">num_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">r</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">c</span> <span class="o">&lt;</span> <span class="nx">num_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">c</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nf">noise</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span> <span class="nx">zoom</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span> <span class="nx">zoom</span><span class="p">);</span>
+
+
+    <span class="c1">// fill in with code from next slide</span>
+
+
+    <span class="nx">game_map</span><span class="p">[</span><span class="nx">r</span><span class="p">][</span><span class="nx">c</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ch</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<!-- _footer: . -->
+
+<hr />
+
+<h1 id="the-noise-bit">The noise bit</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if </span><span class="p">(</span><span class="nx">n</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">w</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">n</span> <span class="o">&lt;=</span> <span class="mf">0.6</span><span class="p">)</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">n</span> <span class="o">&lt;=</span> <span class="mf">0.9</span><span class="p">)</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">t</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">r</span> <span class="o">=</span> <span class="nf">random</span><span class="p">();</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">r</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">)</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">else</span> <span class="nx">ch</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="the-finesse-bit">The finesse bit</h1>
+
+<p>Now this is the tricky part - you need to play with the <code class="language-plaintext highlighter-rouge">zoom</code> value and the <code class="language-plaintext highlighter-rouge">noiseDetail</code> (at the top) values to get exactly the output you want!</p>
+
+<p>Try varying the:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">zoom</code> into the noise distribution (try <code class="language-plaintext highlighter-rouge">0.1</code>, <code class="language-plaintext highlighter-rouge">0.001</code>, etc.)</li>
+  <li><a href="https://p5js.org/reference/p5/noiseDetail/">https://p5js.org/reference/p5/noiseDetail/</a>
+    <ul>
+      <li>The number of octaves (first parameter in <code class="language-plaintext highlighter-rouge">noiseDetail</code>) - <code class="language-plaintext highlighter-rouge">[1, 16]</code> usually show interesting values</li>
+      <li>The falloff amount (second parameter in <code class="language-plaintext highlighter-rouge">noiseDetail</code>) - <code class="language-plaintext highlighter-rouge">[0.0, 1.0]</code></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="other-ways-to-do-it">Other ways to do it!</h1>
+
+<p>Use a different algorithm!</p>
+<ul>
+  <li>Rectangular room placement</li>
+  <li>Cellular automata</li>
+  <li><strong>Wave function collapse</strong> -&gt;</li>
+  <li>…</li>
+</ul>
+
+<p><img src="https://bfnightly.bracketproductions.com/c33-s8.gif" alt="bg right (wfc)" /></p>
+
+<blockquote>
+  <p>There’s a cellular automata implementation in the demo - instead of building your map in <code class="language-plaintext highlighter-rouge">setup</code> try calling <code class="language-plaintext highlighter-rouge">game_map = CA();</code></p>
+</blockquote>

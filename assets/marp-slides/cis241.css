@@ -73,3 +73,27 @@ ul {
 .language-bash {
   font-family: monospace !important;
 }
+
+/* 2 columns
+div class="container">
+<div class="col">
+Column 1 Content
+</div>
+<div class="col">
+Column 2 Content
+</div>
+</div> */
+.container{
+    display: flex;
+}
+.col{
+    flex: 1;
+    border-right: 1px solid #eee !important;
+    padding: 1em !important;
+}
+.col b {
+  color: var(--rose) !important;
+}
+.col li {
+  font-size: .8em !important;
+}
