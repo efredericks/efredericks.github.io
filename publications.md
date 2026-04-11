@@ -16,6 +16,8 @@ permalink: /publications/
     <h2>book chapters</h2>
     {% bibliography -q @inbook %}
     <br />
+    <h2>sigboviks</h2>
+    {% bibliography -q @inboviks %}
     <h2>theses</h2>
     {% bibliography -q @phdthesis %}
     {% bibliography -q @mastersthesis %}

@@ -65,6 +65,10 @@ Erik Fredericks, frederer@gvsu.edu
 
 ---
 
+# What is the purpose of this keynote?
+
+
+
 What am I talking about?
 - EC
 - SAS
