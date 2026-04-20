@@ -76,6 +76,20 @@ Now, pop a sound in.  Click `Music` and then `play sound ba ding until done` and
 
 ---
 
+# Download to the device!
+
+This is all on your computer - let's put it on a device!
+
+1. Click the `Download` button - a `*.uf2` file will download to your computer.
+
+2. Make sure the device is plugged in!  If you don't see a `CPLAYBTBOOT` folder in your file explorer then click the small button in the middle of to reset it.
+- If it still doesn't work, try clicking it twice to put it into bootloader mode.
+
+3. Drag the `.uf2` file onto your `CPLAYBTBOOT` directory
+- It should auto-load - if not try resetting it!
+
+---
+
 # Now some forever sounds!
 
 Add the `play <waveform>` node to your `forever` block
@@ -128,19 +142,6 @@ Then, add a lightshow!
 
 ---
 
-# Download to the device!
-
-This is all on your computer - let's put it on a device!
-
-1. Click the `Download` button - a `*.uf2` file will download to your computer.
-
-2. Make sure the device is plugged in!  If you don't see a `CPLAYBTBOOT` folder in your file explorer then click the small button in the middle of to reset it.
-- If it still doesn't work, try clicking it twice to put it into bootloader mode.
-
-3. Drag the `.uf2` file onto your `CPLAYBTBOOT` directory
-- It should auto-load - if not try resetting it!
-
----
 
 # Hook up to a speaker!
 
@@ -152,3 +153,9 @@ If you want to test out your program on a *better* speaker, here's how it can be
 ![bg right w:650 (speaker wiring)](https://cdn-learn.adafruit.com/assets/assets/000/047/228/large1024/circuit_playground_hp.png?1507854669)
 
 <!-- _footer: . -->
+
+---
+
+# Have some fun!
+
+![bg left w:500 (mario)](img/mario.png)
