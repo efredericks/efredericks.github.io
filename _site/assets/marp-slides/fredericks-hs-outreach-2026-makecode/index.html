@@ -1,0 +1,173 @@
+<style> @import url('./cis241.css'); </style>
+
+<h1 id="hands-on-with-the-adafruit-circuitplayground-bluefruit">Hands-On with the Adafruit CircuitPlayground Bluefruit</h1>
+
+<h2 id="high-school-visit-04202026">High school visit (04/20/2026)</h2>
+
+<p>Erik Fredericks, frederer@gvsu.edu
+Winter 2026</p>
+
+<p><a href="https://efredericks.github.io">https://efredericks.github.io</a></p>
+
+<p><img src="https://cdn-shop.adafruit.com/970x728/764-00.jpg" alt="bg cover opacity:0.2 (bluefruit)" /></p>
+
+<hr />
+
+<p><img src="https://media.tenor.com/D0BHPRLfHt8AAAAM/dancing-kermit-and-robin.gif" alt="top-corner  (website qr code)" /></p>
+
+<h1 id="plan-for-today">Plan for today</h1>
+
+<ol>
+  <li>
+    <p>Block programming in a simulator</p>
+  </li>
+  <li>
+    <p>Program device</p>
+  </li>
+  <li>
+    <p>Try it out on the speakers!</p>
+  </li>
+</ol>
+
+<hr />
+
+<h1 id="block-programming">Block programming</h1>
+
+<p>In a browser, go to:</p>
+
+<h2 id="httpsmakermakecodecom">https://maker.makecode.com</h2>
+
+<hr />
+
+<h1 id="first-steps">First steps</h1>
+
+<ol>
+  <li>
+    <p>Click ‘New Project’</p>
+  </li>
+  <li>
+    <p>Give it a name!</p>
+  </li>
+  <li>
+    <p>Click create and then select the <strong>adafruit-circuit-playground-bluefruit</strong></p>
+  </li>
+</ol>
+
+<p><img src="img/select.png" alt="bg right selection" /></p>
+
+<!-- show the simulator now -->
+
+<hr />
+
+<h1 id="make-a-sound">Make a sound!</h1>
+
+<p>Let’s make a sound on a button press.</p>
+
+<p>Click <code class="language-plaintext highlighter-rouge">Input</code> and get an <code class="language-plaintext highlighter-rouge">on button A click</code> field.</p>
+
+<ul>
+  <li>Anything in that block will run when you click a button</li>
+  <li>You can put any action in there!</li>
+</ul>
+
+<p>Now, pop a sound in.  Click <code class="language-plaintext highlighter-rouge">Music</code> and then <code class="language-plaintext highlighter-rouge">play sound ba ding until done</code> and drag that <em>inside</em> the button event.</p>
+<ul>
+  <li>You can change the sound by clicking the drop down!</li>
+</ul>
+
+<p><img src="img/btna-sound.png" alt="bg right w:650 (btn a)" /></p>
+
+<!-- _footer: . -->
+
+<hr />
+
+<h1 id="now-some-forever-sounds">Now some forever sounds!</h1>
+
+<p>Add the <code class="language-plaintext highlighter-rouge">play &lt;waveform&gt;</code> node to your <code class="language-plaintext highlighter-rouge">forever</code> block</p>
+<ul>
+  <li>Play with the waveform by clicking on it and moving the points around!</li>
+</ul>
+
+<p><img src="img/forever-play.png" alt="bg left w:300 (forever play)" /></p>
+
+<p><img src="img/forever-play2.png" alt="bg w:300 (forever play2)" /></p>
+
+<hr />
+
+<h1 id="now-make-a-variable-and-turn-it-onoff">Now make a variable and turn it on/off!</h1>
+
+<p>First add a variable - click <code class="language-plaintext highlighter-rouge">Variables</code> and <code class="language-plaintext highlighter-rouge">Make a variable</code> and call it <code class="language-plaintext highlighter-rouge">soundActive</code></p>
+
+<p>Then, drag the <code class="language-plaintext highlighter-rouge">set soundActive to 0</code> field to the <code class="language-plaintext highlighter-rouge">on start</code> block</p>
+<ul>
+  <li>Set its value to be <code class="language-plaintext highlighter-rouge">1</code></li>
+</ul>
+
+<p><img src="img/variable-block.png" alt="bg right w:400 (var)" /></p>
+
+<hr />
+
+<h1 id="and-change-the-variable">And change the variable</h1>
+
+<p>Add another button block and have it respond to Button B.</p>
+
+<p>Inside that block, change the <code class="language-plaintext highlighter-rouge">soundActive</code> variable to be the opposite!</p>
+
+<p>Also, add the <code class="language-plaintext highlighter-rouge">stop all sounds</code> block so that things stop!</p>
+
+<p><img src="img/btnb-toggle.png" alt="bg right w:600 (toggle)" /></p>
+
+<hr />
+
+<h1 id="and-then-the-if-statement">And then, the if statement</h1>
+
+<p>In your <code class="language-plaintext highlighter-rouge">forever</code> block, add an <code class="language-plaintext highlighter-rouge">if</code> statement to play sound!  This will involve adding a bunch of things, so good luck!</p>
+
+<p><img src="img/loop-if.png" alt="bg right w:600 (if statement)" /></p>
+
+<hr />
+
+<h1 id="create-a-lightshow-on-touch">Create a lightshow on touch</h1>
+
+<p>Add another input, this time for a touch sensor</p>
+
+<p>Then, add a lightshow!</p>
+
+<p><img src="img/touch-light.png" alt="bg right w:400 (touch light)" /></p>
+
+<hr />
+
+<h1 id="download-to-the-device">Download to the device!</h1>
+
+<p>This is all on your computer - let’s put it on a device!</p>
+
+<ol>
+  <li>
+    <p>Click the <code class="language-plaintext highlighter-rouge">Download</code> button - a <code class="language-plaintext highlighter-rouge">*.uf2</code> file will download to your computer.</p>
+  </li>
+  <li>Make sure the device is plugged in!  If you don’t see a <code class="language-plaintext highlighter-rouge">CPLAYBTBOOT</code> folder in your file explorer then click the small button in the middle of to reset it.
+    <ul>
+      <li>If it still doesn’t work, try clicking it twice to put it into bootloader mode.</li>
+    </ul>
+  </li>
+  <li>Drag the <code class="language-plaintext highlighter-rouge">.uf2</code> file onto your <code class="language-plaintext highlighter-rouge">CPLAYBTBOOT</code> directory
+    <ul>
+      <li>It should auto-load - if not try resetting it!</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h1 id="hook-up-to-a-speaker">Hook up to a speaker!</h1>
+
+<p>If you want to test out your program on a <em>better</em> speaker, here’s how it can be wired up!</p>
+
+<ul>
+  <li>Connect the <code class="language-plaintext highlighter-rouge">GND</code> pad (ground) to the base of the audio connector</li>
+  <li>Connect the tip of the audio connector to the <code class="language-plaintext highlighter-rouge">AUDIO</code> pad</li>
+</ul>
+
+<p><img src="https://cdn-learn.adafruit.com/assets/assets/000/047/228/large1024/circuit_playground_hp.png?1507854669" alt="bg right w:650 (speaker wiring)" /></p>
+
+<!-- _footer: . -->

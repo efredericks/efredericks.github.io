@@ -8,7 +8,8 @@ permalink: /activities/
         <h2>events</h2>
         <ul>
                 <li><a href="https://sega-workshop.github.io/2026/" target="_blank">Software Engineering for Generative Art (SEGA) 2026</a></li>
-                <li><a href="https://gvsu-gamejam.github.io/" target="_blank">Computing Club 2025 Game Jam!</a></li>
+                <li><a href="https://gvsu-gamejam.github.io/" target="_blank">Computing Club 2025 -- Game Jam!</a></li>
+		<li><a href="/assets/marp-slides/fredericks-hs-outreach-2026-makecode.html" target="_blank" rel="noopener noreferrer">GVSU College of Computing W26 - High School Outreach (Adafruit Circuit Playground Bluefrit - MakeCode)</a></li>
         </ul>
         <br />
         <h2>invited talks</h2>
