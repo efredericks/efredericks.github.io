@@ -91,9 +91,27 @@ Column 2 Content
     border-right: 1px solid #eee !important;
     padding: 1em !important;
 }
-.col b {
+.col-right {
+    flex: 1;
+    padding: 1em !important;
+}
+.col-mid {
+    flex: 1;
+    padding: 1em !important;
+    border-right: 1px solid #eee !important;
+    background-color: #cc00cc11 !important;
+}
+
+.col b, .col-right b, .col-mid b {
   color: var(--rose) !important;
 }
-.col li {
+.col li, .col-right li, .col-mid li {
   font-size: .8em !important;
+}
+footer a {
+    color: var(--text-color-negative) !important;
+}
+
+th strong, th b, td strong, td b {
+    color: var(--text-color-negative) !important;
 }

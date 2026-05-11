@@ -5,13 +5,16 @@ marp: true
 theme: rose-pine
 paginate: true
 math: katex
-footer: Fredericks | FaSE4Games Keynote | Procedural Content Generation (Perlin Noise)
+footer: Fredericks | FaSE4Games'26 Keynote | Esoteric Software Engineering for Games
 ---
 
 <style> @import url('./cis241.css'); </style>
 
+<!-- Description: Uncertainty can impact games given the numerous uncertainties involved, from supporting a wide range of hardware architectures and interfaces to managing unexpected human interactions.  The failure of systems in gaming due to uncertainty, whether a hard crash or a performance slowdown, can lead to player frustration and disengagement.  In this talk I will discuss approaches that my lab has explored for both discovering and managing uncertainty from a software engineering perspective that can be applied to games, from requirements monitoring at run time to search-based fuzz testing.  I'll also cover its applications in other domains such as safety-critical systems and algorithmic art to demonstrate the domain-independence of these techniques.  I'll end with a discussion of potential future directions that can be explored in the context of uncertainty and game development. -->
+
 <!-- # Bridging Esoteric Software Engineering Practices to the Video Games Domain -->
-# Opportunities for Esoteric Software Engineering Practices in Games
+<!-- # Opportunities for Esoteric Software Engineering Practices in Games -->
+# Opportunities for Esoteric Software Engineering Practices for Managing Uncertainty in Games
 
 ### FaSE4Games Keynote (07/05/2026)
 
@@ -37,14 +40,15 @@ Erik Fredericks, frederer@gvsu.edu
 <ul>
 <li>Abigail Diller</li>
 <li>Steven Streasick</li>
-<li>Skyler Burden</li>
 <li>Mallory Jacobs</li>
+<li>Skyler Burden</li>
 <li>Cameron Schneider</li>
 <li>Andrew Goodling</li>
 <li>Astha Thapa</li>
+<li>...and more!</li>
 </ul>
 </div>
-<div class="col">
+<div class="col-mid">
 <b>Collaborators and Mentors</b>
 <ul>
 <li>Byron DeVries</li>
@@ -53,7 +57,7 @@ Erik Fredericks, frederer@gvsu.edu
 <li>Betty H. C. Cheng</li>
 </ul>
 </div>
-<div class="col">
+<div class="col-right">
 <b>Sponsors</b>
 <ul>
 <li>Grand Valley State University</li>
@@ -67,19 +71,147 @@ Erik Fredericks, frederer@gvsu.edu
 
 # What is the purpose of this keynote?
 
+Dealing with **uncertainty** and its insidious impacts on software systems
+
+More specifically?
+- Causing requirements violations
+- Inducing performance slowdowns
+- Crashes!
+
+![bg cover opacity:0.3 (an angry user)](img/pexels-vantik93-16876741.jpg)
 
 
-What am I talking about?
-- EC
-- SAS
-- Fuzzing
+<!-- _footer: Photo by Михаил Крамор from Pexels: https://www.pexels.com/photo/angry-girl-sitting-at-desk-in-classroom-16876741/ -->
+
+---
+
+# Why is this interesting to you specifically?
+
+I'm not pitching you a career's worth of work but rather opportunities for future work
+
+What we'll be talking about :
+
+- Recognizing and quantifying uncertainty
+- Techniques for managing uncertainty
+- Potential future options in this area 
+
+---
+
+# Who am I?
+
+- Until recently, a person who has focused on managing uncertainty in safety-critical systems with search-based software engineering 
+
+  - E.g., robotics, self-adaptive systems
+
+- And then I found:
+
+  - Algorithmic art
+  - Procedural content generation
+
+(Background image: [Etienne Jacob](https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/))
+
+![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif)
+
+---
+
+# What is uncertainty?
+
+Uncertainty is:
+
+- Insidious
+- Difficult to quantify
+- Difficult to *recognize*
+
+Uncertainty causes your software to react/behave in ways unintended
+- This should worry you as a software engineer!
+
+<!--
+- Robots crash and people die
+- Video games crash and people trash your game online
+-->
+
+![bg cover opacity:0.3 (a question mark)](img/pexels-filirovska-4913769.jpg)
+
+<!-- _footer: Photo by Julia Filirovska from Pexels: https://www.pexels.com/photo/misted-window-with-question-mark-4913769/ -->
+
+---
+
+# What is uncertainty?
+
+Interestingly, there are a plethora of ways to describe uncertainty depending on your domain.  I fall in the:
+
+| **Type** | **Description** | 
+| ----------- | ----------- | 
+| Known known | We **know** the source **and** how much impact it will have |
+| Unknown known | We **don't know** the source but do **know** its impact |
+| Known Unknown | We **know** the source but **don't know** its impact |
+| Unknown unknown | We **don't know** the source and **don't know** its impact |
+
+---
+
+# Examples of uncertainty
+
+Safety-critical systems
+- Unexpected weather
+- Human interaction
+- System misconfiguration
+
+Video games
+- Network issues (also works for above)
+- Human interaction
+- System misconfiguration
+
+![top-right w:300 (roomba cat)](https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif)
+
+---
+
+# Software engineering and uncertainty
+
+---
+
+# Contextualizing for games
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<!-- # Examples! -->
+
+![bg opacity:0.5 (noita)](img/noita-map.png)
+![bg opacity:0.5 (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg)
+
+<!-- _footer: . -->
+
+---
+
+# Requirements monitoring
+
+---
+
+# Software testing (basic)
 
 
 ---
 
-Why si this interesting?
-I'm not pitching you a career's worth of work but rather opportunities for future work
+# Software testing (esoteric) 
 
+---
+---
+---
+---
+---
+---
+---
+---
+---
 ---
 ---
 ---
