@@ -115,3 +115,6 @@ footer a {
 th strong, th b, td strong, td b {
     color: var(--text-color-negative) !important;
 }
+.over-img {
+    background-color: #cc00ccaa !important;
+}

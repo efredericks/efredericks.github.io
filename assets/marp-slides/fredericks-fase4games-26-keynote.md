@@ -108,9 +108,9 @@ What we'll be talking about :
   - Algorithmic art
   - Procedural content generation
 
-(Background image: [Etienne Jacob](https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/))
+<!-- _footer: (Background image: [Etienne Jacob](https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/)) -->
 
-![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif)
+![bg cover opacity:0.1 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif)
 
 ---
 
@@ -136,9 +136,31 @@ Uncertainty causes your software to react/behave in ways unintended
 
 ---
 
-# What is uncertainty?
+# Consider...
 
-Interestingly, there are a plethora of ways to describe uncertainty depending on your domain.  I fall in the:
+You are programming a robot
+
+<div class="container">
+  <div class="col">
+    <ul>
+      <li>A camera lens gets scratched</li>
+      <li>A sensor gets bumped and becomes misaligned</li>
+      <li>A typo is entered into a config file</li>
+    </ul>
+    <b>How does that impact the robot's goals?</b>
+  </div>
+
+  <div class="col-right">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/svovLytCkMw?si=GbgPbsBMpvcl0JiJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</div>
+
+
+---
+
+# Defining uncertainty
+
+Interestingly, there are a plethora of ways to describe uncertainty depending on your domain.  I fall in the []:
 
 | **Type** | **Description** | 
 | ----------- | ----------- | 
@@ -146,6 +168,28 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 | Unknown known | We **don't know** the source but do **know** its impact |
 | Known Unknown | We **know** the source but **don't know** its impact |
 | Unknown unknown | We **don't know** the source and **don't know** its impact |
+
+<!-- _footer: . -->
+<!-- could also go the aleatory (inherent randomness/noise) and epistemic (lack of knowledge) route as well -->
+
+---
+
+# Defining uncertainty
+
+This leads us to:
+
+- **Sources of uncertainty**
+
+- **Impact of uncertainty**
+
+&nbsp;
+&nbsp;
+
+It is <mark>humanly impossible</mark> to enumerate all possible combinations of each
+
+<!--
+can we find the most impactful or put the system into a good enough state
+-->
 
 ---
 
@@ -165,7 +209,63 @@ Video games
 
 ---
 
+# How do we handle it from a software engineering perspective?
+
+- Verification and validation
+- Machine learning
+- Z
+
+---
+
 # Software engineering and uncertainty
+
+Generating and monitoring problems:
+
+- Robot with random sensor failures/degradations
+- Remote data mirroring with severed links
+
+Experiencing:
+
+- Unsatisfied requirements
+- Violated invariants
+- Poor performance
+
+---
+
+# Software engineering and uncertainty - How do we know?
+
+Monitoring requirements satisfaction *at run time*
+
+
+
+
+---
+
+<div class="over-img">
+<h1>Leaving the safety-critical space</h1>
+</div>
+
+![bg (generative-gi 1)](https://efredericks.github.io/assets/img/GenerativeGI/random/img-22.png)
+![bg (generative-gi 2)](https://efredericks.github.io/assets/img/GenerativeGI/no-clear-single/img-10051.png)
+![bg (generative-gi 3)](https://efredericks.github.io/assets/img/GenerativeGI/clear-lexicase/img-10096-1.png)
+
+<!-- _footer:. -->
+
+---
+
+# GenerativeGI []
+
+Using evolutionary computation and software engineering to create glitch art
+
+- Many-objective search with Lexicase selection
+
+- Fitness proxies for aesthetic preference
+ 
+  - Maximizing pixel differences in images
+  - Maximizing negative space
+  - Maximizing diversity of drawing techniques
+  - ...
+  
 
 ---
 
@@ -217,6 +317,34 @@ Video games
 ---
 ---
 ---
+
+
+---
+
+# Discussion
+
+---
+
+# A pitch!
+
+![bg opacity:0.1 (Schloss Dagstuhl)](https://www.dagstuhl.de/_Resources/Persistent/d/b/9/2/db92ac4a61b2c6a364b7b0d8ef618dc5ad8819cd/_01_DSC00749_1_Didas%20KopieDG1.jpg)
+
+I am currently working on a Dagstuhl seminar proposal.  If you would like to be included as a participant, please fill out the survey here!
+
+(QR code)
+
+---
+
+# Thank you!
+
+![bg opacity:0.1 (thank you)](img/pexels-towfiqu-barbhuiya-3440682-11341894.jpg)
+
+<!-- _footer:Photo by Towfiqu barbhuiya from Pexels: https://www.pexels.com/photo/cursive-text-on-a-paper-11341894/ -->
+
+---
+
+# References
+
 ---
 
 # But first, **how** do we make a game map?
