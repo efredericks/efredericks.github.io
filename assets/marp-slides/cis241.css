@@ -118,3 +118,10 @@ th strong, th b, td strong, td b {
 .over-img {
     background-color: #cc00ccaa !important;
 }
+.small-code {
+  font-size: 0.75em !important;
+}
+
+#references li {
+  font-size: 0.5em !important;
+}
