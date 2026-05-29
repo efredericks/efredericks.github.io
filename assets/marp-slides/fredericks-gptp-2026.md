@@ -19,7 +19,7 @@ GPTP, June 4th, 2026
 
 (Background gif: Binding of Isaac)
 
-![bg cover opacity:0.2 (looping perlin noise)](https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYzF0d3QwYnpwMGE0dHU0d3dmeGE5NGE1N2EzOTFzM2swYzhnY3dmciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/idcipQ8abT4hq/giphy.gif)
+![bg cover opacity:0.4 (binding of isaac)](https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYzF0d3QwYnpwMGE0dHU0d3dmeGE5NGE1N2EzOTFzM2swYzhnY3dmciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/idcipQ8abT4hq/giphy.gif)
 <!-- ![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif) -->
 
 ![bottom-corner w:200 (website qr code)](img/qrcode_efredericks.github.io.png)
@@ -40,14 +40,17 @@ All aspects of procedural content generation (PCG) managed by genetic programmin
   - Enemy AI control
 
 
-<!-- background intentional - not a traditional roguelike (though that would be fun too) -->
+<!-- 
+- background intentional - not a traditional roguelike (though that would be fun too) 
+- created as part of a game jam at GVSU
+-->
 
 ---
 
 # Status 
 
 <!-- _footer: . -->
-![bg right (nethack)](https://upload.wikimedia.org/wikipedia/commons/0/00/Nethack_releasing_a_djinni.png)
+![bg right (screenshot)](img/gptp-screenshots/screen.45diff.png)
 
 One GP active and one in progress
 - Dungeon generation (functioning, optimization required)
@@ -58,7 +61,7 @@ One GP active and one in progress
 
 ---
 
-# Making a game map
+# Why - making a game map/environment
 
 &nbsp;
 &nbsp;
@@ -75,8 +78,22 @@ One GP active and one in progress
 
 ![bg w:500 (sunless skies)](img/sunless_skies.jpeg)
 
-![bg  w:500](https://img.itch.zone/aW1hZ2UvMjg3NjgvNjcwOTk1LnBuZw==/original/tg4IqL.png)
-![bg w:500](https://api.arcade.academy/en/2.6.17/_images/use_tileset.png)
+<!--
+LttP: hand-crafted
+Sunless Skies: hand-crafted with procedural elements
+-->
+---
+
+# Why - making a game map/environment
+
+<div class="container">
+<div class="col">
+<img alt="tiled" src="https://api.arcade.academy/en/2.6.17/_images/use_tileset.png">
+</div>
+<div class="col">
+<img alt="behavior tree" src="img/gptp-screenshots/bt.png" />
+</div>
+</div>
 
 <!-- 
 procedural content generation 
@@ -85,19 +102,22 @@ entities with tree/list behaviors
 state machines
 -->
 
-
 <!-- _footer: . -->
 
 ---
 
-<!-- # Examples! -->
+
+<!-- Examples! -->
 
 ![bg (noita)](img/noita-map.png)
 ![bg (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg)
 
+<!--
+BoI: room templates with PCG placement
+-->
 ---
 
-# Procedural Content Generation 
+# Procedural content generation 
 
 What is PCG?
 - Algorithmically-placing and generating content [hendrikx,shaker]
@@ -110,49 +130,23 @@ Goal for GP?
 - Optimize for variety and difficulty in game experience
 ---
 
-# Basic concept
-
-Use math/algorithms to place content intelligently
-- Dungeons, items, etc.
-
-Noise functions:
-- Calculate a noise value based on inputs and configurations
-- Map that value to something useful
-
-![bg cover (minecraft) opacity:0.2](https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d)
-
----
-
 # Optimizing PCG
 
-Algorithms exist to be optimized
+PCG is typically **parameterized**
 
----
+Things we can optimize:
+- Ideal/diverse enemy behaviors 
+  - Behavior trees or programs
+    - E.g., `[Move towards player`, `queue a bullet pattern`, `fire`, `wait 10 seconds`, `repeat]`
 
-# For example - Perlin noise []
+- Variety in environments
+  - Obstacle/tile placement 
+    - E.g., `#.t.$e` represents `wall`, `space`, `gold`, `enemy`
+      - Represented as 2D/3D grid, graph, etc.
 
-<!-- _footer: . -->
-
-<!-- Typically, returns a value in [-1.0, 1.0] (p5js uses [0.0, 1.0]) -->
-
-For example (in p5):
-
-`let n = noise(x * 0.01, y * 0.01);`
-
-- `n = [0.0, 0.5] -- (x, y) -> water`
-- `n = (0.5, 0.6] -- (x, y) -> beach`
-<!-- - `n = (0.6, 0.9] -- (x, y) -> grass`
-- `n = (0.9, 1.0] -- (x, y) -> rock` -->
-
-There are other noise functions!  Worley noise, Simplex noise, etc.
-
-## Noise function mappings:
-- Environment biome
-- Map height
-- Enemy spawns
-
-![bg cover (minecraft) opacity:0.2](https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d)
-
+<!--
+- which bullet pattern, how fast, etc.
+-->
 ---
 
 # Prior Art
@@ -175,25 +169,67 @@ There has been a *lot* done with PCG and evolutionary computation
 
 1. **Individual room layouts**
 - 2D grid of characters to represent obstacles, painful obstacles, items, and enemies
+- Room connections *currently* unoptimized
 
 2. **Enemy programs** (tied to entities in room)
 - List of actions to be executed in order
+- Physics parameters (e.g., bullet speed, enemy acceleration, sensing radius)
 
 ---
 
 
 # Fitness Functions
 
-fitness = layout_score - difficulty_penalty
+<!-- _footer: . -->
 
-layout_score = 
+$fitness = score_{layout} - penalty_{difficulty}$
+
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div style="border-right: 1px solid #ccc; padding: 1.5rem">
+
+$$
+\begin{aligned}
+score_{layout} &= ratio_{obstacles} &* w_1\\ 
+&+ ratio_{pain~obstacles} &* w_2 \\ 
+&+ ratio_{open~cells} &* w_3 \\
+&+ number_{center~obstacles} &* w_4 \\
+&+ diversity_{enemy~program~} &* w_5 \\
+&+ connectivity_{room} &* w_6 \\
+&+ chokepoints_{room} &* w_7 \\
+&+ clustering_{room} &* w_8 \\
+&+ symmetry_{room} &* w_9 
+\end{aligned}
+$$
+
+</div>
+<div>
+
+$$
+\begin{aligned}
+penalty_{difficulty} &= score_{difficulty} - target_{difficulty} & \\
+{}\\
+score_{difficulty} &= score_{space}  &* w_{10} \\ 
+&+ score_{hazards}  &* w_{11} \\
+&+ score_{chokepoints}  &* w_{12} \\
+&+ score_{aggression}  &* w_{13} \\
+&+ score_{complexity}  &* w_{14} \\
+&+ score_{center~pressure}  &* w_{15}
+\end{aligned}
+$$
+</div>
+</div>
+
+
+<!-- $layout_score = 
 ratio of obstacles [0.1, 0.25]%
 ratio of pain obstacles [0.03, 0.15]
 ratio of open cells [0.5, 1.0]
 ratio of obstacles in center [0, 3]
-diversity of enemy program
+diversity of enemy program$
 
-# shape of room
+
+## shape of room
 maximize connectivity 
 score chokepoints
 score clustering
@@ -213,7 +249,7 @@ difficulty_score = estimate_difficulty()
   d += score_difficulty_aggression()      * 0.25
   d += score_difficulty_complexity()      * 0.10
   d += score_difficulty_center_pressure() * 0.05
-  return clampf(d, 0.0, 1.0)</pre>
+  return clampf(d, 0.0, 1.0)</pre> -->
 
 
 ---
@@ -244,13 +280,36 @@ difficulty_score = estimate_difficulty()
 
 # Next Steps
 
-- Additional fitness functions that reward room symmetry
+<style scoped>
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>
 
-- Log metrics for incorporating in future runs
-  - Not just all sandboxed runs
+<!-- _footer: . -->
 
-- Full empirical evaluation
+<div class="container">
+<div class="col">
+<ul>
+<li>Update genome with feedback from gameplay in <b>current</b> room to impact <b>next</b> room</li>
+<ul><li>E.g., finished quick with no health lost?  Next room is harder</li></ul>
+<li>Additional fitness functions that reward room symmetry</li>
+<li>Log metrics for incorporating in future runs</li>
+<ul><li>Not just all sandboxed runs</li></ul>
+<li>Full empirical evaluation</li>
+</ul>
+</div>
+<div class="col">
+<img src="img/evoworld.gif" alt="evoworld demo" />
+<p align="center"><b>Ideal goal</b>: Larger map worlds</p>
 
+</div>
+</div>
+
+
+
+
+<!-- ![bg right (evoworld gif)](img/evoworld.gif) -->
 <!-- potentially even a win condition -->
 
 ---
@@ -259,8 +318,11 @@ difficulty_score = estimate_difficulty()
 
 The game is playable locally and in the browser
 - Though, exiting just freezes the browser at the moment...
+  -  (works fine in local builds)
 - Gameplay based on Zenva tutorial []
 
+&nbsp;
+&nbsp;
 
 https://efredericks.github.io/gp-roguelite/
 
@@ -285,6 +347,8 @@ https://efredericks.github.io/gp-roguelite/
 <li>[] de Pontes, R. G., & Gomes, H. M. (2020, November). Evolutionary procedural content generation for an endless platform game. In 2020 19th Brazilian Symposium on Computer Games and Digital Entertainment (SBGames) (pp. 80-89). IEEE.</li>
 <li>[] Zamorano López, M. D. M., Blasco, D., Cetina, C., & Sarro, F. (2025, April). Video game procedural content generation through software transplantation. In International Conference on Software Engineering: Software Engineering in Practice. IEEE/ACM.</li>
 <li>[] Rollings, A. (2010). Fundamentals of game design.</li>
+<li>[] Zenva. (2026). Build a Complete Roguelike from Scratch with Godot. https://academy.zenva.com/course/godot-roguelike-course/
+</li>
 </ul>
 
 
@@ -292,151 +356,47 @@ https://efredericks.github.io/gp-roguelite/
 
 
 ---
----
----
----
----
----
----
----
+
+# Backup slides
+
 ---
 
-# Demo time
+# PCG basic concept
 
-<div class="callout-dark" style="background:#333"><a href="https://tinyurl.com/24c9sftw">https://tinyurl.com/24c9sftw</a></div>
+Use math/algorithms to place content intelligently
+- Dungeons, items, etc.
 
+**Noise functions**:
 
-This time I made a pre-baked p5js template for you.  Go to this link and `File -> Duplicate`
-- Make sure you login and save often
+- Calculate a noise value based on inputs and configurations
+  - E.g., Perlin noise, Simplex noise,
 
-## The sketch
+- Map that value to something useful
 
-- You should have a little ASCII happy face that you can move around with your arrow keys
-- Your game map is represented as a **two-dimensional grid** where the first index is the row and the second index is the column
-- There is also a basic camera that follows your player so that we can make big maps
+![bg cover (minecraft) opacity:0.2](https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d)
+
+---
+
+# For example - Perlin noise []
 
 <!-- _footer: . -->
 
----
+<!-- Typically, returns a value in [-1.0, 1.0] (p5js uses [0.0, 1.0]) -->
 
-# The map
+For example (in p5):
 
-```js
-[['#', '#', '#', ..., '#'],
- ['#', ' ', ' ', ..., '#'],
- ['#', '.', 't', ..., '#'],
- [...],
- ['#', '#', '#', ..., '#']]
-```
+`let n = noise(x * 0.01, y * 0.01);`
 
-`game_map[2][1]` returns a ???
-* `.`
+- `n = [0.0, 0.5] -- (x, y) -> water`
+- `n = (0.5, 0.6] -- (x, y) -> beach`
+<!-- - `n = (0.6, 0.9] -- (x, y) -> grass`
+- `n = (0.9, 1.0] -- (x, y) -> rock` -->
 
-By default, the map puts walls on the outside and nothing on the inside - your job is to fill it with things
+There are other noise functions!  Worley noise, Simplex noise, etc.
 
+## Noise function mappings:
+- Environment biome
+- Map height
+- Enemy spawns
 
----
-
-# Valid things:
-
-| Character | Walkable? | Represents |
-| ----------- | ----------- | ---- |
-| `#` | No | Stone wall
-| `t` | No | Tree
-| `w` | No | Water
-| ` ` | Yes | Empty space
-| `.` | Yes | Pebbles
-| `g` | Yes | Grass
-
-Try setting some random cells to these characters!
-- such as, `game_map[2][3] = 'g';` in `setup()` AFTER the game map is created
-
-![bottom-right (keanuuu)](https://images.squarespace-cdn.com/content/v1/5f960514ad64315671f581a2/1616704085936-WQ1CKH7U0ZDLUC0HA0PI/Do+it+now.gif)
-
-<div class="callout">Try hitting <code>~</code> and see what happens!</div>
-
-<!-- _footer: . -->
-
----
-
-# First, let's randomize things
-
-After the call to `setupGameMap()` (which again, just gives us an empty grid with borders)
-
-```js
-for (let r = 1; r < num_rows - 1; r++) {
-  for (let c = 1; c < num_cols - 1; c++) {
-    let r = random();
-    let ch = ' ';
-    if (r > 0.8) ch = '#';
-
-    game_map[r][c] = ch;
-  }
-}
-```
-
-<div class="callout">Is this something interesting?</div>
-
----
-
-# Now let's give it a bit of detail 
-
-First, comment out what you did inside that double loop.
-
-```js
-const zoom = 0.01;
-for (let r = 1; r < num_rows - 1; r++) {
-  for (let c = 1; c < num_cols - 1; c++) {
-    let ch = ' ';
-    let n = noise(c * zoom, r * zoom);
-
-
-    // fill in with code from next slide
-
-
-    game_map[r][c] = ch;
-  }
-}
-```
-<!-- _footer: . -->
-
----
-
-# The noise bit
-
-```js
-if (n <= 0.5) ch = 'w';
-else if (n <= 0.6) ch = 'b';
-else if (n <= 0.9) ch = 't';
-else {
-  let r = random();
-  if (r > 0.8) ch = '.';
-  else ch = ' ';
-}
-```
-
----
-
-# The finesse bit
-
-Now this is the tricky part - you need to play with the `zoom` value and the `noiseDetail` (at the top) values to get exactly the output you want!
-
-Try varying the:
-
-- `zoom` into the noise distribution (try `0.1`, `0.001`, etc.)
-- [https://p5js.org/reference/p5/noiseDetail/](https://p5js.org/reference/p5/noiseDetail/)
-    - The number of octaves (first parameter in `noiseDetail`) - `[1, 16]` usually show interesting values
-    - The falloff amount (second parameter in `noiseDetail`) - `[0.0, 1.0]`
-
----
-
-# Other ways to do it!
-
-Use a different algorithm!
-- Rectangular room placement
-- Cellular automata
-- Wave function collapse
-- ...
-
-![bg right (wfc)](https://bfnightly.bracketproductions.com/c33-s8.gif)
-
+![bg cover (minecraft) opacity:0.2](https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d)
