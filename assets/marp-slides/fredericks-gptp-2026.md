@@ -149,7 +149,7 @@ Things we can optimize:
 -->
 ---
 
-# Prior Art
+# Prior art
 
 There has been a *lot* done with PCG and evolutionary computation
 
@@ -178,7 +178,7 @@ There has been a *lot* done with PCG and evolutionary computation
 ---
 
 
-# Fitness Functions
+# Fitness functions
 
 <!-- _footer: . -->
 
@@ -254,7 +254,7 @@ difficulty_score = estimate_difficulty()
 
 ---
 
-# Sample Outputs (Room Generation)
+# Sample outputs (room generation)
 
 <!-- ![bg w:400](img/gptp-screenshots/screen.36diff.png)
 ![bg w:400](img/gptp-screenshots/screen.45diff.png)
@@ -267,7 +267,7 @@ difficulty_score = estimate_difficulty()
 
 ---
 
-# Sample Outputs (Enemy Program)
+# Sample outputs (enemy program)
 
 <strong>Enemy:</strong> <code class="small-code">WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,AIM,WAIT_20,FIRE_ONE</code>
 
@@ -278,7 +278,7 @@ difficulty_score = estimate_difficulty()
 
 ---
 
-# Next Steps
+# Next steps
 
 <style scoped>
   li {
@@ -354,6 +354,9 @@ https://efredericks.github.io/gp-roguelite/
 
 ---
 
+![bg opacity:0.4 (thank you - https://www.pexels.com/photo/cursive-text-on-a-paper-11341894/)](img/pexels-towfiqu-barbhuiya-3440682-11341894.jpg)
+
+---
 
 ---
 
