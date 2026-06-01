@@ -17,7 +17,7 @@ GPTP, June 4th, 2026
 
 [https://efredericks.github.io](https://efredericks.github.io)
 
-(Background gif: Binding of Isaac)
+<!-- _footer: Background gif: Binding of Isaac -->
 
 ![bg cover opacity:0.4 (binding of isaac)](https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYzF0d3QwYnpwMGE0dHU0d3dmeGE5NGE1N2EzOTFzM2swYzhnY3dmciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/idcipQ8abT4hq/giphy.gif)
 <!-- ![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif) -->
@@ -120,7 +120,7 @@ BoI: room templates with PCG placement
 # Procedural content generation 
 
 What is PCG?
-- Algorithmically-placing and generating content [hendrikx,shaker]
+- Algorithmically-placing and generating content [8,9,11,12,13,14]
 
 Why PCG?
 - Save the developer/designer time and effort!
@@ -128,13 +128,14 @@ Why PCG?
 
 Goal for GP?
 - Optimize for variety and difficulty in game experience
+
 ---
 
 # Optimizing PCG
 
 PCG is typically **parameterized**
 
-Things we can optimize:
+Things we can optimize (via GP/EC) [7,11,12,13]:
 - Ideal/diverse enemy behaviors 
   - Behavior trees or programs
     - E.g., `[Move towards player`, `queue a bullet pattern`, `fire`, `wait 10 seconds`, `repeat]`
@@ -153,9 +154,13 @@ Things we can optimize:
 
 There has been a *lot* done with PCG and evolutionary computation
 
-- Cooke *et al*. explored co-evolution for game generators []
+- Cooke *et al*. explored co-evolution for game generators [1,2]
 
-- Stanley *et al*.
+- Stanley *et al*. used neuroevolution in games to train entities, generate environments, etc. [3,4,5,6]
+
+- When game entities are considered agents, all kinds of interesting related work comes into play (planning in supervenience, Avida, etc.) [16,17,18]
+
+<!-- In philosophy, supervenience refers to a relation between sets of properties or sets of facts. X is said to supervene on Y if and only if some difference in Y is necessary for any difference in X to be possible. (https://en.wikipedia.org/wiki/Supervenience) -->
 
 ---
 
@@ -182,7 +187,7 @@ There has been a *lot* done with PCG and evolutionary computation
 
 <!-- _footer: . -->
 
-$fitness = score_{layout} - penalty_{difficulty}$
+$\underline{fitness = score_{layout} - penalty_{difficulty}}$
 
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -217,6 +222,10 @@ score_{difficulty} &= score_{space}  &* w_{10} \\
 &+ score_{center~pressure}  &* w_{15}
 \end{aligned}
 $$
+
+<br />
+
+$target_{difficulty}$ increased per floor
 </div>
 </div>
 
@@ -310,7 +319,10 @@ difficulty_score = estimate_difficulty()
 
 
 <!-- ![bg right (evoworld gif)](img/evoworld.gif) -->
-<!-- potentially even a win condition -->
+<!-- 
+- potentially even a win condition 
+- 500x500 grid - things are slow
+-->
 
 ---
 
@@ -319,7 +331,7 @@ difficulty_score = estimate_difficulty()
 The game is playable locally and in the browser
 - Though, exiting just freezes the browser at the moment...
   -  (works fine in local builds)
-- Gameplay based on Zenva tutorial []
+- Gameplay based on Zenva tutorial [15]
 
 &nbsp;
 &nbsp;
@@ -333,22 +345,33 @@ https://efredericks.github.io/gp-roguelite/
 <!-- _footer: . -->
 
 <ul id="references">
-<li>[] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part i. IEEE Transactions on Computational Intelligence and AI in Games, 9(2), 192-203.</li>
-<li>[] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part ii. IEEE Transactions on Computational Intelligence and AI in Games, 9(3), 254-266.</li>
-<li>[] Togelius, J., Champandard, A. J., Lanzi, P. L., Mateas, M., Paiva, A., Preuss, M., & Stanley, K. O. (2013). Procedural content generation: Goals, challenges and actionable steps.</li>
-<li>[] Stanley, K. O., Bryant, B. D., & Miikkulainen, R. (2005). Real-time neuroevolution in the NERO video game. IEEE transactions on evolutionary computation, 9(6), 653-668.</li>
-<li>[] Pugh, J. K., Soros, L. B., Frota, R., Negy, K., & Stanley, K. O. (2017, September). Major evolutionary transitions in the voxelbuild virtual sandbox game. In Artificial Life Conference Proceedings (pp. 553-560). One Rogers Street, Cambridge, MA 02142-1209, USA journals-info@ mit. edu: MIT Press.</li>
-<li>[] Hastings, E. J., Guha, R. K., & Stanley, K. O. (2009). Automatic content generation in the galactic arms race video game. IEEE Transactions on Computational Intelligence and AI in Games, 1(4), 245-263.</li>
-<li>[] Taylor, T., Bedau, M., Channon, A., Ackley, D., Banzhaf, W., Beslon, G., ... & Wiser, M. (2016). Open-ended evolution: Perspectives from the OEE workshop in York. Artificial life, 22(3), 408-423.</li>
-<li>[] Hendrikx, M., Meijer, S., Van Der Velden, J., & Iosup, A. (2013). Procedural content generation for games: A survey. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 9(1), 1-22.</li>
-<li>[] Shaker, N., Togelius, J., & Nelson, M. J. (2016). Procedural content generation in games.</li>
-<li>[] Streasick, S., Fredericks, E., DeVries, B., & Woodring, I. (2025, June). Incorporating Multiple Self-Adaptive Agents in Games. In Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (pp. 1469-1476).</li>
-<li>[] Cai, Y., Miao, C., Tan, A. H., Shen, Z., & Li, B. (2009). Creating an immersive game world with evolutionary fuzzy cognitive maps. IEEE computer graphics and applications, 30(2), 58-70.</li>
-<li>[] de Pontes, R. G., & Gomes, H. M. (2020, November). Evolutionary procedural content generation for an endless platform game. In 2020 19th Brazilian Symposium on Computer Games and Digital Entertainment (SBGames) (pp. 80-89). IEEE.</li>
-<li>[] Zamorano López, M. D. M., Blasco, D., Cetina, C., & Sarro, F. (2025, April). Video game procedural content generation through software transplantation. In International Conference on Software Engineering: Software Engineering in Practice. IEEE/ACM.</li>
-<li>[] Rollings, A. (2010). Fundamentals of game design.</li>
-<li>[] Zenva. (2026). Build a Complete Roguelike from Scratch with Godot. https://academy.zenva.com/course/godot-roguelike-course/
-</li>
+<li>[1] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part i. IEEE Transactions on Computational Intelligence and AI in Games, 9(2), 192-203.</li>
+<li>[2] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part ii. IEEE Transactions on Computational Intelligence and AI in Games, 9(3), 254-266.</li>
+<li>[3] Togelius, J., Champandard, A. J., Lanzi, P. L., Mateas, M., Paiva, A., Preuss, M., & Stanley, K. O. (2013). Procedural content generation: Goals, challenges and actionable steps.</li>
+<li>[4] Stanley, K. O., Bryant, B. D., & Miikkulainen, R. (2005). Real-time neuroevolution in the NERO video game. IEEE transactions on evolutionary computation, 9(6), 653-668.</li>
+<li>[5] Pugh, J. K., Soros, L. B., Frota, R., Negy, K., & Stanley, K. O. (2017, September). Major evolutionary transitions in the voxelbuild virtual sandbox game. In Artificial Life Conference Proceedings (pp. 553-560). One Rogers Street, Cambridge, MA 02142-1209, USA journals-info@ mit. edu: MIT Press.</li>
+<li>[6] Hastings, E. J., Guha, R. K., & Stanley, K. O. (2009). Automatic content generation in the galactic arms race video game. IEEE Transactions on Computational Intelligence and AI in Games, 1(4), 245-263.</li>
+<li>[7] Taylor, T., Bedau, M., Channon, A., Ackley, D., Banzhaf, W., Beslon, G., ... & Wiser, M. (2016). Open-ended evolution: Perspectives from the OEE workshop in York. Artificial life, 22(3), 408-423.</li>
+<li>[8] Hendrikx, M., Meijer, S., Van Der Velden, J., & Iosup, A. (2013). Procedural content generation for games: A survey. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 9(1), 1-22.</li>
+<li>[9] Shaker, N., Togelius, J., & Nelson, M. J. (2016). Procedural content generation in games.</li>
+</ul>
+
+---
+
+# References
+
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[10] Streasick, S., Fredericks, E., DeVries, B., & Woodring, I. (2025, June). Incorporating Multiple Self-Adaptive Agents in Games. In Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (pp. 1469-1476).</li>
+<li>[11] Cai, Y., Miao, C., Tan, A. H., Shen, Z., & Li, B. (2009). Creating an immersive game world with evolutionary fuzzy cognitive maps. IEEE computer graphics and applications, 30(2), 58-70.</li>
+<li>[12] de Pontes, R. G., & Gomes, H. M. (2020, November). Evolutionary procedural content generation for an endless platform game. In 2020 19th Brazilian Symposium on Computer Games and Digital Entertainment (SBGames) (pp. 80-89). IEEE.</li>
+<li>[13] Zamorano López, M. D. M., Blasco, D., Cetina, C., & Sarro, F. (2025, April). Video game procedural content generation through software transplantation. In International Conference on Software Engineering: Software Engineering in Practice. IEEE/ACM.</li>
+<li>[14] Rollings, A. (2010). Fundamentals of game design.</li>
+<li>[15] Zenva. (2026). Build a Complete Roguelike from Scratch with Godot. https://academy.zenva.com/course/godot-roguelike-course/</li>
+<li>[16] Spector, L. A. (1992). Supervenience in dynamic-world planning. University of Maryland, College Park.</li>
+<li>[17] Ofria, C., & Wilke, C. O. (2004). Avida: A software platform for research in computational evolutionary biology. Artificial life, 10(2), 191-229.</li>
+<li>[18] Gigliotta, O., Miglino, O., Schembri, M., & Di Ferdinando, A. (2014). Building up serious games with an artificial life approach: Two case studies. In Evolution, complexity and artificial life (pp. 149-158). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
 </ul>
 
 
@@ -380,7 +403,7 @@ Use math/algorithms to place content intelligently
 
 ---
 
-# For example - Perlin noise []
+# For example - Perlin noise
 
 <!-- _footer: . -->
 
