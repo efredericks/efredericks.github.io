@@ -1,7 +1,10 @@
 <style> @import url('./cis241.css'); </style>
 
+<!-- Description: Uncertainty can impact games given the numerous uncertainties involved, from supporting a wide range of hardware architectures and interfaces to managing unexpected human interactions.  The failure of systems in gaming due to uncertainty, whether a hard crash or a performance slowdown, can lead to player frustration and disengagement.  In this talk I will discuss approaches that my lab has explored for both discovering and managing uncertainty from a software engineering perspective that can be applied to games, from requirements monitoring at run time to search-based fuzz testing.  I'll also cover its applications in other domains such as safety-critical systems and algorithmic art to demonstrate the domain-independence of these techniques.  I'll end with a discussion of potential future directions that can be explored in the context of uncertainty and game development. -->
+
 <!-- # Bridging Esoteric Software Engineering Practices to the Video Games Domain -->
-<h1 id="opportunities-for-esoteric-software-engineering-practices-in-games">Opportunities for Esoteric Software Engineering Practices in Games</h1>
+<!-- # Opportunities for Esoteric Software Engineering Practices in Games -->
+<h1 id="opportunities-for-esoteric-software-engineering-practices-for-managing-uncertainty-in-games">Opportunities for Esoteric Software Engineering Practices for Managing Uncertainty in Games</h1>
 
 <h3 id="fase4games-keynote-07052026">FaSE4Games Keynote (07/05/2026)</h3>
 
@@ -28,14 +31,15 @@
 <ul>
 <li>Abigail Diller</li>
 <li>Steven Streasick</li>
-<li>Skyler Burden</li>
 <li>Mallory Jacobs</li>
+<li>Skyler Burden</li>
 <li>Cameron Schneider</li>
 <li>Andrew Goodling</li>
 <li>Astha Thapa</li>
+<li>...and more!</li>
 </ul>
 </div>
-<div class="col">
+<div class="col-mid">
 <b>Collaborators and Mentors</b>
 <ul>
 <li>Byron DeVries</li>
@@ -44,7 +48,7 @@
 <li>Betty H. C. Cheng</li>
 </ul>
 </div>
-<div class="col">
+<div class="col-right">
 <b>Sponsors</b>
 <ul>
 <li>Grand Valley State University</li>
@@ -58,23 +62,331 @@
 
 <h1 id="what-is-the-purpose-of-this-keynote">What is the purpose of this keynote?</h1>
 
-<p>What am I talking about?</p>
+<p>Dealing with <strong>uncertainty</strong> and its insidious impacts on software systems</p>
+
+<p>More specifically?</p>
 <ul>
-  <li>EC</li>
-  <li>SAS</li>
-  <li>Fuzzing</li>
+  <li>Causing requirements violations</li>
+  <li>Inducing performance slowdowns</li>
+  <li>Crashes!</li>
+</ul>
+
+<p><img src="img/pexels-vantik93-16876741.jpg" alt="bg cover opacity:0.3 (an angry user)" /></p>
+
+<!-- _footer: Photo by Михаил Крамор from Pexels: https://www.pexels.com/photo/angry-girl-sitting-at-desk-in-classroom-16876741/ -->
+
+<hr />
+
+<h1 id="why-is-this-interesting-to-you-specifically">Why is this interesting to you specifically?</h1>
+
+<p>I’m not pitching you a career’s worth of work but rather opportunities for future work</p>
+
+<p>What we’ll be talking about :</p>
+
+<ul>
+  <li>Recognizing and quantifying uncertainty</li>
+  <li>Techniques for managing uncertainty</li>
+  <li>Potential future options in this area</li>
 </ul>
 
 <hr />
 
-<p>Why si this interesting?
-I’m not pitching you a career’s worth of work but rather opportunities for future work</p>
+<h1 id="who-am-i">Who am I?</h1>
+
+<ul>
+  <li>
+    <p>Until recently, a person who has focused on managing uncertainty in safety-critical systems with search-based software engineering</p>
+
+    <ul>
+      <li>E.g., robotics, self-adaptive systems</li>
+    </ul>
+  </li>
+  <li>
+    <p>And then I found:</p>
+
+    <ul>
+      <li>Algorithmic art</li>
+      <li>Procedural content generation</li>
+    </ul>
+  </li>
+</ul>
+
+<!-- _footer: (Background image: [Etienne Jacob](https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/)) -->
+
+<p><img src="https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif" alt="bg cover opacity:0.1 (looping perlin noise)" /></p>
+
+<hr />
+
+<h1 id="what-is-uncertainty">What is uncertainty?</h1>
+
+<p>Uncertainty is:</p>
+
+<ul>
+  <li>Insidious</li>
+  <li>Difficult to quantify</li>
+  <li>Difficult to <em>recognize</em></li>
+</ul>
+
+<p>Uncertainty causes your software to react/behave in ways unintended</p>
+<ul>
+  <li>This should worry you as a software engineer!</li>
+</ul>
+
+<!--
+- Robots crash and people die
+- Video games crash and people trash your game online
+-->
+
+<p><img src="img/pexels-filirovska-4913769.jpg" alt="bg cover opacity:0.3 (a question mark)" /></p>
+
+<!-- _footer: Photo by Julia Filirovska from Pexels: https://www.pexels.com/photo/misted-window-with-question-mark-4913769/ -->
+
+<hr />
+
+<h1 id="consider">Consider…</h1>
+
+<p>You are programming a robot</p>
+
+<div class="container">
+  <div class="col">
+    <ul>
+      <li>A camera lens gets scratched</li>
+      <li>A sensor gets bumped and becomes misaligned</li>
+      <li>A typo is entered into a config file</li>
+    </ul>
+    <b>How does that impact the robot's goals?</b>
+  </div>
+
+  <div class="col-right">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/svovLytCkMw?si=GbgPbsBMpvcl0JiJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+  </div>
+</div>
+
+<hr />
+
+<h1 id="defining-uncertainty">Defining uncertainty</h1>
+
+<p>Interestingly, there are a plethora of ways to describe uncertainty depending on your domain.  I fall in the []:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Type</strong></th>
+      <th><strong>Description</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Known known</td>
+      <td>We <strong>know</strong> the source <strong>and</strong> how much impact it will have</td>
+    </tr>
+    <tr>
+      <td>Unknown known</td>
+      <td>We <strong>don’t know</strong> the source but do <strong>know</strong> its impact</td>
+    </tr>
+    <tr>
+      <td>Known Unknown</td>
+      <td>We <strong>know</strong> the source but <strong>don’t know</strong> its impact</td>
+    </tr>
+    <tr>
+      <td>Unknown unknown</td>
+      <td>We <strong>don’t know</strong> the source and <strong>don’t know</strong> its impact</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- _footer: . -->
+<!-- could also go the aleatory (inherent randomness/noise) and epistemic (lack of knowledge) route as well -->
+
+<hr />
+
+<h1 id="defining-uncertainty-1">Defining uncertainty</h1>
+
+<p>This leads us to:</p>
+
+<ul>
+  <li>
+    <p><strong>Sources of uncertainty</strong></p>
+  </li>
+  <li>
+    <p><strong>Impact of uncertainty</strong></p>
+  </li>
+</ul>
+
+<p> 
+ </p>
+
+<p>It is <mark>humanly impossible</mark> to enumerate all possible combinations of each</p>
+
+<!--
+can we find the most impactful or put the system into a good enough state
+-->
+
+<hr />
+
+<h1 id="examples-of-uncertainty">Examples of uncertainty</h1>
+
+<p>Safety-critical systems</p>
+<ul>
+  <li>Unexpected weather</li>
+  <li>Human interaction</li>
+  <li>System misconfiguration</li>
+</ul>
+
+<p>Video games</p>
+<ul>
+  <li>Network issues (also works for above)</li>
+  <li>Human interaction</li>
+  <li>System misconfiguration</li>
+</ul>
+
+<p><img src="https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif" alt="top-right w:300 (roomba cat)" /></p>
+
+<hr />
+
+<h1 id="how-do-we-handle-it-from-a-software-engineering-perspective">How do we handle it from a software engineering perspective?</h1>
+
+<ul>
+  <li>Verification and validation</li>
+  <li>Machine learning</li>
+  <li>Z</li>
+</ul>
+
+<hr />
+
+<h1 id="software-engineering-and-uncertainty">Software engineering and uncertainty</h1>
+
+<p>Generating and monitoring problems:</p>
+
+<ul>
+  <li>Robot with random sensor failures/degradations</li>
+  <li>Remote data mirroring with severed links</li>
+</ul>
+
+<p>Experiencing:</p>
+
+<ul>
+  <li>Unsatisfied requirements</li>
+  <li>Violated invariants</li>
+  <li>Poor performance</li>
+</ul>
+
+<hr />
+
+<h1 id="software-engineering-and-uncertainty---how-do-we-know">Software engineering and uncertainty - How do we know?</h1>
+
+<p>Monitoring requirements satisfaction <em>at run time</em></p>
+
+<hr />
+
+<div class="over-img">
+<h1>Leaving the safety-critical space</h1>
+</div>
+
+<p><img src="https://efredericks.github.io/assets/img/GenerativeGI/random/img-22.png" alt="bg (generative-gi 1)" />
+<img src="https://efredericks.github.io/assets/img/GenerativeGI/no-clear-single/img-10051.png" alt="bg (generative-gi 2)" />
+<img src="https://efredericks.github.io/assets/img/GenerativeGI/clear-lexicase/img-10096-1.png" alt="bg (generative-gi 3)" /></p>
+
+<!-- _footer:. -->
+
+<hr />
+
+<h1 id="generativegi-">GenerativeGI []</h1>
+
+<p>Using evolutionary computation and software engineering to create glitch art</p>
+
+<ul>
+  <li>
+    <p>Many-objective search with Lexicase selection</p>
+  </li>
+  <li>
+    <p>Fitness proxies for aesthetic preference</p>
+
+    <ul>
+      <li>Maximizing pixel differences in images</li>
+      <li>Maximizing negative space</li>
+      <li>Maximizing diversity of drawing techniques</li>
+      <li>…</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="contextualizing-for-games">Contextualizing for games</h1>
+
+<p> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </p>
+
+<!-- # Examples! -->
+
+<p><img src="img/noita-map.png" alt="bg opacity:0.5 (noita)" />
+<img src="https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg" alt="bg opacity:0.5 (boi)" /></p>
+
+<!-- _footer: . -->
+
+<hr />
+
+<h1 id="requirements-monitoring">Requirements monitoring</h1>
+
+<hr />
+
+<h1 id="software-testing-basic">Software testing (basic)</h1>
+
+<hr />
+
+<h1 id="software-testing-esoteric">Software testing (esoteric)</h1>
 
 <hr />
 <hr />
 <hr />
 <hr />
 <hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+
+<hr />
+
+<h1 id="discussion">Discussion</h1>
+
+<hr />
+
+<h1 id="a-pitch">A pitch!</h1>
+
+<p><img src="https://www.dagstuhl.de/_Resources/Persistent/d/b/9/2/db92ac4a61b2c6a364b7b0d8ef618dc5ad8819cd/_01_DSC00749_1_Didas%20KopieDG1.jpg" alt="bg opacity:0.1 (Schloss Dagstuhl)" /></p>
+
+<p>I am currently working on a Dagstuhl seminar proposal.  If you would like to be included as a participant, please fill out the survey here!</p>
+
+<p>(QR code)</p>
+
+<hr />
+
+<h1 id="thank-you">Thank you!</h1>
+
+<p><img src="img/pexels-towfiqu-barbhuiya-3440682-11341894.jpg" alt="bg opacity:0.1 (thank you)" /></p>
+
+<!-- _footer:Photo by Towfiqu barbhuiya from Pexels: https://www.pexels.com/photo/cursive-text-on-a-paper-11341894/ -->
+
+<hr />
+
+<h1 id="references">References</h1>
+
 <hr />
 
 <h1 id="but-first-how-do-we-make-a-game-map">But first, <strong>how</strong> do we make a game map?</h1>
