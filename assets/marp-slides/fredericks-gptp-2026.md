@@ -107,16 +107,6 @@ state machines
 ---
 
 
-<!-- Examples! -->
-
-![bg (noita)](img/noita-map.png)
-![bg (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg)
-
-<!--
-BoI: room templates with PCG placement
--->
----
-
 # Procedural content generation 
 
 What is PCG?
@@ -386,6 +376,17 @@ https://efredericks.github.io/gp-roguelite/
 # Backup slides
 
 ---
+
+<!-- Examples! -->
+
+![bg (noita)](img/noita-map.png)
+![bg (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg)
+
+<!--
+BoI: room templates with PCG placement
+-->
+---
+
 
 # PCG basic concept
 
