@@ -63,29 +63,6 @@ One GP active and one in progress
 
 # Why - making a game map/environment
 
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-![bg w:500 (lttp)](https://assetsio.gnwcdn.com/A-Link-to-the-Past-Map-Header1-05292020.jpg)
-
-![bg w:500 (sunless skies)](img/sunless_skies.jpeg)
-
-<!--
-LttP: hand-crafted
-Sunless Skies: hand-crafted with procedural elements
--->
----
-
-# Why - making a game map/environment
-
 <div class="container">
 <div class="col">
 <img alt="tiled" src="https://api.arcade.academy/en/2.6.17/_images/use_tileset.png">
@@ -386,6 +363,30 @@ https://efredericks.github.io/gp-roguelite/
 BoI: room templates with PCG placement
 -->
 ---
+
+# Why - making a game map/environment
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+![bg w:500 (lttp)](https://assetsio.gnwcdn.com/A-Link-to-the-Past-Map-Header1-05292020.jpg)
+
+![bg w:500 (sunless skies)](img/sunless_skies.jpeg)
+
+<!--
+LttP: hand-crafted
+Sunless Skies: hand-crafted with procedural elements
+-->
+---
+
 
 
 # PCG basic concept
