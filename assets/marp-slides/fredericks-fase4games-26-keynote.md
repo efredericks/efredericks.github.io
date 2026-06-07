@@ -8,6 +8,8 @@ math: katex
 footer: Fredericks | FaSE4Games'26 Keynote | Esoteric Software Engineering for Games
 ---
 
+<!-- 40+20 -->
+
 <style> @import url('./cis241.css'); </style>
 
 <!-- Description: Uncertainty can impact games given the numerous uncertainties involved, from supporting a wide range of hardware architectures and interfaces to managing unexpected human interactions.  The failure of systems in gaming due to uncertainty, whether a hard crash or a performance slowdown, can lead to player frustration and disengagement.  In this talk I will discuss approaches that my lab has explored for both discovering and managing uncertainty from a software engineering perspective that can be applied to games, from requirements monitoring at run time to search-based fuzz testing.  I'll also cover its applications in other domains such as safety-critical systems and algorithmic art to demonstrate the domain-independence of these techniques.  I'll end with a discussion of potential future directions that can be explored in the context of uncertainty and game development. -->
@@ -55,6 +57,8 @@ Erik Fredericks, frederer@gvsu.edu
 <li>Jared Moore</li>
 <li>Ira Woodring</li>
 <li>Betty H. C. Cheng</li>
+<li>Austin Ferguson</li>
+<li>Alex Lalejini</li>
 </ul>
 </div>
 <div class="col-right">
@@ -66,6 +70,8 @@ Erik Fredericks, frederer@gvsu.edu
 </ul>
 </div>
 </div>
+
+<!-- primarily undergrad institution -->
 
 ---
 
@@ -101,12 +107,12 @@ What we'll be talking about :
 
 - Until recently, a person who has focused on managing uncertainty in safety-critical systems with search-based software engineering 
 
-  - E.g., robotics, self-adaptive systems
+  - E.g., robotics [], self-adaptive systems []
 
-- And then I found:
+- And then:
 
-  - Algorithmic art
-  - Procedural content generation
+  - Algorithmic art []
+  - Procedural content generation []
 
 <!-- _footer: (Background image: [Etienne Jacob](https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/)) -->
 
@@ -155,6 +161,10 @@ You are programming a robot
   </div>
 </div>
 
+<!-- 
+what is the uncertainty here?
+-->
+
 
 ---
 
@@ -176,22 +186,34 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 
 # Defining uncertainty
 
-This leads us to:
+<!-- _footer: . -->
 
-- **Sources of uncertainty**
+<div class="container">
+<div class="col">
+<p>This leads us to:</p>
+<ul>
+<li><strong>Sources of uncertainty</strong></li>
+<li><strong>Impact of uncertainty</strong></li>
+</ul>
+</div>
+<div class="col">
+<img alt="Sources of uncertainty" src="img/fase4games-keynote/ragnarok-sources.png" />
+<p class="reference">Genome for Ragnarok genetic algorithm []</p>
+</div>
+</div>
 
-- **Impact of uncertainty**
-
-&nbsp;
-&nbsp;
 
 It is <mark>humanly impossible</mark> to enumerate all possible combinations of each
+
+
 
 <!--
 can we find the most impactful or put the system into a good enough state
 -->
 
 ---
+
+<!-- _footer: . -->
 
 # Examples of uncertainty
 
@@ -207,13 +229,17 @@ Video games
 
 ![top-right w:300 (roomba cat)](https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif)
 
+
+*Formal methods for quantification exist as well via probability analysis, statistical modeling, etc.* [Uncertainty Quantification, Soize]
+
 ---
 
-# How do we handle it from a software engineering perspective?
+# How can we handle it from a software engineering perspective?
 
-- Verification and validation
-- Machine learning
-- Z
+- Run-time monitoring **
+- Verification and validation []
+- Machine learning []
+- Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards]
 
 ---
 
@@ -234,7 +260,14 @@ Experiencing:
 
 # Software engineering and uncertainty - How do we know?
 
-Monitoring requirements satisfaction *at run time*
+One concern can be the additional overhead of monitors
+
+*Lightweight* monitoring requirements satisfaction *at run time* -- utility functions []
+- Derive mathematical functions for each requirement/goal to assess performance
+
+---
+
+# Utility functions
 
 
 
@@ -253,6 +286,17 @@ Monitoring requirements satisfaction *at run time*
 
 ---
 
+# Search-based software engineering
+
+background
+will show sbst/ragnarok/valkyrie later
+
+---
+
+# An example (self-adaptive)
+
+---
+
 # GenerativeGI []
 
 Using evolutionary computation and software engineering to create glitch art
@@ -265,6 +309,16 @@ Using evolutionary computation and software engineering to create glitch art
   - Maximizing negative space
   - Maximizing diversity of drawing techniques
   - ...
+
+---
+
+# Uncertainty in the art space
+
+*Wasn't the focus of the work, however...*
+
+- Use of external libraries
+- Architecture differences between machines
+- Fitness measures
   
 
 ---
