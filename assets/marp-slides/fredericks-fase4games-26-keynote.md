@@ -94,6 +94,7 @@ More specifically?
 # Why is this interesting to you specifically?
 
 I'm not pitching you a career's worth of work but rather opportunities for future work
+- And things I find interesting anyway
 
 What we'll be talking about :
 
@@ -105,19 +106,19 @@ What we'll be talking about :
 
 # Who am I?
 
+<!-- _footer: (**crowning achievement) -->
+
 - Until recently, a person who has focused on managing uncertainty in safety-critical systems with search-based software engineering 
 
-  - E.g., robotics [], self-adaptive systems []
+  - Safety-critical systems [] / robotics [] 
+  - Self-adaptive systems []
 
 - And then:
 
   - Algorithmic art []
   - Procedural content generation []
-
-<!-- _footer: (Background image: [Etienne Jacob](https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/)) -->
-
-![bg cover opacity:0.1 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif)
-
+  - SIGBOVIK contributor [] **
+  
 ---
 
 # What is uncertainty?
@@ -190,7 +191,7 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 
 <div class="container">
 <div class="col">
-<p>This leads us to:</p>
+<p>This leads us to identifying the:</p>
 <ul>
 <li><strong>Sources of uncertainty</strong></li>
 <li><strong>Impact of uncertainty</strong></li>
@@ -198,7 +199,7 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 </div>
 <div class="col">
 <img alt="Sources of uncertainty" src="img/fase4games-keynote/ragnarok-sources.png" />
-<p class="reference">Genome for Ragnarok genetic algorithm []</p>
+<p class="reference">Genome for remote data mirroring application with Ragnarok genetic algorithm []</p>
 </div>
 </div>
 
@@ -239,7 +240,7 @@ Video games
 - Run-time monitoring **
 - Verification and validation []
 - Machine learning []
-- Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards]
+- Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards, https://arxiv.org/pdf/2606.03662]
 
 ---
 
@@ -262,20 +263,88 @@ Experiencing:
 
 One concern can be the additional overhead of monitors
 
-*Lightweight* monitoring requirements satisfaction *at run time* -- utility functions []
+*Lightweight* satisfaction monitoring *at run time* -- utility functions []
+- **Satisfaction**: requirement or goal's performance is *acceptable*
 - Derive mathematical functions for each requirement/goal to assess performance
 
 ---
 
 # Utility functions
 
+$Goal_a$: [Maintain] >= 30\% $battery_{perc}$
 
+$util_{a}$ = $1.0~if~battery_{perc}~>=~30\%~else~0.0$
+
+<hr size="1" />
+
+$R_1$: All walkable areas of game map must be accessible.
+
+$util_{R_1}$ = 
+
+<hr size="1" />
+
+Normalize on [0.0, 1.0] - 0.0 is a <span style="color:red !important">violation</span>, 1.0 is <span style="color:green !important">satisfaction</span>, (0.0, 1.0) is *degree of satisfaction*
 
 
 ---
 
+# Fuzzy logic to support flexibility
+
+<!-- _footer: . -->
+
+Typical requirements are **brittle**
+- No room to tolerate *transient* failures
+
+**Consider**: 
+<div class="container" style="background:#eee !important; border: 1px solid #000 !important; margin-bottom: 0.5em !important">
+<div class="col" style="border-right: 1px solid #000 !important">
+[Maintain] >= 30% battery 
+</div>
+<div class="col">
+[Achieve] >= 30% +/- 5% battery
+</div>
+</div>
+
+KAOS goal notation [] -- 
+- [Maintain] is an invariant
+- [Achieve] is a non-invariant
+
+---
+
+# RELAX specification language []
+
+Introduce fuzzy-logic membership functions to requirements that can be *temporarily* unsatisfied
+
+- Return to charging station when battery percentage is `AS CLOSE AS POSSIBLE TO` 30%
+
+(triangle function)
+
+Applies to requirement or goal monitoring
+
+---
+
+
+# Search-based software engineering (SSBSE)
+
+
+background
+will show sbst/ragnarok/valkyrie later
+
+---
+
+# An SSBSE example (self-adaptive systems)
+
+1. Breaking the system
+2. Fixing the system
+
+### Utility functions 
+
+- Fitness calculations
+
+---
+
 <div class="over-img">
-<h1>Leaving the safety-critical space</h1>
+<h1 style="text-align: center !important">Leaving the safety-critical space</h1>
 </div>
 
 ![bg (generative-gi 1)](https://efredericks.github.io/assets/img/GenerativeGI/random/img-22.png)
@@ -283,17 +352,6 @@ One concern can be the additional overhead of monitors
 ![bg (generative-gi 3)](https://efredericks.github.io/assets/img/GenerativeGI/clear-lexicase/img-10096-1.png)
 
 <!-- _footer:. -->
-
----
-
-# Search-based software engineering
-
-background
-will show sbst/ragnarok/valkyrie later
-
----
-
-# An example (self-adaptive)
 
 ---
 
@@ -310,15 +368,36 @@ Using evolutionary computation and software engineering to create glitch art
   - Maximizing diversity of drawing techniques
   - ...
 
+<!--
+* learned that pixel differences are useless
+* move to ML
+-->
+
 ---
+
 
 # Uncertainty in the art space
 
 *Wasn't the focus of the work, however...*
 
-- Use of external libraries
-- Architecture differences between machines
-- Fitness measures
+<div class="container">
+<div class="col">
+<ul>
+<li>Use of external libraries</li>
+  <ul>
+  <li>E.g., <code>pixel-sort</code>, <code>scikit-learn</code> libraries</li>
+  </ul>
+<li>Architecture differences between machines</li>
+<li>Fitness measures</li>
+</ul>
+</div>
+<div class="col">
+fitness fxn
+</div>
+</div>
+
+<!-- translates nicely to games domain -->
+
   
 
 ---
@@ -348,34 +427,97 @@ Using evolutionary computation and software engineering to create glitch art
 
 # Requirements monitoring
 
+Leverage software sensors to monitor performance
+
+<div class="over-img">
+<h3 style="padding:1em !important">
+We spent all that time deriving requirements and design documents, we might as well keep using them!
+</h3>
+</div>
+
 ---
 
-# Software testing (basic)
+# What are some good things to monitor?
 
+1. Could consider *all* requirements
+- May be cost prohibitive (memory, time, etc.) 
+
+2. Identify requirements that can be used for run-time adjustments
+- Or self-adaptation...
+
+
+---
+
+# Consider: software testing 
+
+## Or, things we *should* be doing already
+
+- Unit/integration/regression/system/acceptance/.../ testing
+
+Are those one-off tests or can we re-use them?
+- Much like requirements specs, test specs are great targets for run-time reuse
+  - Especially if you consider that run-time uncertainty *might* get caught by those artifacts
 
 ---
 
 # Software testing (esoteric) 
 
+<!-- promised you esoteric in the title -->
+
+Search-based fuzz testing 
+
+Mutation testing
+
 ---
+
+# RELAXation as a target for evolution
+
+(gif of p5 scene)
+
 ---
+
+# Genetic improvement []
+
+Automatically optimizing a program
+- Source code (code transplantation) []
+- Behavior trees
+- Stack-based opcodes
+
+(image of code patch)
+
+![bg right w:450](img/gptp-screenshots/bt.png)
+
 ---
+
+### Sample outputs (enemy program opcodes) []
+
+<strong>Enemy:</strong> <code class="small-code">WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,AIM,WAIT_20,FIRE_ONE</code>
+
+<strong>Enemy:</strong> <code class="small-code">WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_8,FIRE_ALL,WAIT_40,WAIT_20,RADIAL_4,FIRE_ALL,WAIT_40</code>
+
+
+<!-- _footer: . -->
+<!-- lovely example of GP bloat -->
+
 ---
+
+### Sample outputs (room generation) []
+
+| | | |
+| ----------- | ----------- | ---- |
+| ![w:400](img/gptp-screenshots/screen.36diff.png) | ![w:400](img/gptp-screenshots/screen.45diff.png) | ![w:400](img/gptp-screenshots/screen.50diff.png)
+| Difficulty: 0.36 | Difficulty: 0.45 | Difficulty: 0.50
+
 ---
----
----
----
----
----
----
----
----
+
 ---
 
 
 ---
 
 # Discussion
+
+
 
 ---
 
