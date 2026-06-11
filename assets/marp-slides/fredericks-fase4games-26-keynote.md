@@ -175,10 +175,12 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 
 | **Type** | **Description** | 
 | ----------- | ----------- | 
-| Known known | We **know** the source **and** how much impact it will have |
-| Unknown known | We **don't know** the source but do **know** its impact |
-| Known Unknown | We **know** the source but **don't know** its impact |
-| Unknown unknown | We **don't know** the source and **don't know** its impact |
+| **Known known** | We **know** the source **and** how much impact it will have |
+| **Unknown known** | We **don't know** the source but do **know** its impact |
+| **Known Unknown** | We **know** the source but **don't know** its impact |
+| **Unknown unknown** | We **don't know** the source and **don't know** its impact |
+
+Or, **aleatory** (inherent randomness/noise) and **epistemic** (lack of knowledge) uncertainties []
 
 <!-- _footer: . -->
 <!-- could also go the aleatory (inherent randomness/noise) and epistemic (lack of knowledge) route as well -->
@@ -257,29 +259,55 @@ Experiencing:
 - Violated invariants
 - Poor performance
 
+![bottom-corner (drone scatter plot) w:400](img/fase4games-keynote/drone-scatter.png)
+
+<!-- plot of drone position over multiple runs. green is success-->
 ---
 
 # Software engineering and uncertainty - How do we know?
 
-One concern can be the additional overhead of monitors
+<!-- _footer: Background photo by Mahoney Fotos from Pexels: https://www.pexels.com/photo/close-up-of-tree-logs-lying-in-a-forest-20442681/ -->
+
+![bg cover opacity:0.1 (https://www.pexels.com/photo/close-up-of-tree-logs-lying-in-a-forest-20442681/)](img/pexels-mahoneyfotos-20442681.logs.jpg)
+
+Post-analysis with logs, but *often performed prior to release*
+- Logs can get <mark>big</mark>
+
+<hr size="1" />
+
+Run-time monitoring - though incurs additional overhead 
 
 *Lightweight* satisfaction monitoring *at run time* -- utility functions []
 - **Satisfaction**: requirement or goal's performance is *acceptable*
 - Derive mathematical functions for each requirement/goal to assess performance
 
+
 ---
 
 # Utility functions
 
-$Goal_a$: [Maintain] >= 30\% $battery_{perc}$
+<!-- _footer: . -->
 
-$util_{a}$ = $1.0~if~battery_{perc}~>=~30\%~else~0.0$
+$Goal_a$: [Maintain] >= 30\% $battery_{perc}$
+<!-- $util_{a}$ = $1.0~if~battery_{perc}~>=~30\%~else~0.0$ -->
+$$
+util_{a} = \begin{cases} 
+    1.0 & \text{if } battery_{perc} \ge 30\% \\
+    0.0 & \text{else} 
+\end{cases} 
+$$
 
 <hr size="1" />
 
-$R_1$: All walkable areas of game map must be accessible.
+$R_1$: At least 60% of the walkable areas of game map must be accessible.
 
-$util_{R_1}$ = 
+$$
+util_{R1} = \begin{cases} 
+    \frac{x - 0.6}{0.4} & \text{if } |cells_{walkable}| \ge |cells| * 0.6 \\
+    0.0 & \text{else} 
+\end{cases} 
+$$
+
 
 <hr size="1" />
 
@@ -308,6 +336,8 @@ Typical requirements are **brittle**
 KAOS goal notation [] -- 
 - [Maintain] is an invariant
 - [Achieve] is a non-invariant
+
+<mark>PICTURE FROM GOODLING PAPER WITH ERROR BARS FOR UNCERTAINTY IN PLANNING</mark>
 
 ---
 
@@ -512,6 +542,20 @@ Automatically optimizing a program
 
 ---
 
+# Future areas 
+
+where can we go from here img
+
+Focusing on the SE areas of improvement:
+
+- Leverage run-time monitors for adapting to gameplay and/or performance metrics
+  - E.g., Shadow of Mordor antagonists, tweak performance envelope for different machine specs
+
+- The third thing that is second!
+
+- Agentic monitors for continuous improvement
+  - E.g., mimic players to catch latent bugs
+    - Though, keep them out of the creative space
 
 ---
 
