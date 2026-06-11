@@ -248,6 +248,8 @@ Video games
 
 # Software engineering and uncertainty
 
+<!-- _footer: . -->
+
 Generating and monitoring problems:
 
 - Robot with random sensor failures/degradations
@@ -259,9 +261,11 @@ Experiencing:
 - Violated invariants
 - Poor performance
 
-![bottom-corner (drone scatter plot) w:400](img/fase4games-keynote/drone-scatter.png)
+![bottom-corner (drone scatter plot) w:350](img/fase4games-keynote/drone-scatter.png)
 
-<!-- plot of drone position over multiple runs. green is success-->
+<div style="z-index:99 !important; background-color:#eee !important; position:absolute !important; bottom: 20px !important; right: 70px !important; font-size: 0.9rem !important">Scatter plot of drone position over multiple runs []</div>
+
+<!-- plot of drone position over multiple runs. green is success. uncertainty is the environmet layout -->
 ---
 
 # Software engineering and uncertainty - How do we know?
@@ -313,6 +317,8 @@ $$
 
 Normalize on [0.0, 1.0] - 0.0 is a <span style="color:red !important">violation</span>, 1.0 is <span style="color:green !important">satisfaction</span>, (0.0, 1.0) is *degree of satisfaction*
 
+<!-- can be used to make decisions -->
+
 
 ---
 
@@ -337,19 +343,21 @@ KAOS goal notation [] --
 - [Maintain] is an invariant
 - [Achieve] is a non-invariant
 
-<mark>PICTURE FROM GOODLING PAPER WITH ERROR BARS FOR UNCERTAINTY IN PLANNING</mark>
-
 ---
 
 # RELAX specification language []
 
+<!-- _footer: . -->
+
 Introduce fuzzy-logic membership functions to requirements that can be *temporarily* unsatisfied
+- E.g., return to charging station when battery percentage is `AS CLOSE AS POSSIBLE TO` 30% (triangle)
 
-- Return to charging station when battery percentage is `AS CLOSE AS POSSIBLE TO` 30%
+<div style="text-align:center !important">
+  <img width=700 src="img/fase4games-keynote/autorelax.png" /> <br />
+  Encoding a candidate solution in AutoRELAX (left shoulder) [ramirez2012]
+</div>
 
-(triangle function)
-
-Applies to requirement or goal monitoring
+<!-- left shoulder : as few as possible -->
 
 ---
 
@@ -584,6 +592,8 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 ---
 
 # References
+
+[] Goodling, A. and Schneider, C. and Fredericks, E. M. and Hariri, R. Antagonistic Development via Intentional Software Churn. To Appear in the Proceedings of the 2026 ASEE National Conference.
 
 ---
 
