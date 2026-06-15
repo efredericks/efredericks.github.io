@@ -6,6 +6,14 @@ theme: rose-pine
 paginate: true
 math: katex
 footer: Fredericks | FaSE4Games'26 Keynote | Esoteric Software Engineering for Games
+
+style: |
+  table tr:nth-child(even) {
+    background-color: #cccccc;
+  }
+  table tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
 ---
 
 <!-- 40+20 -->
@@ -33,7 +41,7 @@ Erik Fredericks, frederer@gvsu.edu
 
 <!-- _footer: . -->
 
-# Acknowledgements 
+<h1><mark>Acknowledgements</mark></h1>
 
 <div class="container">
 <div class="col">
@@ -180,8 +188,6 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 | **Known Unknown** | We **know** the source but **don't know** its impact |
 | **Unknown unknown** | We **don't know** the source and **don't know** its impact |
 
-Or, **aleatory** (inherent randomness/noise) and **epistemic** (lack of knowledge) uncertainties []
-
 <!-- _footer: . -->
 <!-- could also go the aleatory (inherent randomness/noise) and epistemic (lack of knowledge) route as well -->
 
@@ -206,7 +212,7 @@ Or, **aleatory** (inherent randomness/noise) and **epistemic** (lack of knowledg
 </div>
 
 
-It is <mark>humanly impossible</mark> to enumerate all possible combinations of each
+It is <mark>humanly impossible</mark> to enumerate all possible combinations of each []
 
 
 
@@ -240,6 +246,7 @@ Video games
 # How can we handle it from a software engineering perspective?
 
 - Run-time monitoring **
+- Search-based software engineering
 - Verification and validation []
 - Machine learning []
 - Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards, https://arxiv.org/pdf/2606.03662]
@@ -281,14 +288,14 @@ Post-analysis with logs, but *often performed prior to release*
 
 Run-time monitoring - though incurs additional overhead 
 
-*Lightweight* satisfaction monitoring *at run time* -- utility functions []
-- **Satisfaction**: requirement or goal's performance is *acceptable*
-- Derive mathematical functions for each requirement/goal to assess performance
+- *Lightweight* satisfaction monitoring *at run time* -- utility functions []
+  - **Satisfaction**: requirement or goal's performance is *acceptable*
+  - Derive mathematical functions for each requirement/goal to assess performance
 
 
 ---
 
-# Utility functions
+# Utility functions []
 
 <!-- _footer: . -->
 
@@ -335,14 +342,27 @@ Typical requirements are **brittle**
 [Maintain] >= 30% battery 
 </div>
 <div class="col">
-[Achieve] >= 30% +/- 5% battery
+[Achieve] >= 30% &plusmn; 5% battery
 </div>
 </div>
 
-KAOS goal notation [] -- 
-- [Maintain] is an invariant
-- [Achieve] is a non-invariant
+KAOS goal notation []:
+- [Maintain] is an **invariant**
+- [Achieve] is a **non-invariant** &rarr; *can temporarily tolerate failure!*
 
+---
+
+# KAOS goal example
+
+<!-- _footer: . -->
+
+<div style="text-align:center !important">
+  <img width=800 src="img/fase4games-keynote/kaos.png" /> <br />
+</div>
+
+<p class="reference">KAOS goal model describing multi-agent system in game [Streasick].</p>
+
+<!-- lots of maintains - brittle! -->
 ---
 
 # RELAX specification language []
@@ -350,22 +370,20 @@ KAOS goal notation [] --
 <!-- _footer: . -->
 
 Introduce fuzzy-logic membership functions to requirements that can be *temporarily* unsatisfied
-- E.g., return to charging station when battery percentage is `AS CLOSE AS POSSIBLE TO` 30% (triangle)
+- E.g., return to charging station when battery percentage is `AS CLOSE AS POSSIBLE TO` 30% (triangle function)
 
 <div style="text-align:center !important">
-  <img width=700 src="img/fase4games-keynote/autorelax.png" /> <br />
-  Encoding a candidate solution in AutoRELAX (left shoulder) [ramirez2012]
+  <img width=700 src="img/fase4games-keynote/autorelax.png" />
 </div>
+<p class="reference">Encoding a candidate solution in AutoRELAX (left shoulder) [ramirez2012]</p>
 
 <!-- left shoulder : as few as possible -->
 
 ---
 
-
 # Search-based software engineering (SSBSE)
 
-
-background
+Evolutionary comptuation [] for optimizing solutions for SE problems
 will show sbst/ragnarok/valkyrie later
 
 ---
@@ -502,9 +520,13 @@ Are those one-off tests or can we re-use them?
 
 <!-- promised you esoteric in the title -->
 
+Run-time testing [fredericks2019]
+
 Search-based fuzz testing 
 
 Mutation testing
+
+![bg right w:600 (run-time testing loop)](img/fase4games-keynote/rt-test.png)
 
 ---
 
@@ -552,7 +574,7 @@ Automatically optimizing a program
 
 # Future areas 
 
-where can we go from here img
+![top-corner w:200 opacity:0.3 (filter: where do we go from here)](https://i.discogs.com/cutUpbupBsfiEv8xYflZLl8YEwoGXF5m7HVYithjP84/rs:fit/g:sm/q:90/h:320/w:317/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5OTY3/Ni0xMjMwMzQzMjM2/LmpwZWc.jpeg)
 
 Focusing on the SE areas of improvement:
 
@@ -575,11 +597,16 @@ Focusing on the SE areas of improvement:
 
 # A pitch!
 
+<!-- _footer: . -->
+
 ![bg opacity:0.1 (Schloss Dagstuhl)](https://www.dagstuhl.de/_Resources/Persistent/d/b/9/2/db92ac4a61b2c6a364b7b0d8ef618dc5ad8819cd/_01_DSC00749_1_Didas%20KopieDG1.jpg)
 
 I am currently working on a Dagstuhl seminar proposal.  If you would like to be included as a participant, please fill out the survey here!
 
-(QR code)
+<div style="text-align:center !important">
+  <img width=350 alt="QR code"src="img/fase4games-keynote/qrcode_docs.google.com.png" /> <br />
+  Survey for Dagstuhl inclusion.
+</div>
 
 ---
 
@@ -593,7 +620,53 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 
 # References
 
-[] Goodling, A. and Schneider, C. and Fredericks, E. M. and Hariri, R. Antagonistic Development via Intentional Software Churn. To Appear in the Proceedings of the 2026 ASEE National Conference.
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[1] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part i. IEEE Transactions on Computational Intelligence and AI in Games, 9(2), 192-203.</li>
+<li>[2] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part ii. IEEE Transactions on Computational Intelligence and AI in Games, 9(3), 254-266.</li>
+<li>[3] Togelius, J., Champandard, A. J., Lanzi, P. L., Mateas, M., Paiva, A., Preuss, M., & Stanley, K. O. (2013). Procedural content generation: Goals, challenges and actionable steps.</li>
+<li>[4] Stanley, K. O., Bryant, B. D., & Miikkulainen, R. (2005). Real-time neuroevolution in the NERO video game. IEEE transactions on evolutionary computation, 9(6), 653-668.</li>
+<li>[5] Pugh, J. K., Soros, L. B., Frota, R., Negy, K., & Stanley, K. O. (2017, September). Major evolutionary transitions in the voxelbuild virtual sandbox game. In Artificial Life Conference Proceedings (pp. 553-560). One Rogers Street, Cambridge, MA 02142-1209, USA journals-info@ mit. edu: MIT Press.</li>
+<li>[6] Hastings, E. J., Guha, R. K., & Stanley, K. O. (2009). Automatic content generation in the galactic arms race video game. IEEE Transactions on Computational Intelligence and AI in Games, 1(4), 245-263.</li>
+<li>[7] Taylor, T., Bedau, M., Channon, A., Ackley, D., Banzhaf, W., Beslon, G., ... & Wiser, M. (2016). Open-ended evolution: Perspectives from the OEE workshop in York. Artificial life, 22(3), 408-423.</li>
+<li>[8] Hendrikx, M., Meijer, S., Van Der Velden, J., & Iosup, A. (2013). Procedural content generation for games: A survey. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 9(1), 1-22.</li>
+<li>[9] Shaker, N., Togelius, J., & Nelson, M. J. (2016). Procedural content generation in games.</li>
+</ul>
+
+---
+
+# References
+
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[10] Streasick, S., Fredericks, E., DeVries, B., & Woodring, I. (2025, June). Incorporating Multiple Self-Adaptive Agents in Games. In Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (pp. 1469-1476).</li>
+<li>[11] Cai, Y., Miao, C., Tan, A. H., Shen, Z., & Li, B. (2009). Creating an immersive game world with evolutionary fuzzy cognitive maps. IEEE computer graphics and applications, 30(2), 58-70.</li>
+<li>[12] de Pontes, R. G., & Gomes, H. M. (2020, November). Evolutionary procedural content generation for an endless platform game. In 2020 19th Brazilian Symposium on Computer Games and Digital Entertainment (SBGames) (pp. 80-89). IEEE.</li>
+<li>[13] Zamorano López, M. D. M., Blasco, D., Cetina, C., & Sarro, F. (2025, April). Video game procedural content generation through software transplantation. In International Conference on Software Engineering: Software Engineering in Practice. IEEE/ACM.</li>
+<li>[14] Rollings, A. (2010). Fundamentals of game design.</li>
+<li>[15] Zenva. (2026). Build a Complete Roguelike from Scratch with Godot. https://academy.zenva.com/course/godot-roguelike-course/</li>
+<li>[16] Spector, L. A. (1992). Supervenience in dynamic-world planning. University of Maryland, College Park.</li>
+<li>[17] Ofria, C., & Wilke, C. O. (2004). Avida: A software platform for research in computational evolutionary biology. Artificial life, 10(2), 191-229.</li>
+<li>[18] Gigliotta, O., Miglino, O., Schembri, M., & Di Ferdinando, A. (2014). Building up serious games with an artificial life approach: Two case studies. In Evolution, complexity and artificial life (pp. 149-158). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
+</ul>
+
+[] Goodling, A., Schneider, C., Fredericks, E. M., and Hariri, R. (2026). Antagonistic Development via Intentional Software Churn. To appear in the Proceedings of the 2026 ASEE National Conference.
+[] Fredericks, E. M., Bobeldyk, D., & Moore, J. M. (2026). Every Map an Evolution, Every Room a Generation: Co-Evolution in a Procedurally-Generated Video Game. To appear in Genetic Programming Theory and Practice XXIII. Singapore: Springer Nature Singapore.
+[] Bowers, K. M., Fredericks, E. M., Hariri, R. H., & Cheng, B. H. C. (2020). Providentia: Using search-based heuristics to optimize satisficement and competing concerns between functional and non-functional objectives in self-adaptive systems. Journal of Systems and Software, 162, 110497.
+[] Fredericks, E. M., Diller, A. C., & DeVries, B. (2026).  Managing Dermal Reference Guides in the Face of Software Evolution via a CI/CD Pipeline. In 26th ACH Special Interest Group on Harry Quadragesimal Bovik (SIGBOVIK). Association for Computational Heresy (ACH).
+[] Fredericks, E. M., DeVries, B., & Hariri, R. (2026). Databending as a Target for Genetic Improvement. To Be Published in the 2026 15th International Workshop on Genetic Improvement (GI).
+[] Fredericks, E. M., Jacobs, M., & DeVries, B. (2024). Towards a Metamorphic Testing Architecture for Software-Defined Drone Systems. 2024 11th International Conference on Software Defined Systems (SDS), 170–177. https://doi.org/10.1109/SDS64317.2024.10883896
+[] DeVries, B., & Fredericks, E. M. (2024). Triggering Adaptation via Contextual Metamorphic Relations. 2024 IEEE 24th International Conference on Software Quality, Reliability and Security (QRS), 105–114.
+[] Fredericks, E. M., & Burden, S. (2024). Towards Fuzz Testing a Procedurally-Generated Video Game. To Appear in the Proceedings of the 2024 ASEE North Central Section Conference (ASEE NCS).
+[] Fredericks, E. M., Bowers, K. M., & Hariri, R. H. (2019). On incorporating search-based heuristics into real-world systems. 2019 IEEE/ACM 12th International Workshop on Search-Based Software Testing (SBST), 11–12.
+[] Fredericks, E. M., Gerostathopoulos, I., Krupitzer, C., & Vogel, T. (2019). Planning as optimization: Dynamically discovering optimal configurations for runtime situations. 2019 IEEE 13th International Conference on Self-Adaptive and Self-Organizing Systems (SASO), 1–10.
+[] Fredericks, E. M., & Moore, J. M. (2020). Search@ Home: A Commercial Off-the-Shelf Environment for Investigating Optimization Problems. International Symposium on Search Based Software Engineering, 171–177. 
+
+---
+
+
 
 ---
 
