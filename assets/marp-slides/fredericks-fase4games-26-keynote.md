@@ -101,14 +101,18 @@ More specifically?
 
 # Why is this interesting to you specifically?
 
-I'm not pitching you a career's worth of work but rather opportunities for future work
-- And things I find interesting anyway
+<!-- I'm not pitching you a career's worth of work but rather opportunities for future work
+- And things I find interesting anyway -->
 
 What we'll be talking about :
 
 - Recognizing and quantifying uncertainty
 - Techniques for managing uncertainty
 - Potential future options in this area 
+
+Also:
+
+- Things *I* find interesting, perhaps you will as well!
 
 ---
 
@@ -248,7 +252,7 @@ Video games
 - Run-time monitoring **
 - Search-based software engineering
 - Verification and validation []
-- Machine learning []
+- Machine learning [] and neuroevolution []
 - Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards, https://arxiv.org/pdf/2606.03662]
 
 ---
@@ -357,7 +361,7 @@ KAOS goal notation []:
 <!-- _footer: . -->
 
 <div style="text-align:center !important">
-  <img width=800 src="img/fase4games-keynote/kaos.png" /> <br />
+  <img width=800 src="img/fase4games-keynote/kaos.png" />
 </div>
 
 <p class="reference">KAOS goal model describing multi-agent system in game [Streasick].</p>
@@ -381,21 +385,114 @@ Introduce fuzzy-logic membership functions to requirements that can be *temporar
 
 ---
 
+# Current takeaways
+
+<!-- _footer: GIF: The Muppet Movie - Movin Right Along -->
+<!-- ![top-corner (movin right along)](img/fase4games-keynote/movin-right-along.webp) -->
+
+<!-- _footer: . -->
+
+<!-- a lot of human/socio-centric works out there, not as much in terms of SE -->
+
+<div class="container">
+<div class="col">
+<p><b>Plan for</b> and <b>proactively mitigate</b> uncertainty
+<p>- Does it matter for games?</p>
+</div>
+<div class="col">
+<div style="text-align:center !important">
+  <img width=300 alt="providentia dfd" src="img/fase4games-keynote/rm-cover.png" /> 
+  <p class="reference">Risk Management for Video Game Professionals Cover []</p>
+</div>
+</div>
+<div class="col">
+<div style="text-align:center !important">
+  <img width=300 alt="providentia dfd" src="img/fase4games-keynote/rm-toc.png" /> <br />
+  <p class="reference">Risk Management for Video Game Professionals TOC []</p>
+</div>
+
+</div>
+</div>
+
+---
+
+# How can we take all of *this* (gestures broadly at previous slides) and put it together?
+
+---
+
 # Search-based software engineering (SSBSE)
 
-Evolutionary comptuation [] for optimizing solutions for SE problems
-will show sbst/ragnarok/valkyrie later
+<!-- _footer: . -->
+
+<div class="container">
+<div class="col">
+<p>Evolutionary computation [] for optimizing solutions for SE problems:
+<br /><br />E.g.:</p>
+<ul>
+<li>Optimizing test case prioritization</li>
+<li>Generating fuzz test data</li>
+<li>Improving requirements satisfaction</li>
+</ul>
+</div>
+<div class="col">
+<div style="text-align:center !important">
+  <img width=600 alt="providentia dfd" src="img/fase4games-keynote/providentia-dfd.png" /> <br />
+  <!-- <img width=300 alt="crossover and mutation" src="img/fase4games-keynote/crossover-mutation.png" /> <br /> -->
+  <p class="reference">Providentia data flow diagram [providentia]</p>
+</div>
+
+</div>
+</div>
+
+<!-- if you have a hammer ... -->
+
+---
+
+# Evolutionary computation (briefly)
+
+Search heuristic that aims to generate an *optimal* solution to a *difficult* problem
+
+**Requirements**
+
+- Solution representation
+- Fitness measure
+
+Iterate until your solution is *good enough* or you run out of time!
+
+Can go beyond with diversity [], multi/many-objective optimization [], etc.
+
+![bg opacity:0.1 (dna strand)](https://www.yourgenome.org/wp-content/uploads/2023/10/10-shutterstock_572718040-1920x1120.jpg.webp)
+
+<!-- _footer: Background image: https://www.yourgenome.org/theme/what-is-dna/ -->
+
 
 ---
 
 # An SSBSE example (self-adaptive systems)
 
 1. Breaking the system
+    * Run a genetic algorithm to cause the system to **violate as many requirements as possible**
 2. Fixing the system
+    * Run another genetic algorithm to **optimize the system's configuration** to resolve the violations from (1)
 
-### Utility functions 
+* **Utility functions** used to monitor performance and serve as a fitness function 
 
-- Fitness calculations
+---
+
+# An SSBSE example 
+
+<!-- _footer: . -->
+
+<div class="container">
+<div class="col">
+  <img width=400 src="img/fase4games-keynote/ragnarok.png" />
+  <p class="reference">Comparison of Remote Data Mirroring invariant goal violations between Ragnarok (GA-1) and random search [].</p>
+</div>
+<div class="col">
+  <img width=400 src="img/fase4games-keynote/valkyrie.png" />
+  <p class="reference">Comparison of average fitness values between Veritas (GA-2) and random search [fredericks2016auto].</p>
+</div>
+</div>
 
 ---
 
@@ -431,7 +528,6 @@ Using evolutionary computation and software engineering to create glitch art
 
 ---
 
-
 # Uncertainty in the art space
 
 *Wasn't the focus of the work, however...*
@@ -444,15 +540,30 @@ Using evolutionary computation and software engineering to create glitch art
   <li>E.g., <code>pixel-sort</code>, <code>scikit-learn</code> libraries</li>
   </ul>
 <li>Architecture differences between machines</li>
-<li>Fitness measures</li>
+<li>Fitness and aesthetic measures</li>
 </ul>
 </div>
 <div class="col">
-fitness fxn
+<img alt="Fitness functions" src="img/fase4games-keynote/gengi-fitness-fxns.png" />
+<p class="reference">GenerativeGI subset of fitness functions [].</p>
 </div>
 </div>
 
 <!-- translates nicely to games domain -->
+
+
+---
+
+![bg (generative-gi 1)](https://efredericks.github.io/assets/img/GenerativeGI/random/img-22.png)
+![bg (generative-gi 2)](https://efredericks.github.io/assets/img/GenerativeGI/no-clear-single/img-10051.png)
+![bg (generative-gi 3)](https://efredericks.github.io/assets/img/GenerativeGI/clear-lexicase/img-10096-1.png)
+
+
+<!-- more up on my website 
+pixel sorting
+circle packing + thresholding
+watercolor potentially
+-->
 
   
 
@@ -475,13 +586,70 @@ fitness fxn
 <!-- # Examples! -->
 
 ![bg opacity:0.5 (noita)](img/noita-map.png)
-![bg opacity:0.5 (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg)
+<!-- ![bg opacity:0.5 (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg) -->
+![bg cover opacity:0.4 (binding of isaac)](https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYzF0d3QwYnpwMGE0dHU0d3dmeGE5NGE1N2EzOTFzM2swYzhnY3dmciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/idcipQ8abT4hq/giphy.gif)
 
 <!-- _footer: . -->
 
 ---
 
-# Requirements monitoring
+<!-- pick your favorite approach -->
+
+# Things we *should* care about
+
+One person indie game or AAA juggernaut, we should follow **proper documentation and testing procedures**
+
+- Design documents
+- Requirements elicitation and derivation
+- Software testing at all levels
+
+![bg right w:500 (software development lifecycle)](https://storage.ghost.io/c/e2/c8/e2c8c380-908a-4cb3-bbde-7d4cd9649d5f/content/images/2019/08/image-23.png)
+
+<!-- _footer: Image c/o https://datarob.com/essentials-software-development-life-cycle/ -->
+
+---
+
+# Gaming-specific concerns
+
+<!-- _footer: Noita gif: a "simple" 2D game" -->
+
+<!-- some computers can barely handle this 2D game -->
+
+(Probably arguable, but...) a game is just another software product with some *special concerns*:
+
+- Users with varying hardware architectures
+- Graphics fidelity and system performance
+- Multiplayer issues 
+...
+
+![bg right w:500](https://media1.tenor.com/m/4dGcFqwB9CsAAAAd/noita-nolla-games.gif)
+
+
+---
+
+# A (random) selection of prior FaSE4Games inclusions
+
+- Unit test generation using large language models for unity game development (Paduraru *et al*. 2024)
+
+- A data-driven analysis of player personalities for different game genres (Li *et al*. 2024)
+
+- Automated bug frame retrieval from gameplay videos using vision-language models (Lu *et al*.  2024)
+
+- Many-objective neuroevolution for testing games (Feldmeier *et al*. 2025)
+
+<!-- interesting to see all the techniques being applied to the SE side of things -->
+
+--- 
+
+# Looking forward
+
+![bg opacity:0.3 (looking forward)](img/fase4games-keynote/pexels-mikez-143714.lookingahead.jpg)
+
+<!-- _footer: Photo by Michael Zittel: https://www.pexels.com/photo/gray-and-black-tower-viewer-near-green-grass-field-and-beach-under-blue-white-and-gray-clouds-143714/ -->
+
+---
+
+# Run-time requirements monitoring
 
 Leverage software sensors to monitor performance
 
@@ -495,20 +663,21 @@ We spent all that time deriving requirements and design documents, we might as w
 
 # What are some good things to monitor?
 
-1. Could consider *all* requirements
-- May be cost prohibitive (memory, time, etc.) 
+1. Could consider *all* requirements or a *subset* of necessary requirements
+    - May be cost prohibitive (memory, time, etc.) 
 
 2. Identify requirements that can be used for run-time adjustments
-- Or self-adaptation...
+    - Or self-adaptation...
 
+3. Consider including test cases to provide *fine-grained* feedback
 
 ---
 
-# Consider: software testing 
+# Consider: traditional software testing at run time
 
-## Or, things we *should* be doing already
+<!-- ## Or, things we *should* be doing already -->
 
-- Unit/integration/regression/system/acceptance/.../ testing
+Unit/integration/regression/system/acceptance/.../ testing
 
 Are those one-off tests or can we re-use them?
 - Much like requirements specs, test specs are great targets for run-time reuse
@@ -589,12 +758,6 @@ Focusing on the SE areas of improvement:
 
 ---
 
-# Discussion
-
-
-
----
-
 # A pitch!
 
 <!-- _footer: . -->
@@ -605,7 +768,7 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 
 <div style="text-align:center !important">
   <img width=350 alt="QR code"src="img/fase4games-keynote/qrcode_docs.google.com.png" /> <br />
-  Survey for Dagstuhl inclusion.
+  <p class="reference">Survey for Dagstuhl inclusion.</p>
 </div>
 
 ---
@@ -617,6 +780,13 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 <!-- _footer:Photo by Towfiqu barbhuiya from Pexels: https://www.pexels.com/photo/cursive-text-on-a-paper-11341894/ -->
 
 ---
+
+# Discussion
+
+
+
+---
+
 
 # References
 
@@ -664,6 +834,7 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 [] Fredericks, E. M., Gerostathopoulos, I., Krupitzer, C., & Vogel, T. (2019). Planning as optimization: Dynamically discovering optimal configurations for runtime situations. 2019 IEEE 13th International Conference on Self-Adaptive and Self-Organizing Systems (SASO), 1–10.
 [] Fredericks, E. M., & Moore, J. M. (2020). Search@ Home: A Commercial Off-the-Shelf Environment for Investigating Optimization Problems. International Symposium on Search Based Software Engineering, 171–177. 
 
+[] Wickham, L. (2026). Risk Management for Video Game Professionals: Navigating Uncertainty in Game Development. CRC Press.
 ---
 
 
