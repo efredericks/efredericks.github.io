@@ -659,17 +659,44 @@ We spent all that time deriving requirements and design documents, we might as w
 </h3>
 </div>
 
+<!--
+I came out of the automotive industry -- documents were checked into revision control and never used again after their initial use was done
+-->
+
 ---
+
+<style scoped>
+  ol li {
+    margin-bottom: 1em;
+  }
+</style>
 
 # What are some good things to monitor?
 
-1. Could consider *all* requirements or a *subset* of necessary requirements
-    - May be cost prohibitive (memory, time, etc.) 
 
-2. Identify requirements that can be used for run-time adjustments
-    - Or self-adaptation...
 
-3. Consider including test cases to provide *fine-grained* feedback
+<div class="container">
+<div class="col">
+<p>This leads us to identifying the:</p>
+<ol>
+  <li>Could consider <i>all</i> requirements or a <i>subset</i> of necessary requirement
+  <ul>
+    <li>May be cost prohibitive (memory, time, etc.)</li>
+    </ul>
+  </li>
+  <li>Identify requirements that can be used for run-time adjustments
+  <ul>
+      <li>Or self-adaptation...</li>
+      </ul>
+  </li>
+  <li>Include test cases to provide <i>fine-grained</i> feedback</li>
+</ol>
+</div>
+<div class="col">
+<img alt="MAPE-T" src="img/fase4games-keynote/mape-t.png" />
+<p class="reference">Proposed Monitor-Analyze-Plan-Execute-Test (MAPE-T) loop [fredericks2013towards].</p>
+</div>
+</div>
 
 ---
 
@@ -691,9 +718,9 @@ Are those one-off tests or can we re-use them?
 
 Run-time testing [fredericks2019]
 
-Search-based fuzz testing 
+Search-based fuzz testing [fredericks-burden]
 
-Mutation testing
+Mutation testing [not a me!]
 
 ![bg right w:600 (run-time testing loop)](img/fase4games-keynote/rt-test.png)
 
@@ -701,7 +728,7 @@ Mutation testing
 
 # RELAXation as a target for evolution
 
-(gif of p5 scene)
+![bg right (RELAX dungeon)](img/fase4games-keynote/relax-dungeon.gif)
 
 ---
 
@@ -743,6 +770,8 @@ Automatically optimizing a program
 
 # Future areas 
 
+<!-- _footer: . -->
+
 ![top-corner w:200 opacity:0.3 (filter: where do we go from here)](https://i.discogs.com/cutUpbupBsfiEv8xYflZLl8YEwoGXF5m7HVYithjP84/rs:fit/g:sm/q:90/h:320/w:317/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5OTY3/Ni0xMjMwMzQzMjM2/LmpwZWc.jpeg)
 
 Focusing on the SE areas of improvement:
@@ -750,7 +779,8 @@ Focusing on the SE areas of improvement:
 - Leverage run-time monitors for adapting to gameplay and/or performance metrics
   - E.g., Shadow of Mordor antagonists, tweak performance envelope for different machine specs
 
-- The third thing that is second!
+- Use artificial life for evolution of game environments and agents [avida, cooke] 
+  - Life ... finds a way!
 
 - Agentic monitors for continuous improvement
   - E.g., mimic players to catch latent bugs
@@ -820,242 +850,20 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 <li>[16] Spector, L. A. (1992). Supervenience in dynamic-world planning. University of Maryland, College Park.</li>
 <li>[17] Ofria, C., & Wilke, C. O. (2004). Avida: A software platform for research in computational evolutionary biology. Artificial life, 10(2), 191-229.</li>
 <li>[18] Gigliotta, O., Miglino, O., Schembri, M., & Di Ferdinando, A. (2014). Building up serious games with an artificial life approach: Two case studies. In Evolution, complexity and artificial life (pp. 149-158). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
+
+<li>[] Goodling, A., Schneider, C., Fredericks, E. M., and Hariri, R. (2026). Antagonistic Development via Intentional Software Churn. To appear in the Proceedings of the 2026 ASEE National Conference.</li>
+<li>[] Fredericks, E. M., Bobeldyk, D., & Moore, J. M. (2026). Every Map an Evolution, Every Room a Generation: Co-Evolution in a Procedurally-Generated Video Game. To appear in Genetic Programming Theory and Practice XXIII. Singapore: Springer Nature Singapore.</li>
+<li>[] Bowers, K. M., Fredericks, E. M., Hariri, R. H., & Cheng, B. H. C. (2020). Providentia: Using search-based heuristics to optimize satisficement and competing concerns between functional and non-functional objectives in self-adaptive systems. Journal of Systems and Software, 162, 110497.</li>
+<li>[] Fredericks, E. M., Diller, A. C., & DeVries, B. (2026).  Managing Dermal Reference Guides in the Face of Software Evolution via a CI/CD Pipeline. In 26th ACH Special Interest Group on Harry Quadragesimal Bovik (SIGBOVIK). Association for Computational Heresy (ACH).</li>
+<li>[] Fredericks, E. M., DeVries, B., & Hariri, R. (2026). Databending as a Target for Genetic Improvement. To Be Published in the 2026 15th International Workshop on Genetic Improvement (GI).</li>
+<li>[] Fredericks, E. M., Jacobs, M., & DeVries, B. (2024). Towards a Metamorphic Testing Architecture for Software-Defined Drone Systems. 2024 11th International Conference on Software Defined Systems (SDS), 170–177. https://doi.org/10.1109/SDS64317.2024.10883896</li>
+<li>[] DeVries, B., & Fredericks, E. M. (2024). Triggering Adaptation via Contextual Metamorphic Relations. 2024 IEEE 24th International Conference on Software Quality, Reliability and Security (QRS), 105–114.</li>
+<li>[] Fredericks, E. M., & Burden, S. (2024). Towards Fuzz Testing a Procedurally-Generated Video Game. To Appear in the Proceedings of the 2024 ASEE North Central Section Conference (ASEE NCS).</li>
+<li>[] Fredericks, E. M., Bowers, K. M., & Hariri, R. H. (2019). On incorporating search-based heuristics into real-world systems. 2019 IEEE/ACM 12th International Workshop on Search-Based Software Testing (SBST), 11–12.</li>
+<li>[] Fredericks, E. M., Gerostathopoulos, I., Krupitzer, C., & Vogel, T. (2019). Planning as optimization: Dynamically discovering optimal configurations for runtime situations. 2019 IEEE 13th International Conference on Self-Adaptive and Self-Organizing Systems (SASO), 1–10.</li>
+<li>[] Fredericks, E. M., & Moore, J. M. (2020). Search@ Home: A Commercial Off-the-Shelf Environment for Investigating Optimization Problems. International Symposium on Search Based Software Engineering, 171–177. </li>
+
+<li>[] Wickham, L. (2026). Risk Management for Video Game Professionals: Navigating Uncertainty in Game Development. CRC Press.</li>
 </ul>
 
-[] Goodling, A., Schneider, C., Fredericks, E. M., and Hariri, R. (2026). Antagonistic Development via Intentional Software Churn. To appear in the Proceedings of the 2026 ASEE National Conference.
-[] Fredericks, E. M., Bobeldyk, D., & Moore, J. M. (2026). Every Map an Evolution, Every Room a Generation: Co-Evolution in a Procedurally-Generated Video Game. To appear in Genetic Programming Theory and Practice XXIII. Singapore: Springer Nature Singapore.
-[] Bowers, K. M., Fredericks, E. M., Hariri, R. H., & Cheng, B. H. C. (2020). Providentia: Using search-based heuristics to optimize satisficement and competing concerns between functional and non-functional objectives in self-adaptive systems. Journal of Systems and Software, 162, 110497.
-[] Fredericks, E. M., Diller, A. C., & DeVries, B. (2026).  Managing Dermal Reference Guides in the Face of Software Evolution via a CI/CD Pipeline. In 26th ACH Special Interest Group on Harry Quadragesimal Bovik (SIGBOVIK). Association for Computational Heresy (ACH).
-[] Fredericks, E. M., DeVries, B., & Hariri, R. (2026). Databending as a Target for Genetic Improvement. To Be Published in the 2026 15th International Workshop on Genetic Improvement (GI).
-[] Fredericks, E. M., Jacobs, M., & DeVries, B. (2024). Towards a Metamorphic Testing Architecture for Software-Defined Drone Systems. 2024 11th International Conference on Software Defined Systems (SDS), 170–177. https://doi.org/10.1109/SDS64317.2024.10883896
-[] DeVries, B., & Fredericks, E. M. (2024). Triggering Adaptation via Contextual Metamorphic Relations. 2024 IEEE 24th International Conference on Software Quality, Reliability and Security (QRS), 105–114.
-[] Fredericks, E. M., & Burden, S. (2024). Towards Fuzz Testing a Procedurally-Generated Video Game. To Appear in the Proceedings of the 2024 ASEE North Central Section Conference (ASEE NCS).
-[] Fredericks, E. M., Bowers, K. M., & Hariri, R. H. (2019). On incorporating search-based heuristics into real-world systems. 2019 IEEE/ACM 12th International Workshop on Search-Based Software Testing (SBST), 11–12.
-[] Fredericks, E. M., Gerostathopoulos, I., Krupitzer, C., & Vogel, T. (2019). Planning as optimization: Dynamically discovering optimal configurations for runtime situations. 2019 IEEE 13th International Conference on Self-Adaptive and Self-Organizing Systems (SASO), 1–10.
-[] Fredericks, E. M., & Moore, J. M. (2020). Search@ Home: A Commercial Off-the-Shelf Environment for Investigating Optimization Problems. International Symposium on Search Based Software Engineering, 171–177. 
-
-[] Wickham, L. (2026). Risk Management for Video Game Professionals: Navigating Uncertainty in Game Development. CRC Press.
 ---
-
-
-
----
-
-# But first, **how** do we make a game map?
-
-![bg left w:500 (lttp)](https://assetsio.gnwcdn.com/A-Link-to-the-Past-Map-Header1-05292020.jpg)
-
-![bg left w:500 (sunless skies)](img/sunless_skies.jpeg)
-
-(and, what does the data structure look like?)
-
-<!-- _footer: . -->
-
----
-
-# Any reason for not doing it by hand?
-
-![bg left w:500](https://img.itch.zone/aW1hZ2UvMjg3NjgvNjcwOTk1LnBuZw==/original/tg4IqL.png)
-![bg right w:500](https://api.arcade.academy/en/2.6.17/_images/use_tileset.png)
-
----
-
-<!-- # Examples! -->
-
-![bg (noita)](img/noita-map.png)
-![bg (boi)](https://d3kjluh73b9h9o.cloudfront.net/optimized/3X/6/0/60a6fc5ce76e78c2226541bb949e9e7b6bc73b71_2_690x391.jpeg)
-
----
-
-# Procedural Content Generation (PCG)
-
-What is PCG?
-- Algorithmically-placing content!
-
-Why is PCG?
-- Save the developer/designer time and effort!
-  - One would think...
-
-Why bother talking about this?
-- I recently sent out a paper on it and thought you might find it interesting
-- Plus, useful for gamejam things
-
----
-
-# Basic concept
-
-Use math/algorithms to place content intelligently
-- Dungeons, items, etc.
-
-Noise functions:
-- Calculate a noise value based on inputs and configurations
-- Your job is to map that value to something useful
-
-![bg cover (minecraft) opacity:0.2](https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d)
-
-
----
-
-# For example - Perlin noise
-
-Typically, returns a value in [-1.0, 1.0], though p5js uses [0.0, 1.0]
-
-For example (in p5):
-`let n = noise(x * 0.01, y * 0.01);`
-
-- `n = [0.0, 0.5] -- (x, y) -> water`
-- `n = (0.5, 0.6] -- (x, y) -> beach`
-- `n = (0.6, 0.9] -- (x, y) -> grass`
-- `n = (0.9, 1.0] -- (x, y) -> rock`
-
-You do *effectively* the same in any language/editor!
-
-There are other noise functions!  Worley noise, Simplex noise, etc.
-
----
-
-# How does noise generate this?
-
-![bg cover (minecraft) opacity:0.5](https://minecraft.wiki/images/thumb/Overworld_1.18.png/600px-Overworld_1.18.png?9499d)
-
----
-
-# Demo time
-
-<div class="callout-dark" style="background:#333"><a href="https://tinyurl.com/24c9sftw">https://tinyurl.com/24c9sftw</a></div>
-
-
-This time I made a pre-baked p5js template for you.  Go to this link and `File -> Duplicate`
-- Make sure you login and save often
-
-## The sketch
-
-- You should have a little ASCII happy face that you can move around with your arrow keys
-- Your game map is represented as a **two-dimensional grid** where the first index is the row and the second index is the column
-- There is also a basic camera that follows your player so that we can make big maps
-
-<!-- _footer: . -->
-
----
-
-# The map
-
-```js
-[['#', '#', '#', ..., '#'],
- ['#', ' ', ' ', ..., '#'],
- ['#', '.', 't', ..., '#'],
- [...],
- ['#', '#', '#', ..., '#']]
-```
-
-`game_map[2][1]` returns a ???
-* `.`
-
-By default, the map puts walls on the outside and nothing on the inside - your job is to fill it with things
-
----
-
-# Valid things:
-
-| Character | Walkable? | Represents |
-| ----------- | ----------- | ---- |
-| `#` | No | Stone wall
-| `t` | No | Tree
-| `w` | No | Water
-| ` ` | Yes | Empty space
-| `.` | Yes | Pebbles
-| `g` | Yes | Grass
-
-Try setting some random cells to these characters!
-- such as, `game_map[2][3] = 'g';` in `setup()` AFTER the game map is created
-
-![bottom-right (keanuuu)](https://images.squarespace-cdn.com/content/v1/5f960514ad64315671f581a2/1616704085936-WQ1CKH7U0ZDLUC0HA0PI/Do+it+now.gif)
-
-<div class="callout">Try hitting <code>~</code> and see what happens!</div>
-
-<!-- _footer: . -->
-
----
-
-# First, let's randomize things
-
-After the call to `setupGameMap()` (which again, just gives us an empty grid with borders)
-
-```js
-for (let r = 1; r < num_rows - 1; r++) {
-  for (let c = 1; c < num_cols - 1; c++) {
-    let r = random();
-    let ch = ' ';
-    if (r > 0.8) ch = '#';
-
-    game_map[r][c] = ch;
-  }
-}
-```
-
-<div class="callout">Is this something interesting?</div>
-
----
-
-# Now let's give it a bit of detail 
-
-First, comment out what you did inside that double loop.
-
-```js
-const zoom = 0.01;
-for (let r = 1; r < num_rows - 1; r++) {
-  for (let c = 1; c < num_cols - 1; c++) {
-    let ch = ' ';
-    let n = noise(c * zoom, r * zoom);
-
-
-    // fill in with code from next slide
-
-
-    game_map[r][c] = ch;
-  }
-}
-```
-<!-- _footer: . -->
-
----
-
-# The noise bit
-
-```js
-if (n <= 0.5) ch = 'w';
-else if (n <= 0.6) ch = 'b';
-else if (n <= 0.9) ch = 't';
-else {
-  let r = random();
-  if (r > 0.8) ch = '.';
-  else ch = ' ';
-}
-```
-
----
-
-# The finesse bit
-
-Now this is the tricky part - you need to play with the `zoom` value and the `noiseDetail` (at the top) values to get exactly the output you want!
-
-Try varying the:
-
-- `zoom` into the noise distribution (try `0.1`, `0.001`, etc.)
-- [https://p5js.org/reference/p5/noiseDetail/](https://p5js.org/reference/p5/noiseDetail/)
-    - The number of octaves (first parameter in `noiseDetail`) - `[1, 16]` usually show interesting values
-    - The falloff amount (second parameter in `noiseDetail`) - `[0.0, 1.0]`
-
----
-
-# Other ways to do it!
-
-Use a different algorithm!
-- Rectangular room placement
-- Cellular automata
-- **Wave function collapse** ->
-- ...
-
-![bg right (wfc)](https://bfnightly.bracketproductions.com/c33-s8.gif)
-
-> There's a cellular automata implementation in the demo - instead of building your map in `setup` try calling `game_map = CA();`
