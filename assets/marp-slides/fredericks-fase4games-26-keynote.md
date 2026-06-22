@@ -14,6 +14,9 @@ style: |
   table tr:nth-child(odd) {
     background-color: #ffffff;
   }
+  table th {
+    background-color: #cccccc;
+  }
 ---
 
 <!-- 40+20 -->
@@ -26,7 +29,7 @@ style: |
 <!-- # Opportunities for Esoteric Software Engineering Practices in Games -->
 # Opportunities for Esoteric Software Engineering Practices for Managing Uncertainty in Games
 
-### FaSE4Games Keynote (07/05/2026)
+### FaSE4Games Keynote (07/06/2026)
 
 Erik Fredericks, frederer@gvsu.edu
 
@@ -88,9 +91,9 @@ Erik Fredericks, frederer@gvsu.edu
 Dealing with **uncertainty** and its insidious impacts on software systems
 
 More specifically?
-- Causing requirements violations
 - Inducing performance slowdowns
 - Crashes!
+- Causing requirements violations, test case failures, etc.
 
 ![bg cover opacity:0.3 (an angry user)](img/pexels-vantik93-16876741.jpg)
 
@@ -130,6 +133,8 @@ Also:
   - Algorithmic art []
   - Procedural content generation []
   - SIGBOVIK contributor [] **
+
+![bottom-corner w:200 (website qr code)](img/fase4games-keynote/qrcode_sigbovik.org.png)
   
 ---
 
@@ -147,6 +152,7 @@ Uncertainty causes your software to react/behave in ways unintended
 <!--
 - Robots crash and people die
 - Video games crash and people trash your game online
+- Deviates from your requirements!
 -->
 
 ![bg cover opacity:0.3 (a question mark)](img/pexels-filirovska-4913769.jpg)
@@ -176,6 +182,7 @@ You are programming a robot
 
 <!-- 
 what is the uncertainty here?
+or impact its reqs?  what do the people see?
 -->
 
 
@@ -183,7 +190,7 @@ what is the uncertainty here?
 
 # Defining uncertainty
 
-Interestingly, there are a plethora of ways to describe uncertainty depending on your domain.  I fall in the []:
+Interestingly, there are a plethora of ways to describe uncertainty depending on your domain [].
 
 | **Type** | **Description** | 
 | ----------- | ----------- | 
@@ -191,6 +198,7 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 | **Unknown known** | We **don't know** the source but do **know** its impact |
 | **Known Unknown** | We **know** the source but **don't know** its impact |
 | **Unknown unknown** | We **don't know** the source and **don't know** its impact |
+
 
 <!-- _footer: . -->
 <!-- could also go the aleatory (inherent randomness/noise) and epistemic (lack of knowledge) route as well -->
@@ -231,14 +239,14 @@ can we find the most impactful or put the system into a good enough state
 # Examples of uncertainty
 
 Safety-critical systems
-- Unexpected weather
-- Human interaction
-- System misconfiguration
+* Unexpected weather
+* Human interaction
+* System misconfiguration
 
 Video games
-- Network issues (also works for above)
-- Human interaction
-- System misconfiguration
+* Network issues (also works for above)
+* Human interaction
+* System misconfiguration
 
 ![top-right w:300 (roomba cat)](https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif)
 
@@ -249,11 +257,14 @@ Video games
 
 # How can we handle it from a software engineering perspective?
 
-- Run-time monitoring **
-- Search-based software engineering
 - Verification and validation []
 - Machine learning [] and neuroevolution []
 - Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards, https://arxiv.org/pdf/2606.03662]
+
+&nbsp;
+
+- Search-based software engineering **
+- Run-time monitoring **
 
 ---
 
@@ -261,7 +272,7 @@ Video games
 
 <!-- _footer: . -->
 
-Generating and monitoring problems:
+Monitoring for problems:
 
 - Robot with random sensor failures/degradations
 - Remote data mirroring with severed links
@@ -333,7 +344,7 @@ Normalize on [0.0, 1.0] - 0.0 is a <span style="color:red !important">violation<
 
 ---
 
-# Fuzzy logic to support flexibility
+# Adding flexibility
 
 <!-- _footer: . -->
 
@@ -353,6 +364,8 @@ Typical requirements are **brittle**
 KAOS goal notation []:
 - [Maintain] is an **invariant**
 - [Achieve] is a **non-invariant** &rarr; *can temporarily tolerate failure!*
+
+<!-- goal: higher level of abstraction -->
 
 ---
 
@@ -392,7 +405,10 @@ Introduce fuzzy-logic membership functions to requirements that can be *temporar
 
 <!-- _footer: . -->
 
-<!-- a lot of human/socio-centric works out there, not as much in terms of SE -->
+<!-- 
+a lot of human/socio-centric works out there, not as much in terms of SE 
+- regardless of how you plan (requirements, fuzzy logic, formal models), do it!
+-->
 
 <div class="container">
 <div class="col">
@@ -677,7 +693,7 @@ I came out of the automotive industry -- documents were checked into revision co
 
 <div class="container">
 <div class="col">
-<p>This leads us to identifying the:</p>
+<p>This leads us to identifying useful artifacts:</p>
 <ol>
   <li>Could consider <i>all</i> requirements or a <i>subset</i> of necessary requirement
   <ul>
@@ -700,7 +716,7 @@ I came out of the automotive industry -- documents were checked into revision co
 
 ---
 
-# Consider: traditional software testing at run time
+# Consider: moving traditional software testing to run time
 
 <!-- ## Or, things we *should* be doing already -->
 
@@ -721,6 +737,8 @@ Run-time testing [fredericks2019]
 Search-based fuzz testing [fredericks-burden]
 
 Mutation testing [not a me!]
+
+Neuroevolution for testing [already present]!
 
 ![bg right w:600 (run-time testing loop)](img/fase4games-keynote/rt-test.png)
 
@@ -766,7 +784,6 @@ Automatically optimizing a program
 
 ---
 
----
 
 # Future areas 
 
@@ -788,13 +805,25 @@ Focusing on the SE areas of improvement:
 
 ---
 
+# Dream project
+
+Everything **fully evolved** and yet:
+
+- Cohesive across game
+- Clearly communicative to player
+- Enjoyable!
+
+![bg right (evoworld)](img/evoworld.gif)
+
+---
+
 # A pitch!
 
 <!-- _footer: . -->
 
 ![bg opacity:0.1 (Schloss Dagstuhl)](https://www.dagstuhl.de/_Resources/Persistent/d/b/9/2/db92ac4a61b2c6a364b7b0d8ef618dc5ad8819cd/_01_DSC00749_1_Didas%20KopieDG1.jpg)
 
-I am currently working on a Dagstuhl seminar proposal.  If you would like to be included as a participant, please fill out the survey here!
+I am currently working on a Dagstuhl seminar proposal centered around SE and games.  If you would like to be included as a participant, please fill out the survey here!
 
 <div style="text-align:center !important">
   <img width=350 alt="QR code"src="img/fase4games-keynote/qrcode_docs.google.com.png" /> <br />
@@ -867,3 +896,7 @@ I am currently working on a Dagstuhl seminar proposal.  If you would like to be 
 </ul>
 
 ---
+
+[] Chua Chow, C., & Sarin, R. K. (2002). Known, unknown, and unknowable uncertainties. Theory and Decision, 52(2), 127-138.
+[] Attenberg, J., Ipeirotis, P., & Provost, F. (2015). Beat the machine: Challenging humans to find a predictive model's “unknown unknowns”. Journal of Data and Information Quality (JDIQ), 6(1), 1-17.
+[] Lakkaraju, H., Kamar, E., Caruana, R., & Horvitz, E. (2017, February). Identifying unknown unknowns in the open world: Representations and policies for guided exploration. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 31, No. 1).
