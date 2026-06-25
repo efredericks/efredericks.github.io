@@ -125,14 +125,14 @@ Also:
 
 - Until recently, a person who has focused on managing uncertainty in safety-critical systems with search-based software engineering 
 
-  - Safety-critical systems [] / robotics [] 
-  - Self-adaptive systems []
+  - Safety-critical systems [21,38] / robotics [23] 
+  - Self-adaptive systems [18]
 
 - And then:
 
-  - Algorithmic art []
-  - Procedural content generation []
-  - SIGBOVIK contributor [] **
+  - Algorithmic art [27]
+  - Procedural content generation [26]
+  - SIGBOVIK contributor [19] **
 
 ![bottom-corner w:200 (website qr code)](img/fase4games-keynote/qrcode_sigbovik.org.png)
   
@@ -190,7 +190,7 @@ or impact its reqs?  what do the people see?
 
 # Defining uncertainty
 
-Interestingly, there are a plethora of ways to describe uncertainty depending on your domain [].
+Interestingly, there are a plethora of ways to describe uncertainty depending on your domain [46,55,59,67,...].
 
 | **Type** | **Description** | 
 | ----------- | ----------- | 
@@ -219,12 +219,12 @@ Interestingly, there are a plethora of ways to describe uncertainty depending on
 </div>
 <div class="col">
 <img alt="Sources of uncertainty" src="img/fase4games-keynote/ragnarok-sources.png" />
-<p class="reference">Genome for remote data mirroring application with Ragnarok genetic algorithm []</p>
+<p class="reference">Genome for remote data mirroring application with Ragnarok genetic algorithm [68]</p>
 </div>
 </div>
 
 
-It is <mark>humanly impossible</mark> to enumerate all possible combinations of each []
+It is <mark>humanly impossible</mark> to enumerate all possible combinations of each [6,10,47]
 
 
 
@@ -238,7 +238,7 @@ can we find the most impactful or put the system into a good enough state
 
 # Examples of uncertainty
 
-Safety-critical systems
+Safety-critical systems [38]
 * Unexpected weather
 * Human interaction
 * System misconfiguration
@@ -251,20 +251,22 @@ Video games
 ![top-right w:300 (roomba cat)](https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif)
 
 
-*Formal methods for quantification exist as well via probability analysis, statistical modeling, etc.* [Uncertainty Quantification, Soize]
+*Formal methods for quantification exist as well via probability analysis, statistical modeling, etc.* [49]
 
 ---
 
 # How can we handle it from a software engineering perspective?
 
-- Verification and validation []
-- Machine learning [] and neuroevolution []
-- Agentic monitors [SELAUR: Self Evolving LLM Agent via Uncertainty-aware Rewards, https://arxiv.org/pdf/2606.03662]
+- Verification and validation [5,44,67]
+- Machine learning [15,56]
+- Agentic monitors [64-66]
 
 &nbsp;
 
 - Search-based software engineering **
 - Run-time monitoring **
+
+<!-- preprints on agentic - bleeding edge! -->
 
 ---
 
@@ -300,7 +302,7 @@ Unsatisfied requirements
 <div class="col" style="text-align: center !important">
 <img alt="Drone scatter plot" width="300" src="img/fase4games-keynote/drone-scatter.png" />
 <p class="reference">
-Scatter plot of drone position over multiple runs []
+Scatter plot of drone position over multiple runs [29]
 </p>
 </div>
 </div>
@@ -321,14 +323,14 @@ Post-analysis with logs, but *often performed prior to release*
 
 Run-time monitoring - though incurs additional overhead 
 
-- *Lightweight* satisfaction monitoring *at run time* -- utility functions []
+- *Lightweight* satisfaction monitoring *at run time* -- utility functions [12,43,58]
   - **Satisfaction**: requirement or goal's performance is *acceptable*
   - Derive mathematical functions for each requirement/goal to assess performance
 
 
 ---
 
-# Utility functions []
+# Utility functions [12,43,58]
 
 <!-- _footer: . -->
 
@@ -379,7 +381,7 @@ Typical requirements are **brittle**
 </div>
 </div>
 
-KAOS goal notation []:
+KAOS goal notation [10,57]:
 - [Maintain] is an **invariant**
 - [Achieve] is a **non-invariant** &rarr; *can temporarily tolerate failure!*
 
@@ -395,12 +397,12 @@ KAOS goal notation []:
   <img width=800 src="img/fase4games-keynote/kaos.png" />
 </div>
 
-<p class="reference">KAOS goal model describing multi-agent system in game [Streasick].</p>
+<p class="reference">KAOS goal model describing multi-agent system in game [52].</p>
 
 <!-- lots of maintains - brittle! -->
 ---
 
-# RELAX specification language []
+# RELAX specification language [60]
 
 <!-- _footer: . -->
 
@@ -410,7 +412,7 @@ Introduce fuzzy-logic membership functions to requirements that can be *temporar
 <div style="text-align:center !important">
   <img width=700 src="img/fase4games-keynote/autorelax.png" />
 </div>
-<p class="reference">Encoding a candidate solution in AutoRELAX (left shoulder) [ramirez2012]</p>
+<p class="reference">Encoding a candidate solution in AutoRELAX (left shoulder) [18,42]</p>
 
 <!-- left shoulder : as few as possible -->
 
@@ -436,13 +438,13 @@ a lot of human/socio-centric works out there, not as much in terms of SE
 <div class="col">
 <div style="text-align:center !important">
   <img width=300 alt="providentia dfd" src="img/fase4games-keynote/rm-cover.png" /> 
-  <p class="reference">Risk Management for Video Game Professionals Cover []</p>
+  <p class="reference">Risk Management for Video Game Professionals Cover [61]</p>
 </div>
 </div>
 <div class="col">
 <div style="text-align:center !important">
   <img width=300 alt="providentia dfd" src="img/fase4games-keynote/rm-toc.png" /> <br />
-  <p class="reference">Risk Management for Video Game Professionals TOC []</p>
+  <p class="reference">Risk Management for Video Game Professionals TOC [61]</p>
 </div>
 
 </div>
@@ -460,7 +462,7 @@ a lot of human/socio-centric works out there, not as much in terms of SE
 
 <div class="container">
 <div class="col">
-<p>Evolutionary computation [] for optimizing solutions for SE problems:
+<p>Evolutionary computation [holland] for optimizing solutions for SE problems:
 <br /><br />E.g.:</p>
 <ul>
 <li>Optimizing test case prioritization</li>
@@ -472,7 +474,7 @@ a lot of human/socio-centric works out there, not as much in terms of SE
 <div style="text-align:center !important">
   <img width=600 alt="providentia dfd" src="img/fase4games-keynote/providentia-dfd.png" /> <br />
   <!-- <img width=300 alt="crossover and mutation" src="img/fase4games-keynote/crossover-mutation.png" /> <br /> -->
-  <p class="reference">Providentia data flow diagram [providentia]</p>
+  <p class="reference">Providentia data flow diagram [3]</p>
 </div>
 
 </div>
@@ -493,7 +495,7 @@ Search heuristic that aims to generate an *optimal* solution to a *difficult* pr
 
 Iterate until your solution is *good enough* or you run out of time!
 
-Can go beyond with diversity [], multi/many-objective optimization [], etc.
+Can go beyond with diversity [36], multi/many-objective optimization [11,35,37], etc.
 
 ![bg opacity:0.1 (dna strand)](https://www.yourgenome.org/wp-content/uploads/2023/10/10-shutterstock_572718040-1920x1120.jpg.webp)
 
@@ -502,7 +504,7 @@ Can go beyond with diversity [], multi/many-objective optimization [], etc.
 
 ---
 
-# An SSBSE example (self-adaptive systems) []
+# An SSBSE example (self-adaptive systems) [fredericks 2016 automatically]
 
 1. Breaking the system
     * Run a genetic algorithm to cause the system to **violate as many requirements as possible**
@@ -520,11 +522,11 @@ Can go beyond with diversity [], multi/many-objective optimization [], etc.
 <div class="container">
 <div class="col">
   <img width=400 src="img/fase4games-keynote/ragnarok.png" />
-  <p class="reference">Comparison of Remote Data Mirroring invariant goal violations between Ragnarok (GA-1) and random search [].</p>
+  <p class="reference">Comparison of Remote Data Mirroring invariant goal violations between Ragnarok (GA-1) and random search [68].</p>
 </div>
 <div class="col">
   <img width=400 src="img/fase4games-keynote/valkyrie.png" />
-  <p class="reference">Comparison of average fitness values between Veritas (GA-2) and random search [fredericks2016auto].</p>
+  <p class="reference">Comparison of average fitness values between Veritas (GA-2) and random search [68].</p>
 </div>
 </div>
 
@@ -549,7 +551,7 @@ how can evolution be used elsewhere
 
 # Using evolutionary computation and software engineering to create glitch art
 
-## GenerativeGI []
+## GenerativeGI [27]
 
 - Many-objective search with Lexicase selection
 
@@ -584,7 +586,7 @@ how can evolution be used elsewhere
 </div>
 <div class="col">
 <img alt="Fitness functions" src="img/fase4games-keynote/gengi-fitness-fxns.png" />
-<p class="reference">GenerativeGI subset of fitness functions [].</p>
+<p class="reference">GenerativeGI subset of fitness functions [27].</p>
 </div>
 </div>
 
@@ -608,9 +610,9 @@ watercolor potentially
 
 <!-- _footer: . -->
 
-# Genetic improvement: databending [34]
+# Genetic improvement: databending [20]
 
-- Using PyGGI [35] to optimize an open source glitch tool's **code** 
+- Using PyGGI [an pyggi] to optimize an open source glitch tool's **code** 
 
 - Fitness: maximize **average hash** between images
 
@@ -768,19 +770,19 @@ Leads to self-healing at run time!
 
 <!-- promised you esoteric in the title -->
 
-Run-time testing [fredericks2019]
+Run-time testing [21,23]
 
-Search-based fuzz testing [fredericks-burden]
+Search-based fuzz testing [22]
 
-Mutation testing (esoteric, but has industry penetration!) [fraser, xx huang]
+Mutation testing (esoteric, but has industry penetration!) [17,33]
 
-Neuroevolution for testing [already present]!
+Neuroevolution for testing [16]!!
 
 ![bg right w:600 (run-time testing loop)](img/fase4games-keynote/rt-test.png)
 
 ---
 
-# RELAXation as a target for evolution
+# RELAXation [60] as a target for evolution
 
 ![bg right (RELAX dungeon)](img/fase4games-keynote/relax-dungeon.gif)
 
@@ -790,18 +792,17 @@ in progress, but applying relaxations to PCG requirements
 
 ---
 
-# Genetic improvement []
+# Genetic improvement [40]
 
 Automatically optimizing a program
-- Source code (code transplantation) []
-- Behavior trees
-- Stack-based opcodes
+- Source code (code transplantation) [40]
+- Behavior trees or stack-based opcodes
 
 ![bg right w:450](img/gptp-screenshots/bt.png)
 
 ---
 
-### Sample outputs (enemy program opcodes) []
+### Sample outputs (enemy program opcodes) [26]
 
 <strong>Enemy:</strong> <code class="small-code">WAIT_20,AIM,WAIT_20,FIRE_ONE,WAIT_20,AIM,WAIT_20,FIRE_ONE</code>
 
@@ -813,7 +814,7 @@ Automatically optimizing a program
 
 ---
 
-### Sample outputs (room generation) []
+### Sample outputs (room generation) [26]
 
 | | | |
 | ----------- | ----------- | ---- |
@@ -890,41 +891,104 @@ I am currently working on a Dagstuhl seminar proposal centered around SE and gam
 <!-- _footer: . -->
 
 <ul id="references">
-<li>[35] An, G., Blot, A., Petke, J., & Yoo, S. (2019, August). PyGGI 2.0: Language independent genetic improvement framework. In Proceedings of the 2019 27th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering (pp. 1100-1104).</li>
-<li>[32] Attenberg, J., Ipeirotis, P., & Provost, F. (2015). Beat the machine: Challenging humans to find a predictive model's “unknown unknowns”. Journal of Data and Information Quality (JDIQ), 6(1), 1-17.</li>
-<li>[21] Bowers, K. M., Fredericks, E. M., Hariri, R. H., & Cheng, B. H. C. (2020). Providentia: Using search-based heuristics to optimize satisficement and competing concerns between functional and non-functional objectives in self-adaptive systems. Journal of Systems and Software, 162, 110497.</li>
-<li>[11] Cai, Y., Miao, C., Tan, A. H., Shen, Z., & Li, B. (2009). Creating an immersive game world with evolutionary fuzzy cognitive maps. IEEE computer graphics and applications, 30(2), 58-70.</li>
-<li>[31] Chua Chow, C., & Sarin, R. K. (2002). Known, unknown, and unknowable uncertainties. Theory and Decision, 52(2), 127-138.</li>
-<li>[1] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part i. IEEE Transactions on Computational Intelligence and AI in Games, 9(2), 192-203.</li>
-<li>[2] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part ii. IEEE Transactions on Computational Intelligence and AI in Games, 9(3), 254-266.</li>
-<li>[12] de Pontes, R. G., & Gomes, H. M. (2020, November). Evolutionary procedural content generation for an endless platform game. In 2020 19th Brazilian Symposium on Computer Games and Digital Entertainment (SBGames) (pp. 80-89). IEEE.</li>
-<li>[25] DeVries, B., & Fredericks, E. M. (2024). Triggering Adaptation via Contextual Metamorphic Relations. 2024 IEEE 24th International Conference on Software Quality, Reliability and Security (QRS), 105–114.</li>
-<li>[] Fraser, G., & Arcuri, A. (2011, September). Evosuite: automatic test suite generation for object-oriented software. In Proceedings of the 19th ACM SIGSOFT symposium and the 13th European conference on Foundations of software engineering (pp. 416-419).</li>
-<li>[22] Fredericks, E. M., Diller, A. C., & DeVries, B. (2026).  Managing Dermal Reference Guides in the Face of Software Evolution via a CI/CD Pipeline. In 26th ACH Special Interest Group on Harry Quadragesimal Bovik (SIGBOVIK). Association for Computational Heresy (ACH).</li>
-<li>[23] Fredericks, E. M., DeVries, B., & Hariri, R. (2026). Databending as a Target for Genetic Improvement. To Be Published in the 2026 15th International Workshop on Genetic Improvement (GI).</li>
-<li>[24] Fredericks, E. M., Jacobs, M., & DeVries, B. (2024). Towards a Metamorphic Testing Architecture for Software-Defined Drone Systems. 2024 11th International Conference on Software Defined Systems (SDS), 170–177. https://doi.org/10.1109/SDS64317.2024.10883896</li>
-<li>[26] Fredericks, E. M., & Burden, S. (2024). Towards Fuzz Testing a Procedurally-Generated Video Game. To Appear in the Proceedings of the 2024 ASEE North Central Section Conference (ASEE NCS).</li>
-<li>[27] Fredericks, E. M., Bowers, K. M., & Hariri, R. H. (2019). On incorporating search-based heuristics into real-world systems. 2019 IEEE/ACM 12th International Workshop on Search-Based Software Testing (SBST), 11–12.</li>
-<li>[28] Fredericks, E. M., Gerostathopoulos, I., Krupitzer, C., & Vogel, T. (2019). Planning as optimization: Dynamically discovering optimal configurations for runtime situations. 2019 IEEE 13th International Conference on Self-Adaptive and Self-Organizing Systems (SASO), 1–10.</li>
-<li>[29] Fredericks, E. M., & Moore, J. M. (2020). Search@ Home: A Commercial Off-the-Shelf Environment for Investigating Optimization Problems. International Symposium on Search Based Software Engineering, 171–177. </li>
-<li>[20] Fredericks, E. M., Bobeldyk, D., & Moore, J. M. (2026). Every Map an Evolution, Every Room a Generation: Co-Evolution in a Procedurally-Generated Video Game. To appear in Genetic Programming Theory and Practice XXIII. Singapore: Springer Nature Singapore.</li>
-<li>[34] Fredericks, E. M., DeVries, B., & Hariri, R. (2026). Databending as a Target for Genetic Improvement. To Be Published in the 2026 15th International Workshop on Genetic Improvement (GI).</li>
-<li>[18] Gigliotta, O., Miglino, O., Schembri, M., & Di Ferdinando, A. (2014). Building up serious games with an artificial life approach: Two case studies. In Evolution, complexity and artificial life (pp. 149-158). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
-<li>[19] Goodling, A., Schneider, C., Fredericks, E. M., and Hariri, R. (2026). Antagonistic Development via Intentional Software Churn. To appear in the Proceedings of the 2026 ASEE National Conference.</li>
-<li>[6] Hastings, E. J., Guha, R. K., & Stanley, K. O. (2009). Automatic content generation in the galactic arms race video game. IEEE Transactions on Computational Intelligence and AI in Games, 1(4), 245-263.</li>
-<li>[8] Hendrikx, M., Meijer, S., Van Der Velden, J., & Iosup, A. (2013). Procedural content generation for games: A survey. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 9(1), 1-22.</li>
-<li>[xx] Huang, C., Zhou, H., Zhao, H., Cai, W., Zhou, Z. Q., & Jiang, M. (2022, December). On the Usefulness of Crossover in Search-Based Test Case Generation: An Industrial Report. In 2022 29th Asia-Pacific Software Engineering Conference (APSEC) (pp. 417-421). IEEE.</li>
-<li>[33] Lakkaraju, H., Kamar, E., Caruana, R., & Horvitz, E. (2017, February). Identifying unknown unknowns in the open world: Representations and policies for guided exploration. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 31, No. 1).</li>
-<li>[17] Ofria, C., & Wilke, C. O. (2004). Avida: A software platform for research in computational evolutionary biology. Artificial life, 10(2), 191-229.</li>
-<li>[5] Pugh, J. K., Soros, L. B., Frota, R., Negy, K., & Stanley, K. O. (2017, September). Major evolutionary transitions in the voxelbuild virtual sandbox game. In Artificial Life Conference Proceedings (pp. 553-560). One Rogers Street, Cambridge, MA 02142-1209, USA journals-info@ mit. edu: MIT Press.</li>
-<li>[14] Rollings, A. (2010). Fundamentals of game design.</li>
-<li>[9] Shaker, N., Togelius, J., & Nelson, M. J. (2016). Procedural content generation in games.</li>
-<li>[16] Spector, L. A. (1992). Supervenience in dynamic-world planning. University of Maryland, College Park.</li>
-<li>[4] Stanley, K. O., Bryant, B. D., & Miikkulainen, R. (2005). Real-time neuroevolution in the NERO video game. IEEE transactions on evolutionary computation, 9(6), 653-668.</li>
-<li>[10] Streasick, S., Fredericks, E., DeVries, B., & Woodring, I. (2025, June). Incorporating Multiple Self-Adaptive Agents in Games. In Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (pp. 1469-1476).</li>
-<li>[7] Taylor, T., Bedau, M., Channon, A., Ackley, D., Banzhaf, W., Beslon, G., ... & Wiser, M. (2016). Open-ended evolution: Perspectives from the OEE workshop in York. Artificial life, 22(3), 408-423.</li>
-<li>[3] Togelius, J., Champandard, A. J., Lanzi, P. L., Mateas, M., Paiva, A., Preuss, M., & Stanley, K. O. (2013). Procedural content generation: Goals, challenges and actionable steps.</li>
-<li>[30] Wickham, L. (2026). Risk Management for Video Game Professionals: Navigating Uncertainty in Game Development. CRC Press.</li>
-<li>[13] Zamorano López, M. D. M., Blasco, D., Cetina, C., & Sarro, F. (2025, April). Video game procedural content generation through software transplantation. In International Conference on Software Engineering: Software Engineering in Practice. IEEE/ACM.</li>
-<li>[15] Zenva. (2026). Build a Complete Roguelike from Scratch with Godot. https://academy.zenva.com/course/godot-roguelike-course/</li>
+<li>[1] An, G., Blot, A., Petke, J., & Yoo, S. (2019, August). PyGGI 2.0: Language independent genetic improvement framework. In Proceedings of the 2019 27th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering (pp. 1100-1104).</li>
+<li>[2] Attenberg, J., Ipeirotis, P., & Provost, F. (2015). Beat the machine: Challenging humans to find a predictive model's “unknown unknowns”. Journal of Data and Information Quality (JDIQ), 6(1), 1-17.</li>
+<li>[3] Bowers, K. M., Fredericks, E. M., Hariri, R. H., & Cheng, B. H. C. (2020). Providentia: Using search-based heuristics to optimize satisficement and competing concerns between functional and non-functional objectives in self-adaptive systems. Journal of Systems and Software, 162, 110497.</li>
+<li>[4] Cai, Y., Miao, C., Tan, A. H., Shen, Z., & Li, B. (2009). Creating an immersive game world with evolutionary fuzzy cognitive maps. IEEE computer graphics and applications, 30(2), 58-70.</li>
+<li>[5] Calinescu, R., Ghezzi, C., Johnson, K., Pezzé, M., Rafiq, Y., & Tamburrelli, G. (2015). Formal verification with confidence intervals to establish quality of service properties of software systems. IEEE transactions on reliability, 65(1), 107-125.</li>
+<li>[6] Cheng, B. H., Giese, H., Inverardi, P., Magee, J., de Lemos, R., Andersson, J., ... & Whittle, J. (2008). 08031–software engineering for self-adaptive systems: A research road map. Schloss Dagstuhl–Leibniz-Zentrum für Informatik.</li>
+<li>[7] Chua Chow, C., & Sarin, R. K. (2002). Known, unknown, and unknowable uncertainties. Theory and Decision, 52(2), 127-138.</li>
+<li>[8] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part i. IEEE Transactions on Computational Intelligence and AI in Games, 9(2), 192-203.</li>
+<li>[9] Cook, M., Colton, S., & Gow, J. (2016). The angelina videogame design system—part ii. IEEE Transactions on Computational Intelligence and AI in Games, 9(3), 254-266.</li>
+<li>[10] Dardenne, A., Van Lamsweerde, A., & Fickas, S. (1993). Goal-directed requirements acquisition. Science of computer programming, 20(1-2), 3-50.</li>
+<li>[11] Deb, K., Sindhya, K., & Hakanen, J. (2016). Multi-objective optimization. In Decision sciences (pp. 161-200). CRC Press.</li>
+<li>[12] DeGrandis, P., & Valetto, G. (2009, June). Elicitation and utilization of application-level utility functions. In Proceedings of the 6th international conference on Autonomic computing (pp. 107-116).</li>
+<li>[13] de Pontes, R. G., & Gomes, H. M. (2020, November). Evolutionary procedural content generation for an endless platform game. In 2020 19th Brazilian Symposium on Computer Games and Digital Entertainment (SBGames) (pp. 80-89). IEEE.</li>
+</ul>
+
+---
+
+# References
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[14] DeVries, B., & Fredericks, E. M. (2024). Triggering Adaptation via Contextual Metamorphic Relations. 2024 IEEE 24th International Conference on Software Quality, Reliability and Security (QRS), 105–114.</li>
+<li>[15] Fakour, F., Mosleh, A., & Ramezani, R. (2024). A structured review of literature on uncertainty in machine learning & deep learning. arXiv preprint arXiv:2406.00332.</li>
+<li>[16] Feldmeier, P., Schmelz, K., & Fraser, G. (2025, March). Many-objective neuroevolution for testing games. In 2025 IEEE Conference on Software Testing, Verification and Validation (ICST) (pp. 244-254). IEEE.</li>
+<li>[17] Fraser, G., & Arcuri, A. (2011, September). Evosuite: automatic test suite generation for object-oriented software. In Proceedings of the 19th ACM SIGSOFT symposium and the 13th European conference on Foundations of software engineering (pp. 416-419).</li>
+<li>[18] Fredericks, E. M., DeVries, B., & Cheng, B. H. (2014). AutoRELAX: automatically RELAXing a goal model to address uncertainty. Empirical Software Engineering, 19(5), 1466-1501.</li>
+<li>[19] Fredericks, E. M., Diller, A. C., & DeVries, B. (2026).  Managing Dermal Reference Guides in the Face of Software Evolution via a CI/CD Pipeline. In 26th ACH Special Interest Group on Harry Quadragesimal Bovik (SIGBOVIK). Association for Computational Heresy (ACH).</li>
+<li>[20] Fredericks, E. M., DeVries, B., & Hariri, R. (2026). Databending as a Target for Genetic Improvement. To Be Published in the 2026 15th International Workshop on Genetic Improvement (GI).</li>
+<li>[21] Fredericks, E. M., Jacobs, M., & DeVries, B. (2024). Towards a Metamorphic Testing Architecture for Software-Defined Drone Systems. 2024 11th International Conference on Software Defined Systems (SDS), 170–177. https://doi.org/10.1109/SDS64317.2024.10883896</li>
+<li>[22] Fredericks, E. M., & Burden, S. (2024). Towards Fuzz Testing a Procedurally-Generated Video Game. To Appear in the Proceedings of the 2024 ASEE North Central Section Conference (ASEE NCS).</li>
+<li>[23] Fredericks, E. M., Bowers, K. M., & Hariri, R. H. (2019). On incorporating search-based heuristics into real-world systems. 2019 IEEE/ACM 12th International Workshop on Search-Based Software Testing (SBST), 11–12.</li>
+<li>[24] Fredericks, E. M., Gerostathopoulos, I., Krupitzer, C., & Vogel, T. (2019). Planning as optimization: Dynamically discovering optimal configurations for runtime situations. 2019 IEEE 13th International Conference on Self-Adaptive and Self-Organizing Systems (SASO), 1–10.</li>
+<li>[25] Fredericks, E. M., & Moore, J. M. (2020). Search@ Home: A Commercial Off-the-Shelf Environment for Investigating Optimization Problems. International Symposium on Search Based Software Engineering, 171–177. </li>
+<li>[26] Fredericks, E. M., Moore, J. M., & DeVries, B. (2026). Every Map an Evolution, Every Room a Generation: Co-Evolution in a Procedurally-Generated Video Game. To appear in Genetic Programming Theory and Practice XXIII. Singapore: Springer Nature Singapore.</li>
+</ul>
+
+---
+
+# References
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[27] Fredericks, E. M., Bobeldyk, D., & Moore, J. M. (2025). Crafting generative art through genetic improvement: Managing creative outputs in diverse fitness landscapes. In Genetic Programming Theory and Practice XXI (pp. 321-335). Singapore: Springer Nature Singapore.</li>
+<li>[28] Gigliotta, O., Miglino, O., Schembri, M., & Di Ferdinando, A. (2014). Building up serious games with an artificial life approach: Two case studies. In Evolution, complexity and artificial life (pp. 149-158). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
+<li>[29] Goodling, A., Schneider, C., Fredericks, E. M., and Hariri, R. (2026). Antagonistic Development via Intentional Software Churn. To appear in the Proceedings of the 2026 ASEE National Conference.</li>
+<li>[30] Hastings, E. J., Guha, R. K., & Stanley, K. O. (2009). Automatic content generation in the galactic arms race video game. IEEE Transactions on Computational Intelligence and AI in Games, 1(4), 245-263.</li>
+<li>[31] Hendrikx, M., Meijer, S., Van Der Velden, J., & Iosup, A. (2013). Procedural content generation for games: A survey. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 9(1), 1-22.</li>
+<li>[32] Holland, J. H. (1992). Adaptation in natural and artificial systems: an introductory analysis with applications to biology, control, and artificial intelligence. MIT press.</li>
+<li>[33] Huang, C., Zhou, H., Zhao, H., Cai, W., Zhou, Z. Q., & Jiang, M. (2022, December). On the Usefulness of Crossover in Search-Based Test Case Generation: An Industrial Report. In 2022 29th Asia-Pacific Software Engineering Conference (APSEC) (pp. 417-421). IEEE.</li>
+<li>[34] Lakkaraju, H., Kamar, E., Caruana, R., & Horvitz, E. (2017, February). Identifying unknown unknowns in the open world: Representations and policies for guided exploration. In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 31, No. 1).</li>
+<li>[35] La Cava, W., Helmuth, T., Spector, L., & Moore, J. H. (2019). A probabilistic and multi-objective analysis of lexicase selection and ε-lexicase selection. Evolutionary Computation, 27(3), 377-402.</li>
+<li>[36] Lehman, J., & Stanley, K. O. (2011). Novelty search and the problem with objectives. In Genetic programming theory and practice IX (pp. 37-56). New York, NY: Springer New York.</li>
+<li>[37] Li, K., Wang, R., Zhang, T., & Ishibuchi, H. (2018). Evolutionary many-objective optimization: A comparative study of the state-of-the-art. Ieee Access, 6, 26194-26214</li>
+<li>[38] Mitra, S., Wongpiromsarn, T., & Murray, R. M. (2013). Verifying cyber-physical interactions in safety-critical systems. IEEE Security & Privacy, 11(4), 28-37.</li>
+<li>[39] Ofria, C., & Wilke, C. O. (2004). Avida: A software platform for research in computational evolutionary biology. Artificial life, 10(2), 191-229.</li>
+</ul>
+
+---
+
+# References
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[40] Petke, J., Haraldsson, S. O., Harman, M., Langdon, W. B., White, D. R., & Woodward, J. R. (2017). Genetic improvement of software: a comprehensive survey. IEEE Transactions on Evolutionary Computation, 22(3), 415-432.</li>
+<li>[41] Pugh, J. K., Soros, L. B., Frota, R., Negy, K., & Stanley, K. O. (2017, September). Major evolutionary transitions in the voxelbuild virtual sandbox game. In Artificial Life Conference Proceedings (pp. 553-560). One Rogers Street, Cambridge, MA 02142-1209, USA journals-info@ mit. edu: MIT Press.</li>
+<li>[42] Ramirez, A. J., Fredericks, E. M., Jensen, A. C., & Cheng, B. H. (2012, September). Automatically relaxing a goal model to cope with uncertainty. In International Symposium on Search Based Software Engineering (pp. 198-212). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
+<li>[43] Ramirez, A. J., & Cheng, B. H. (2011, October). Automatic derivation of utility functions for monitoring software requirements. In International Conference on Model Driven Engineering Languages and Systems (pp. 501-516). Berlin, Heidelberg: Springer Berlin Heidelberg.</li>
+<li>[44] Rushby, J. (2009, November). Software verification and system assurance. In 2009 Seventh IEEE International Conference on Software Engineering and Formal Methods (pp. 3-10). IEEE.</li>
+<li>[45] Rollings, A. (2010). Fundamentals of game design.</li>
+<li>[46] Saunders, F. C., Gale, A. W., & Sherry, A. H. (2016). Responding to project uncertainty: Evidence for high reliability practices in large-scale safety–critical projects. International Journal of Project Management, 34(7), 1252-1265.</li>
+<li>[47] Sawyer, P., Bencomo, N., Whittle, J., Letier, E., & Finkelstein, A. (2010, September). Requirements-aware systems: A research agenda for re for self-adaptive systems. In 2010 18th IEEE International Requirements Engineering Conference (pp. 95-103). IEEE.</li>
+<li>[48] Shaker, N., Togelius, J., & Nelson, M. J. (2016). Procedural content generation in games.</li>
+<li>[49] Soize, C. Uncertainty Quantification: An Accelerated Course with Advanced Applications in Computational Engineering. 2016. Citado en, 6.</li>
+<li>[50] Spector, L. A. (1992). Supervenience in dynamic-world planning. University of Maryland, College Park.</li>
+<li>[51] Stanley, K. O., Bryant, B. D., & Miikkulainen, R. (2005). Real-time neuroevolution in the NERO video game. IEEE transactions on evolutionary computation, 9(6), 653-668.</li>
+<li>[52] Streasick, S., Fredericks, E., DeVries, B., & Woodring, I. (2025, June). Incorporating Multiple Self-Adaptive Agents in Games. In Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (pp. 1469-1476).</li>
+<li>[53] Taylor, T., Bedau, M., Channon, A., Ackley, D., Banzhaf, W., Beslon, G., ... & Wiser, M. (2016). Open-ended evolution: Perspectives from the OEE workshop in York. Artificial life, 22(3), 408-423.</li>
+<li>[54] Togelius, J., Champandard, A. J., Lanzi, P. L., Mateas, M., Paiva, A., Preuss, M., & Stanley, K. O. (2013). Procedural content generation: Goals, challenges and actionable steps.</li>
+</ul>
+
+---
+
+# References
+<!-- _footer: . -->
+
+<ul id="references">
+<li>[55] Troya, J., Moreno, N., Bertoa, M. F., & Vallecillo, A. (2021). Uncertainty representation in software models: a survey. Software and Systems Modeling, 20(4), 1183-1213.</li>
+<li>[56] Tyralis, H., & Papacharalampous, G. (2024). A review of predictive uncertainty estimation with machine learning. Artificial Intelligence Review, 57(4), 94.</li>
+<li>[57] Van Lamsweerde, A. (2009). Requirements engineering: From system goals to UML models to software (Vol. 10, p. 34). Chichester, UK: John Wiley & Sons.</li>
+<li>[58] Walsh, W. E., Tesauro, G., Kephart, J. O., & Das, R. (2004, May). Utility functions in autonomic systems. In International Conference on Autonomic Computing, 2004. Proceedings. (pp. 70-77). IEEE.</li>
+<li>[59] Wang, K., Shen, C., Li, X., & Lu, J. (2025). Uncertainty quantification for safe and reliable autonomous vehicles: A review of methods and applications. IEEE Transactions on Intelligent Transportation Systems.</li>
+<li>[60] Whittle, J., Sawyer, P., Bencomo, N., Cheng, B. H., & Bruel, J. M. (2009, August). Relax: Incorporating uncertainty into the specification of self-adaptive systems. In 2009 17th IEEE International Requirements Engineering Conference (pp. 79-88). IEEE.</li>
+<li>[61] Wickham, L. (2026). Risk Management for Video Game Professionals: Navigating Uncertainty in Game Development. CRC Press.</li>
+<li>[62] Zamorano López, M. D. M., Blasco, D., Cetina, C., & Sarro, F. (2025, April). Video game procedural content generation through software transplantation. In International Conference on Software Engineering: Software Engineering in Practice. IEEE/ACM.</li>
+<li>[63] Zenva. (2026). Build a Complete Roguelike from Scratch with Godot. https://academy.zenva.com/course/godot-roguelike-course/</li>
+<li>[64] Zhang, D., Liu, X., Cheng, L., Wang, Y., Murray, K., & Wei, H. (2026). SELAUR: Self Evolving LLM Agent via Uncertainty-Aware Rewards. In Pacific-Asia Conference on Knowledge Discovery and Data Mining (pp. 424-436). Springer, Singapore.</li>
+<li>[65] Zhang, J., Choubey, P. K., Huang, K. H., Xiong, C., & Wu, C. S. (2026). Agentic Uncertainty Quantification. arXiv preprint arXiv:2601.15703.</li>
+<li>[66] Zhang, M., Yue, T., Aguirre, N. M., Garbervetsky, D., & Uchitel, S. (2026). Agentic Generation and Evolution of Knowledge Models. arXiv preprint arXiv:2606.03662.</li>
+<li>[67] Ziv, H., Richardson, D., & Klösch, R. (1997, May). The uncertainty principle in software engineering. In submitted to Proceedings of the 19th International Conference on Software Engineering (ICSE'97).</li>
+<li>[68] Fredericks, E. M. (2016, May). Automatically hardening a self-adaptive system against uncertainty. In Proceedings of the 11th International Symposium on Software Engineering for Adaptive and Self-Managing Systems (pp. 16-27).</li>
 </ul>
