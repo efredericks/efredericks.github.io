@@ -15,6 +15,7 @@ permalink: /activities/
         <h2>invited talks</h2>
         <ul>
 
+		<li><strong><a href="/assets/marp-slides/fredericks-fase4games-26-keynote.html" target="_blank" rel="noopener noreferrer">FaSE4Games 2026 Keynote - Opportunities for Esoteric Software Engineering Practices for Managing Uncertainty in Games</a></strong></li>
 		<li><a href="/assets/marp-slides/fredericks-gptp-2026.html" target="_blank" rel="noopener noreferrer">GPTP 2026 - Every Map an Evolution, Every Room a Generation: Co-Evolution in a Procedurally-Generated Video Game</a></li>
 		<li><a href="/assets/marp-slides/fredericks-computingclub-2026-procgen.html" target="_blank" rel="noopener noreferrer">GVSU School of Computing W26 - Procedural Content Generation</a></li>
 		<li><a href="/assets/slides/fredericks-computing24-seminar.pdf" target="_blank" rel="noopener noreferrer">GVSU School of Computing F24 Seminar Series - Express Yourself: Creative Coding and Generative Art</a></li>

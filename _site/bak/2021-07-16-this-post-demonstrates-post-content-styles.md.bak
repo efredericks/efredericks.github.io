@@ -33,14 +33,16 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="assoc prof @ gvsu" />
 <meta property="og:description" content="assoc prof @ gvsu" />
+<link rel="canonical" href="http://localhost:4000/bak/2021-07-16-this-post-demonstrates-post-content-styles.md.bak" />
+<meta property="og:url" content="http://localhost:4000/bak/2021-07-16-this-post-demonstrates-post-content-styles.md.bak" />
 <meta property="og:site_name" content="assoc prof @ gvsu.eduo" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="This post demonstrates post content styles" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"erik-fredericks"},"description":"assoc prof @ gvsu","headline":"This post demonstrates post content styles","url":"/bak/2021-07-16-this-post-demonstrates-post-content-styles.md.bak"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"erik-fredericks"},"description":"assoc prof @ gvsu","headline":"This post demonstrates post content styles","url":"http://localhost:4000/bak/2021-07-16-this-post-demonstrates-post-content-styles.md.bak"}</script>
 <!-- End Jekyll SEO tag -->
- <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="assoc prof @ gvsu.eduo" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+ <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="assoc prof @ gvsu.eduo" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/p5@2.1.1/lib/p5.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
