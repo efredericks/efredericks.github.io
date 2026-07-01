@@ -29,6 +29,8 @@ style: |
 <!-- # Opportunities for Esoteric Software Engineering Practices in Games -->
 # Opportunities for Esoteric Software Engineering Practices for Managing Uncertainty in Games
 
+<!-- _paginate: false -->
+
 ### FaSE4Games Keynote (07/06/2026)
 
 Erik Fredericks, frederer@gvsu.edu
@@ -36,7 +38,7 @@ Erik Fredericks, frederer@gvsu.edu
 > [https://efredericks.github.io](https://efredericks.github.io)
 
 
-<!-- ![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif) -->
+![bg cover opacity:0.2 (looping perlin noise)](https://necessarydisorder.wordpress.com/wp-content/uploads/2017/11/agif3opt.gif)
 
 ![bottom-corner w:200 (website qr code)](img/qrcode_efredericks.github.io.png)
 
@@ -121,6 +123,7 @@ Also:
 
 # Who am I?
 
+<!-- _paginate: false -->
 <!-- _footer: (**crowning achievement) -->
 
 - Until recently, a person who has focused on managing uncertainty in safety-critical systems with search-based software engineering 
@@ -162,6 +165,8 @@ Uncertainty causes your software to react/behave in ways unintended
 ---
 
 # Consider...
+
+<!-- incomplete or uncertain information -->
 
 You are programming a robot
 
@@ -311,6 +316,8 @@ Scatter plot of drone position over multiple runs [29]
 ---
 
 # Software engineering and uncertainty - How do we know?
+
+<!-- _paginate: false -->
 
 <!-- _footer: Background photo by Mahoney Fotos from Pexels: https://www.pexels.com/photo/close-up-of-tree-logs-lying-in-a-forest-20442681/ -->
 
@@ -462,7 +469,7 @@ a lot of human/socio-centric works out there, not as much in terms of SE
 
 <div class="container">
 <div class="col">
-<p>Evolutionary computation [holland] for optimizing solutions for SE problems:
+<p>Evolutionary computation [32] for optimizing solutions for SE problems:
 <br /><br />E.g.:</p>
 <ul>
 <li>Optimizing test case prioritization</li>
@@ -504,7 +511,7 @@ Can go beyond with diversity [36], multi/many-objective optimization [11,35,37],
 
 ---
 
-# An SSBSE example (self-adaptive systems) [fredericks 2016 automatically]
+# An SSBSE example (self-adaptive systems) [68]
 
 1. Breaking the system
     * Run a genetic algorithm to cause the system to **violate as many requirements as possible**
@@ -569,31 +576,9 @@ how can evolution be used elsewhere
 
 ---
 
-# Uncertainty in the art space
 
-*Wasn't the focus of the work, however...*
-
-<div class="container">
-<div class="col">
-<ul>
-<li>Use of external libraries</li>
-  <ul>
-  <li>E.g., <code>pixel-sort</code>, <code>scikit-learn</code> libraries</li>
-  </ul>
-<li>Architecture differences between machines</li>
-<li>Fitness and aesthetic measures</li>
-</ul>
-</div>
-<div class="col">
-<img alt="Fitness functions" src="img/fase4games-keynote/gengi-fitness-fxns.png" />
-<p class="reference">GenerativeGI subset of fitness functions [27].</p>
-</div>
-</div>
-
-<!-- translates nicely to games domain -->
-
-
----
+<!-- _footer: . -->
+<!-- _paginate: false -->
 
 ![bg (generative-gi 1)](https://efredericks.github.io/assets/img/GenerativeGI/random/img-22.png)
 ![bg (generative-gi 2)](https://efredericks.github.io/assets/img/GenerativeGI/no-clear-single/img-10051.png)
@@ -612,7 +597,7 @@ watercolor potentially
 
 # Genetic improvement: databending [20]
 
-- Using PyGGI [an pyggi] to optimize an open source glitch tool's **code** 
+- Using PyGGI [1] to optimize an open source glitch tool's **code** 
 
 - Fitness: maximize **average hash** between images
 
@@ -620,6 +605,31 @@ watercolor potentially
 
 ---
 
+# Uncertainty in the art space
+
+*Wasn't the focus of these projects, however...*
+
+<div class="container">
+<div class="col">
+<ul>
+<li>Use of external libraries</li>
+  <ul>
+  <li>E.g., <code>pixel-sort</code>, <code>scikit-learn</code>, <code>PyGGI</code> libraries</li>
+  </ul>
+<li>Architecture differences between machines</li>
+<li>Fitness and aesthetic measures</li>
+</ul>
+</div>
+<div class="col">
+<img alt="Fitness functions" src="img/fase4games-keynote/gengi-fitness-fxns.png" />
+<p class="reference">GenerativeGI subset of fitness functions [27].</p>
+</div>
+</div>
+
+<!-- translates nicely to games domain -->
+
+
+---
 
 # Contextualizing for games
 
@@ -654,6 +664,7 @@ One person indie game or AAA juggernaut, we should follow **proper documentation
 - Design documents
 - Requirements elicitation and derivation
 - Software testing at all levels
+- *(Hopefully self-evident)*
 
 ![bg right w:500 (software development lifecycle)](https://storage.ghost.io/c/e2/c8/e2c8c380-908a-4cb3-bbde-7d4cd9649d5f/content/images/2019/08/image-23.png)
 
@@ -676,6 +687,14 @@ One person indie game or AAA juggernaut, we should follow **proper documentation
 
 ![bg right w:500](https://media1.tenor.com/m/4dGcFqwB9CsAAAAd/noita-nolla-games.gif)
 
+---
+
+<div class="over-img">
+<h1 style="text-align: center !important">Looking at past years for gaming relevance...</h1>
+</div>
+
+![bg opacity:0.4 (links)](img/fase4games-keynote/pexels-sonny-14742413.jpg)
+<!-- _footer: Photo by Sonny Sixteen: https://www.pexels.com/photo/round-chain-construction-14742413/ -->
 
 ---
 
@@ -746,7 +765,7 @@ I came out of the automotive industry -- documents were checked into revision co
 </div>
 <div class="col">
 <img alt="MAPE-T" src="img/fase4games-keynote/mape-t.png" />
-<p class="reference">Proposed Monitor-Analyze-Plan-Execute-Test (MAPE-T) loop [fredericks2013towards].</p>
+<p class="reference">Monitor-Analyze-Plan-Execute-Test (MAPE-T) loop [69].</p>
 </div>
 </div>
 
@@ -770,35 +789,40 @@ Leads to self-healing at run time!
 
 <!-- promised you esoteric in the title -->
 
-Run-time testing [21,23]
-
-Search-based fuzz testing [22]
-
-Mutation testing (esoteric, but has industry penetration!) [17,33]
-
-Neuroevolution for testing [16]!!
-
-![bg right w:600 (run-time testing loop)](img/fase4games-keynote/rt-test.png)
-
----
-
-# RELAXation [60] as a target for evolution
-
-![bg right (RELAX dungeon)](img/fase4games-keynote/relax-dungeon.gif)
-
-<!-- 
-in progress, but applying relaxations to PCG requirements
--->
+<div class="container">
+<div class="col">
+<p>Interesting possibilities for testing:</p>
+  <ul>
+    <li>Run-time testing [21,23]</li>
+    <li>Search-based fuzz testing [22], plus SBFT workshop!</li>
+    <li>Mutation testing (esoteric, but has industry penetration!) [17,33]</li>
+    <li>Neuroevolution for testing [16]!!</li>
+  </ul>
+</div>
+<div class="col">
+<img alt="Robot testing" src="img/fase4games-keynote/rt-test.png" />
+<p class="reference">Run-time testing proposal for robots [23]</p>
+</div>
+</div>
 
 ---
+
 
 # Genetic improvement [40]
 
 Automatically optimizing a program
-- Source code (code transplantation) [40]
+- Source code (code transplantation) [40,62]
 - Behavior trees or stack-based opcodes
 
 ![bg right w:450](img/gptp-screenshots/bt.png)
+
+---
+
+# A touch of recent work
+
+![bg right w:400](img/gptp-flow.drawio.png)
+
+![bg rightt w:910](img/gptp-screenshots/screen.boss.png)
 
 ---
 
@@ -835,16 +859,20 @@ Focusing on the SE areas of improvement:
 - Leverage run-time monitors for adapting to gameplay and/or performance metrics
   - E.g., Shadow of Mordor antagonists, tweak performance envelope for different machine specs
 
-- Use artificial life for evolution of game environments and agents [avida, cooke] 
+- Use artificial life for evolution of game environments and agents [8,9,39] 
   - Life ... finds a way!
 
-- Agentic monitors for continuous improvement
+- Agentic monitors for continuous improvement [64-66]
   - E.g., mimic players to catch latent bugs
     - Though, keep them out of the creative space
 
 ---
 
 # Dream project
+
+<!-- Harman's dream auto-created compiler reference -->
+
+<!-- _paginate: false -->
 
 Everything **fully evolved** and yet:
 
@@ -854,6 +882,7 @@ Everything **fully evolved** and yet:
 
 ![bg right (evoworld)](img/evoworld.gif)
 
+<!-- an evolved dwarf fortress -->
 ---
 
 # A pitch!
@@ -881,7 +910,9 @@ I am currently working on a Dagstuhl seminar proposal centered around SE and gam
 
 # Discussion
 
+![bg opacity:0.2 (link)](img/fase4games-keynote/pexels-sonny-14742413.jpg)
 
+<!-- _footer: Photo by Sonny Sixteen from Pexels: https://www.pexels.com/photo/round-chain-construction-14742413/ --> 
 
 ---
 
@@ -991,4 +1022,23 @@ I am currently working on a Dagstuhl seminar proposal centered around SE and gam
 <li>[66] Zhang, M., Yue, T., Aguirre, N. M., Garbervetsky, D., & Uchitel, S. (2026). Agentic Generation and Evolution of Knowledge Models. arXiv preprint arXiv:2606.03662.</li>
 <li>[67] Ziv, H., Richardson, D., & Klösch, R. (1997, May). The uncertainty principle in software engineering. In submitted to Proceedings of the 19th International Conference on Software Engineering (ICSE'97).</li>
 <li>[68] Fredericks, E. M. (2016, May). Automatically hardening a self-adaptive system against uncertainty. In Proceedings of the 11th International Symposium on Software Engineering for Adaptive and Self-Managing Systems (pp. 16-27).</li>
+<li>[69] Fredericks, E. M., Ramirez, A. J., & Cheng, B. H. C. (2013). Towards run-time testing of dynamic adaptive systems. 2013 8th International Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS), 169–174.</li>
 </ul>
+
+---
+
+# Other slides
+
+---
+
+# RELAXation [60] as a target for evolution
+
+<!-- _paginate: false -->
+
+![bg right (RELAX dungeon)](img/fase4games-keynote/relax-dungeon.gif)
+
+<!-- 
+in progress, but applying relaxations to PCG requirements
+-->
+
+---
