@@ -122,6 +122,9 @@ th strong, th b, td strong, td b {
   font-size: 0.75em !important;
 }
 
-#references li {
+.reference, #references li {
   font-size: 0.5em !important;
+}
+.reference {
+  text-align: center;
 }
