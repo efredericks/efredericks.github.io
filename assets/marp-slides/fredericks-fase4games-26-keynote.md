@@ -44,6 +44,25 @@ Erik Fredericks, frederer@gvsu.edu
 
 ---
 
+<!-- _paginate: false -->
+# Quick plug
+
+<div class="over-img">
+<h3 style="padding:1em !important">
+Roguelike Celebration 2026 is looking for talks!<br /><br />
+
+https://www.roguelike.club/ -- submit by July 17
+
+</h3>
+</div>
+
+![bg opacity:0.2 (roguelike.club)](img/fase4games-keynote/rl.png)
+
+![bottom-corner w:200 (website qr code)](img/fase4games-keynote/rl-qr.png)
+
+
+---
+
 <!-- _footer: . -->
 
 <h1><mark>Acknowledgements</mark></h1>
@@ -868,22 +887,6 @@ Focusing on the SE areas of improvement:
 
 ---
 
-# Dream project
-
-<!-- Harman's dream auto-created compiler reference -->
-
-<!-- _paginate: false -->
-
-Everything **fully evolved** and yet:
-
-- Cohesive across game
-- Clearly communicative to player
-- Enjoyable!
-
-![bg right (evoworld)](img/evoworld.gif)
-
-<!-- an evolved dwarf fortress -->
----
 
 # A pitch!
 
@@ -1029,6 +1032,23 @@ I am currently working on a Dagstuhl seminar proposal centered around SE and gam
 
 # Other slides
 
+---
+
+# Dream project
+
+<!-- Harman's dream auto-created compiler reference -->
+
+<!-- _paginate: false -->
+
+Everything **fully evolved** and yet:
+
+- Cohesive across game
+- Clearly communicative to player
+- Enjoyable!
+
+![bg right (evoworld)](img/evoworld.gif)
+
+<!-- an evolved dwarf fortress -->
 ---
 
 # RELAXation [60] as a target for evolution
