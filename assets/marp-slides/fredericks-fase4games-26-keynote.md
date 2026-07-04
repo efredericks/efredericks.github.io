@@ -258,22 +258,33 @@ can we find the most impactful or put the system into a good enough state
 
 ---
 
-<!-- _footer: . -->
-
 # Examples of uncertainty
 
-Safety-critical systems [38]
-* Unexpected weather
-* Human interaction
-* System misconfiguration
+<!-- _footer: . -->
+<!-- _paginate: false --> 
 
-Video games
-* Network issues (also works for above)
-* Human interaction
-* System misconfiguration
+![top-corner w:200 (roomba cat)](https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif)
 
-![top-right w:300 (roomba cat)](https://media.tenor.com/BXaKWj76ZScAAAAM/cat-cats.gif)
+<div class="container">
+  <div class="col">
+    <p>Safety critical systems [38]</p>
+    <ul>
+      <li>Unexpected weather</li>
+      <li>Human interaction</li>
+      <li>System misconfiguration</li>
+    </ul>
+    <p>Video games</p>
+    <ul>
+      <li>Network issues (also works for above)</li>
+      <li>Human interaction</li>
+      <li>System misconfiguration</li>
+    </ul>
+  </div>
 
+  <div class="col-right">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5-9jM5LnHuE?si=XphsvBnY4F_OJo-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</div>
 
 *Formal methods for quantification exist as well via probability analysis, statistical modeling, etc.* [49]
 
