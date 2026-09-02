@@ -12200,4 +12200,10 @@ pre.highlight {
   text-decoration: underline;
 }
 
+#script-note {
+  font-family: "Rubik Glitch", system-ui;
+  font-weight: 200;
+  font-style: normal;
+}
+
 /*# sourceMappingURL=styles.css.map */
