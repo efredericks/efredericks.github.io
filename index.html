@@ -8,6 +8,8 @@ layout: default
   <div id="script-author"></div>
 </div>
 
+<div id="script-note"></div>
+
 <script>
   // pick a random sketch to show on load
   let author_urls = {
@@ -18,11 +20,12 @@ layout: default
     // 'fredericks-sega-1.js',
 
     { script: "fredericks-sega-2.js", author: "Erik Fredericks", tag:"Random colored squares with vaporwave color palette" },
-    { script: "fredericks-sega-3.js", author: "Erik Fredericks", tag:"SEGA2026 workshop" },
+    { script: "fredericks-sega-3.js", author: "Erik Fredericks", tag:"SEGA2026 workshop", note: "<a target='_blank' href='https://sega-workshop.github.io/2026/'>SEGA 2026</a>" },
     { script: "fredericks-sega-4.js", author: "Erik Fredericks", tag:"Checkered patterns rotated and dithered" },
     { script: "fredericks-sega-5.js", author: "Erik Fredericks", tag:"Animated simplex noise" },
     { script: "fredericks-banner-6.js", author: "Erik Fredericks", tag:"Messy cosine waves" },
     { script: "fredericks-banner-7-ruleparticles.js", author: "Erik Fredericks", tag:"Rule-driven particles" },
+    { script: "fredericks-flow-avoid.js", author: "Erik Fredericks", tag: "Circle packing and flow fields", note: "Double click to reset noise/zoom." },
   ];
   let index = Math.floor(Math.random() * js_files.length);
   const the_file = js_files[index].script;
@@ -34,10 +37,16 @@ layout: default
   let author_url = author_urls[author];
   let author_tag = js_files[index].tag;
   let script_url = `{{ site.baseurl }}/assets/js/sketches/${the_file}`;
+  let script_note = js_files[index].note;
   document.getElementById(
     "script-author"
-  // ).innerHTML = `Author: <a href='${author_url}' target='_blank'>${author}</a>`;
   ).innerHTML = `<a href='${script_url}' target='_blank'>${author_tag}</a>`;
+
+  if (script_note) {
+    document.getElementById(
+      "script-note"
+    ).innerHTML = script_note;
+  }
 </script>
 
 <!-- <div class="archive">
