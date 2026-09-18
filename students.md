@@ -10,14 +10,15 @@ permalink: /students/
     <hr size="1" />
 
     <h2>current undergraduate researchers</h2>
+        <li>John Chikwe, 2026</li>
+        <li>Santiago Montalvo-Berry, 2026</li>
     <ul>
-        <li>Mohamed Rayene Sassi, 2025 -- present</li>
     </ul>
     <br />
     <h2>current graduate researchers</h2>
-    <ul>
-        <li>Abigail Diller, 2023 -- present</li>
-    </ul>
+    <!-- <ul>
+        <li></li>
+    </ul> -->
 
     <hr size="1" />
     <h2>graduated doctoral students</h2>
@@ -36,6 +37,7 @@ permalink: /students/
     <br />
     <h2>graduated masters (project) students</h2>
     <ul>
+        <li>Abigail Diller, 2026</li>
         <li>Steven Streasick, 2025</li>
         <li>Khiem Nguyen, 2025</li>
         <li>Jason Omemu, 2025</li>
@@ -60,6 +62,7 @@ permalink: /students/
     <br />
     <h2>graduated undergraduate researchers</h2>
     <ul>
+        <li>Mohamed Rayene Sassi, 2026</li>
         <li>Ibon Castro Llorente, 2025</li>
         <li>Mallory Jacobs, 2026</li>
         <li>Skyler Burden, 2024</li>
