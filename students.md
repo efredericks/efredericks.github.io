@@ -10,9 +10,9 @@ permalink: /students/
     <hr size="1" />
 
     <h2>current undergraduate researchers</h2>
+    <ul>
         <li>John Chikwe, 2026</li>
         <li>Santiago Montalvo-Berry, 2026</li>
-    <ul>
     </ul>
     <br />
     <h2>current graduate researchers</h2>
