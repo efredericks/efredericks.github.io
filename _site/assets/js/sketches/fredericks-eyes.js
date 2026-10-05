@@ -54,7 +54,7 @@ function setup() {
   container = document.getElementById('canvas-container');
   let canvas = createCanvas(container.clientWidth, container.clientHeight);
   canvas.parent('canvas-container');
-  background(20);
+  background('#111111');//20);
 
   colorMode(HSB, 255, 255, 255);
   textSize(48);
@@ -67,7 +67,7 @@ function setup() {
   cellHeight = height / eyeRows;
 
   // hidden particles for eyes to follow
-  for (let _ = 0; _ < 100; _++) {
+  for (let _ = 0; _ < 10; _++) {
     particles.push({
       x: random(width),
       y: random(height),
@@ -101,6 +101,8 @@ function setup() {
   mouseTimer = 0;
   smoothMouseX = width / 2;
   smoothMouseY = height / 2;
+
+  noCursor();
 }
 
 function mouseMoved() {
@@ -108,7 +110,8 @@ function mouseMoved() {
 }
 
 function draw() {
-  background(0);
+  background('#11111133');
+  // background(0);
 
 
   let targetBlend = mouseTimer > 0 ? 1.0 : 0.0;
@@ -128,7 +131,7 @@ function draw() {
       const x = (col + 0.5) * cellWidth;
       const y = (row + 0.5) * cellHeight;
 
-      drawingContext.shadowColor = 220; //color(h, s, b);
+      // drawingContext.shadowColor = 220; //color(h, s, b);
 
       drawMathEye(x, y, eyeWidth, eyeHeight);
 
@@ -235,8 +238,8 @@ function draw() {
 
       // drawingContext.shadowOffsetX = -2;
       // drawingContext.shadowOffsetY = -2;
-      drawingContext.shadowBlur = 20;
-      drawingContext.shadowColor = color(h, s, b);
+      // drawingContext.shadowBlur = 20;
+      // drawingContext.shadowColor = color(h, s, b);
       fill(h, s, b);
 
       // let h = map(col, 0, eyeCols - 1, 0, 255);
@@ -246,17 +249,18 @@ function draw() {
       // fill(0, 150, 255);
       noStroke();
 
-      d = lerp(d, d*2, blendFactor);
+      // d = lerp(d, d*2, blendFactor);
       r = d/2;
       let f = color(20);
-      f = lerpColor(f, color(210,180,255), blendFactor)
+      f = lerpColor(f, color(0,180,255), blendFactor)
 
 
 
       ellipse(irisX, irisY, d, d);
 
       fill(f);
-      ellipse(irisX, irisY, r, r);
+      const d2 = d * 0.75
+      ellipse(irisX, irisY, d2, d2);
       // drawingContext.shadowOffsetX = 0;
       // drawingContext.shadowOffsetY = 0;
       // drawingContext.shadowBlur = 0;
@@ -267,8 +271,9 @@ function draw() {
   // text("@", mouseX, mouseY);
 
   for (let p of particles) {
-    // fill(255)
-    // circle(p.x, p.y, 5);
+    fill('#ffffff33');
+    const d2 = min(eyeWidth, eyeHeight) * 0.85;
+    circle(p.x, p.y, d2);
     p.x += p.vx;
     p.y += p.vy;
 
@@ -288,6 +293,12 @@ function draw() {
   //   ev_pos.t += ev_pos.s;
   //   pop();
   // }
+
+  push();
+  translate(mouseX, mouseY);
+  fill(color(255,0,255));
+  circle(0, 0, 50)
+  pop();
 }
 
 function windowResized() {
