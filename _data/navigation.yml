@@ -1,0 +1,16 @@
+- name: home
+  link: /
+- name: about
+  link: /about/
+- name: publications
+  link: /publications/
+- name: teaching
+  link: /teaching/
+- name: students
+  link: /students/
+- name: activities 
+  link: /activities/
+- name: posts
+  link: /posts/
+# - name: portfolio
+#   link: /portfolio/
